@@ -1,0 +1,29 @@
+{
+    "users": {
+        "397875584": "evgenidzee",
+        "1311521096": "Im_Gods_Son"
+    },
+    "admins": [
+        "1311521096",
+        "397875584"
+    ],
+    "channels": {
+        "397875584": {
+            "-1001848750759": "Schedule Test 2"
+        }
+    },
+    "catalogs": {
+        "q": {
+            "videos": [],
+            "photos": [
+                "AgACAgIAAxkBAAIFGWU2ORUu9ZrvSjHRIRGPAm_gQXbjAAI30TEb_Dm5SZcupn7ts3tTAQADAgADcwADMAQ",
+                "AgACAgIAAxkBAAIFGmU2ORUW8HFH_mD8RXkfQmdrkzDNAAI40TEb_Dm5STJxIIpGZn3MAQADAgADcwADMAQ",
+                "AgACAgIAAxkBAAIFG2U2ORVsaghCwzHnFCvkV5YFwxH-AAI50TEb_Dm5SWAg8vS17lf8AQADAgADcwADMAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": []
+        }
+    }
+}
