@@ -8,22 +8,7 @@
         "397875584"
     ],
     "channels": {
-        "397875584": {
-            "-1001848750759": "Schedule Test 2"
-        }
     },
     "catalogs": {
-        "1": {
-            "videos": [],
-            "photos": [
-                "AgACAgIAAxkBAAIHfmU2hNDwaizgN9CgG2BxpMBsd7KAAAIL0zEb_Dm5ScnLokmFWv3nAQADAgADcwADMAQ",
-                "AgACAgIAAxkBAAIIiGU2jcUOiqJ_9EUhcufuyMyy08RuAAL30jEb_Dm5Scd-KjUBcuJIAQADAgADcwADMAQ",
-                "AgACAgIAAxkBAAIIiWU2jcXPk4NoU-lrhntu82GNN7uxAAL50jEb_Dm5SWQbKsAsz7lwAQADAgADcwADMAQ"
-            ],
-            "voices": [],
-            "documents": [],
-            "gifs": [],
-            "video_notes": []
-        }
     }
 }
