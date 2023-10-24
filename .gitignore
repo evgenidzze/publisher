@@ -321,3 +321,5 @@ cython_debug/
 config.py
 .config.py
 config.py/
+
+data.json

@@ -686,19 +686,23 @@ async def load_media_file(messages: List[types.Message], state: FSMContext):
         await choose_or_self_media(call=messages[0], state=state)
         return
 
-
     data = await state.get_data()
-
-    if data.get('random_photos_number'):
-        await messages[0].answer(text='⚠️ Рандом-медіа налаштування скинуті.')
-        await state.update_data(random_photos_number=None)
     job_id = data.get('job_id')
-    post_type = data.get('post_type')
 
     # if job_id до дані будуть з джоба
     if job_id:
         job = scheduler.get_job(job_id)
         data = scheduler.get_job(job_id).kwargs.get('data')
+
+    if data.get('random_photos_number'):
+        await messages[0].answer(text='⚠️ Рандом-медіа налаштування скинуті.')
+        if job_id:
+            data['random_photos_number'] = None
+            job.modify(kwargs={'data': data, 'callback_query': None})
+        else:
+            await state.update_data(random_photos_number=None)
+
+
     text = data.get('post_text')
     media: types.MediaGroup = data.get('loaded_post_files')
 
@@ -846,16 +850,28 @@ async def number_of_random_photos(message, state: FSMContext):
         except:
             pass
         return
+
     elif isinstance(message, types.Message):
-        fsm_data = await state.get_data()
-        if fsm_data.get('loaded_post_files'):
+        data = await state.get_data()
+        job_id = data.get('job_id')
+
+        if job_id:
+            job = scheduler.get_job(job_id)
+            data = job.kwargs.get('data')
+
+        if data.get('loaded_post_files'):
             await message.answer(text='⚠️ Ручні налаштування медіа - скинуті')
-            await state.update_data(loaded_post_files=None)
-        cat_name = fsm_data.get('choose_catalog')
+            if job_id:
+                data['loaded_post_files'] = None
+                job.modify(kwargs={'data': data, 'callback_query': None})
+            else:
+                await state.update_data(loaded_post_files=None)
+
+        cat_name = data.get('choose_catalog')
         cat_data = get_catalog(cat_name)
         await state.update_data(random_photos_number=message.text)
-        print(await state.get_data())
         await message.answer(text='Фото додано у рандомну вибірку.')
+
         if cat_data.get('videos'):
             await FSMClient.number_of_rand_video.set()
             await message.answer(text=f'Скільки відео буде у вибірці? (доступно {len(cat_data.get("videos"))})',
@@ -903,7 +919,7 @@ async def add_inline(call: types.CallbackQuery, state: FSMContext):
         data = scheduler.get_job(job_id).kwargs.get('data')
     if data.get('random_photos_number'):
         await call.message.answer('❌ Інлайн кнопку неожливо додати у пост.\n'
-                                  'До рандом-медіа інлайн неможливо додати.\n'
+                                  'До рандом-медіа інлайн неможливо додати, налаштуйте медіа власноруч.\n'
                                   'Інлайн можна додавати до:\n'
                                   '<i>- тексту</i>\n'
                                   '<i>- 1 фото</i>\n'
@@ -912,6 +928,21 @@ async def add_inline(call: types.CallbackQuery, state: FSMContext):
                                   '<i>- голосове повідомлення</i>\n', parse_mode='html',
                                   reply_markup=post_formatting_kb)
         return
+
+    post_media_files = data.get('loaded_post_files')
+    if post_media_files:
+        if len(post_media_files.media) > 1:
+            await call.message.answer('❌ Інлайн кнопку не додано у пост\n'
+                                      'До згрупованих медіа інлайн неможливо додати.\n'
+                                      'Інлайн можна додавати до:\n'
+                                      '<i>- тексту</i>\n'
+                                      '<i>- 1 фото</i>\n'
+                                      '<i>- 1 відео</i>\n'
+                                      '<i>- відеоповідомлення</i>\n'
+                                      '<i>- голосове повідомлення</i>\n', parse_mode='html',
+                                      reply_markup=post_formatting_kb)
+
+            return
 
     await FSMClient.inline_text.set()
     try:
@@ -990,20 +1021,7 @@ async def inline_link_load(message: types.Message, state: FSMContext):
                         await message.answer_video(video=post_media_files.media[0]['media'],
                                                    caption=text,
                                                    reply_markup=link_kb)
-                else:
-                    set_caption(text=text, media=post_media_files),
-                    await message.answer_media_group(media=post_media_files)
-                    await message.answer('❌ Інлайн кнопку не додано у пост\n'
-                                         'До згрупованих медіа інлайн неможливо додати.\n'
-                                         'Інлайн можна додавати до:\n'
-                                         '<i>- тексту</i>\n'
-                                         '<i>- 1 фото</i>\n'
-                                         '<i>- 1 відео</i>\n'
-                                         '<i>- відеоповідомлення</i>\n'
-                                         '<i>- голосове повідомлення</i>\n', parse_mode='html',
-                                         reply_markup=post_formatting_kb)
 
-                    return
             elif post_voice:
                 await message.answer_voice(voice=post_voice, caption=text, reply_markup=link_kb)
             elif video_note:
