@@ -28,25 +28,32 @@ cancel_media = InlineKeyboardButton(text='Відміна', callback_data='cancel
 cancel_sending_media_kb.add(cancel_media)
 
 post_formatting_kb = InlineKeyboardMarkup(row_width=2)
-make_plan = InlineKeyboardButton(text='🗓 Запланувати', callback_data='Запланувати')
-post_loop = InlineKeyboardButton(text='🌀 Зациклити', callback_data='Зациклити')
+plan_menu = InlineKeyboardButton(text='🗓 Планування', callback_data='Планування')
 change_text = InlineKeyboardButton(text='📝 Змінити текст', callback_data='Змінити текст')
-post = InlineKeyboardButton(text='Опублікувати зараз 🚀', callback_data='post_now_menu')
 del_post_inline = InlineKeyboardButton(text='❌ Видалити пост', callback_data='delete_post')
 inlines = InlineKeyboardButton(text='Інлайни', callback_data='inlines')
 media_settings = InlineKeyboardButton(text='🎞 Налаштувати медіа', callback_data='Налаштувати медіа')
 reset_post = InlineKeyboardButton(text='❌ Скинути пост', callback_data='reset_post')
-post_formatting_kb.add(make_plan, post_loop, change_text, inlines, reset_post, post)
+post_now = InlineKeyboardButton(text='Опублікувати зараз 🚀', callback_data='Опублікувати')
+
+
+post_formatting_kb.add(plan_menu, media_settings, change_text, inlines, reset_post, post_now)
+
+back_to_plan_menu = InlineKeyboardButton(text='« Назад', callback_data='Планування')
+back_to_formatting = InlineKeyboardButton(text='« Назад', callback_data='formatting_main_menu')
+make_plan = InlineKeyboardButton(text='🗓 Запланувати', callback_data='Запланувати')
+post_loop = InlineKeyboardButton(text='🌀 Зациклити', callback_data='Зациклити')
+plan_menu_kb = InlineKeyboardMarkup(row_width=2)
+plan_menu_kb.add(make_plan, post_loop, back_to_formatting)
 
 back_to_media_settings = InlineKeyboardButton(text='« Назад', callback_data='Налаштувати медіа')
-
-back_to_formatting = InlineKeyboardButton(text='« Назад', callback_data='formatting_main_menu')
+back_to_catalog = InlineKeyboardButton('« Назад', callback_data='back_to_catalog')
 
 inlines_menu_kb = InlineKeyboardMarkup(row_width=2)
 add_inline = InlineKeyboardButton(text='Додати інлайн', callback_data='add_inline')
 del_inline = InlineKeyboardButton(text='Видалити інлайн', callback_data='del_inline')
 back = InlineKeyboardButton(text='« Назад', callback_data='back')
-back_to_plan_menu = InlineKeyboardButton(text='« Назад', callback_data='main_menu')
+back_to_main_menu = InlineKeyboardButton(text='« Назад', callback_data='main_menu')
 inlines_menu_kb.add(add_inline, del_inline, back_to_formatting)
 
 back_edit_post_inline = InlineKeyboardButton(text='« Назад', callback_data='Змінити пост')
@@ -97,17 +104,10 @@ voice_type = InlineKeyboardButton(text='Голосове', callback_data='voices
 document_type = InlineKeyboardButton(text='Файл', callback_data='documents')
 v_note_type = InlineKeyboardButton(text='Відеоповідомлення', callback_data='video_notes')
 
-planning_kb = InlineKeyboardMarkup(row_width=2)
-date_choose = InlineKeyboardButton(text='Обрати дату/час', callback_data='choose_date')
-planning_kb.add(date_choose, media_settings, back_to_formatting)
+# planning_kb = InlineKeyboardMarkup(row_width=2)
+# date_choose = InlineKeyboardButton(text='Обрати дату/час', callback_data='choose_date')
+# planning_kb.add(back_to_formatting, date_choose)
 
-loop_kb = InlineKeyboardMarkup(row_width=2)
-date_choose = InlineKeyboardButton(text='Обрати час', callback_data='choose_loop_time')
-loop_kb.add(date_choose, media_settings, back_to_formatting)
-
-post_now_kb = InlineKeyboardMarkup(row_width=2)
-post_now = InlineKeyboardButton(text='Опублікувати зараз 🚀', callback_data='Опублікувати')
-post_now_kb.add(post_now, media_settings, back_to_formatting)
 
 change_post_kb = InlineKeyboardMarkup()
 change_post = InlineKeyboardButton(text='Змінити пост', callback_data='Змінити пост')
@@ -121,20 +121,11 @@ random_inline = InlineKeyboardButton(text='Рандом медіа', callback_da
 self_media_inline = InlineKeyboardButton(text='Обрати самому', callback_data='self_media')
 self_or_random_kb.add(random_inline, self_media_inline, back)
 
-loop_media_kb = InlineKeyboardMarkup(row_width=2)
-back_loop = InlineKeyboardButton(text='« Назад', callback_data='Зациклити')
-loop_media_kb.insert(take_from_db)
-loop_media_kb.add(back_loop, remove_media)
-
-planned_media_kb = InlineKeyboardMarkup(row_width=2)
-back_planned = InlineKeyboardButton(text='« Назад', callback_data='Запланувати')
-planned_media_kb.add(take_from_db, send_by_self, back_planned, remove_media)
-
-now_media_kb = InlineKeyboardMarkup(row_width=2)
-back_now = InlineKeyboardButton(text='« Назад', callback_data='post_now_menu')
-now_media_kb.add(take_from_db, send_by_self, back_now, remove_media)
+media_kb = InlineKeyboardMarkup(row_width=2)
+media_kb.add(take_from_db, send_by_self, back_to_formatting, remove_media)
 
 back_to_my_posts_inline = InlineKeyboardButton(text='« Назад', callback_data='Мої пости')
+
 
 def add_posts_to_kb(jobs, edit_kb):
     for j in jobs:

@@ -127,16 +127,16 @@ async def send_message_cron(callback_query: CallbackQuery, data):
                 await bot.send_video(chat_id=channel_id, video=media_files.media[0]['media'], caption=post_text,
                                      reply_markup=link_kb)
         else:
-            await callback_query.bot.send_media_group(chat_id=channel_id, media=media_files)
+            await bot.send_media_group(chat_id=channel_id, media=media_files)
     elif voice:
         await asyncio.sleep(random_number * 60)
-        await callback_query.bot.send_voice(chat_id=channel_id, voice=voice, caption=post_text, reply_markup=link_kb)
+        await bot.send_voice(chat_id=channel_id, voice=voice, caption=post_text, reply_markup=link_kb)
     elif video_note:
         await asyncio.sleep(random_number * 60)
-        await callback_query.bot.send_video_note(chat_id=channel_id, video_note=video_note, reply_markup=link_kb)
+        await bot.send_video_note(chat_id=channel_id, video_note=video_note, reply_markup=link_kb)
     else:
         await asyncio.sleep(random_number * 60)
-        await callback_query.bot.send_message(chat_id=channel_id, text=post_text, reply_markup=link_kb)
+        await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=link_kb)
 
 
 async def kb_channels(message, bot):

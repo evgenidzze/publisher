@@ -1,3 +1,4 @@
+from copy import deepcopy
 from typing import List
 from aiogram.utils.exceptions import BadRequest
 from aiogram import types, Dispatcher
@@ -10,7 +11,7 @@ from create_bot import bot, scheduler
 from json_functionality import add_media_to_catalog, catalog_list_json, cat_name_exist, save_cat_json, get_catalog, \
     get_media_from_base, remove_cat_media_json, delete_catalog_json
 from keyboards.kb_client import base_manage_panel_kb, back_kb, self_or_random_kb, post_formatting_kb, \
-    change_create_post_kb, planning_kb, loop_kb, post_now_kb, cat_types_kb, back, cancel_kb, cancel_sending_media_kb
+    change_create_post_kb, cat_types_kb, back, cancel_kb, cancel_sending_media_kb, back_to_catalog
 from utils import pressed_back_button, cat_content, restrict_media, set_caption
 
 
@@ -29,15 +30,18 @@ async def media_base_panel(message, state: FSMContext):
 
 @media_group_handler
 async def load_media_for_catalog(messages: List[types.Message], state: FSMContext):
+    fsm_data = await state.get_data()
+    kb = deepcopy(base_manage_panel_kb)
+    if fsm_data.get('channel_id'):
+        kb.add(InlineKeyboardButton(text='« Повернутись до поста', callback_data='formatting_main_menu'))
     if pressed_back_button(messages[0]):
         await state.reset_state(with_data=False)
         await media_base_panel(message=messages[0], state=state)
         return
-    fsm_data = await state.get_data()
     cat_name = fsm_data.get('cat_name')
     await add_media_to_catalog(messages, bot=bot, catalog_name=cat_name)
     await state.reset_state(with_data=False)
-    await messages[0].answer(text=f'Медіа додано у каталог "{cat_name}"', reply_markup=base_manage_panel_kb)
+    await messages[0].answer(text=f'Медіа додано у каталог "{cat_name}"', reply_markup=kb)
 
 
 async def catalog_list(call: types.CallbackQuery):
@@ -129,7 +133,7 @@ async def choose_catalog(call: types.CallbackQuery, state: FSMContext):
         await state.reset_state(with_data=False)
         await choose_or_self_media(call, state)
         return
-    if call.data not in ('random_media', 'self_media', 'take_from_db'):
+    if call.data not in ('random_media', 'self_media', 'take_from_db', 'back_to_catalog'):
         await state.update_data(choose_catalog=call.data)
     from handlers.client import FSMClient
 
@@ -147,8 +151,8 @@ async def choose_catalog(call: types.CallbackQuery, state: FSMContext):
 
 async def media_type_from_cat(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
+    print(call.data)
     fsm_data = await state.get_data()
-
     cat_name = fsm_data.get('choose_catalog')
     if not cat_name:
         cat_name = call.data
@@ -159,7 +163,7 @@ async def media_type_from_cat(call: types.CallbackQuery, state: FSMContext):
         catalog = get_catalog(cat_name)
         cat_data_types = [media_type for media_type in catalog if catalog.get(media_type)]
         kb = cat_types_kb(cat_data_types)
-        kb.add(back)
+        kb.add(back_to_catalog)
         try:
             await call.message.edit_text(text='Що саме хочете додати?', reply_markup=kb)
         except:
@@ -180,6 +184,9 @@ async def media_type_from_cat(call: types.CallbackQuery, state: FSMContext):
 
 async def choose_media_from_cat(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
+    if call.data == 'back_to_catalog':
+        await choose_catalog(call, state)
+        return
     fsm_data = await state.get_data()
     post_type = fsm_data.get('post_type')
     if post_type in ('planned', 'looped', 'now') and call.data == 'back':
@@ -271,24 +278,11 @@ async def add_media_from_catalog(message: types.Message, state: FSMContext):
         else:
             await state.update_data(loaded_post_files=media)
 
-        if data.get('post_type') == 'planned':
-            if job_id:
-                await message.answer(text='✅ Медіа змінено.', reply_markup=change_create_post_kb)
-            else:
-                await message.answer(text='✅ Медіа додано.\n'
-                                          'Оберіть варіант:', reply_markup=planning_kb)
-        elif data.get('post_type') == 'looped':
-            if job_id:
-                await message.answer(text='✅ Медіа змінено.', reply_markup=change_create_post_kb)
-            else:
-                await message.answer(text='✅ Медіа додано.\n'
-                                          'Оберіть варіант:', reply_markup=loop_kb)
-        elif data.get('post_type') == 'now':
-            if job_id:
-                await message.answer(text='✅ Медіа змінено.', reply_markup=change_create_post_kb)
-            else:
-                await message.answer(text='✅ Медіа додано.\n'
-                                          'Оберіть варіант:', reply_markup=post_now_kb)
+        if job_id:
+            await message.answer(text='✅ Медіа змінено.', reply_markup=change_create_post_kb)
+        else:
+            await message.answer(text='✅ Медіа додано.\n'
+                                      'Оберіть варіант:', reply_markup=post_formatting_kb)
     await state.reset_state(with_data=False)
 
 
