@@ -298,6 +298,7 @@ async def edit_cat_media(call: types.CallbackQuery, state: FSMContext):
                                   '\t<i>-фото;</i>\n'
                                   '\t<i>-відео;</i>\n'
                                   '\t<i>-голосове повідомлення;</i>\n'
+                                  '\t<i>-відеоповідомлення;</i>\n'
                                   '\t<i>-файл;</i>', parse_mode='html', reply_markup=back_kb)
         await state.reset_state(with_data=False)
         from handlers.client import FSMClient

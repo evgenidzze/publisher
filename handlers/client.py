@@ -1052,7 +1052,7 @@ async def my_posts_menu(message, state: FSMContext):
                 await message.answer(text='Оберіть канал, щоб переглянути заплановані або зациклені пости:',
                                      reply_markup=kb)
             else:
-                await message.answer(text='У вас немає постів.')
+                await message.answer(text='У вас немає каналів.')
                 await add_channel(message, state)
         elif isinstance(message, types.CallbackQuery):
             await message.answer()
@@ -1060,7 +1060,7 @@ async def my_posts_menu(message, state: FSMContext):
                 await message.message.answer(text='Оберіть канал, щоб переглянути заплановані або зациклені пости:',
                                              reply_markup=kb)
             else:
-                await message.message.answer(text='У вас немає постів.')
+                await message.message.answer(text='У вас немає каналів.')
                 await add_channel(message, state)
     else:
         kb = InlineKeyboardMarkup().add(create_post_inline)

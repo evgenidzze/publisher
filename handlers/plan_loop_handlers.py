@@ -43,6 +43,7 @@ async def plan_menu(call: types.CallbackQuery, state: FSMContext):
 
 async def choose_loop_time(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
+    await state.update_data(post_type='looped')
     from handlers.client import FSMClient
     await FSMClient.time_loop.set()
     await call.message.answer(text="Ваша публікація буде опублікована кожного дня в обраний час: ",
@@ -131,6 +132,7 @@ async def process_simple_calendar(callback_query: types.CallbackQuery, callback_
 
 async def choose_plan_date(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
+    await state.update_data(post_type='planned')
 
     from handlers.client import FSMClient
     await FSMClient.date_planning.set()

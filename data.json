@@ -8,7 +8,9 @@
         "397875584"
     ],
     "channels": {
+        "397875584": {
+            "-1001967754187": "Schedule Test 1"
+        }
     },
-    "catalogs": {
-    }
+    "catalogs": {}
 }
