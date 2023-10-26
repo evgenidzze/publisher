@@ -871,7 +871,7 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
                 msg = await call.message.answer_video_note(video_note=video_notes[note_num])
                 await msg.reply(text=str(note_num + 1))
             await call.message.answer(
-                text='Введіть номер відеоповідомлення (або кілька номерів через пробіл), яке бажаєте додати.')
+                text='Введіть номер відеоповідомлення (або кілька номерів через пробіл), яке бажаєте додати.', reply_markup=back_kb)
         else:
             await call.message.edit_text(text='У каталозі має бути мінімум 2 відеоповідомлення.',
                                          reply_markup=self_or_random_kb)
@@ -899,33 +899,48 @@ async def load_random_v_notes_id(message, state: FSMContext):
         # else:
         #     await message.answer(text='Введіть коректний номер:')
     elif isinstance(message, types.CallbackQuery):
-        if message.data == 'back_to_media_variant':
+        if message.data in ('back_to_media_variant', 'back'):
             await state.update_data(random_v_notes_id=None)
             await number_of_random_videos(message, state)
             return
         if len(existing_random_v_notes_id) <= 1:
             await message.message.edit_text(text='У вибірці має бути мінімум 2 відеоповідомлення.\n'
-                                                 'Надішліть ще номер(-и) відеоповідомлень:', reply_markup=random_v_note_kb)
+                                                 'Надішліть ще номер(-и) відеоповідомлень:',
+                                            reply_markup=random_v_note_kb)
         else:
             await FSMClient.time_random_video_notes.set()
             await message.message.edit_text(text='Рандомні відеоповідомлення збережено.\n'
-                                              'Оберіть час, коли вони будуть публікуватись:',
-                                         reply_markup=await FullTimePicker().start_picker())
+                                                 'Оберіть час, коли вони будуть публікуватись:',
+                                            reply_markup=await FullTimePicker().start_picker())
 
 
 async def pick_time_random_v_notes(callback_query: types.CallbackQuery, callback_data: dict, state: FSMContext):
     r = await FullTimePicker().process_selection(callback_query, callback_data)
     await callback_query.answer()
+    if r.status.name == 'CANCELED':
+        print('123')
+        await number_of_random_videos(callback_query, state)
+        return
     if r.selected:
-        await state.update_data(time_random_video_notes=r.time)
         data = await state.get_data()
+        job_id = data.get('job_id')
+        if job_id:
+            job = scheduler.get_job(job_id)
+            job_data = job.kwargs.get('data')
+            job_data['time_random_video_notes'] = r.time
+            job.modify(kwargs={'data': job_data, 'callback_query': None})
+        else:
+            await state.update_data(time_random_video_notes=r.time)
+            data = await state.get_data()
+            scheduler.add_job(send_v_notes_cron, trigger='cron', hour=r.time.hour, minute=r.time.minute,
+                              kwargs={'data': data, 'callback_query': callback_query})
+
         selected_time_str = r.time.strftime("%H:%M")
         await callback_query.message.answer(
             f'Відеоповідомлення будуть публікуватись кожного дня о {selected_time_str}.',
             reply_markup=change_create_post_kb
         )
-        scheduler.add_job(send_v_notes_cron, trigger='cron', hour=r.time.hour, minute=r.time.minute,
-                          kwargs={'data': data, 'callback_query': callback_query})
+
 
 async def number_of_random_photos(message, state: FSMContext):
     if isinstance(message, types.CallbackQuery):
@@ -976,7 +991,9 @@ async def number_of_random_videos(message, state: FSMContext):
                 text='Якщо хочете щоб медіа обирались для посту автоматично - оберіть "Рандом медіа".',
                 reply_markup=self_or_random_kb)
         except:
-            pass
+            await message.message.answer(
+                text='Якщо хочете щоб медіа обирались для посту автоматично - оберіть "Рандом медіа".',
+                reply_markup=self_or_random_kb)
         return
     fsm_data = await state.get_data()
     post_type = fsm_data.get('post_type')
@@ -1208,9 +1225,17 @@ async def load_all_post_date_choose_post(callback_query: types.CallbackQuery, ca
                     InlineKeyboardButton(text=f"Пост о {time_planning} - {job_in_channel_data.get('post_text')}",
                                          callback_data=job_in_channel.id))
             else:
-                time_loop: datetime.time = job_in_channel_data.get('time_loop').strftime('%H:%M')
-                kb.add(InlineKeyboardButton(text=f"Пост о {time_loop} - {job_in_channel_data.get('post_text')}",
-                                            callback_data=job_in_channel.id))
+                time_loop: datetime.time = job_in_channel_data.get('time_loop')
+                random_v_note_loop: datetime.time = job_in_channel_data.get('time_random_video_notes')
+                if time_loop:
+                    kb.add(
+                        InlineKeyboardButton(
+                            text=f"Пост о {time_loop.strftime('%H:%M')} - {job_in_channel_data.get('post_text')}",
+                            callback_data=job_in_channel.id))
+                elif random_v_note_loop:
+                    kb.add(
+                        InlineKeyboardButton(text=f"Відеоповідомлення о {random_v_note_loop.strftime('%H:%M')}",
+                                             callback_data=job_in_channel.id))
         kb.add(back_to_my_posts_inline)
         await FSMClient.job_id.set()
         try:
