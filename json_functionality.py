@@ -227,15 +227,6 @@ def get_video_notes_by_cat(cat_name):
             return False
 
 
-def get_last_v_note_index(job_id):
-    with open('data.json', 'r', encoding='utf-8') as file:
-        file_data = json.load(file)
-        job_id = file_data.get('last_video_note_index').get(job_id)
-        if job_id:
-            return job_id
-        else:
-            return False
-
 
 class CustomMessage:
     def __init__(self, file_id, media_type, message: types.Message):

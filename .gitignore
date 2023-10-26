@@ -323,3 +323,5 @@ config.py
 config.py/
 
 data.json
+data.json/
+.data.json
