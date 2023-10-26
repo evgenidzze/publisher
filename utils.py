@@ -139,6 +139,14 @@ async def send_message_cron(callback_query: CallbackQuery, data):
         await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=link_kb)
 
 
+async def send_v_notes_cron(callback_query: CallbackQuery, data):
+    channel_id = data.get('channel_id')
+    random_v_notes_id: list = data.get('random_v_notes_id')
+    await bot.send_video_note(chat_id=channel_id, video_note=random_v_notes_id[0])
+    data['random_v_notes_id'].append(random_v_notes_id[0])
+    del data['random_v_notes_id'][0]
+
+
 async def kb_channels(message, bot):
     kb_all_channels = InlineKeyboardMarkup(row_width=1)
     all_channels_list = get_all_channels(message.from_user.id)

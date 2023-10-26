@@ -117,16 +117,20 @@ change_create_post_kb = InlineKeyboardMarkup(row_width=2)
 change_create_post_kb.add(create_post_inline, change_post, my_posts_inline)
 
 self_or_random_kb = InlineKeyboardMarkup(row_width=2)
-random_inline = InlineKeyboardButton(text='Рандом медіа', callback_data='random_media')
+random_inline = InlineKeyboardButton(text='🎞 Рандом медіа', callback_data='random_media')
+random_videonote = InlineKeyboardButton(text='⭕️ Рандомм кругляши', callback_data='random_videonote')
 self_media_inline = InlineKeyboardButton(text='Обрати самому', callback_data='self_media')
-self_or_random_kb.add(random_inline, self_media_inline, back)
+self_or_random_kb.add(random_videonote,random_inline,self_media_inline, back)
 
 media_kb = InlineKeyboardMarkup(row_width=2)
 media_kb.add(take_from_db, send_by_self, back_to_formatting, remove_media)
 
 back_to_my_posts_inline = InlineKeyboardButton(text='« Назад', callback_data='Мої пости')
 
-
+random_v_note_kb = InlineKeyboardMarkup()
+save_added_v_notes = InlineKeyboardButton(text='💾 Зберегти', callback_data='save_added_v_notes')
+back_to_media_variant = InlineKeyboardButton(text='Відміна', callback_data='back_to_media_variant')
+random_v_note_kb.add(save_added_v_notes, back_to_media_variant)
 def add_posts_to_kb(jobs, edit_kb):
     for j in jobs:
         date_p: datetime = j.next_run_time

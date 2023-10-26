@@ -216,6 +216,27 @@ async def get_media_from_base(message: types.Message, cat_name, media_type, medi
             return
 
 
+def get_video_notes_by_cat(cat_name):
+    with open('data.json', 'r', encoding='utf-8') as file:
+        file_data = json.load(file)
+        catalog_data = file_data.get('catalogs').get(cat_name)
+        video_notes = catalog_data.get('video_notes')
+        if len(video_notes) > 1:
+            return video_notes
+        else:
+            return False
+
+
+def get_last_v_note_index(job_id):
+    with open('data.json', 'r', encoding='utf-8') as file:
+        file_data = json.load(file)
+        job_id = file_data.get('last_video_note_index').get(job_id)
+        if job_id:
+            return job_id
+        else:
+            return False
+
+
 class CustomMessage:
     def __init__(self, file_id, media_type, message: types.Message):
         self.file_id = file_id
@@ -228,4 +249,3 @@ class CustomMessage:
 
     async def answer(self, text, reply_markup=None):
         await self.message.answer(text=text, reply_markup=reply_markup)
-
