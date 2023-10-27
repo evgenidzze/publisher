@@ -1,31 +1,18 @@
 {
-  "users": {
-    "397875584": "evgenidzee",
-    "1311521096": "Im_Gods_Son"
-  },
-  "admins": [
-    "1311521096",
-    "397875584"
-  ],
-  "channels": {
-    "397875584": {
-      "-1001967754187": "Schedule Test 1"
-    }
-  },
-  "catalogs": {
-    "1": {
-      "videos": [],
-      "photos": [
-        "AgACAgEAAxkBAAIBcmU6ESyYFnyzHEPSf74Dxbc-GEPKAAI9rTEb8w54RUcwSf67IISPAQADAgADcwADMAQ"
-      ],
-      "voices": [],
-      "documents": [],
-      "gifs": [],
-      "video_notes": [
-        "DQACAgEAAxkBAAIBm2U6K0l41EZA7nKzLcbokNR13rMfAAIPBAAChWrJRdn0kcx7tQ3tMAQ",
-        "DQACAgEAAxkBAAIBomU6K2TJi3YiSEtleydBBJ4b6liOAAKFAwACiSvBRT1eG95hXIhjMAQ"
-      ]
-    }
-  }
+    "users": {
+        "397875584": "evgenidzee",
+        "1311521096": "Im_Gods_Son"
+    },
+    "admins": [
+        "1311521096",
+        "397875584"
+    ],
+    "channels": {
+        "397875584": {
+            "-1001967754187": "Schedule Test 1"
+        }
+    },
+    "catalogs": {
 
+    }
 }
