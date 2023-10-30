@@ -1084,7 +1084,7 @@ async def inline_text_load(message, state: FSMContext):
 
 
 async def inline_link_load(message: types.Message, state: FSMContext):
-    if message.entities:
+    if 'entities' in message:
         if message.entities[0]['type'] == 'url':
             await state.update_data(inline_link=message.text)
             await state.reset_state(with_data=False)
