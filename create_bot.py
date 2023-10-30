@@ -1,5 +1,6 @@
 from aiogram import Bot, Dispatcher
 from apscheduler.jobstores.redis import RedisJobStore
+from apscheduler_di import ContextSchedulerDecorator
 
 from config import TOKEN_API
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
@@ -14,7 +15,8 @@ job_stores = {
 }
 
 
-scheduler = AsyncIOScheduler(jobstores=job_stores, timezone='Europe/Kiev')
+scheduler = ContextSchedulerDecorator(AsyncIOScheduler(jobstores=job_stores, timezone='Europe/Kiev'))
+# scheduler = AsyncIOScheduler(timezone='Europe/Kiev')
 storage = MemoryStorage()
 scheduler.start()
 

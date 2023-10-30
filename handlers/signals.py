@@ -183,7 +183,7 @@ async def load_start_time(callback_query: types.CallbackQuery, callback_data: di
         await state.update_data(start_time=r.time)
         data = await state.get_data()
         scheduler.add_job(cron_signals, trigger='cron', hour=r.time.hour, minute=r.time.minute,
-                          kwargs={'data': data, 'callback_query': callback_query})
+                          kwargs={'data': data})
         selected_time_str = r.time.strftime("%H:%M")
         await callback_query.message.answer(text=f'Розсилка сигналів буде починатись кожного дня о {selected_time_str}',
                                             reply_markup=main_kb)

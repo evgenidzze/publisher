@@ -36,7 +36,6 @@ media_settings = InlineKeyboardButton(text='🎞 Налаштувати меді
 reset_post = InlineKeyboardButton(text='❌ Скинути пост', callback_data='reset_post')
 post_now = InlineKeyboardButton(text='Опублікувати зараз 🚀', callback_data='Опублікувати')
 
-
 post_formatting_kb.add(plan_menu, media_settings, change_text, inlines, reset_post, post_now)
 
 back_to_plan_menu = InlineKeyboardButton(text='« Назад', callback_data='Планування')
@@ -92,9 +91,13 @@ del_voice_kb = InlineKeyboardMarkup()
 del_voice_kb.add(InlineKeyboardButton(text='Так', callback_data='yes'))
 del_voice_kb.add(InlineKeyboardButton(text='Ні', callback_data='no'))
 
-edit_catalog_kb = InlineKeyboardMarkup()
+edit_catalog_kb = InlineKeyboardMarkup(row_width=2)
 edit_catalog_kb.add(InlineKeyboardButton(text='Додати медіа', callback_data='add_cat_media'),
-                    InlineKeyboardButton(text='Видалити медіа', callback_data='del_cat_media'))
+                    InlineKeyboardButton(text='Змінити назву', callback_data='change_cat_name'),
+                    InlineKeyboardButton(text='« Назад', callback_data='back_to_base_menu'),
+                    InlineKeyboardButton(text='Видалити медіа', callback_data='del_cat_media'),
+
+                    )
 
 # remove_media_cat_type = InlineKeyboardMarkup()
 video_type = InlineKeyboardButton(text='Відео', callback_data='videos')
@@ -120,7 +123,7 @@ self_or_random_kb = InlineKeyboardMarkup(row_width=2)
 random_inline = InlineKeyboardButton(text='🎞 Рандом медіа', callback_data='random_media')
 random_videonote = InlineKeyboardButton(text='⭕️ Рандомм кругляши', callback_data='random_videonote')
 self_media_inline = InlineKeyboardButton(text='Обрати самому', callback_data='self_media')
-self_or_random_kb.add(random_videonote,random_inline,self_media_inline, back)
+self_or_random_kb.add(random_videonote, random_inline, self_media_inline, back)
 
 media_kb = InlineKeyboardMarkup(row_width=2)
 media_kb.add(take_from_db, send_by_self, back_to_formatting, remove_media)
@@ -131,6 +134,8 @@ random_v_note_kb = InlineKeyboardMarkup()
 save_added_v_notes = InlineKeyboardButton(text='💾 Зберегти', callback_data='save_added_v_notes')
 back_to_media_variant = InlineKeyboardButton(text='Відміна', callback_data='back_to_media_variant')
 random_v_note_kb.add(save_added_v_notes, back_to_media_variant)
+
+
 def add_posts_to_kb(jobs, edit_kb):
     for j in jobs:
         date_p: datetime = j.next_run_time

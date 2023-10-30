@@ -9,16 +9,16 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram_media_group import media_group_handler
 from create_bot import bot, scheduler
 from json_functionality import add_media_to_catalog, catalog_list_json, cat_name_exist, save_cat_json, get_catalog, \
-    get_media_from_base, remove_cat_media_json, delete_catalog_json
+    get_media_from_base, remove_cat_media_json, delete_catalog_json, change_cat_name
 from keyboards.kb_client import base_manage_panel_kb, back_kb, self_or_random_kb, post_formatting_kb, \
-    change_create_post_kb, cat_types_kb, back, cancel_kb, cancel_sending_media_kb, back_to_catalog
+    change_create_post_kb, cat_types_kb, back, cancel_kb, cancel_sending_media_kb, back_to_catalog, edit_catalog_kb
 from utils import pressed_back_button, cat_content, restrict_media, set_caption
 
 
 async def media_base_panel(message, state: FSMContext):
     await state.finish()
     if isinstance(message, types.CallbackQuery):
-        if message.data == 'back':
+        if message.data in ('back', 'back_to_base_menu'):
             await message.message.edit_text(text='Панель управління каталогами медіа',
                                             reply_markup=base_manage_panel_kb)
         else:
@@ -114,8 +114,9 @@ async def edit_catalog_list(call: types.CallbackQuery, state: FSMContext):
     if catalogs:
         for cat in catalogs:
             catalogs_kb.add(InlineKeyboardButton(text=cat, callback_data=cat))
+        catalogs_kb.add(InlineKeyboardButton(text='« Назад', callback_data='back_to_base_menu'))
         from handlers.client import FSMClient
-        await FSMClient.edit_catalog_name.set()
+        await FSMClient.edit_catalog.set()
         await call.message.edit_text(text='Оберіть каталог, який хочете редагувати: ', reply_markup=catalogs_kb)
     else:
         try:
@@ -151,7 +152,6 @@ async def choose_catalog(call: types.CallbackQuery, state: FSMContext):
 
 async def media_type_from_cat(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
-    print(call.data)
     fsm_data = await state.get_data()
     cat_name = fsm_data.get('choose_catalog')
     if not cat_name:
@@ -237,7 +237,7 @@ async def add_media_from_catalog(message: types.Message, state: FSMContext):
         if media_type == 'voices':
             if job_id:
                 data['voice'] = messages[0].file_id
-                job.modify(kwargs={'data': data, 'callback_query': None})
+                job.modify(kwargs={'data': data})
             else:
                 await state.update_data(voice=messages[0].file_id)
             await message.answer_voice(voice=messages[0].file_id)
@@ -247,7 +247,7 @@ async def add_media_from_catalog(message: types.Message, state: FSMContext):
         elif media_type == 'video_notes':
             if job_id:
                 data['video_note'] = messages[0].file_id
-                job.modify(kwargs={'data': data, 'callback_query': None})
+                job.modify(kwargs={'data': data})
             else:
                 await state.update_data(video_note=messages[0].file_id)
             await message.answer_video_note(video_note=messages[0].file_id)
@@ -274,7 +274,7 @@ async def add_media_from_catalog(message: types.Message, state: FSMContext):
 
         if job_id:
             data['loaded_post_files'] = media
-            job.modify(kwargs={'data': data, 'callback_query': None})
+            job.modify(kwargs={'data': data})
         else:
             await state.update_data(loaded_post_files=media)
 
@@ -286,7 +286,23 @@ async def add_media_from_catalog(message: types.Message, state: FSMContext):
     await state.reset_state(with_data=False)
 
 
-async def edit_cat_media(call: types.CallbackQuery, state: FSMContext):
+async def what_to_edit_cat(call: types.CallbackQuery, state: FSMContext):
+    await call.answer()
+    message_data = call.data
+    if message_data == 'back_to_base_menu':
+        await media_base_panel(call, state)
+        return
+    await state.update_data(cat_name=message_data)
+    from handlers.client import FSMClient
+    await FSMClient.add_delete_cat_media.set()
+    try:
+        await call.message.edit_text(text='Що бажаєте змінити?', reply_markup=edit_catalog_kb)
+    except:
+        pass
+
+
+async def edit_cat(call: types.CallbackQuery, state: FSMContext):
+    from handlers.client import FSMClient
     await call.answer()
     message_data = call.data
     fsm_data = await state.get_data()
@@ -301,7 +317,6 @@ async def edit_cat_media(call: types.CallbackQuery, state: FSMContext):
                                   '\t<i>-відеоповідомлення;</i>\n'
                                   '\t<i>-файл;</i>', parse_mode='html', reply_markup=back_kb)
         await state.reset_state(with_data=False)
-        from handlers.client import FSMClient
         await FSMClient.loaded_catalog_file.set()
     elif message_data == 'del_cat_media':
         catalog_data = get_catalog(cat_name)
@@ -311,7 +326,6 @@ async def edit_cat_media(call: types.CallbackQuery, state: FSMContext):
             cat_data_types = [media_type for media_type in catalog if catalog.get(media_type)]
             kb = cat_types_kb(cat_data_types)
             await call.message.edit_text(text='Що бажаєте видалити?', reply_markup=kb)
-            from handlers.client import FSMClient
 
             await FSMClient.catalog_media_type_remove.set()
         else:
@@ -320,6 +334,33 @@ async def edit_cat_media(call: types.CallbackQuery, state: FSMContext):
                 await call.message.edit_text(text='Каталог пустий', reply_markup=base_manage_panel_kb)
             except:
                 pass
+    elif message_data == 'change_cat_name':
+        await call.message.edit_text(text='Введіть нову назву каталогу:', reply_markup=InlineKeyboardMarkup().add(back))
+        await FSMClient.new_cat_name.set()
+    elif message_data == 'back_to_base_menu':
+        await media_base_panel(call, state)
+        return
+
+
+
+async def load_new_cat_name(message, state: FSMContext):
+    fsm_data = await state.get_data()
+    cat_name = fsm_data.get('cat_name')
+    from handlers.client import FSMClient
+    if isinstance(message, types.Message):
+        new_name = message.text
+        change_cat_name(cat_name=cat_name, new_name=new_name)
+        await state.update_data(cat_name=new_name)
+        await message.answer(text=f'✅ Назву каталога змінено на {new_name}', reply_markup=edit_catalog_kb)
+        await FSMClient.add_delete_cat_media.set()
+
+    else:
+        await FSMClient.add_delete_cat_media.set()
+
+        try:
+            await message.message.edit_text(text='Що бажаєте змінити?', reply_markup=edit_catalog_kb)
+        except:
+            pass
 
 
 async def catalog_remove_media_numder(call: types.CallbackQuery, state: FSMContext):
@@ -380,7 +421,7 @@ async def delete_catalog(call: types.CallbackQuery, state: FSMContext):
 def register_handlers_catalog(dp: Dispatcher):
     from handlers.client import FSMClient
     # dp.register_message_handler(media_base_panel, Text(equals='База медіа'), state='*')
-    dp.register_callback_query_handler(edit_cat_media, state=FSMClient.add_delete_cat_media)
+    dp.register_callback_query_handler(edit_cat, state=FSMClient.add_delete_cat_media)
     dp.register_callback_query_handler(catalog_remove_media_numder, state=FSMClient.catalog_media_type_remove)
     dp.register_callback_query_handler(delete_catalog_list, Text(equals='delete_cat'))
     dp.register_callback_query_handler(delete_catalog, state=FSMClient.del_catalog)
@@ -399,3 +440,6 @@ def register_handlers_catalog(dp: Dispatcher):
     dp.register_callback_query_handler(load_media_for_catalog, state=FSMClient.loaded_catalog_file)
     dp.register_callback_query_handler(show_catalog_content, state=FSMClient.show_catalog)
     dp.register_callback_query_handler(edit_catalog_list, Text(equals='edit_cat'))
+    dp.register_callback_query_handler(what_to_edit_cat, state=FSMClient.edit_catalog)
+    dp.register_message_handler(load_new_cat_name, state=FSMClient.new_cat_name)
+    dp.register_callback_query_handler(load_new_cat_name, state=FSMClient.new_cat_name)

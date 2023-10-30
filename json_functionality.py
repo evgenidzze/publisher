@@ -227,6 +227,14 @@ def get_video_notes_by_cat(cat_name):
             return False
 
 
+def change_cat_name(cat_name, new_name):
+    with open('data.json', 'r+', encoding='utf-8') as file:
+        file_data = json.load(file)
+        file_data['catalogs'][new_name] = file_data['catalogs'].pop(cat_name)
+        file.seek(0)
+        json.dump(file_data, file, ensure_ascii=False, indent=4)
+        file.truncate()
+
 
 class CustomMessage:
     def __init__(self, file_id, media_type, message: types.Message):

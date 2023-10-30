@@ -9,7 +9,7 @@ from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import StatesGroup, State
-from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, InputFile
+from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram_calendar import SimpleCalendar
 
 from aiogram_media_group import media_group_handler
@@ -20,16 +20,15 @@ from handlers.catalog_handlers import media_type_from_cat, media_base_panel
 from handlers.signals import signal_menu
 
 from utils import kb_channels, AuthMiddleware, send_voice_from_audio, restrict_media, set_caption, send_post, \
-    pressed_back_button, add_random_media, send_v_notes_cron
+    pressed_back_button, add_random_media, send_v_notes_cron, sorting_key_jobs
 from json_functionality import get_all_channels, save_channel_json, remove_channel_id_from_json, catalog_list_json, \
     get_catalog, get_video_notes_by_cat
 
 from keyboards.kb_client import main_kb, kb_manage_channel_inline, cancel_kb, post_formatting_kb, add_channel_inline, \
-    create_post_inline_kb, back_kb, base_manage_panel_kb, no_text_kb, del_voice_kb, add_posts_to_kb, \
-    edit_catalog_kb, take_from_db, \
-    media_kb, inlines_menu_kb, back, \
-    self_or_random_kb, del_post_inline, back_to_main_menu, back_edit_post_inline, change_create_post_kb, \
-    create_post_inline, back_to_my_posts_inline, back_to_media_settings, my_posts_inline, random_v_note_kb
+    create_post_inline_kb, back_kb, base_manage_panel_kb, no_text_kb, del_voice_kb, add_posts_to_kb, take_from_db, \
+    media_kb, inlines_menu_kb, back, self_or_random_kb, del_post_inline, back_to_main_menu, back_edit_post_inline, \
+    change_create_post_kb, create_post_inline, back_to_my_posts_inline, back_to_media_settings, my_posts_inline, \
+    random_v_note_kb
 from aiogram_calendar import simple_cal_callback
 from aiogram_timepicker.panel import FullTimePicker, full_timep_callback
 
@@ -37,6 +36,7 @@ locale.setlocale(locale.LC_ALL, 'uk_UA.utf8')
 
 
 class FSMClient(StatesGroup):
+    new_cat_name = State()
     time_random_video_notes = State()
     random_v_notes_id = State()
     posts_by_data = State()
@@ -68,7 +68,7 @@ class FSMClient(StatesGroup):
 
     create_cat_name = State()
     show_catalog = State()  # show catalog content
-    edit_catalog_name = State()  # choose add or remove media
+    edit_catalog = State()  # choose add or remove media
     add_delete_cat_media = State()  # if delete - pick a type if add - load media
     catalog_media_type_remove = State()  # request media number
     del_cat_media_number = State()  # receive num of media and remove
@@ -239,6 +239,7 @@ async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
     jobs = scheduler.get_jobs()
     edit_kb = InlineKeyboardMarkup()
     posts = []
+    jobs = sorted(jobs, key=lambda job: job.next_run_time)
     for job in jobs:
         job_data = job.kwargs.get('data')
         if job_data.get('channel_id') == channel_id:
@@ -349,7 +350,7 @@ async def load_changed_text(message, state: FSMContext):
         job = scheduler.get_job(job_id)
         data = job.kwargs.get('data')
         data['post_text'] = text
-        job.modify(kwargs={'data': data, 'callback_query': None})
+        job.modify(kwargs={'data': data})
     else:
         await state.update_data(post_text=text)
     post_media_files = data.get('loaded_post_files')
@@ -625,14 +626,14 @@ async def del_media(message: types.Message, state: FSMContext):
             set_caption(text=post_text, media=media),
             if job:
                 job_data['loaded_post_files'] = media
-                job.modify(kwargs={'data': job_data, 'callback_query': None})
+                job.modify(kwargs={'data': job_data})
             else:
                 await state.update_data(loaded_post_files=media)
             await message.answer_media_group(media=media)
         else:
             if job:
                 del job_data['loaded_post_files']
-                job.modify(kwargs={'data': job_data, 'callback_query': None})
+                job.modify(kwargs={'data': job_data})
             else:
                 await state.update_data(loaded_post_files=None)
 
@@ -655,7 +656,7 @@ async def del_voice_or_video_note(call: types.CallbackQuery, state: FSMContext):
             elif 'video_note' in job_data:
                 job_data['video_note'] = None
                 await call.message.answer(text='✅ Відео-повідомлення видалено.', reply_markup=post_formatting_kb)
-            job.modify(kwargs={'data': job_data, 'callback_query': None})
+            job.modify(kwargs={'data': job_data})
         else:
             if 'voice' in fsm_data:
                 await state.update_data(voice=None)
@@ -704,7 +705,7 @@ async def load_media_file(messages: List[types.Message], state: FSMContext):
         await messages[0].answer(text='⚠️ Рандом-медіа налаштування скинуті.')
         if job_id:
             data['random_photos_number'] = None
-            job.modify(kwargs={'data': data, 'callback_query': None})
+            job.modify(kwargs={'data': data})
         else:
             await state.update_data(random_photos_number=None)
 
@@ -725,21 +726,21 @@ async def load_media_file(messages: List[types.Message], state: FSMContext):
                 voice_message = await send_voice_from_audio(message=messages[0], bot=bot)
                 if job_id:
                     data['voice'] = voice_message.voice.file_id
-                    job.modify(kwargs={'data': data, 'callback_query': None})
+                    job.modify(kwargs={'data': data})
                 else:
                     await state.update_data(voice=voice_message.voice.file_id)
             elif 'voice' in messages[0]:
                 await messages[0].answer_voice(messages[0].voice.file_id, caption=text)
                 if job_id:
                     data['voice'] = messages[0].voice.file_id
-                    job.modify(kwargs={'data': data, 'callback_query': None})
+                    job.modify(kwargs={'data': data})
                 else:
                     await state.update_data(voice=messages[0].voice.file_id)
             elif 'video_note' in messages[0]:
                 await messages[0].answer_video_note(messages[0].video_note.file_id)
                 if job_id:
                     data['video_note'] = messages[0].video_note.file_id
-                    job.modify(kwargs={'data': data, 'callback_query': None})
+                    job.modify(kwargs={'data': data})
                 else:
                     await state.update_data(video_note=messages[0].video_note.file_id)
 
@@ -782,7 +783,7 @@ async def load_media_file(messages: List[types.Message], state: FSMContext):
 
         if job_id:
             data['loaded_post_files'] = media
-            job.modify(kwargs={'data': data, 'callback_query': None})
+            job.modify(kwargs={'data': data})
         else:
             await state.update_data(loaded_post_files=media)
 
@@ -790,17 +791,6 @@ async def load_media_file(messages: List[types.Message], state: FSMContext):
                              reply_markup=post_formatting_kb)
 
     await state.reset_state(with_data=False)
-
-
-async def what_to_edit(call: types.CallbackQuery, state: FSMContext):
-    await call.answer()
-    cat_name = call.data
-    await state.update_data(cat_name=cat_name)
-    await FSMClient.add_delete_cat_media.set()
-    try:
-        await call.message.edit_text(text='Що бажаєте змінити?', reply_markup=edit_catalog_kb)
-    except:
-        pass
 
 
 async def random_or_self(call: types.CallbackQuery, state: FSMContext):
@@ -871,7 +861,8 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
                 msg = await call.message.answer_video_note(video_note=video_notes[note_num])
                 await msg.reply(text=str(note_num + 1))
             await call.message.answer(
-                text='Введіть номер відеоповідомлення (або кілька номерів через пробіл), яке бажаєте додати.', reply_markup=back_kb)
+                text='Введіть номер відеоповідомлення (або кілька номерів через пробіл), яке бажаєте додати.',
+                reply_markup=back_kb)
         else:
             await call.message.edit_text(text='У каталозі має бути мінімум 2 відеоповідомлення.',
                                          reply_markup=self_or_random_kb)
@@ -928,12 +919,12 @@ async def pick_time_random_v_notes(callback_query: types.CallbackQuery, callback
             job = scheduler.get_job(job_id)
             job_data = job.kwargs.get('data')
             job_data['time_random_video_notes'] = r.time
-            job.modify(kwargs={'data': job_data, 'callback_query': None})
+            job.modify(kwargs={'data': job_data})
         else:
             await state.update_data(time_random_video_notes=r.time)
             data = await state.get_data()
             scheduler.add_job(send_v_notes_cron, trigger='cron', hour=r.time.hour, minute=r.time.minute,
-                              kwargs={'data': data, 'callback_query': callback_query})
+                              kwargs={'data': data})
 
         selected_time_str = r.time.strftime("%H:%M")
         await callback_query.message.answer(
@@ -966,7 +957,7 @@ async def number_of_random_photos(message, state: FSMContext):
             await message.answer(text='⚠️ Ручні налаштування медіа - скинуті')
             if job_id:
                 data['loaded_post_files'] = None
-                job.modify(kwargs={'data': data, 'callback_query': None})
+                job.modify(kwargs={'data': data})
             else:
                 await state.update_data(loaded_post_files=None)
 
@@ -1069,7 +1060,7 @@ async def del_inline(call: types.CallbackQuery, state: FSMContext):
         if job_id:
             fsm_data['inline_link'] = None
             fsm_data['inline_text'] = None
-            job.modify(kwargs={'data': fsm_data, 'callback_query': None})
+            job.modify(kwargs={'data': fsm_data})
         else:
             await state.update_data(inline_link=None)
             await state.update_data(inline_text=None)
@@ -1216,6 +1207,7 @@ async def load_all_post_date_choose_post(callback_query: types.CallbackQuery, ca
                     jobs_in_channel.append(job)
         #                     jobs_in_channel.append(job.kwargs.get('data'))
         kb = InlineKeyboardMarkup()
+        jobs_in_channel = sorted(jobs_in_channel, key=sorting_key_jobs)
         for job_in_channel in jobs_in_channel:
             job_in_channel_data = job_in_channel.kwargs.get('data')
             post_type = job_in_channel_data.get('post_type')
@@ -1289,7 +1281,6 @@ def register_handlers_client(dp: Dispatcher):
                                 state=FSMClient.loaded_post_files,
                                 content_types=types.ContentType.all())
     dp.register_callback_query_handler(load_media_file, state=FSMClient.loaded_post_files)
-    dp.register_callback_query_handler(what_to_edit, state=FSMClient.edit_catalog_name)
     dp.register_callback_query_handler(choose_or_self_media, Text(equals='Налаштувати медіа'))
     dp.register_callback_query_handler(load_media_answer, state=FSMClient.media_answer)
     dp.register_callback_query_handler(change_job, state=FSMClient.job_id)

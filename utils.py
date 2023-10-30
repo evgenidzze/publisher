@@ -1,4 +1,5 @@
 import asyncio
+import datetime
 import json
 import random
 
@@ -60,7 +61,7 @@ def add_random_media(media_files, data, cat_name):
             media_files.attach_video(rand_video)
 
 
-async def send_message_time(callback_query: CallbackQuery, data):
+async def send_message_time(data):
     channel_id = data.get('channel_id')
     post_text = data.get('post_text')
     media_files = data.get('loaded_post_files')
@@ -97,7 +98,7 @@ async def send_message_time(callback_query: CallbackQuery, data):
         await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=link_kb)
 
 
-async def send_message_cron(callback_query: CallbackQuery, data):
+async def send_message_cron(data):
     channel_id = data.get('channel_id')
     post_text = data.get('post_text')
     media_files: types.MediaGroup = data.get('loaded_post_files')
@@ -139,7 +140,7 @@ async def send_message_cron(callback_query: CallbackQuery, data):
         await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=link_kb)
 
 
-async def send_v_notes_cron(callback_query: CallbackQuery, data):
+async def send_v_notes_cron(data):
     channel_id = data.get('channel_id')
     random_v_notes_id: list = data.get('random_v_notes_id')
     await bot.send_video_note(chat_id=channel_id, video_note=random_v_notes_id[0])
@@ -375,3 +376,11 @@ async def cron_signals(callback_query: CallbackQuery, data):
 
         await bot.send_photo(chat_id=signal_channel_id, photo=image_buffer)
         await asyncio.sleep(int(signal_period_minutes) * 60)
+
+
+def sorting_key_jobs(job):
+    next_run: datetime.datetime = job.next_run_time
+    return next_run.time()
+
+
+

@@ -66,6 +66,7 @@ async def full_picker_handler(callback_query: types.CallbackQuery, callback_data
         if s == 'FSMClient:time_planning':
             await state.update_data(time_planning=r.time)
             data = await state.get_data()
+            print(type(data))
             selected_time: time = data.get("time_planning")
             selected_date: datetime = data.get("date_planning")
             selected_date = selected_date.replace(hour=selected_time.hour, minute=selected_time.minute)
@@ -86,7 +87,7 @@ async def full_picker_handler(callback_query: types.CallbackQuery, callback_data
 
                 await callback_query.message.delete_reply_markup()
                 scheduler.add_job(send_message_time, trigger='date', run_date=selected_date,
-                                  kwargs={'data': data, 'callback_query': callback_query})
+                                  kwargs={'data': data})
 
         elif s == 'FSMClient:time_loop':
             await state.update_data(time_loop=r.time)
@@ -107,7 +108,7 @@ async def full_picker_handler(callback_query: types.CallbackQuery, callback_data
                     reply_markup=change_create_post_kb
                 )
                 scheduler.add_job(send_message_cron, trigger='cron', hour=r.time.hour, minute=r.time.minute,
-                                  kwargs={'data': data, 'callback_query': callback_query})
+                                  kwargs={'data': data})
 
         await state.reset_state(with_data=False)
 
