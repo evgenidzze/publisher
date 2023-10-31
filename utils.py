@@ -87,6 +87,9 @@ async def send_message_time(data):
             elif media_files.media[0]['type'] == 'video':
                 await bot.send_video(chat_id=channel_id, video=media_files.media[0]['media'], caption=post_text,
                                      reply_markup=link_kb)
+            elif media_files.media[0]['type'] == 'document':
+                await bot.send_document(chat_id=channel_id, document=media_files.media[0]['media'], caption=post_text,
+                                     reply_markup=link_kb)
         else:
             await bot.send_media_group(chat_id=channel_id, media=media_files)
 
@@ -126,6 +129,9 @@ async def send_message_cron(data):
                                      reply_markup=link_kb)
             elif media_files.media[0]['type'] == 'video':
                 await bot.send_video(chat_id=channel_id, video=media_files.media[0]['media'], caption=post_text,
+                                     reply_markup=link_kb)
+            elif media_files.media[0]['type'] == 'document':
+                await bot.send_document(chat_id=channel_id, document=media_files.media[0]['media'], caption=post_text,
                                      reply_markup=link_kb)
         else:
             await bot.send_media_group(chat_id=channel_id, media=media_files)
@@ -226,11 +232,15 @@ async def send_post(post_media_files: types.MediaGroup, post_text, bot, channel_
     if post_media_files:
         set_caption(text=post_text, media=post_media_files),
         if len(post_media_files.media) == 1:
+            print(post_media_files.media[0])
             if post_media_files.media[0]['type'] == 'photo':
                 await bot.send_photo(chat_id=channel_id, photo=post_media_files.media[0]['media'], caption=post_text,
                                      reply_markup=link_kb)
             elif post_media_files.media[0]['type'] == 'video':
                 await bot.send_video(chat_id=channel_id, video=post_media_files.media[0]['media'], caption=post_text,
+                                     reply_markup=link_kb)
+            elif post_media_files.media[0]['type'] == 'document':
+                await post_media_files.bot.send_document(chat_id=channel_id, document=post_media_files.media[0]['media'], caption=post_text,
                                      reply_markup=link_kb)
         else:
             await bot.send_media_group(chat_id=channel_id, media=post_media_files)
@@ -381,6 +391,3 @@ async def cron_signals(callback_query: CallbackQuery, data):
 def sorting_key_jobs(job):
     next_run: datetime.datetime = job.next_run_time
     return next_run.time()
-
-
-
