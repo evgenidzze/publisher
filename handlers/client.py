@@ -1013,17 +1013,20 @@ async def add_inline(call: types.CallbackQuery, state: FSMContext):
     job_id = data.get('job_id')
     if job_id:
         data = scheduler.get_job(job_id).kwargs.get('data')
-    if data.get('random_photos_number'):
-        await call.message.answer('❌ Інлайн кнопку неожливо додати у пост.\n'
-                                  'До рандом-медіа інлайн неможливо додати, налаштуйте медіа власноруч.\n'
-                                  'Інлайн можна додавати до:\n'
-                                  '<i>- тексту</i>\n'
-                                  '<i>- 1 фото</i>\n'
-                                  '<i>- 1 відео</i>\n'
-                                  '<i>- відеоповідомлення</i>\n'
-                                  '<i>- голосове повідомлення</i>\n', parse_mode='html',
-                                  reply_markup=post_formatting_kb)
-        return
+
+    random_photos_number = data.get('random_photos_number')
+    if random_photos_number:
+        if int(random_photos_number) > 1:
+            await call.message.answer('❌ Інлайн кнопку неожливо додати у пост.\n'
+                                      'До більше 1 медіа інлайн неможливо додати.\n'
+                                      'Інлайн можна додавати до:\n'
+                                      '<i>- тексту</i>\n'
+                                      '<i>- 1 фото</i>\n'
+                                      '<i>- 1 відео</i>\n'
+                                      '<i>- відеоповідомлення</i>\n'
+                                      '<i>- голосове повідомлення</i>\n', parse_mode='html',
+                                      reply_markup=post_formatting_kb)
+            return
 
     post_media_files = data.get('loaded_post_files')
     if post_media_files:
