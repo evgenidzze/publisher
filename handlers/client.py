@@ -751,25 +751,6 @@ async def load_media_file(messages: List[types.Message], state: FSMContext):
         elif 'photo' in messages[message_num]:
             media.attach_photo(photo=messages[message_num].photo[0].file_id)
         elif 'document' in messages[message_num]:
-            document = await bot.get_file(messages[message_num].document.file_id)
-            document_url = f"https://api.telegram.org/file/bot{TOKEN_API}/{document.file_path}"
-            async with aiohttp.ClientSession() as session:
-                buffer = io.BytesIO()
-                async with session.get(document_url) as response:
-                    if response.status != 200:
-                        # Handle the case where the document cannot be retrieved
-                        print(f"Failed to retrieve document with status code {response.status}")
-                    else:
-                        data = await response.read()
-                        buffer.write(data)
-
-            if buffer.tell() == 0:
-                # Handle the case where the buffer is empty
-                print("Buffer is empty")
-
-            # Ensure the buffer is not empty before attempting to send the photo
-            if buffer.tell() > 0:
-                await bot.send_photo(chat_id=messages[message_num].from_user.id, photo=types.InputFile(buffer))
             media.attach_document(messages[message_num].document.file_id)
 
     if media.media:
