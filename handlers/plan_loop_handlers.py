@@ -42,15 +42,25 @@ async def plan_menu(call: types.CallbackQuery, state: FSMContext):
 
 
 async def choose_loop_time(call: types.CallbackQuery, state: FSMContext):
-    await call.answer()
-    await state.update_data(post_type='looped')
     from handlers.client import FSMClient
+    await call.answer()
+    data = await state.get_data()
+    job_id = data.get('job_id')
+    if job_id:
+        job = scheduler.get_job(job_id)
+        data = job.kwargs.get('data')
+        data['post_type'] = 'looped'
+        job.modify(kwargs={'data': data})
+    else:
+        await state.update_data(post_type='looped')
+
     await FSMClient.time_loop.set()
     await call.message.answer(text="Ваша публікація буде опублікована кожного дня в обраний час: ",
                               reply_markup=await FullTimePicker().start_picker())
 
 
 async def full_picker_handler(callback_query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    await callback_query.answer()
     r = await FullTimePicker().process_selection(callback_query, callback_data)
     s = await state.get_state()
     fsm_data = await state.get_data()
@@ -61,12 +71,10 @@ async def full_picker_handler(callback_query: types.CallbackQuery, callback_data
         from handlers.client import formatting_main_menu
         await formatting_main_menu(callback_query, state)
 
-    await callback_query.answer()
     if r.selected:
         if s == 'FSMClient:time_planning':
             await state.update_data(time_planning=r.time)
             data = await state.get_data()
-            print(type(data))
             selected_time: time = data.get("time_planning")
             selected_date: datetime = data.get("date_planning")
             selected_date = selected_date.replace(hour=selected_time.hour, minute=selected_time.minute)
@@ -114,8 +122,8 @@ async def full_picker_handler(callback_query: types.CallbackQuery, callback_data
 
 
 async def process_simple_calendar(callback_query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    from handlers.client import FSMClient
     await callback_query.answer()
-    print(callback_query)
     selected, date = await SimpleCalendar().process_selection(callback_query, callback_data)
     if selected:
         await state.update_data(date_planning=date)
@@ -123,7 +131,6 @@ async def process_simple_calendar(callback_query: types.CallbackQuery, callback_
             text=f'Ви обрали: {date.strftime("%d/%m/%Y")}'
         )
         await state.reset_state(with_data=False)
-        from handlers.client import FSMClient
         await FSMClient.time_planning.set()
         await callback_query.message.answer(
             "Будь ласка оберіть час: ",
@@ -132,10 +139,19 @@ async def process_simple_calendar(callback_query: types.CallbackQuery, callback_
 
 
 async def choose_plan_date(call: types.CallbackQuery, state: FSMContext):
-    await call.answer()
-    await state.update_data(post_type='planned')
-
     from handlers.client import FSMClient
+    await call.answer()
+    data = await state.get_data()
+    job_id = data.get('job_id')
+
+    if job_id:
+        job = scheduler.get_job(job_id)
+        data = job.kwargs.get('data')
+        data['post_type'] = 'planned'
+        job.modify(kwargs={'data': data})
+    else:
+        await state.update_data(post_type='planned')
+
     await FSMClient.date_planning.set()
     await call.message.answer(text="Оберіть дату: ", reply_markup=await SimpleCalendar().start_calendar())
     await call.answer()

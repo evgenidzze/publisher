@@ -5,10 +5,11 @@ import random
 
 import aiogram_timepicker
 from aiogram import types
+from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.handler import CancelHandler
 from aiogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove
 
-from create_bot import bot
+from create_bot import bot, scheduler
 from json_functionality import get_all_channels, get_users_dict
 from aiogram.dispatcher.middlewares import BaseMiddleware
 import io
@@ -68,12 +69,7 @@ async def send_message_time(data):
     voice = data.get('voice')
     video_note = data.get('video_note')
     cat_name = data.get('choose_catalog')
-    inline_text = data.get('inline_text')
-    inline_url = data.get('inline_link')
-    link_kb = None
-    if inline_text and inline_url:
-        link_kb = InlineKeyboardMarkup()
-        link_kb.add(InlineKeyboardButton(text=inline_text, url=inline_url))
+    link_kb = data.get('link_kb')
 
     if not media_files and (data.get('random_photos_number') or data.get('random_videos_number')):
         media_files = types.MediaGroup()
@@ -89,7 +85,7 @@ async def send_message_time(data):
                                      reply_markup=link_kb)
             elif media_files.media[0]['type'] == 'document':
                 await bot.send_document(chat_id=channel_id, document=media_files.media[0]['media'], caption=post_text,
-                                     reply_markup=link_kb)
+                                        reply_markup=link_kb)
         else:
             await bot.send_media_group(chat_id=channel_id, media=media_files)
 
@@ -132,7 +128,7 @@ async def send_message_cron(data):
                                      reply_markup=link_kb)
             elif media_files.media[0]['type'] == 'document':
                 await bot.send_document(chat_id=channel_id, document=media_files.media[0]['media'], caption=post_text,
-                                     reply_markup=link_kb)
+                                        reply_markup=link_kb)
         else:
             await bot.send_media_group(chat_id=channel_id, media=media_files)
     elif voice:
@@ -224,32 +220,28 @@ def set_caption(media, text):
 
 
 async def send_post(post_media_files: types.MediaGroup, post_text, bot, channel_id, post_voice, post_video_note,
-                    inline_url, inline_text):
-    link_kb = None
-    if inline_text and inline_url:
-        link_kb = InlineKeyboardMarkup()
-        link_kb.add(InlineKeyboardButton(text=inline_text, url=inline_url))
+                    inline_kb):
     if post_media_files:
         set_caption(text=post_text, media=post_media_files),
         if len(post_media_files.media) == 1:
-            print(post_media_files.media[0])
             if post_media_files.media[0]['type'] == 'photo':
                 await bot.send_photo(chat_id=channel_id, photo=post_media_files.media[0]['media'], caption=post_text,
-                                     reply_markup=link_kb)
+                                     reply_markup=inline_kb)
             elif post_media_files.media[0]['type'] == 'video':
                 await bot.send_video(chat_id=channel_id, video=post_media_files.media[0]['media'], caption=post_text,
-                                     reply_markup=link_kb)
+                                     reply_markup=inline_kb)
             elif post_media_files.media[0]['type'] == 'document':
-                await post_media_files.bot.send_document(chat_id=channel_id, document=post_media_files.media[0]['media'], caption=post_text,
-                                     reply_markup=link_kb)
+                await post_media_files.bot.send_document(chat_id=channel_id,
+                                                         document=post_media_files.media[0]['media'], caption=post_text,
+                                                         reply_markup=inline_kb)
         else:
             await bot.send_media_group(chat_id=channel_id, media=post_media_files)
     elif post_voice:
-        await bot.send_voice(chat_id=channel_id, voice=post_voice, caption=post_text, reply_markup=link_kb)
+        await bot.send_voice(chat_id=channel_id, voice=post_voice, caption=post_text, reply_markup=inline_kb)
     elif post_video_note:
-        await bot.send_video_note(chat_id=channel_id, video_note=post_video_note, reply_markup=link_kb)
+        await bot.send_video_note(chat_id=channel_id, video_note=post_video_note, reply_markup=inline_kb)
     else:
-        await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=link_kb)
+        await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=inline_kb)
 
 
 async def cat_content(call: types.CallbackQuery, catalog_data: dict, media_type: str = None):
@@ -391,3 +383,52 @@ async def cron_signals(callback_query: CallbackQuery, data):
 def sorting_key_jobs(job):
     next_run: datetime.datetime = job.next_run_time
     return next_run.time()
+
+
+async def show_post(message, state: FSMContext):
+
+    data = await state.get_data()
+    job_id = data.get('job_id')
+    if job_id:
+        data = scheduler.get_job(job_id).kwargs.get('data')
+    post_media_files = data.get('loaded_post_files')
+    kb_inline = data.get('inline_kb')
+    text = data.get('post_text')
+    post_voice = data.get('voice')
+    video_note = data.get('video_note')
+
+    if post_media_files:
+        if len(post_media_files.media) == 1 and kb_inline:
+            m = post_media_files.media[0]
+            if m.type == 'video':
+                await bot.send_video(chat_id=message.from_user.id, video=m.media, caption=text, reply_markup=kb_inline)
+            elif m.type == 'photo':
+                await bot.send_photo(chat_id=message.from_user.id, photo=m.media, caption=text, reply_markup=kb_inline)
+            elif m.type == 'document':
+                await bot.send_document(chat_id=message.from_user.id, document=m.media, caption=text,
+                                          reply_markup=kb_inline)
+        else:
+            set_caption(text=text, media=post_media_files),
+            await bot.send_media_group(chat_id=message.from_user.id, media=post_media_files)
+    elif post_voice:
+        await bot.send_voice(chat_id=message.from_user.id, voice=post_voice, caption=text, reply_markup=kb_inline)
+    elif video_note:
+        await bot.send_video_note(chat_id=message.from_user.id, video_note=video_note, reply_markup=kb_inline)
+    elif text:
+        await bot.send_message(chat_id=message.from_user.id, text=text, reply_markup=kb_inline)
+
+
+def job_list_by_channel(data, date: datetime.datetime):
+    all_posts_channel_id = data.get('all_posts_channel_id')
+    all_jobs = scheduler.get_jobs()
+    jobs_in_channel = []
+    for job in all_jobs:
+        job_data = job.kwargs.get('data')
+        if job_data.get('channel_id') == all_posts_channel_id:
+            date_planning: datetime.datetime = job.next_run_time
+            if date_planning:
+                if date_planning.date() == date.date() or job_data.get('post_type') == 'looped':
+                    jobs_in_channel.append(job)
+            else:
+                jobs_in_channel.append(job)
+    return jobs_in_channel

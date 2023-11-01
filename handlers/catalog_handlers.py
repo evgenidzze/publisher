@@ -4,7 +4,7 @@ from aiogram.utils.exceptions import BadRequest
 from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, InputMediaVideo
 
 from aiogram_media_group import media_group_handler
 from create_bot import bot, scheduler
@@ -12,7 +12,7 @@ from json_functionality import add_media_to_catalog, catalog_list_json, cat_name
     get_media_from_base, remove_cat_media_json, delete_catalog_json, change_cat_name
 from keyboards.kb_client import base_manage_panel_kb, back_kb, self_or_random_kb, post_formatting_kb, \
     change_create_post_kb, cat_types_kb, back, cancel_kb, cancel_sending_media_kb, back_to_catalog, edit_catalog_kb
-from utils import pressed_back_button, cat_content, restrict_media, set_caption
+from utils import pressed_back_button, cat_content, restrict_media, set_caption, show_post
 
 
 async def media_base_panel(message, state: FSMContext):
@@ -151,6 +151,8 @@ async def choose_catalog(call: types.CallbackQuery, state: FSMContext):
 
 
 async def media_type_from_cat(call: types.CallbackQuery, state: FSMContext):
+    from handlers.client import FSMClient
+
     await call.answer()
     fsm_data = await state.get_data()
     cat_name = fsm_data.get('choose_catalog')
@@ -168,7 +170,6 @@ async def media_type_from_cat(call: types.CallbackQuery, state: FSMContext):
             await call.message.edit_text(text='Що саме хочете додати?', reply_markup=kb)
         except:
             pass
-        from handlers.client import FSMClient
         await FSMClient.media_type_add_from_cat.set()
     else:
         try:
@@ -177,6 +178,8 @@ async def media_type_from_cat(call: types.CallbackQuery, state: FSMContext):
             if catalogs:
                 for cat in catalogs:
                     catalogs_kb.add(InlineKeyboardButton(text=cat, callback_data=cat))
+                catalogs_kb.add(back)
+                await FSMClient.choose_catalog.set()
             await call.message.edit_text(text='Каталог пустий', reply_markup=catalogs_kb)
         except:
             pass
@@ -211,9 +214,12 @@ async def choose_media_from_cat(call: types.CallbackQuery, state: FSMContext):
 
 async def add_media_from_catalog(message: types.Message, state: FSMContext):
     data = await state.get_data()
+    post_text = data.get('post_text')
     media_type = data.get('media_type_add_from_cat')
     cat_name = data.get('catalog_for_post')
     job_id = data.get('job_id')
+    kb_inline = data.get('inline_kb')
+
     # if job_id то дані будуть з джоба
     if job_id:
         job = scheduler.get_job(job_id)
@@ -225,11 +231,10 @@ async def add_media_from_catalog(message: types.Message, state: FSMContext):
 
     elif isinstance(message, types.Message):
         media_indexes = [int(x) - 1 for x in message.text.split(' ') if x.isdigit()]
-        if not data.get('loaded_post_files'):
-            media = types.MediaGroup()
-        else:
-            media = data.get('loaded_post_files')
         messages = await get_media_from_base(message, cat_name, media_type, media_indexes)
+        media = data.get('loaded_post_files')
+        if not media:
+            media = types.MediaGroup()
         if not messages:
             return
         if await restrict_media(messages=messages, state=state, data=data, post_formatting_kb=post_formatting_kb):
@@ -240,7 +245,8 @@ async def add_media_from_catalog(message: types.Message, state: FSMContext):
                 job.modify(kwargs={'data': data})
             else:
                 await state.update_data(voice=messages[0].file_id)
-            await message.answer_voice(voice=messages[0].file_id)
+
+            await message.answer_voice(voice=messages[0].file_id, reply_markup=kb_inline)
             await message.answer(text='✅ Голосове додано до посту.', reply_markup=post_formatting_kb)
             await state.reset_state(with_data=False)
             return
@@ -250,7 +256,7 @@ async def add_media_from_catalog(message: types.Message, state: FSMContext):
                 job.modify(kwargs={'data': data})
             else:
                 await state.update_data(video_note=messages[0].file_id)
-            await message.answer_video_note(video_note=messages[0].file_id)
+            await message.answer_video_note(video_note=messages[0].file_id, reply_markup=kb_inline)
             await message.answer(text='✅ Відеоповідомлення додано до посту.', reply_markup=post_formatting_kb)
             await state.reset_state(with_data=False)
             return
@@ -264,19 +270,17 @@ async def add_media_from_catalog(message: types.Message, state: FSMContext):
         elif media_type == 'documents':
             for document in messages:
                 media.attach_document(document=document.file_id)
-        set_caption(media=media, text=data.get('post_text'))
-
-        try:
-            await message.answer_media_group(media=media)
-        except BadRequest:
-            await message.answer(text='❌ Цей тип медіа не може бути згрупований з попередніми медіа.')
-            media.media.pop()
-
+        set_caption(media=media, text=post_text)
         if job_id:
             data['loaded_post_files'] = media
             job.modify(kwargs={'data': data})
         else:
             await state.update_data(loaded_post_files=media)
+        try:
+            await show_post(message, state)
+        except BadRequest:
+            await message.answer(text='❌ Цей тип медіа не може бути згрупований з попередніми медіа.')
+            media.media.pop()
 
         if job_id:
             await message.answer(text='✅ Медіа змінено.', reply_markup=change_create_post_kb)
@@ -340,7 +344,6 @@ async def edit_cat(call: types.CallbackQuery, state: FSMContext):
     elif message_data == 'back_to_base_menu':
         await media_base_panel(call, state)
         return
-
 
 
 async def load_new_cat_name(message, state: FSMContext):

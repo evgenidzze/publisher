@@ -20,7 +20,7 @@ from handlers.catalog_handlers import media_type_from_cat, media_base_panel
 from handlers.signals import signal_menu
 
 from utils import kb_channels, AuthMiddleware, send_voice_from_audio, restrict_media, set_caption, send_post, \
-    pressed_back_button, add_random_media, send_v_notes_cron, sorting_key_jobs
+    pressed_back_button, add_random_media, send_v_notes_cron, sorting_key_jobs, show_post, job_list_by_channel
 from json_functionality import get_all_channels, save_channel_json, remove_channel_id_from_json, catalog_list_json, \
     get_catalog, get_video_notes_by_cat
 
@@ -36,9 +36,10 @@ locale.setlocale(locale.LC_ALL, 'uk_UA.utf8')
 
 
 class FSMClient(StatesGroup):
+    inline_to_delete = State()
     new_cat_name = State()
     time_random_video_notes = State()
-    random_v_notes_id = State()
+    # random_v_notes_id = State()
     posts_by_data = State()
     all_posts_channel_id = State()
     del_signal_id = State()
@@ -190,6 +191,11 @@ async def channel_list(call: types.CallbackQuery):
 
 
 async def edit_create_post_channel_list(message, state: FSMContext):
+    jobs = scheduler.get_jobs()
+    if jobs:
+        for job in jobs:
+            print(job.kwargs.get('data'))
+
     if isinstance(message, types.Message):
         await state.finish()
         if get_all_channels(message.from_user.id):
@@ -234,7 +240,7 @@ async def edit_create_post_channel_list(message, state: FSMContext):
 
 
 async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
-    await state.finish()
+    # await state.finish()
     channel_id = message.data
     jobs = scheduler.get_jobs()
     edit_kb = InlineKeyboardMarkup()
@@ -267,36 +273,13 @@ async def change_job(call: types.CallbackQuery, state: FSMContext):
     await state.update_data(job_id=job_id)
 
     job_data = job.kwargs.get('data')
-    post_type = job_data.get('post_type')
-    post_text = job_data.get("post_text")
-    post_media_files = job_data.get('loaded_post_files')
-    post_voice = job_data.get('voice')
-    post_video_note = job_data.get('video_note')
-    inline_text = job_data.get('inline_text')
-    inline_url = job_data.get('inline_link')
-
-    link_kb = None
-    if inline_text and inline_url:
-        link_kb = InlineKeyboardMarkup()
-        link_kb.add(InlineKeyboardButton(text=inline_text, url=inline_url))
-
-    if post_media_files:
-        set_caption(media=post_media_files, text=post_text)
-        if len(post_media_files.media) == 1:
-            if post_media_files.media[0]['type'] == 'photo':
-                await call.message.answer_photo(photo=post_media_files.media[0]['media'], caption=post_text,
-                                                reply_markup=link_kb)
-            elif post_media_files.media[0]['type'] == 'video':
-                await call.message.answer_video(video=post_media_files.media[0]['media'], caption=post_text,
-                                                reply_markup=link_kb)
-        else:
-            await call.message.answer_media_group(media=post_media_files)
-    elif post_voice:
-        await call.message.answer_voice(voice=post_voice, reply_markup=link_kb)
-    elif post_video_note:
-        await call.message.answer_video_note(video_note=post_video_note, reply_markup=link_kb)
-    elif post_text:
-        await call.message.answer(text=post_text, reply_markup=link_kb)
+    # post_text = job_data.get("post_text")
+    # post_media_files = job_data.get('loaded_post_files')
+    # post_voice = job_data.get('voice')
+    # post_video_note = job_data.get('video_note')
+    #
+    # link_kb = job_data.get('inline_kb')
+    await show_post(call, state)
 
     await state.reset_state(with_data=False)
 
@@ -342,8 +325,6 @@ async def load_changed_text(message, state: FSMContext):
         text = message.text
     else:
         await message.answer()
-        message = message.message
-
     data = await state.get_data()
     job_id = data.get('job_id')
     if job_id:
@@ -353,26 +334,10 @@ async def load_changed_text(message, state: FSMContext):
         job.modify(kwargs={'data': data})
     else:
         await state.update_data(post_text=text)
-    post_media_files = data.get('loaded_post_files')
-    post_voice = data.get('voice')
-    video_note = data.get('video_note')
+    await show_post(message, state)
 
-    if post_media_files:
-        set_caption(text=text, media=post_media_files),
-        await message.answer_media_group(media=post_media_files)
-    elif post_voice:
-        await message.answer_voice(voice=post_voice, caption=text)
-    elif video_note:
-        await message.answer_video_note(video_note=video_note)
-    elif text:
-        await message.answer(text=text)
-
-    try:
-        await message.edit_text(text='Налаштуйте оформлення посту.',
-                                reply_markup=post_formatting_kb)
-    except:
-        await message.answer(text='Налаштуйте оформлення посту.',
-                             reply_markup=post_formatting_kb)
+    await bot.send_message(chat_id=message.from_user.id, text='Налаштуйте оформлення посту.',
+                           reply_markup=post_formatting_kb)
     await state.reset_state(with_data=False)
 
 
@@ -382,8 +347,7 @@ async def formatting_main_menu(message, state: FSMContext):
     if job_id:
         job = scheduler.get_job(job_id)
         data = job.kwargs.get('data')
-    else:
-        job = None
+
     if isinstance(message, types.CallbackQuery):
         await message.answer()
         if message.data in ('back', 'formatting_main_menu', 'full_timepicker:CANCEL:-1:-1:-1'):
@@ -421,8 +385,7 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
         post_media_files = data.get('loaded_post_files')
         post_voice = data.get('voice')
         post_video_note = data.get('video_note')
-        inline_text = data.get('inline_text')
-        inline_url = data.get('inline_link')
+        inline_kb = data.get('inline_kb')
         cat_name = data.get('choose_catalog')
 
         if post_text is None:
@@ -432,8 +395,7 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
             post_media_files = types.MediaGroup()
             add_random_media(media_files=post_media_files, data=data, cat_name=cat_name)
         await send_post(post_media_files=post_media_files, post_text=post_text, post_voice=post_voice,
-                        channel_id=channel_id, post_video_note=post_video_note, bot=bot, inline_url=inline_url,
-                        inline_text=inline_text)
+                        channel_id=channel_id, post_video_note=post_video_note, bot=bot, inline_kb=inline_kb)
 
         await call.message.delete()
         await call.message.answer(
@@ -447,30 +409,12 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
 
 
 async def choose_or_self_media(call: types.CallbackQuery, state: FSMContext):
-    fsm_data = await state.get_data()
-    job_id = fsm_data.get('job_id')
-    if job_id:
-        job_data = scheduler.get_job(job_id).kwargs.get('data')
-        post_type = job_data.get('post_type')
-    else:
-        post_type = fsm_data.get('post_type')
     await call.answer()
     await FSMClient.media_answer.set()
     media_choice_custom_kb = InlineKeyboardMarkup(row_width=2)
     media_choice_custom_kb.add(take_from_db)
     try:
         await call.message.edit_text(text='Оберіть варіант:', reply_markup=media_kb)
-    #     if post_type == 'looped':
-    #         await call.message.edit_text(text='Оберіть варіант:', reply_markup=loop_media_kb)
-    #         return
-    #     elif post_type == 'planned':
-    #         await call.message.edit_text(text='Обрати медіа з бази чи додати самостійно?',
-    #                                      reply_markup=planned_media_kb)
-    #         return
-    #     elif post_type == 'now':
-    #         await call.message.edit_text(text='Обрати медіа з бази чи додати самостійно?',
-    #                                      reply_markup=now_media_kb)
-    #         return
     except:
         pass
 
@@ -480,7 +424,6 @@ async def load_media_answer(call: types.CallbackQuery, state: FSMContext):
 
     data = call.data
     fsm_data = await state.get_data()
-    post_type = fsm_data.get('post_type')
     if data == 'formatting_main_menu':
         await formatting_main_menu(call, state)
     #
@@ -592,7 +535,7 @@ async def load_media_answer(call: types.CallbackQuery, state: FSMContext):
 
 async def del_media(message: types.Message, state: FSMContext):
     fsm_data = await state.get_data()
-    post_type = fsm_data.get('post_type')
+    inline_kb = fsm_data.get('inline_kb')
     if isinstance(message, types.CallbackQuery):
         if message.data == 'back':
             await state.reset_state(with_data=False)
@@ -629,7 +572,16 @@ async def del_media(message: types.Message, state: FSMContext):
                 job.modify(kwargs={'data': job_data})
             else:
                 await state.update_data(loaded_post_files=media)
-            await message.answer_media_group(media=media)
+            if len(media.media) == 1 and inline_kb:
+                m = media.media[0]
+                if m.type == 'video':
+                    await message.answer_video(video=m.media, caption=post_text, reply_markup=inline_kb)
+                elif m.type == 'photo':
+                    await message.answer_photo(photo=m.media, caption=post_text, reply_markup=inline_kb)
+                elif m.type == 'document':
+                    await message.answer_document(document=m.media, caption=post_text, reply_markup=inline_kb)
+            else:
+                await message.answer_media_group(media=media)
         else:
             if job:
                 del job_data['loaded_post_files']
@@ -640,6 +592,7 @@ async def del_media(message: types.Message, state: FSMContext):
         await message.answer(text=f'Медіа №{message.text} видалено з посту.\n'
                                   f'Налаштуйте оформлення посту.', reply_markup=media_kb)
         await state.reset_state(with_data=False)
+        await FSMClient.media_answer.set()
 
 
 async def del_voice_or_video_note(call: types.CallbackQuery, state: FSMContext):
@@ -700,6 +653,7 @@ async def load_media_file(messages: List[types.Message], state: FSMContext):
     if job_id:
         job = scheduler.get_job(job_id)
         data = scheduler.get_job(job_id).kwargs.get('data')
+    inline_kb = data.get('inline_kb')
 
     if data.get('random_photos_number'):
         await messages[0].answer(text='⚠️ Рандом-медіа налаштування скинуті.')
@@ -757,7 +711,16 @@ async def load_media_file(messages: List[types.Message], state: FSMContext):
         set_caption(media=media, text=text)
 
         try:
-            await messages[0].answer_media_group(media=media)
+            if len(media.media) == 1 and inline_kb:
+                m = media.media[0]
+                if m.type == 'video':
+                    await messages[0].answer_video(video=m.media, caption=text, reply_markup=inline_kb)
+                elif m.type == 'photo':
+                    await messages[0].answer_photo(photo=m.media, caption=text, reply_markup=inline_kb)
+                elif m.type == 'document':
+                    await messages[0].answer_document(document=m.media, caption=text, reply_markup=inline_kb)
+            else:
+                await messages[0].answer_media_group(media=media)
         except aiogram.utils.exceptions.BadRequest:
             await messages[0].answer(text='❌ Цей тип медіа не може бути згрупований з попередніми медіа.')
             media.media.pop()
@@ -777,20 +740,12 @@ async def load_media_file(messages: List[types.Message], state: FSMContext):
 async def random_or_self(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     fsm_data = await state.get_data()
-    if fsm_data.get('inline_link') and fsm_data.get('inline_text'):
-        await state.reset_state(with_data=False)
-        try:
-            await call.message.edit_text(text='❌ У пості встановлений інлайн.\n'
-                                              'Якщо хочете додати кілька медіа або рандом-медіа, потрібно видалити інлайн:\n'
-                                              '<i>"Інлайни" → "Видалити інлайн"</i>', parse_mode='html',
-                                         reply_markup=post_formatting_kb)
-        except:
-            pass
-        return
     cat_name = fsm_data.get('choose_catalog')
     cat_data = get_catalog(cat_name)
     message_data = call.data
     media_len = 0
+    existing_random_v_notes_id: list = fsm_data.get('random_v_notes_id')
+
     if message_data == 'back':
         catalogs = catalog_list_json()
         catalogs_kb = InlineKeyboardMarkup()
@@ -810,7 +765,6 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
         media_len += len(cat_data.get('videos'))
 
     if message_data == 'random_media':
-        # try:
         if cat_data.get('photos') and media_len > 1:
             await FSMClient.number_of_rand_photo.set()
             await call.message.edit_text(
@@ -827,9 +781,7 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
                                              parse_mode='html', reply_markup=self_or_random_kb)
             except:
                 pass
-            # await choose_or_self_media(call, state)
-        # except:
-        #     pass
+
 
     elif message_data == 'self_media':
         await media_type_from_cat(call, state)
@@ -837,60 +789,68 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
     elif message_data == 'random_videonote':
         video_notes = get_video_notes_by_cat(cat_name)
         if video_notes:
-            await FSMClient.random_v_notes_id.set()
-            for note_num in range(len(video_notes)):
-                msg = await call.message.answer_video_note(video_note=video_notes[note_num])
-                await msg.reply(text=str(note_num + 1))
-            await call.message.answer(
-                text='Введіть номер відеоповідомлення (або кілька номерів через пробіл), яке бажаєте додати.',
-                reply_markup=back_kb)
+            await state.update_data(random_v_notes_id=video_notes)
+            # await FSMClient.random_v_notes_id.set()
+            # for note_num in range(len(video_notes)):
+            #     msg = await call.message.answer_video_note(video_note=video_notes[note_num])
+            #     await msg.reply(text=str(note_num + 1))
+            # if len(existing_random_v_notes_id) <= 1:
+            #     await call.message.edit_text(text='У вибірці має бути мінімум 2 відеоповідомлення.\n'
+            #                                       'Надішліть ще номер(-и) відеоповідомлень:',
+            #                                  reply_markup=random_v_note_kb)
+            # else:
+            await FSMClient.time_random_video_notes.set()
+            await call.message.edit_text(text='Оберіть час, коли вони будуть публікуватись:',
+                                         reply_markup=await FullTimePicker().start_picker())
+            # await call.message.answer(
+            #     text='Введіть номер відеоповідомлення (або кілька номерів через пробіл), яке бажаєте додати.',
+            #     reply_markup=back_kb)
         else:
             await call.message.edit_text(text='У каталозі має бути мінімум 2 відеоповідомлення.',
                                          reply_markup=self_or_random_kb)
 
 
-async def load_random_v_notes_id(message, state: FSMContext):
-    fsm_data = await state.get_data()
-    cat_name = fsm_data.get('choose_catalog')
-    video_notes = get_video_notes_by_cat(cat_name)
-    existing_random_v_notes_id: list = fsm_data.get('random_v_notes_id')
-
-    if isinstance(message, Message):
-        new_v_note_numbers = [num for num in message.text.split() if num.isdigit()]
-        new_v_note_id = [video_notes[int(v_id) - 1] for v_id in new_v_note_numbers if int(v_id) <= len(video_notes)]
-        if existing_random_v_notes_id:
-            existing_random_v_notes_id.extend(new_v_note_id)
-        else:
-            existing_random_v_notes_id = new_v_note_id
-        existing_random_v_notes_id = list(dict.fromkeys(existing_random_v_notes_id))
-        await state.update_data(random_v_notes_id=existing_random_v_notes_id)
-        await message.answer(
-            text=f'✅ Відеоповідомлення №{", ".join([str(num + 1) for num in range(len(existing_random_v_notes_id))])} додано.\n'
-                 f'Надішліть ще номер(-и) або натисніть кнопку "💾 Зберегти", щоб закінчити',
-            reply_markup=random_v_note_kb)
-        # else:
-        #     await message.answer(text='Введіть коректний номер:')
-    elif isinstance(message, types.CallbackQuery):
-        if message.data in ('back_to_media_variant', 'back'):
-            await state.update_data(random_v_notes_id=None)
-            await number_of_random_videos(message, state)
-            return
-        if len(existing_random_v_notes_id) <= 1:
-            await message.message.edit_text(text='У вибірці має бути мінімум 2 відеоповідомлення.\n'
-                                                 'Надішліть ще номер(-и) відеоповідомлень:',
-                                            reply_markup=random_v_note_kb)
-        else:
-            await FSMClient.time_random_video_notes.set()
-            await message.message.edit_text(text='Рандомні відеоповідомлення збережено.\n'
-                                                 'Оберіть час, коли вони будуть публікуватись:',
-                                            reply_markup=await FullTimePicker().start_picker())
+# async def load_random_v_notes_id(message, state: FSMContext):
+#     fsm_data = await state.get_data()
+#     cat_name = fsm_data.get('choose_catalog')
+#     video_notes = get_video_notes_by_cat(cat_name)
+#     existing_random_v_notes_id: list = fsm_data.get('random_v_notes_id')
+#
+#     if isinstance(message, Message):
+#         new_v_note_numbers = [num for num in message.text.split() if num.isdigit()]
+#         new_v_note_id = [video_notes[int(v_id) - 1] for v_id in new_v_note_numbers if int(v_id) <= len(video_notes)]
+#         if existing_random_v_notes_id:
+#             existing_random_v_notes_id.extend(new_v_note_id)
+#         else:
+#             existing_random_v_notes_id = new_v_note_id
+#         existing_random_v_notes_id = list(dict.fromkeys(existing_random_v_notes_id))
+#         await state.update_data(random_v_notes_id=existing_random_v_notes_id)
+#         await message.answer(
+#             text=f'✅ Відеоповідомлення №{", ".join([str(num + 1) for num in range(len(existing_random_v_notes_id))])} додано.\n'
+#                  f'Надішліть ще номер(-и) або натисніть кнопку "💾 Зберегти", щоб закінчити',
+#             reply_markup=random_v_note_kb)
+#         # else:
+#         #     await message.answer(text='Введіть коректний номер:')
+#     elif isinstance(message, types.CallbackQuery):
+#         if message.data in ('back_to_media_variant', 'back'):
+#             await state.update_data(random_v_notes_id=None)
+#             await number_of_random_videos(message, state)
+#             return
+#         if len(existing_random_v_notes_id) <= 1:
+#             await message.message.edit_text(text='У вибірці має бути мінімум 2 відеоповідомлення.\n'
+#                                                  'Надішліть ще номер(-и) відеоповідомлень:',
+#                                             reply_markup=random_v_note_kb)
+#         else:
+#             await FSMClient.time_random_video_notes.set()
+#             await message.message.edit_text(text='Рандомні відеоповідомлення збережено.\n'
+#                                                  'Оберіть час, коли вони будуть публікуватись:',
+#                                             reply_markup=await FullTimePicker().start_picker())
 
 
 async def pick_time_random_v_notes(callback_query: types.CallbackQuery, callback_data: dict, state: FSMContext):
     r = await FullTimePicker().process_selection(callback_query, callback_data)
     await callback_query.answer()
     if r.status.name == 'CANCELED':
-        print('123')
         await number_of_random_videos(callback_query, state)
         return
     if r.selected:
@@ -967,11 +927,11 @@ async def number_of_random_videos(message, state: FSMContext):
                 text='Якщо хочете щоб медіа обирались для посту автоматично - оберіть "Рандом медіа".',
                 reply_markup=self_or_random_kb)
         return
-    fsm_data = await state.get_data()
-    post_type = fsm_data.get('post_type')
     await state.update_data(random_videos_number=message.text)
-    await message.answer(text='Відео додано у рандомну вибірку.')
+    await show_post(message, state)
+    await message.answer(text='Відео додано у рандомну вибірку.', reply_markup=post_formatting_kb)
     await state.reset_state(with_data=False)
+
     # if post_type == 'looped':
     #     await post_looping(message, state)
     # elif post_type == 'planned':
@@ -994,12 +954,12 @@ async def add_inline(call: types.CallbackQuery, state: FSMContext):
     job_id = data.get('job_id')
     if job_id:
         data = scheduler.get_job(job_id).kwargs.get('data')
-
+    post_media_files = data.get('loaded_post_files')
     random_photos_number = data.get('random_photos_number')
     if random_photos_number:
         if int(random_photos_number) > 1:
             await call.message.answer('❌ Інлайн кнопку неожливо додати у пост.\n'
-                                      'До більше 1 медіа інлайн неможливо додати.\n'
+                                      'До більше ніж 1 медіа інлайн неможливо додати.\n'
                                       'Інлайн можна додавати до:\n'
                                       '<i>- тексту</i>\n'
                                       '<i>- 1 фото</i>\n'
@@ -1009,7 +969,6 @@ async def add_inline(call: types.CallbackQuery, state: FSMContext):
                                       reply_markup=post_formatting_kb)
             return
 
-    post_media_files = data.get('loaded_post_files')
     if post_media_files:
         if len(post_media_files.media) > 1:
             await call.message.answer('❌ Інлайн кнопку не додано у пост\n'
@@ -1031,7 +990,7 @@ async def add_inline(call: types.CallbackQuery, state: FSMContext):
         pass
 
 
-async def del_inline(call: types.CallbackQuery, state: FSMContext):
+async def pick_inline_to_delete(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     fsm_data = await state.get_data()
     job_id = fsm_data.get('job_id')
@@ -1039,15 +998,16 @@ async def del_inline(call: types.CallbackQuery, state: FSMContext):
     if job_id:
         job = scheduler.get_job(job_id)
         fsm_data = job.kwargs.get('data')
-    if all(fsm_data.get(i) for i in ('inline_link', 'inline_text')):
-        await call.message.answer(text='Інлайн видалено.', reply_markup=post_formatting_kb)
-        if job_id:
-            fsm_data['inline_link'] = None
-            fsm_data['inline_text'] = None
-            job.modify(kwargs={'data': fsm_data})
-        else:
-            await state.update_data(inline_link=None)
-            await state.update_data(inline_text=None)
+
+    post_inlines: InlineKeyboardMarkup = fsm_data.get('inline_kb')
+    if post_inlines and post_inlines.inline_keyboard:
+        kb = InlineKeyboardMarkup()
+        for inline in post_inlines.inline_keyboard:
+            inline_index = post_inlines.inline_keyboard.index(inline)
+            kb.add(InlineKeyboardButton(text=f"{inline[0].text}",
+                                        callback_data=str(inline_index)))
+        await call.message.answer(text='Оберіть інлайн, який хочете видалити.', reply_markup=kb)
+        await FSMClient.inline_to_delete.set()
     else:
         try:
             await call.message.edit_text('У пості немає інлайнів', reply_markup=post_formatting_kb)
@@ -1055,8 +1015,27 @@ async def del_inline(call: types.CallbackQuery, state: FSMContext):
             pass
 
 
+async def delete_inline(call: types.CallbackQuery, state: FSMContext):
+    data = await state.get_data()
+    job_id = data.get('job_id')
+    if job_id:
+        data = scheduler.get_job(job_id).kwargs.get('data')
+    kb: InlineKeyboardMarkup = data.get('inline_kb')
+    message_data = call.data
+    del kb.inline_keyboard[int(message_data)]
+    if job_id:
+        job = scheduler.get_job(job_id)
+        data['inline_kb'] = kb
+        job.modify(kwargs={'data': data})
+    else:
+        await state.update_data(inline_kb=kb)
+    await show_post(call, state)
+    await call.message.edit_text(text='Інлайн видалено.', reply_markup=post_formatting_kb)
+    await state.reset_state(with_data=False)
+
+
 async def inline_text_load(message, state: FSMContext):
-    if isinstance(message, types.CallbackQuery):
+    if isinstance(message, types.CallbackQuery):  # if back button
         if message.data == 'back':
             await state.reset_state(with_data=False)
             await inlines(message, state)
@@ -1070,8 +1049,7 @@ async def inline_text_load(message, state: FSMContext):
 async def inline_link_load(message: types.Message, state: FSMContext):
     if 'entities' in message:
         if message.entities[0]['type'] == 'url':
-            await state.update_data(inline_link=message.text)
-            await state.reset_state(with_data=False)
+            url = message.text
 
             data = await state.get_data()
             job_id = data.get('job_id')
@@ -1085,30 +1063,38 @@ async def inline_link_load(message: types.Message, state: FSMContext):
             video_note = data.get('video_note')
             text = data.get('post_text')
             inline_text = data.get('inline_text')
-            inline_url = data.get('inline_link')
+            inline_kb: InlineKeyboardMarkup = data.get('inline_kb')
 
-            link_kb = None
-            if inline_text and inline_url:
-                link_kb = InlineKeyboardMarkup()
-                link_kb.add(InlineKeyboardButton(text=inline_text, url=inline_url))
+            if not inline_kb:
+                if inline_text and url:
+                    inline_kb = InlineKeyboardMarkup()
+                    inline_kb.add(InlineKeyboardButton(text=inline_text, url=url))
+                    await state.update_data(inline_kb=inline_kb)
+            elif inline_kb:
+                if inline_text and url:
+                    inline_kb.add(InlineKeyboardButton(text=inline_text, url=url))
+                    await state.update_data(inline_kb=inline_kb)
+
             if post_media_files:
                 if len(post_media_files.media) == 1:
                     if post_media_files.media[0]['type'] == 'photo':
                         await message.answer_photo(photo=post_media_files.media[0]['media'],
                                                    caption=text,
-                                                   reply_markup=link_kb)
+                                                   reply_markup=inline_kb)
                     elif post_media_files.media[0]['type'] == 'video':
                         await message.answer_video(video=post_media_files.media[0]['media'],
                                                    caption=text,
-                                                   reply_markup=link_kb)
+                                                   reply_markup=inline_kb)
 
             elif post_voice:
-                await message.answer_voice(voice=post_voice, caption=text, reply_markup=link_kb)
+                await message.answer_voice(voice=post_voice, caption=text, reply_markup=inline_kb)
             elif video_note:
-                await message.answer_video_note(video_note=video_note, reply_markup=link_kb)
+                await message.answer_video_note(video_note=video_note, reply_markup=inline_kb)
             elif text:
-                await message.answer(text=text, reply_markup=link_kb)
+                await message.answer(text=text, reply_markup=inline_kb)
             await message.answer('✅ Інлайн кнопку додано у пост', reply_markup=post_formatting_kb)
+
+            await state.reset_state(with_data=False)
     else:
         await message.answer(text='Невірний формат.\n'
                                   'Потрібно надіслати саме посилання:')
@@ -1124,9 +1110,11 @@ async def reset_post(call: types.CallbackQuery, state: FSMContext):
 
 async def my_posts_menu(message, state: FSMContext):
     await FSMClient.all_posts_channel_id.set()
+
     if get_all_channels(message.from_user.id):
         kb = await kb_channels(message, bot)
         kb.add(back_to_main_menu)
+
         if isinstance(message, types.Message):
             if get_all_channels(message.from_user.id):
                 await message.answer(text='Оберіть канал, щоб переглянути заплановані або зациклені пости:',
@@ -1134,6 +1122,7 @@ async def my_posts_menu(message, state: FSMContext):
             else:
                 await message.answer(text='У вас немає каналів.')
                 await add_channel(message, state)
+
         elif isinstance(message, types.CallbackQuery):
             await message.answer()
             if get_all_channels(message.from_user.id):
@@ -1147,7 +1136,7 @@ async def my_posts_menu(message, state: FSMContext):
         await message.answer(text='❌ У вас немає постів.', reply_markup=kb)
 
 
-async def load_channel_view_post_enter_date(call: types.CallbackQuery, state: FSMContext):
+async def load_channel_id_enter_date(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     all_jobs = scheduler.get_jobs()
     channel_id = call.data
@@ -1173,45 +1162,34 @@ async def load_channel_view_post_enter_date(call: types.CallbackQuery, state: FS
             pass
 
 
-async def load_all_post_date_choose_post(callback_query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+async def my_posts_by_date(callback_query: types.CallbackQuery, callback_data: dict, state: FSMContext):
     selected, date = await SimpleCalendar().process_selection(callback_query, callback_data)
     data = await state.get_data()
-    all_posts_channel_id = data.get('all_posts_channel_id')
     if selected:
-        all_jobs = scheduler.get_jobs()
-        jobs_in_channel = []
-        for job in all_jobs:
-            if job.kwargs.get('data').get('channel_id') == all_posts_channel_id:
-                date_planning = job.kwargs.get('data').get('date_planning')
-                if date_planning:
-                    if date_planning == date:
-                        jobs_in_channel.append(job)
-                        # jobs_in_channel.append(job.kwargs.get('data'))
-                else:
-                    jobs_in_channel.append(job)
-        #                     jobs_in_channel.append(job.kwargs.get('data'))
+        jobs_in_channel = job_list_by_channel(data=data, date=date)
         kb = InlineKeyboardMarkup()
         jobs_in_channel = sorted(jobs_in_channel, key=sorting_key_jobs)
         for job_in_channel in jobs_in_channel:
             job_in_channel_data = job_in_channel.kwargs.get('data')
             post_type = job_in_channel_data.get('post_type')
             if post_type == 'planned':
-                time_planning: datetime.time = job_in_channel_data.get('time_planning').strftime('%H:%M')
+                time_planning: datetime.time = job_in_channel.next_run_time.strftime('%H:%M')
                 kb.add(
                     InlineKeyboardButton(text=f"Пост о {time_planning} - {job_in_channel_data.get('post_text')}",
                                          callback_data=job_in_channel.id))
             else:
-                time_loop: datetime.time = job_in_channel_data.get('time_loop')
+                time_loop: datetime.time = job_in_channel.next_run_time.strftime('%H:%M')
                 random_v_note_loop: datetime.time = job_in_channel_data.get('time_random_video_notes')
                 if time_loop:
                     kb.add(
                         InlineKeyboardButton(
-                            text=f"Пост о {time_loop.strftime('%H:%M')} - {job_in_channel_data.get('post_text')}",
+                            text=f"Пост о {time_loop} - {job_in_channel_data.get('post_text')}",
                             callback_data=job_in_channel.id))
                 elif random_v_note_loop:
                     kb.add(
                         InlineKeyboardButton(text=f"Відеоповідомлення о {random_v_note_loop.strftime('%H:%M')}",
                                              callback_data=job_in_channel.id))
+        # add_posts_to_kb(jobs_in_channel, kb)
         kb.add(back_to_my_posts_inline)
         await FSMClient.job_id.set()
         try:
@@ -1237,8 +1215,8 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_callback_query_handler(signal_menu, Text(equals='📣 Сигнали'), state='*')
     dp.register_message_handler(my_posts_menu, Text(equals='Мої пости'), state='*')
     dp.register_callback_query_handler(my_posts_menu, Text(equals='Мої пости'), state='*')
-    dp.register_callback_query_handler(load_channel_view_post_enter_date, state=FSMClient.all_posts_channel_id)
-    dp.register_callback_query_handler(load_all_post_date_choose_post, simple_cal_callback.filter(),
+    dp.register_callback_query_handler(load_channel_id_enter_date, state=FSMClient.all_posts_channel_id)
+    dp.register_callback_query_handler(my_posts_by_date, simple_cal_callback.filter(),
                                        state=FSMClient.posts_by_data)
 
     dp.register_callback_query_handler(reset_post, Text(equals='reset_post'), state='*')
@@ -1282,13 +1260,14 @@ def register_handlers_client(dp: Dispatcher):
 
     dp.register_callback_query_handler(inlines, Text(equals='inlines'))
     dp.register_callback_query_handler(add_inline, Text(equals='add_inline'))
-    dp.register_callback_query_handler(del_inline, Text(equals='del_inline'))
+    dp.register_callback_query_handler(pick_inline_to_delete, Text(equals='del_inline'))
     dp.register_message_handler(inline_text_load, state=FSMClient.inline_text)
     dp.register_callback_query_handler(inline_text_load, state=FSMClient.inline_text)
     dp.register_message_handler(inline_link_load, state=FSMClient.inline_link)
     dp.register_callback_query_handler(inline_link_load, state=FSMClient.inline_link)
+    dp.register_callback_query_handler(delete_inline, state=FSMClient.inline_to_delete)
 
-    dp.register_message_handler(load_random_v_notes_id, state=FSMClient.random_v_notes_id)
-    dp.register_callback_query_handler(load_random_v_notes_id, state=FSMClient.random_v_notes_id)
+    # dp.register_message_handler(load_random_v_notes_id, state=FSMClient.random_v_notes_id)
+    # dp.register_callback_query_handler(load_random_v_notes_id, state=FSMClient.random_v_notes_id)
     dp.register_callback_query_handler(pick_time_random_v_notes, full_timep_callback.filter(),
                                        state=FSMClient.time_random_video_notes)
