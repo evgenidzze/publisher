@@ -197,11 +197,6 @@ async def channel_list(call: types.CallbackQuery):
 
 
 async def edit_create_post_channel_list(message, state: FSMContext):
-    jobs = scheduler.get_jobs()
-    if jobs:
-        for job in jobs:
-            print(job.kwargs.get('data'))
-
     if isinstance(message, types.Message):
         await state.finish()
         if get_all_channels(message.from_user.id):
@@ -1101,6 +1096,7 @@ async def pick_inline_to_delete(call: types.CallbackQuery, state: FSMContext):
 
 
 async def delete_inline(call: types.CallbackQuery, state: FSMContext):
+    await call.answer()
     data = await state.get_data()
     job_id = data.get('job_id')
     if job_id:
@@ -1115,7 +1111,7 @@ async def delete_inline(call: types.CallbackQuery, state: FSMContext):
     else:
         await state.update_data(inline_kb=kb)
     await show_post(call, state)
-    await call.message.edit_text(text='Інлайн видалено.', reply_markup=post_formatting_kb)
+    await call.message.answer(text='Інлайн видалено.', reply_markup=post_formatting_kb)
     await state.reset_state(with_data=False)
 
 
@@ -1137,6 +1133,7 @@ async def inline_link_load(message: types.Message, state: FSMContext):
             url = message.text
 
             data = await state.get_data()
+            inline_text = data.get('inline_text')
             job_id = data.get('job_id')
             if job_id:
                 job = scheduler.get_job(job_id)
@@ -1147,36 +1144,36 @@ async def inline_link_load(message: types.Message, state: FSMContext):
             post_voice = data.get('voice')
             video_note = data.get('video_note')
             text = data.get('post_text')
-            inline_text = data.get('inline_text')
             inline_kb: InlineKeyboardMarkup = data.get('inline_kb')
-
             if not inline_kb:
-                if inline_text and url:
-                    inline_kb = InlineKeyboardMarkup()
-                    inline_kb.add(InlineKeyboardButton(text=inline_text, url=url))
-                    await state.update_data(inline_kb=inline_kb)
-            elif inline_kb:
-                if inline_text and url:
-                    inline_kb.add(InlineKeyboardButton(text=inline_text, url=url))
+                inline_kb = InlineKeyboardMarkup()
+
+            if inline_text and url:
+                inline_kb.add(InlineKeyboardButton(text=inline_text, url=url))
+                if job_id:
+                    data['inline_kb'] = inline_kb
+                    job.modify(kwargs={'data': data})
+                else:
                     await state.update_data(inline_kb=inline_kb)
 
-            if post_media_files:
-                if len(post_media_files.media) == 1:
-                    if post_media_files.media[0]['type'] == 'photo':
-                        await message.answer_photo(photo=post_media_files.media[0]['media'],
-                                                   caption=text,
-                                                   reply_markup=inline_kb)
-                    elif post_media_files.media[0]['type'] == 'video':
-                        await message.answer_video(video=post_media_files.media[0]['media'],
-                                                   caption=text,
-                                                   reply_markup=inline_kb)
-
-            elif post_voice:
-                await message.answer_voice(voice=post_voice, caption=text, reply_markup=inline_kb)
-            elif video_note:
-                await message.answer_video_note(video_note=video_note, reply_markup=inline_kb)
-            elif text:
-                await message.answer(text=text, reply_markup=inline_kb)
+            await show_post(message, state)
+            # if post_media_files:
+            #     if len(post_media_files.media) == 1:
+            #         if post_media_files.media[0]['type'] == 'photo':
+            #             await message.answer_photo(photo=post_media_files.media[0]['media'],
+            #                                        caption=text,
+            #                                        reply_markup=inline_kb)
+            #         elif post_media_files.media[0]['type'] == 'video':
+            #             await message.answer_video(video=post_media_files.media[0]['media'],
+            #                                        caption=text,
+            #                                        reply_markup=inline_kb)
+            #
+            # elif post_voice:
+            #     await message.answer_voice(voice=post_voice, caption=text, reply_markup=inline_kb)
+            # elif video_note:
+            #     await message.answer_video_note(video_note=video_note, reply_markup=inline_kb)
+            # elif text:
+            #     await message.answer(text=text, reply_markup=inline_kb)
             await message.answer('✅ Інлайн кнопку додано у пост', reply_markup=post_formatting_kb)
 
             await state.reset_state(with_data=False)

@@ -419,7 +419,7 @@ async def show_post(message, state: FSMContext, send_to_channel=False):
     if isinstance(text, list) and not send_to_channel:
         text = '"Текст буде обраний рандомно."'
     if post_media_files:
-        if len(post_media_files.media) == 1 and kb_inline:
+        if len(post_media_files.media) == 1:
             m = post_media_files.media[0]
             if m.type == 'video':
                 await bot.send_video(chat_id=chat_id, video=m.media, caption=text, reply_markup=kb_inline)
