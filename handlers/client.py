@@ -422,7 +422,6 @@ async def set_text_in_post_from_db(message: types.Message, state: FSMContext):
                                   'Введіть номер тексту, який бажаєте обрати:')
 
 
-
 async def formatting_main_menu(message, state: FSMContext):
     data = await state.get_data()
     job_id = data.get('job_id')
@@ -1065,7 +1064,12 @@ async def add_inline(call: types.CallbackQuery, state: FSMContext):
 
     await FSMClient.inline_text.set()
     try:
-        await call.message.edit_text(text='Надішліть текст інлайну:', reply_markup=back_kb)
+        await call.message.edit_text(text='Надішліть текст інлайну:\n\n'
+                                          '<i>Щоб текст у інлайнах кожного разу змінювався, введіть кілька варіантів через новий рядок, наприклад:\n'
+                                          'Текст1\n'
+                                          'Текст2\n'
+                                          '...</i>',
+                                     reply_markup=back_kb, parse_mode='html')
     except:
         pass
 
@@ -1122,7 +1126,8 @@ async def inline_text_load(message, state: FSMContext):
             await inlines(message, state)
             return
     elif isinstance(message, types.Message):
-        await state.update_data(inline_text=message.text)
+        inline_text = message.text.split('\n')
+        await state.update_data(inline_text=inline_text)
         await message.answer(text='Надішліть посилання, яке бажаєте прикріпити до інлайну:', reply_markup=back_kb)
         await FSMClient.inline_link.set()
 
@@ -1139,11 +1144,6 @@ async def inline_link_load(message: types.Message, state: FSMContext):
                 job = scheduler.get_job(job_id)
                 data = job.kwargs.get('data')
 
-            # показати пост
-            post_media_files = data.get('loaded_post_files')
-            post_voice = data.get('voice')
-            video_note = data.get('video_note')
-            text = data.get('post_text')
             inline_kb: InlineKeyboardMarkup = data.get('inline_kb')
             if not inline_kb:
                 inline_kb = InlineKeyboardMarkup()
@@ -1155,7 +1155,6 @@ async def inline_link_load(message: types.Message, state: FSMContext):
                     job.modify(kwargs={'data': data})
                 else:
                     await state.update_data(inline_kb=inline_kb)
-
             await show_post(message, state)
             # if post_media_files:
             #     if len(post_media_files.media) == 1:

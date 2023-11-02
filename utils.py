@@ -69,16 +69,25 @@ async def send_message_time(data):
     voice = data.get('voice')
     video_note = data.get('video_note')
     cat_name = data.get('choose_catalog')
-    link_kb = data.get('inline_kb')
+    kb_inline = data.get('inline_kb')
+
+    randomed_text_kb = InlineKeyboardMarkup()
+    if kb_inline:
+        for buttons in kb_inline.inline_keyboard:
+            for button in buttons:
+                randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
+
+
 
     if not media_files and (data.get('random_photos_number') or data.get('random_videos_number')):
         media_files = types.MediaGroup()
         add_random_media(media_files=media_files, data=data, cat_name=cat_name)
     if isinstance(post_text, list):
         post_text = random.choice(post_text)
+    print(randomed_text_kb)
     await send_post(post_media_files=media_files, post_text=post_text, bot=bot, channel_id=channel_id, post_voice=voice,
                     post_video_note=video_note,
-                    inline_kb=link_kb)
+                    inline_kb=randomed_text_kb)
 
     # if media_files:
     #     if len(media_files.media) == 1:
@@ -109,7 +118,12 @@ async def send_message_cron(data):
     voice = data.get('voice')
     video_note = data.get('video_note')
     cat_name = data.get('choose_catalog')
-    link_kb = data.get('inline_kb')
+    kb_inline = data.get('inline_kb')
+    randomed_text_kb = InlineKeyboardMarkup()
+    if kb_inline:
+        for buttons in kb_inline.inline_keyboard:
+            for button in buttons:
+                randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
 
     if not media_files and (data.get('random_photos_number') or data.get('random_videos_number')):
         media_files = types.MediaGroup()
@@ -125,7 +139,7 @@ async def send_message_cron(data):
     await asyncio.sleep(random_number * 60)
     await send_post(post_media_files=media_files, post_text=post_text, bot=bot, channel_id=channel_id, post_voice=voice,
                     post_video_note=video_note,
-                    inline_kb=link_kb)
+                    inline_kb=randomed_text_kb)
     # if media_files:
     #     if len(media_files.media) == 1:
     #         if media_files.media[0]['type'] == 'photo':
@@ -407,7 +421,12 @@ async def show_post(message, state: FSMContext, send_to_channel=False):
     if job_id:
         data = scheduler.get_job(job_id).kwargs.get('data')
     post_media_files = data.get('loaded_post_files')
-    kb_inline = data.get('inline_kb')
+    kb_inline: InlineKeyboardMarkup = data.get('inline_kb')
+    randomed_text_kb = InlineKeyboardMarkup()
+    if kb_inline:
+        for buttons in kb_inline.inline_keyboard:
+            for button in buttons:
+                randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
     post_voice = data.get('voice')
     video_note = data.get('video_note')
     chat_id = message.from_user.id
@@ -422,21 +441,21 @@ async def show_post(message, state: FSMContext, send_to_channel=False):
         if len(post_media_files.media) == 1:
             m = post_media_files.media[0]
             if m.type == 'video':
-                await bot.send_video(chat_id=chat_id, video=m.media, caption=text, reply_markup=kb_inline)
+                await bot.send_video(chat_id=chat_id, video=m.media, caption=text, reply_markup=randomed_text_kb)
             elif m.type == 'photo':
-                await bot.send_photo(chat_id=chat_id, photo=m.media, caption=text, reply_markup=kb_inline)
+                await bot.send_photo(chat_id=chat_id, photo=m.media, caption=text, reply_markup=randomed_text_kb)
             elif m.type == 'document':
                 await bot.send_document(chat_id=chat_id, document=m.media, caption=text,
-                                        reply_markup=kb_inline)
+                                        reply_markup=randomed_text_kb)
         else:
             set_caption(text=text, media=post_media_files),
             await bot.send_media_group(chat_id=chat_id, media=post_media_files)
     elif post_voice:
-        await bot.send_voice(chat_id=chat_id, voice=post_voice, caption=text, reply_markup=kb_inline)
+        await bot.send_voice(chat_id=chat_id, voice=post_voice, caption=text, reply_markup=randomed_text_kb)
     elif video_note:
-        await bot.send_video_note(chat_id=chat_id, video_note=video_note, reply_markup=kb_inline)
+        await bot.send_video_note(chat_id=chat_id, video_note=video_note, reply_markup=randomed_text_kb)
     elif text:
-        await bot.send_message(chat_id=chat_id, text=text, reply_markup=kb_inline)
+        await bot.send_message(chat_id=chat_id, text=text, reply_markup=randomed_text_kb)
 
 
 def job_list_by_channel(data, date: datetime.datetime):
