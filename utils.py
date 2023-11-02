@@ -69,7 +69,7 @@ async def send_message_time(data):
     voice = data.get('voice')
     video_note = data.get('video_note')
     cat_name = data.get('choose_catalog')
-    link_kb = data.get('link_kb')
+    link_kb = data.get('inline_kb')
 
     if not media_files and (data.get('random_photos_number') or data.get('random_videos_number')):
         media_files = types.MediaGroup()
@@ -109,12 +109,7 @@ async def send_message_cron(data):
     voice = data.get('voice')
     video_note = data.get('video_note')
     cat_name = data.get('choose_catalog')
-    inline_text = data.get('inline_text')
-    inline_url = data.get('inline_link')
-    link_kb = None
-    if inline_text and inline_url:
-        link_kb = InlineKeyboardMarkup()
-        link_kb.add(InlineKeyboardButton(text=inline_text, url=inline_url))
+    link_kb = data.get('inline_kb')
 
     if not media_files and (data.get('random_photos_number') or data.get('random_videos_number')):
         media_files = types.MediaGroup()
