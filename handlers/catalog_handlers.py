@@ -31,6 +31,7 @@ async def media_base_panel(message, state: FSMContext):
 
 @media_group_handler
 async def load_media_for_catalog(messages: List[types.Message], state: FSMContext):
+    from handlers.client import FSMClient
     fsm_data = await state.get_data()
     kb = deepcopy(base_manage_panel_kb)
     if fsm_data.get('channel_id'):
@@ -42,7 +43,9 @@ async def load_media_for_catalog(messages: List[types.Message], state: FSMContex
     cat_name = fsm_data.get('cat_name')
     await add_media_to_catalog(messages, bot=bot, catalog_name=cat_name)
     await state.reset_state(with_data=False)
-    await messages[0].answer(text=f'Медіа додано у каталог "{cat_name}"', reply_markup=kb)
+    await FSMClient.add_delete_cat_media.set()
+
+    await messages[0].answer(text=f'Медіа додано у каталог "{cat_name}"', reply_markup=edit_catalog_kb)
 
 
 async def catalog_list(call: types.CallbackQuery):
@@ -83,7 +86,8 @@ async def load_cat_name(message, state: FSMContext):
                              '\t<i>-фото;</i>\n'
                              '\t<i>-відео;</i>\n'
                              '\t<i>-голосове повідомлення;</i>\n'
-                             '\t<i>-файл;</i>', parse_mode='html', reply_markup=back_kb)
+                             '\t<i>-файл;</i>\n'
+                             '\t<i>-текст</i>', parse_mode='html', reply_markup=back_kb)
         await state.reset_state(with_data=False)
         from handlers.client import FSMClient
         await FSMClient.loaded_catalog_file.set()
