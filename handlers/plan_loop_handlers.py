@@ -10,7 +10,7 @@ from aiogram_calendar import SimpleCalendar
 from create_bot import scheduler
 from aiogram_timepicker.panel import FullTimePicker, full_timep_callback
 
-from keyboards.kb_client import post_formatting_kb, change_create_post_kb, change_post_kb, media_kb, \
+from keyboards.kb_client import post_formatting_kb, change_create_post_kb, media_kb, \
     plan_menu_kb
 from utils import send_message_time, send_message_cron
 
@@ -157,30 +157,6 @@ async def choose_plan_date(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
 
 
-# async def post_looping(call, state: FSMContext):
-#     await state.update_data(post_type='looped')
-#     if isinstance(call, types.CallbackQuery):
-#         await call.answer()
-#         await call.message.edit_text(text='Оберіть варіант:', reply_markup=loop_kb)
-#     else:
-#         await call.answer(text='Оберіть варіант:', reply_markup=loop_kb)
-
-
-# async def nav_cal_handler(call, state: FSMContext):
-#     await state.update_data(post_type='planned')
-#     if isinstance(call, types.CallbackQuery):
-#         await call.answer()
-#         if call.data == 'full_timepicker:CANCEL:-1:-1:-1':
-#             await call.message.answer(text='Оберіть варіант:', reply_markup=media_kb)
-#         else:
-#             try:
-#                 await call.message.edit_text(text='Оберіть варіант:', reply_markup=media_kb)
-#             except:
-#                 pass
-#     else:
-#         await call.answer(text='Оберіть варіант:', reply_markup=media_kb)
-
-
 def register_handlers_schedule(dp: Dispatcher):
     dp.register_callback_query_handler(plan_menu, Text(equals='Планування'))
     dp.register_callback_query_handler(choose_plan_date, Text(equals='Запланувати'))
@@ -191,4 +167,3 @@ def register_handlers_schedule(dp: Dispatcher):
     dp.register_callback_query_handler(full_picker_handler, full_timep_callback.filter(), state=FSMClient.time_planning)
     dp.register_callback_query_handler(full_picker_handler, full_timep_callback.filter(), state=FSMClient.time_loop)
 
-    # dp.register_callback_query_handler(post_looping, Text(equals='Зациклити'))

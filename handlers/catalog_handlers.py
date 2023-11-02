@@ -11,7 +11,8 @@ from create_bot import bot, scheduler
 from json_functionality import add_media_to_catalog, catalog_list_json, cat_name_exist, save_cat_json, get_catalog, \
     get_media_from_base, remove_cat_media_json, delete_catalog_json, change_cat_name
 from keyboards.kb_client import base_manage_panel_kb, back_kb, self_or_random_kb, post_formatting_kb, \
-    change_create_post_kb, cat_types_kb, back, cancel_kb, cancel_sending_media_kb, back_to_catalog, edit_catalog_kb
+    change_create_post_kb, cat_types_kb, back, cancel_sending_media_kb, back_to_catalog, edit_catalog_kb, \
+    create_catalogs_kb
 from utils import pressed_back_button, cat_content, restrict_media, set_caption, show_post
 
 
@@ -19,7 +20,7 @@ async def media_base_panel(message, state: FSMContext):
     await state.finish()
     if isinstance(message, types.CallbackQuery):
         if message.data in ('back', 'back_to_base_menu'):
-            await message.message.edit_text(text='Панель управління каталогами медіа',
+            await message.message.edit_text(text='Панель управління каталогами:',
                                             reply_markup=base_manage_panel_kb)
         else:
             await message.message.answer(text='Панель управління каталогами медіа', reply_markup=base_manage_panel_kb)
@@ -45,13 +46,11 @@ async def load_media_for_catalog(messages: List[types.Message], state: FSMContex
 
 
 async def catalog_list(call: types.CallbackQuery):
+    from handlers.client import FSMClient
     await call.answer()
     catalogs = catalog_list_json()
-    catalogs_kb = InlineKeyboardMarkup()
     if catalogs:
-        for cat in catalogs:
-            catalogs_kb.add(InlineKeyboardButton(text=cat, callback_data=cat))
-        from handlers.client import FSMClient
+        catalogs_kb = create_catalogs_kb()
         await FSMClient.show_catalog.set()
         await call.message.answer(text='Оберіть каталог, щоб подивитись зміст:', reply_markup=catalogs_kb)
     else:
@@ -108,14 +107,14 @@ async def show_catalog_content(call: types.CallbackQuery, state: FSMContext):
 
 
 async def edit_catalog_list(call: types.CallbackQuery, state: FSMContext):
+    from handlers.client import FSMClient
     await call.answer()
+
     catalogs = catalog_list_json()
-    catalogs_kb = InlineKeyboardMarkup()
+
     if catalogs:
-        for cat in catalogs:
-            catalogs_kb.add(InlineKeyboardButton(text=cat, callback_data=cat))
+        catalogs_kb = create_catalogs_kb()
         catalogs_kb.add(InlineKeyboardButton(text='« Назад', callback_data='back_to_base_menu'))
-        from handlers.client import FSMClient
         await FSMClient.edit_catalog.set()
         await call.message.edit_text(text='Оберіть каталог, який хочете редагувати: ', reply_markup=catalogs_kb)
     else:
@@ -160,6 +159,8 @@ async def media_type_from_cat(call: types.CallbackQuery, state: FSMContext):
         cat_name = call.data
     await state.update_data(catalog_for_post=cat_name)
     catalog_data = get_catalog(cat_name)
+    catalog_data.pop('texts', None)
+
 
     if any(catalog_data.get(data) for data in catalog_data):
         catalog = get_catalog(cat_name)
@@ -174,13 +175,11 @@ async def media_type_from_cat(call: types.CallbackQuery, state: FSMContext):
     else:
         try:
             catalogs = catalog_list_json()
-            catalogs_kb = InlineKeyboardMarkup()
             if catalogs:
-                for cat in catalogs:
-                    catalogs_kb.add(InlineKeyboardButton(text=cat, callback_data=cat))
+                catalogs_kb = create_catalogs_kb()
                 catalogs_kb.add(back)
                 await FSMClient.choose_catalog.set()
-            await call.message.edit_text(text='Каталог пустий', reply_markup=catalogs_kb)
+            await call.message.edit_text(text='У каталозі немає медіа.', reply_markup=catalogs_kb)
         except:
             pass
 
@@ -291,13 +290,14 @@ async def add_media_from_catalog(message: types.Message, state: FSMContext):
 
 
 async def what_to_edit_cat(call: types.CallbackQuery, state: FSMContext):
+    from handlers.client import FSMClient
     await call.answer()
+
     message_data = call.data
     if message_data == 'back_to_base_menu':
         await media_base_panel(call, state)
         return
     await state.update_data(cat_name=message_data)
-    from handlers.client import FSMClient
     await FSMClient.add_delete_cat_media.set()
     try:
         await call.message.edit_text(text='Що бажаєте змінити?', reply_markup=edit_catalog_kb)
@@ -327,6 +327,7 @@ async def edit_cat(call: types.CallbackQuery, state: FSMContext):
 
         if any(catalog_data.get(data) for data in catalog_data):
             catalog = get_catalog(cat_name)
+            print(catalog)
             cat_data_types = [media_type for media_type in catalog if catalog.get(media_type)]
             kb = cat_types_kb(cat_data_types)
             await call.message.edit_text(text='Що бажаєте видалити?', reply_markup=kb)
@@ -367,6 +368,7 @@ async def load_new_cat_name(message, state: FSMContext):
 
 
 async def catalog_remove_media_numder(call: types.CallbackQuery, state: FSMContext):
+    from handlers.client import FSMClient
     await call.answer()
     fsm_data = await state.get_data()
     cat_name = fsm_data.get('cat_name')
@@ -376,7 +378,6 @@ async def catalog_remove_media_numder(call: types.CallbackQuery, state: FSMConte
     await cat_content(call=call, catalog_data=catalog_data, media_type=call.data)
 
     await call.message.answer(text='Надішліть номер медіа, яке бажаєте видалити:')
-    from handlers.client import FSMClient
 
     await FSMClient.del_cat_media_number.set()
 
@@ -397,11 +398,8 @@ async def remove_cat_media_by_number(message: types.Message, state: FSMContext):
 async def delete_catalog_list(call: types.CallbackQuery):
     await call.answer()
     catalogs = catalog_list_json()
-    catalogs_kb = InlineKeyboardMarkup()
-
     if catalogs:
-        for cat in catalogs:
-            catalogs_kb.add(InlineKeyboardButton(text=cat, callback_data=cat))
+        catalogs_kb = create_catalogs_kb()
         await call.message.edit_text(text='🗑 Оберіть каталог, який хочете видалити:\n'
                                           '<i>Всі медіа у каталозі буде видалено.</i>', parse_mode='html',
                                      reply_markup=catalogs_kb)

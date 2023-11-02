@@ -2,6 +2,7 @@ from datetime import datetime
 
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton, BotCommand
 
+
 kb_manage_channel_inline = InlineKeyboardMarkup(row_width=2)
 
 add_channel_inline = InlineKeyboardButton(text='Додати канал', callback_data='Додати канал')
@@ -14,7 +15,7 @@ main_kb = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 channel_menu = KeyboardButton(text='Канали')
 create_post = KeyboardButton(text='Створити пост')
 edit_post = KeyboardButton(text='Змінити пост')
-media_base = KeyboardButton(text='База медіа')
+media_base = KeyboardButton(text='База даних')
 signals = KeyboardButton(text='📣 Сигнали')
 my_posts = KeyboardButton(text='Мої пости')
 main_kb.add(create_post, channel_menu, edit_post, media_base, my_posts, signals)
@@ -84,8 +85,11 @@ add_audio_voice = InlineKeyboardButton(text='Аудіо/Голосове', callb
 add_file = InlineKeyboardButton(text='Файл', callback_data='Файл')
 add_to_cat_kb.add(add_video_img, add_audio_voice, add_file)
 
-no_text_kb = InlineKeyboardMarkup()
-no_text_kb.add(InlineKeyboardButton(text='Без тексту', callback_data='no_text'))
+enter_text_kb = InlineKeyboardMarkup(row_width=2)
+pick_text_from_db = InlineKeyboardButton(text='Обрати з бази', callback_data='pick_text_from_db')
+random_text = InlineKeyboardButton(text='Рандом текст', callback_data='random_text')
+no_text_inline = InlineKeyboardButton(text='Без тексту', callback_data='no_text')
+enter_text_kb.add(pick_text_from_db, random_text, no_text_inline)
 
 del_voice_kb = InlineKeyboardMarkup()
 del_voice_kb.add(InlineKeyboardButton(text='Так', callback_data='yes'))
@@ -106,6 +110,7 @@ animation_type = InlineKeyboardButton(text='GIF', callback_data='gifs')
 voice_type = InlineKeyboardButton(text='Голосове', callback_data='voices')
 document_type = InlineKeyboardButton(text='Файл', callback_data='documents')
 v_note_type = InlineKeyboardButton(text='Відеоповідомлення', callback_data='video_notes')
+text_type = InlineKeyboardButton(text='Текст', callback_data='texts')
 
 # planning_kb = InlineKeyboardMarkup(row_width=2)
 # date_choose = InlineKeyboardButton(text='Обрати дату/час', callback_data='choose_date')
@@ -158,7 +163,7 @@ def add_posts_to_kb(jobs, edit_kb):
 
 
 media_types = {"videos": video_type, "photos": photo_type, "gifs": animation_type, "voices": voice_type,
-               "documents": document_type, 'video_notes': v_note_type}
+               "documents": document_type, 'video_notes': v_note_type, 'texts': text_type}
 
 
 def cat_types_kb(cat_data_types):
@@ -166,3 +171,11 @@ def cat_types_kb(cat_data_types):
     for data_type in cat_data_types:
         kb.add(media_types[data_type])
     return kb
+
+
+def create_catalogs_kb():
+    catalogs_kb = InlineKeyboardMarkup()
+    from json_functionality import catalog_list_json
+    for cat in catalog_list_json():
+        catalogs_kb.add(InlineKeyboardButton(text=cat, callback_data=cat))
+    return catalogs_kb

@@ -86,7 +86,8 @@ async def save_cat_json(cat_name, message: types.Message):
                                            "voices": [],
                                            "documents": [],
                                            'gifs': [],
-                                           'video_notes': []
+                                           'video_notes': [],
+                                           'texts': []
                                            }
         file.seek(0)
         json.dump(file_data, file, ensure_ascii=False, indent=4)
@@ -139,7 +140,8 @@ async def remove_channel_id_from_json(channel_id, message: types.Message):
 
 
 async def add_media_to_catalog(messages: List[types.Message], bot, catalog_name):
-    photos, gifs, voices, documents, videos, video_notes = [], [], [], [], [], []
+    from utils import send_voice_from_audio
+    photos, gifs, voices, documents, videos, video_notes, texts = [], [], [], [], [], [], []
     for message in messages:
         if message.content_type == 'photo':
             photos.append(message.photo[0].file_id)
@@ -151,7 +153,6 @@ async def add_media_to_catalog(messages: List[types.Message], bot, catalog_name)
             if message.content_type == 'voice':
                 voices.append(message.voice.file_id)
             elif message.content_type == 'audio':
-                from utils import send_voice_from_audio
                 await message.answer(text='Переформатування аудіо у голосове...')
                 voice_message = await send_voice_from_audio(message=messages[0], bot=bot)
                 voices.append(voice_message.voice.file_id)
@@ -159,6 +160,8 @@ async def add_media_to_catalog(messages: List[types.Message], bot, catalog_name)
                 video_notes.append(message.video_note.file_id)
         elif message.content_type == 'document':
             documents.append(message.document.file_id)
+        elif message.content_type == 'text':
+            texts.append(message.text)
 
     with open('data.json', 'r+', encoding='utf-8') as file:
         file_data = json.load(file)
@@ -168,6 +171,10 @@ async def add_media_to_catalog(messages: List[types.Message], bot, catalog_name)
         file_data['catalogs'][catalog_name]["documents"].extend(documents)
         file_data['catalogs'][catalog_name]["gifs"].extend(gifs)
         file_data['catalogs'][catalog_name]["video_notes"].extend(video_notes)
+        if file_data['catalogs'][catalog_name].get("texts"):
+            file_data['catalogs'][catalog_name]["texts"].extend(texts)
+        else:
+            file_data['catalogs'][catalog_name]["texts"] = texts
         file.seek(0)
         json.dump(file_data, file, ensure_ascii=False, indent=4)
 
@@ -234,6 +241,14 @@ def change_cat_name(cat_name, new_name):
         file.seek(0)
         json.dump(file_data, file, ensure_ascii=False, indent=4)
         file.truncate()
+
+
+def get_texts_from_cat(cat_name):
+    with open('data.json', 'r', encoding='utf-8') as file:
+        file_data = json.load(file)
+        catalog_data = file_data.get('catalogs').get(cat_name)
+        texts = catalog_data.get('texts')
+        return texts
 
 
 class CustomMessage:

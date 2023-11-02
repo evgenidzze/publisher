@@ -74,27 +74,32 @@ async def send_message_time(data):
     if not media_files and (data.get('random_photos_number') or data.get('random_videos_number')):
         media_files = types.MediaGroup()
         add_random_media(media_files=media_files, data=data, cat_name=cat_name)
+    if isinstance(post_text, list):
+        post_text = random.choice(post_text)
+    await send_post(post_media_files=media_files, post_text=post_text, bot=bot, channel_id=channel_id, post_voice=voice,
+                    post_video_note=video_note,
+                    inline_kb=link_kb)
 
-    if media_files:
-        if len(media_files.media) == 1:
-            if media_files.media[0]['type'] == 'photo':
-                await bot.send_photo(chat_id=channel_id, photo=media_files.media[0]['media'], caption=post_text,
-                                     reply_markup=link_kb)
-            elif media_files.media[0]['type'] == 'video':
-                await bot.send_video(chat_id=channel_id, video=media_files.media[0]['media'], caption=post_text,
-                                     reply_markup=link_kb)
-            elif media_files.media[0]['type'] == 'document':
-                await bot.send_document(chat_id=channel_id, document=media_files.media[0]['media'], caption=post_text,
-                                        reply_markup=link_kb)
-        else:
-            await bot.send_media_group(chat_id=channel_id, media=media_files)
-
-    elif voice:
-        await bot.send_voice(chat_id=channel_id, voice=voice, caption=post_text, reply_markup=link_kb)
-    elif video_note:
-        await bot.send_video_note(chat_id=channel_id, voice=video_note, reply_markup=link_kb)
-    else:
-        await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=link_kb)
+    # if media_files:
+    #     if len(media_files.media) == 1:
+    #         if media_files.media[0]['type'] == 'photo':
+    #             await bot.send_photo(chat_id=channel_id, photo=media_files.media[0]['media'], caption=post_text,
+    #                                  reply_markup=link_kb)
+    #         elif media_files.media[0]['type'] == 'video':
+    #             await bot.send_video(chat_id=channel_id, video=media_files.media[0]['media'], caption=post_text,
+    #                                  reply_markup=link_kb)
+    #         elif media_files.media[0]['type'] == 'document':
+    #             await bot.send_document(chat_id=channel_id, document=media_files.media[0]['media'], caption=post_text,
+    #                                     reply_markup=link_kb)
+    #     else:
+    #         await bot.send_media_group(chat_id=channel_id, media=media_files)
+    #
+    # elif voice:
+    #     await bot.send_voice(chat_id=channel_id, voice=voice, caption=post_text, reply_markup=link_kb)
+    # elif video_note:
+    #     await bot.send_video_note(chat_id=channel_id, voice=video_note, reply_markup=link_kb)
+    # else:
+    #     await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=link_kb)
 
 
 async def send_message_cron(data):
@@ -115,31 +120,39 @@ async def send_message_cron(data):
         media_files = types.MediaGroup()
         add_random_media(media_files=media_files, data=data, cat_name=cat_name)
 
+    if isinstance(post_text, list):
+        post_text = post_text[0]
+        data['post_text'].append(post_text[0])
+        del data['post_text'][0]
+
     random_number = random.randint(0, 4)
     print(f"post in {random_number} minutes")
-    if media_files:
-        await asyncio.sleep(random_number * 60)
-        if len(media_files.media) == 1:
-            if media_files.media[0]['type'] == 'photo':
-                await bot.send_photo(chat_id=channel_id, photo=media_files.media[0]['media'], caption=post_text,
-                                     reply_markup=link_kb)
-            elif media_files.media[0]['type'] == 'video':
-                await bot.send_video(chat_id=channel_id, video=media_files.media[0]['media'], caption=post_text,
-                                     reply_markup=link_kb)
-            elif media_files.media[0]['type'] == 'document':
-                await bot.send_document(chat_id=channel_id, document=media_files.media[0]['media'], caption=post_text,
-                                        reply_markup=link_kb)
-        else:
-            await bot.send_media_group(chat_id=channel_id, media=media_files)
-    elif voice:
-        await asyncio.sleep(random_number * 60)
-        await bot.send_voice(chat_id=channel_id, voice=voice, caption=post_text, reply_markup=link_kb)
-    elif video_note:
-        await asyncio.sleep(random_number * 60)
-        await bot.send_video_note(chat_id=channel_id, video_note=video_note, reply_markup=link_kb)
-    else:
-        await asyncio.sleep(random_number * 60)
-        await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=link_kb)
+    await asyncio.sleep(random_number * 60)
+    await send_post(post_media_files=media_files, post_text=post_text, bot=bot, channel_id=channel_id, post_voice=voice,
+                    post_video_note=video_note,
+                    inline_kb=link_kb)
+    # if media_files:
+    #     if len(media_files.media) == 1:
+    #         if media_files.media[0]['type'] == 'photo':
+    #             await bot.send_photo(chat_id=channel_id, photo=media_files.media[0]['media'], caption=post_text,
+    #                                  reply_markup=link_kb)
+    #         elif media_files.media[0]['type'] == 'video':
+    #             await bot.send_video(chat_id=channel_id, video=media_files.media[0]['media'], caption=post_text,
+    #                                  reply_markup=link_kb)
+    #         elif media_files.media[0]['type'] == 'document':
+    #             await bot.send_document(chat_id=channel_id, document=media_files.media[0]['media'], caption=post_text,
+    #                                     reply_markup=link_kb)
+    #     else:
+    #         await bot.send_media_group(chat_id=channel_id, media=media_files)
+    # elif voice:
+    #     await asyncio.sleep(random_number * 60)
+    #     await bot.send_voice(chat_id=channel_id, voice=voice, caption=post_text, reply_markup=link_kb)
+    # elif video_note:
+    #     await asyncio.sleep(random_number * 60)
+    #     await bot.send_video_note(chat_id=channel_id, video_note=video_note, reply_markup=link_kb)
+    # else:
+    #     await asyncio.sleep(random_number * 60)
+    #     await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=link_kb)
 
 
 async def send_v_notes_cron(data):
@@ -298,6 +311,14 @@ async def cat_content(call: types.CallbackQuery, catalog_data: dict, media_type:
             elif not media_type:
                 for video_note in catalog_data[media]:
                     await call.message.answer_video_note(video_note=video_note)
+        elif media == 'texts':
+            if media == media_type:
+                for text_num in range(len(catalog_data[media])):
+                    message = await call.message.answer(text=catalog_data[media][text_num])
+                    await message.reply(text=str(text_num + 1))
+            elif not media_type:
+                for text in catalog_data[media]:
+                    await call.message.answer(text=text)
 
 
 def get_random_photos(count, cat_name) -> list:
@@ -385,37 +406,42 @@ def sorting_key_jobs(job):
     return next_run.time()
 
 
-async def show_post(message, state: FSMContext):
-
+async def show_post(message, state: FSMContext, send_to_channel=False):
     data = await state.get_data()
     job_id = data.get('job_id')
     if job_id:
         data = scheduler.get_job(job_id).kwargs.get('data')
     post_media_files = data.get('loaded_post_files')
     kb_inline = data.get('inline_kb')
-    text = data.get('post_text')
     post_voice = data.get('voice')
     video_note = data.get('video_note')
-
+    chat_id = message.from_user.id
+    text = data.get('post_text')
+    if send_to_channel:
+        chat_id = data.get('channel_id')
+        if isinstance(text, list):
+            text = random.choice(text)
+    if isinstance(text, list) and not send_to_channel:
+        text = '"Текст буде обраний рандомно."'
     if post_media_files:
         if len(post_media_files.media) == 1 and kb_inline:
             m = post_media_files.media[0]
             if m.type == 'video':
-                await bot.send_video(chat_id=message.from_user.id, video=m.media, caption=text, reply_markup=kb_inline)
+                await bot.send_video(chat_id=chat_id, video=m.media, caption=text, reply_markup=kb_inline)
             elif m.type == 'photo':
-                await bot.send_photo(chat_id=message.from_user.id, photo=m.media, caption=text, reply_markup=kb_inline)
+                await bot.send_photo(chat_id=chat_id, photo=m.media, caption=text, reply_markup=kb_inline)
             elif m.type == 'document':
-                await bot.send_document(chat_id=message.from_user.id, document=m.media, caption=text,
-                                          reply_markup=kb_inline)
+                await bot.send_document(chat_id=chat_id, document=m.media, caption=text,
+                                        reply_markup=kb_inline)
         else:
             set_caption(text=text, media=post_media_files),
-            await bot.send_media_group(chat_id=message.from_user.id, media=post_media_files)
+            await bot.send_media_group(chat_id=chat_id, media=post_media_files)
     elif post_voice:
-        await bot.send_voice(chat_id=message.from_user.id, voice=post_voice, caption=text, reply_markup=kb_inline)
+        await bot.send_voice(chat_id=chat_id, voice=post_voice, caption=text, reply_markup=kb_inline)
     elif video_note:
-        await bot.send_video_note(chat_id=message.from_user.id, video_note=video_note, reply_markup=kb_inline)
+        await bot.send_video_note(chat_id=chat_id, video_note=video_note, reply_markup=kb_inline)
     elif text:
-        await bot.send_message(chat_id=message.from_user.id, text=text, reply_markup=kb_inline)
+        await bot.send_message(chat_id=chat_id, text=text, reply_markup=kb_inline)
 
 
 def job_list_by_channel(data, date: datetime.datetime):
