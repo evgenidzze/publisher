@@ -331,7 +331,6 @@ async def edit_cat(call: types.CallbackQuery, state: FSMContext):
 
         if any(catalog_data.get(data) for data in catalog_data):
             catalog = get_catalog(cat_name)
-            print(catalog)
             cat_data_types = [media_type for media_type in catalog if catalog.get(media_type)]
             kb = cat_types_kb(cat_data_types)
             await call.message.edit_text(text='Що бажаєте видалити?', reply_markup=kb)

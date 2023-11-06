@@ -19,7 +19,7 @@ from handlers.catalog_handlers import media_type_from_cat, media_base_panel
 
 from handlers.signals import signal_menu
 
-from utils import kb_channels, AuthMiddleware, send_voice_from_audio, restrict_media, set_caption, send_post, \
+from utils import kb_channels, AuthMiddleware, send_voice_from_audio, restrict_media, set_caption, send_post_to_channel, \
     pressed_back_button, add_random_media, send_v_notes_cron, sorting_key_jobs, show_post, job_list_by_channel
 from json_functionality import get_all_channels, save_channel_json, remove_channel_id_from_json, catalog_list_json, \
     get_catalog, get_video_notes_by_cat, get_texts_from_cat
@@ -477,9 +477,9 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
         if not post_media_files and (data.get('random_photos_number') or data.get('random_videos_number')):
             post_media_files = types.MediaGroup()
             add_random_media(media_files=post_media_files, data=data, cat_name=cat_name)
-        # await send_post(post_media_files=post_media_files, post_text=post_text, post_voice=post_voice,
-        #                 channel_id=channel_id, post_video_note=post_video_note, bot=bot, inline_kb=inline_kb)
-        await show_post(call, state, send_to_channel=True)
+        await send_post_to_channel(post_media_files=post_media_files, post_text=post_text, post_voice=post_voice,
+                        channel_id=channel_id, post_video_note=post_video_note, bot=bot, inline_kb=inline_kb)
+        # await show_post(call, state, send_to_channel=True)
         await call.message.delete()
         await call.message.answer(
             text=f'🚀 Повідомлення {post_text[:10]}... опубліковано у <a href="{chat_url}">{chat_title}</a>.',
@@ -789,19 +789,8 @@ async def load_media_file(messages: List[types.Message], state: FSMContext):
             media.attach_document(messages[message_num].document.file_id)
 
     if media.media:
-        set_caption(media=media, text=text)
-
         try:
-            if len(media.media) == 1 and inline_kb:
-                m = media.media[0]
-                if m.type == 'video':
-                    await messages[0].answer_video(video=m.media, caption=text, reply_markup=inline_kb)
-                elif m.type == 'photo':
-                    await messages[0].answer_photo(photo=m.media, caption=text, reply_markup=inline_kb)
-                elif m.type == 'document':
-                    await messages[0].answer_document(document=m.media, caption=text, reply_markup=inline_kb)
-            else:
-                await messages[0].answer_media_group(media=media)
+            await show_post(message=messages[0], state=state)
         except aiogram.utils.exceptions.BadRequest:
             await messages[0].answer(text='❌ Цей тип медіа не може бути згрупований з попередніми медіа.')
             media.media.pop()
