@@ -164,7 +164,7 @@ async def load_period_enter_start_time(message: types.Message, state: FSMContext
     text_data = message.text
     if text_data.isdigit():
         from handlers.client import FSMClient
-        await FSMClient.start_time.set()
+        await FSMClient.signal_start_time.set()
         await state.update_data(signal_period_minutes=text_data)
         await message.answer(text="Сигнали будуть виходити кожного дня в обраний час: ",
                              reply_markup=await FullTimePicker().start_picker())
@@ -306,7 +306,7 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_callback_query_handler(load_count_enter_period_time, Text(equals='enter_period_time'), state='*')
 
     dp.register_message_handler(load_period_enter_start_time, state=FSMClient.signal_period_minutes)
-    dp.register_callback_query_handler(load_start_time, full_timep_callback.filter(), state=FSMClient.start_time)
+    dp.register_callback_query_handler(load_start_time, full_timep_callback.filter(), state=FSMClient.signal_start_time)
 
     dp.register_callback_query_handler(channel_signals_list_delete, state=FSMClient.del_signal_channel_id)
     dp.register_callback_query_handler(delete_signal, state=FSMClient.del_signal_id)

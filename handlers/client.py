@@ -32,6 +32,7 @@ locale.setlocale(locale.LC_ALL, 'uk_UA.utf8')
 
 
 class FSMClient(StatesGroup):
+    start_loop_date = State()
     skip_days_loop_vnotes = State()
     skip_days_loop = State()
     random_text_catalog = State()
@@ -45,7 +46,7 @@ class FSMClient(StatesGroup):
     all_posts_channel_id = State()
     del_signal_id = State()
     del_signal_channel_id = State()
-    start_time = State()
+    signal_start_time = State()
     signal_period_minutes = State()
     signals_count = State()
     signal_coef = State()
@@ -838,10 +839,14 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
         video_notes = get_video_notes_by_cat(cat_name)
         if video_notes:
             await state.update_data(random_v_notes_id=video_notes)
-            await FSMClient.skip_days_loop_vnotes.set()
-            await call.message.edit_text(text='Скільки днів пропускати між постами?\n\n'
-                                              '<i>Якщо потрібно, щоб пост виходив кожного дня, надішліть "0"</i>',
-                                         parse_mode='html', reply_markup=back_kb)
+            await state.update_data(post_type='looped')
+            await FSMClient.start_loop_date.set()
+            await call.message.edit_text(text='З якого числа почати розсилку?',
+                                         reply_markup=await SimpleCalendar().start_calendar())
+            # await FSMClient.skip_days_loop_vnotes.set()
+            # await call.message.edit_text(text='Скільки днів пропускати між постами?\n\n'
+            #                                   '<i>Якщо потрібно, щоб пост виходив кожного дня, надішліть "0"</i>',
+            #                              parse_mode='html', reply_markup=back_kb)
 
 
         else:
@@ -1136,6 +1141,7 @@ async def my_posts_by_date(callback_query: types.CallbackQuery, callback_data: d
         kb = InlineKeyboardMarkup()
         jobs_in_channel = sorted(jobs_in_channel, key=sorting_key_jobs)
         for job_in_channel in jobs_in_channel:
+            print(job_in_channel)
             job_in_channel_data = job_in_channel.kwargs.get('data')
             post_type = job_in_channel_data.get('post_type')
             if post_type == 'planned':
@@ -1145,16 +1151,20 @@ async def my_posts_by_date(callback_query: types.CallbackQuery, callback_data: d
                                          callback_data=job_in_channel.id))
             else:
                 time_loop: datetime.time = job_in_channel.next_run_time.strftime('%H:%M')
-                random_v_note_loop: datetime.time = job_in_channel_data.get('time_random_video_notes')
-                if time_loop:
+                if job_in_channel_data.get('random_v_notes_id') or job_in_channel_data.get('video_note'):
+                    kb.add(
+                        InlineKeyboardButton(text=f"Відеоповідомлення о {time_loop}",
+                                             callback_data=job_in_channel.id))
+                elif job_in_channel_data.get('voice'):
+                    kb.add(
+                        InlineKeyboardButton(text=f"Голосове о {time_loop}",
+                                             callback_data=job_in_channel.id))
+                else:
                     kb.add(
                         InlineKeyboardButton(
                             text=f"Пост о {time_loop} - {job_in_channel_data.get('post_text')}",
                             callback_data=job_in_channel.id))
-                elif random_v_note_loop:
-                    kb.add(
-                        InlineKeyboardButton(text=f"Відеоповідомлення о {random_v_note_loop.strftime('%H:%M')}",
-                                             callback_data=job_in_channel.id))
+
         # add_posts_to_kb(jobs_in_channel, kb)
         kb.add(back_to_my_posts_inline)
         await FSMClient.job_id.set()

@@ -158,13 +158,14 @@ def add_posts_to_kb(jobs, edit_kb):
         elif trigger_name in ('interval', 'cron'):
             if trigger_name == 'interval':
                 skip_days = job_data.get('skip_days_loop') if job_data.get('skip_days_loop') else job_data.get('skip_days_loop_vnotes')
+                start_loop_date = job_data.get('start_loop_date').strftime("%d.%m.%Y")
                 skip_days = int(skip_days)
                 if skip_days == 0:
-                    text = f"Кожного дня о {date_p.strftime('%H:%M')} {job_post_text}"
+                    text = f"З {start_loop_date} - кожного дня о {date_p.strftime('%H:%M')} {job_post_text}"
                 elif skip_days == 1:
-                    text = f"Пропуск 1 день о {date_p.strftime('%H:%M')} {job_post_text}"
+                    text = f"Початок {start_loop_date} - пропуск 1 день о {date_p.strftime('%H:%M')} {job_post_text}"
                 else:
-                    text = f"Пропуск {skip_days} дні(-в) о {date_p.strftime('%H:%M')} {job_post_text}"
+                    text = f"Початок {start_loop_date} - пропуск {skip_days} дні(-в) о {date_p.strftime('%H:%M')} {job_post_text}"
             else:
                 text = f"Кожного дня о {date_p.strftime('%H:%M')} {job_post_text}"
 
