@@ -191,12 +191,12 @@ async def load_start_time(callback_query: types.CallbackQuery, callback_data: di
 
 
 async def delete_signal_choose_channel(call: types.CallbackQuery, state: FSMContext):
+    from handlers.client import FSMClient
     await call.answer()
     await state.reset_state(with_data=False)
     if get_all_channels(call.from_user.id):
         kb = await kb_channels(call, bot)
         kb.add(back_to_signal_menu_inline)
-        from handlers.client import FSMClient
         await FSMClient.del_signal_channel_id.set()
         try:
             await call.message.edit_text(text='Оберіть канал, в якому бажаєте видалити групу сигналів:',

@@ -148,13 +148,23 @@ def add_posts_to_kb(jobs, edit_kb):
 
         if not job_data.get('post_text'):
             job_post_text = ''
+        elif not job_data.get('post_text') and job_data.get('random_v_notes_id'):
+            job_post_text = '- кругляш'
         else:
             job_post_text = f'- "{job_data.get("post_text")}"'
         trigger_name = str(j.trigger).split('[')[0]
         if trigger_name == 'date':
             text = f"Пост {date_p.date()} о {date_p.strftime('%H:%M')} {job_post_text}"
-        elif trigger_name == 'cron':
-            text = f"Кожного дня о {date_p.strftime('%H:%M')} {job_post_text}"
+        elif trigger_name == 'interval':
+            skip_days = job_data.get('skip_days_loop') if job_data.get('skip_days_loop') else job_data.get('skip_days_loop_vnotes')
+            skip_days = int(skip_days)
+            if skip_days == 0:
+                text = f"Кожного дня о {date_p.strftime('%H:%M')} {job_post_text}"
+            elif skip_days == 1:
+                text = f"Пропуск 1 день о {date_p.strftime('%H:%M')} {job_post_text}"
+            else:
+                text = f"Пропуск {skip_days} дні(-в) о {date_p.strftime('%H:%M')} {job_post_text}"
+
         else:
             text = 'Без імені'
 

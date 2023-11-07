@@ -2,6 +2,8 @@ from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
 import time
 from datetime import datetime, timedelta, time
+
+from aiogram.types import InlineKeyboardMarkup
 from aiogram_calendar import simple_cal_callback
 
 from aiogram.dispatcher.filters import Text
@@ -10,12 +12,14 @@ from aiogram_calendar import SimpleCalendar
 from create_bot import scheduler
 from aiogram_timepicker.panel import FullTimePicker, full_timep_callback
 
+from handlers.client import number_of_random_videos, number_of_random_photos
 from keyboards.kb_client import post_formatting_kb, change_create_post_kb, media_kb, \
-    plan_menu_kb
-from utils import send_message_time, send_message_cron
+    plan_menu_kb, back_to_plan_menu
+from utils import send_message_time, send_message_cron, send_v_notes_cron
 
 
 async def plan_menu(call: types.CallbackQuery, state: FSMContext):
+    await state.reset_state(with_data=False)
     fsm_data = await state.get_data()
     keys_to_check = ['post_text', 'loaded_post_files', 'voice', 'video_note', 'random_photos_number',
                      'random_videos_number']
@@ -24,11 +28,18 @@ async def plan_menu(call: types.CallbackQuery, state: FSMContext):
         fsm_data = scheduler.get_job(job_id).kwargs['data']
 
     if any(fsm_data.get(key) for key in keys_to_check):
-        await call.message.edit_text(text='Бажаєте зациклити чи запланувати пост?\n\n'
-                                          '<i>🗓 - При плануванні, пост опублікується 1 раз в обрану дату та час.\n\n'
-                                          '🌀 - При зацикленні, пост буде публікуватись кожного дня в обраний час з '
-                                          'різницею від 0хв до 4хв.</i>',
-                                     parse_mode='html', reply_markup=plan_menu_kb)
+        try:
+            await call.message.edit_text(text='Бажаєте зациклити чи запланувати пост?\n\n'
+                                              '<i>🗓 - При плануванні, пост опублікується 1 раз в обрану дату та час.\n\n'
+                                              '🌀 - При зацикленні, пост буде публікуватись кожного дня в обраний час з '
+                                              'різницею від 0хв до 4хв.</i>',
+                                         parse_mode='html', reply_markup=plan_menu_kb)
+        except:
+            await call.message.answer(text='Бажаєте зациклити чи запланувати пост?\n\n'
+                                           '<i>🗓 - При плануванні, пост опублікується 1 раз в обрану дату та час.\n\n'
+                                           '🌀 - При зацикленні, пост буде публікуватись кожного дня в обраний час з '
+                                           'різницею від 0хв до 4хв.</i>',
+                                      parse_mode='html', reply_markup=plan_menu_kb)
     else:
         try:
             from handlers.client import FSMClient
@@ -41,25 +52,27 @@ async def plan_menu(call: types.CallbackQuery, state: FSMContext):
             pass
 
 
-async def choose_loop_time(call: types.CallbackQuery, state: FSMContext):
+async def choose_loop_time(message: types.Message, state: FSMContext):
     from handlers.client import FSMClient
-    await call.answer()
     data = await state.get_data()
     job_id = data.get('job_id')
     if job_id:
         job = scheduler.get_job(job_id)
         data = job.kwargs.get('data')
         data['post_type'] = 'looped'
+        data['skip_days_loop'] = message.text
         job.modify(kwargs={'data': data})
     else:
         await state.update_data(post_type='looped')
+        await state.update_data(skip_days_loop=message.text)
 
     await FSMClient.time_loop.set()
-    await call.message.answer(text="Ваша публікація буде опублікована кожного дня в обраний час: ",
-                              reply_markup=await FullTimePicker().start_picker())
+    await message.answer(text="Ваша публікація буде опублікована кожного дня в обраний час: ",
+                         reply_markup=await FullTimePicker().start_picker())
 
 
 async def full_picker_handler(callback_query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    from handlers.client import formatting_main_menu
     await callback_query.answer()
     r = await FullTimePicker().process_selection(callback_query, callback_data)
     s = await state.get_state()
@@ -67,9 +80,8 @@ async def full_picker_handler(callback_query: types.CallbackQuery, callback_data
     job_id = fsm_data.get('job_id')
 
     if callback_data['act'] == 'CANCEL':
-        await state.reset_state(with_data=False)
-        from handlers.client import formatting_main_menu
-        await formatting_main_menu(callback_query, state)
+        await state.update_data(date_planning=None)
+        await plan_menu(callback_query, state)
 
     if r.selected:
         if s == 'FSMClient:time_planning':
@@ -103,21 +115,27 @@ async def full_picker_handler(callback_query: types.CallbackQuery, callback_data
             selected_time_str = r.time.strftime("%H:%M")
             minutes_to_add = timedelta(minutes=4)
             selected_time_str_4min = (r.datetime + minutes_to_add).strftime("%H:%M")
+            new_date = r.datetime.replace(year=datetime.now().year, month=datetime.now().month, day=datetime.now().day)
             if job_id:
                 job = scheduler.get_job(job_id)
-                job.reschedule(trigger='cron', hour=r.time.hour, minute=r.time.minute)
-                await callback_query.message.answer(
-                    f'Змінено: публікація щодня в діапазоні {selected_time_str} - {selected_time_str_4min}',
-                    reply_markup=change_create_post_kb
-                )
+                data = job.kwargs.get('data')
+                days_skip = data.get('skip_days_loop')
+                job.reschedule(trigger='interval', days=int(days_skip) + 1, start_date=str(new_date))
+                if days_skip == 0:
+                    text = f'Змінено: публікація щодня в діапазоні {selected_time_str} - {selected_time_str_4min}'
+                else:
+                    text = f'Змінено: публікація з проміжком в {days_skip} дні(-в) в діапазоні {selected_time_str} - {selected_time_str_4min}'
+                await callback_query.message.answer(text, reply_markup=change_create_post_kb)
             else:
-                await callback_query.message.answer(
-                    f'Пост буде публікуватись щодня в діапазоні {selected_time_str} - {selected_time_str_4min}',
-                    reply_markup=change_create_post_kb
-                )
-                scheduler.add_job(send_message_cron, trigger='cron', hour=r.time.hour, minute=r.time.minute,
-                                  kwargs={'data': data})
+                days_skip = data.get('skip_days_loop')
+                if days_skip == 0:
+                    text = f'Пост буде публікуватись щодня в діапазоні {selected_time_str} - {selected_time_str_4min}'
+                else:
+                    text = f'Пост буде публікуватись з проміжком в {days_skip} дні(-в) в діапазоні {selected_time_str} - {selected_time_str_4min}'
 
+                await callback_query.message.answer(text, reply_markup=change_create_post_kb)
+                scheduler.add_job(send_message_cron, trigger='interval', days=int(days_skip) + 1,
+                                  start_date=str(new_date), kwargs={'data': data})
         await state.reset_state(with_data=False)
 
 
@@ -127,15 +145,24 @@ async def process_simple_calendar(callback_query: types.CallbackQuery, callback_
     selected, date = await SimpleCalendar().process_selection(callback_query, callback_data)
     if selected:
         await state.update_data(date_planning=date)
-        await callback_query.message.answer(
-            text=f'Ви обрали: {date.strftime("%d/%m/%Y")}'
-        )
         await state.reset_state(with_data=False)
         await FSMClient.time_planning.set()
-        await callback_query.message.answer(
+        await callback_query.message.edit_text(
+            f'Ви обрали: {date.strftime("%d/%m/%Y")}\n'
             "Будь ласка оберіть час: ",
             reply_markup=await FullTimePicker().start_picker()
         )
+
+
+async def days_skip_loop(call: types.CallbackQuery, state: FSMContext):
+    from handlers.client import FSMClient
+    await call.answer()
+    kb = InlineKeyboardMarkup()
+    kb.add(back_to_plan_menu)
+    await call.message.edit_text(text='Скільки днів пропускати між постами?\n\n'
+                                      '<i>Якщо потрібно, щоб пост виходив кожного дня, надішліть "0"</i>',
+                                 parse_mode='html', reply_markup=kb)
+    await FSMClient.skip_days_loop.set()
 
 
 async def choose_plan_date(call: types.CallbackQuery, state: FSMContext):
@@ -153,17 +180,79 @@ async def choose_plan_date(call: types.CallbackQuery, state: FSMContext):
         await state.update_data(post_type='planned')
 
     await FSMClient.date_planning.set()
-    await call.message.answer(text="Оберіть дату: ", reply_markup=await SimpleCalendar().start_calendar())
-    await call.answer()
+    await call.message.edit_text(text="Оберіть дату: ", reply_markup=await SimpleCalendar().start_calendar())
+
+
+async def load_skip_days_vnotes(message, state: FSMContext):
+    from handlers.client import FSMClient
+    if isinstance(message, types.CallbackQuery):
+        if message.data == 'back':
+            await number_of_random_photos(message, state)
+            return
+    data = await state.get_data()
+    job_id = data.get('job_id')
+    if job_id:
+        job = scheduler.get_job(job_id)
+        job_data = job.kwargs.get('data')
+        job_data['skip_days_loop_vnotes'] = message.text
+    else:
+        await state.update_data(skip_days_loop_vnotes=message.text)
+    await FSMClient.time_random_video_notes.set()
+    await message.answer(text='Оберіть час, коли вони будуть публікуватись:',
+                         reply_markup=await FullTimePicker().start_picker())
+
+
+async def pick_time_random_v_notes(callback_query: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    r = await FullTimePicker().process_selection(callback_query, callback_data)
+    await callback_query.answer()
+    if r.status.name == 'CANCELED':
+        await number_of_random_videos(callback_query, state)
+        return
+    if r.selected:
+        data = await state.get_data()
+        job_id = data.get('job_id')
+        new_date = r.datetime.replace(year=datetime.now().year, month=datetime.now().month, day=datetime.now().day)
+        selected_time_str = r.time.strftime("%H:%M")
+        minutes_to_add = timedelta(minutes=4)
+        selected_time_str_4min = (r.datetime + minutes_to_add).strftime("%H:%M")
+        if job_id:
+            job = scheduler.get_job(job_id)
+            job_data = job.kwargs.get('data')
+            days_skip = job_data.get('skip_days_loop_vnotes')
+            job_data['time_random_video_notes'] = r.time
+            job.reschedule(trigger='interval', days=int(days_skip) + 1, start_date=str(new_date))
+            if days_skip == 0:
+                text = f'Змінено: відеоповідомлення кожного дня в діапазоні {selected_time_str} - {selected_time_str_4min}'
+            else:
+                text = f'Змінено: відеоповідомлення з проміжком в {days_skip} дні(-в) в діапазоні {selected_time_str} - {selected_time_str_4min}'
+
+        else:
+            await state.update_data(time_random_video_notes=r.time)
+            await state.update_data(post_type='looped')
+            data = await state.get_data()
+            days_skip = data.get('skip_days_loop_vnotes')
+            if days_skip == 0:
+                text = f'Відеоповідомлення будуть публікуватись кожного дня о {selected_time_str}.'
+            else:
+                text = f'Відеоповідомлення будуть публікуватись з проміжком в {days_skip} дні(-в) о {selected_time_str}.'
+            await callback_query.message.answer(text=text, reply_markup=change_create_post_kb)
+            scheduler.add_job(send_v_notes_cron, trigger='interval', days=int(days_skip) + 1, start_date=str(new_date),
+                              kwargs={'data': data})
+        await state.reset_state(with_data=False)
 
 
 def register_handlers_schedule(dp: Dispatcher):
-    dp.register_callback_query_handler(plan_menu, Text(equals='Планування'))
-    dp.register_callback_query_handler(choose_plan_date, Text(equals='Запланувати'))
-    dp.register_callback_query_handler(choose_loop_time, Text(equals='Зациклити'))
     from handlers.client import FSMClient
+    dp.register_callback_query_handler(plan_menu, Text(equals='Планування'), state='*')
+    dp.register_callback_query_handler(choose_plan_date, Text(equals='Запланувати'), state='*')
+    dp.register_callback_query_handler(days_skip_loop, Text(equals='Зациклити'), state='*')
+    dp.register_message_handler(choose_loop_time, state=FSMClient.skip_days_loop)
     dp.register_callback_query_handler(process_simple_calendar, simple_cal_callback.filter(),
                                        state=FSMClient.date_planning)
     dp.register_callback_query_handler(full_picker_handler, full_timep_callback.filter(), state=FSMClient.time_planning)
     dp.register_callback_query_handler(full_picker_handler, full_timep_callback.filter(), state=FSMClient.time_loop)
 
+    dp.register_callback_query_handler(pick_time_random_v_notes, full_timep_callback.filter(),
+                                       state=FSMClient.time_random_video_notes)
+    dp.register_message_handler(load_skip_days_vnotes, state=FSMClient.skip_days_loop_vnotes)
+    dp.register_callback_query_handler(load_skip_days_vnotes, state=FSMClient.skip_days_loop_vnotes)

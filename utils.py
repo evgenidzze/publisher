@@ -330,7 +330,7 @@ one_to_ten_uz = {
 }
 
 
-async def cron_signals(callback_query: CallbackQuery, data):
+async def cron_signals(data):
     signal_channel_id = data.get('signal_channel_id')
     signal_bet = data.get('signal_bet')
     start_coef = data.get('start_coef')
@@ -349,7 +349,7 @@ async def cron_signals(callback_query: CallbackQuery, data):
 
         await bot.send_message(chat_id=signal_channel_id, text=f'📣{one_to_ten_uz[signal_num + 1]}📣\n\n'
                                                                f">x {coef}🚀")
-        await asyncio.sleep(5)
+        await asyncio.sleep(15)
 
         win_sum = int(signal_bet) * coef
         Im.text((88, 43), f"{coef}x", fill=(220, 220, 220), font=koef_font)
@@ -383,6 +383,7 @@ async def show_post(message, state: FSMContext, send_to_channel=False):
                 randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
     post_voice = data.get('voice')
     video_note = data.get('video_note')
+    random_v_notes_id = data.get('random_v_notes_id')
     chat_id = message.from_user.id
     text = data.get('post_text')
     if send_to_channel:
@@ -408,6 +409,9 @@ async def show_post(message, state: FSMContext, send_to_channel=False):
         await bot.send_voice(chat_id=chat_id, voice=post_voice, caption=text, reply_markup=randomed_text_kb)
     elif video_note:
         await bot.send_video_note(chat_id=chat_id, video_note=video_note, reply_markup=randomed_text_kb)
+    elif random_v_notes_id:
+        await bot.send_video_note(chat_id=chat_id, video_note=random.choice(random_v_notes_id),
+                                  reply_markup=randomed_text_kb)
     elif text:
         await bot.send_message(chat_id=chat_id, text=text, reply_markup=randomed_text_kb)
 
@@ -426,3 +430,10 @@ def job_list_by_channel(data, date: datetime.datetime):
             else:
                 jobs_in_channel.append(job)
     return jobs_in_channel
+
+
+async def alert_vnote_text(message: types.Message, state: FSMContext):
+    data = await state.get_data()
+    if data.get('post_text') and data.get('video_note'):
+        await message.answer(text='⚠️ Текст з посту видалено.\n'
+                                  '<i>Текст неможоливо додати до відеоповідомлення.</i>', parse_mode='html')
