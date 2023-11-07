@@ -219,69 +219,70 @@ async def send_post_to_channel(post_media_files: types.MediaGroup, post_text, bo
         await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=inline_kb)
 
 
-async def cat_content(call: types.CallbackQuery, catalog_data: dict, media_type: str = None):
+async def show_cat_content(message, catalog_data: dict, media_type: str = None):
+    if isinstance(message, types.CallbackQuery):
+        message = message.message
     for media in catalog_data:
         if media == 'videos':
             if media == media_type:
                 for video_num in range(len(catalog_data[media])):
-                    await call.message.answer_video(video=catalog_data[media][video_num], caption=str(video_num + 1))
+                    await message.answer_video(video=catalog_data[media][video_num], caption=str(video_num + 1))
                 return
             elif not media_type:
                 for video in catalog_data[media]:
-                    await call.message.answer_video(video=video)
+                    await message.answer_video(video=video)
         elif media == 'photos':
             if media == media_type:
                 for photo_num in range(len(catalog_data[media])):
-                    await call.message.answer_photo(photo=catalog_data[media][photo_num], caption=str(photo_num + 1))
+                    await message.answer_photo(photo=catalog_data[media][photo_num], caption=str(photo_num + 1))
                 return
             elif not media_type:
                 for photo in catalog_data[media]:
-                    print(photo)
-                    await call.message.answer_photo(photo=photo)
+                    await message.answer_photo(photo=photo)
         elif media == 'voices':
             if media == media_type:
                 for voice_num in range(len(catalog_data[media])):
-                    await call.message.answer_voice(voice=catalog_data[media][voice_num], caption=str(voice_num + 1))
+                    await message.answer_voice(voice=catalog_data[media][voice_num], caption=str(voice_num + 1))
                 return
             elif not media_type:
                 for voice in catalog_data[media]:
-                    await call.message.answer_voice(voice=voice)
+                    await message.answer_voice(voice=voice)
         elif media == 'documents':
             if media == media_type:
                 for document_num in range(len(catalog_data[media])):
-                    await call.message.answer_document(document=catalog_data[media][document_num],
+                    await message.answer_document(document=catalog_data[media][document_num],
                                                        caption=str(document_num + 1))
                 return
             elif not media_type:
                 for document in catalog_data[media]:
-                    await call.message.answer_document(document=document)
+                    await message.answer_document(document=document)
         elif media == 'gifs':
             if media == media_type:
                 for gif_num in range(len(catalog_data[media])):
-                    await call.message.answer_animation(animation=catalog_data[media][gif_num],
+                    await message.answer_animation(animation=catalog_data[media][gif_num],
                                                         caption=str(gif_num + 1))
                 return
             elif not media_type:
                 for gif in catalog_data[media]:
-                    await call.message.answer_animation(animation=gif)
+                    await message.answer_animation(animation=gif)
 
         elif media == 'video_notes':
             if media == media_type:
                 for video_note_num in range(len(catalog_data[media])):
-                    await call.message.answer_video_note(video_note=catalog_data[media][video_note_num])
-                    await call.message.answer(text=str(video_note_num + 1))
+                    await message.answer_video_note(video_note=catalog_data[media][video_note_num])
+                    await message.answer(text=str(video_note_num + 1))
                 return
             elif not media_type:
                 for video_note in catalog_data[media]:
-                    await call.message.answer_video_note(video_note=video_note)
+                    await message.answer_video_note(video_note=video_note)
         elif media == 'texts':
             if media == media_type:
                 for text_num in range(len(catalog_data[media])):
-                    message = await call.message.answer(text=catalog_data[media][text_num])
+                    message = await message.answer(text=catalog_data[media][text_num])
                     await message.reply(text=str(text_num + 1))
             elif not media_type:
                 for text in catalog_data[media]:
-                    await call.message.answer(text=text)
+                    await message.answer(text=text)
 
 
 def get_random_photos(count, cat_name) -> list:

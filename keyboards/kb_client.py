@@ -155,15 +155,18 @@ def add_posts_to_kb(jobs, edit_kb):
         trigger_name = str(j.trigger).split('[')[0]
         if trigger_name == 'date':
             text = f"Пост {date_p.date()} о {date_p.strftime('%H:%M')} {job_post_text}"
-        elif trigger_name == 'interval':
-            skip_days = job_data.get('skip_days_loop') if job_data.get('skip_days_loop') else job_data.get('skip_days_loop_vnotes')
-            skip_days = int(skip_days)
-            if skip_days == 0:
-                text = f"Кожного дня о {date_p.strftime('%H:%M')} {job_post_text}"
-            elif skip_days == 1:
-                text = f"Пропуск 1 день о {date_p.strftime('%H:%M')} {job_post_text}"
+        elif trigger_name in ('interval', 'cron'):
+            if trigger_name == 'interval':
+                skip_days = job_data.get('skip_days_loop') if job_data.get('skip_days_loop') else job_data.get('skip_days_loop_vnotes')
+                skip_days = int(skip_days)
+                if skip_days == 0:
+                    text = f"Кожного дня о {date_p.strftime('%H:%M')} {job_post_text}"
+                elif skip_days == 1:
+                    text = f"Пропуск 1 день о {date_p.strftime('%H:%M')} {job_post_text}"
+                else:
+                    text = f"Пропуск {skip_days} дні(-в) о {date_p.strftime('%H:%M')} {job_post_text}"
             else:
-                text = f"Пропуск {skip_days} дні(-в) о {date_p.strftime('%H:%M')} {job_post_text}"
+                text = f"Кожного дня о {date_p.strftime('%H:%M')} {job_post_text}"
 
         else:
             text = 'Без імені'

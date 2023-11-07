@@ -63,7 +63,6 @@ async def save_channel_json(channel_id: str, message: types.Message):
                 reply_markup=kb_manage_channel_inline, parse_mode='html')
         else:
             if channel_id not in file_data['channels'][user_id]:
-                print(channel_id)
                 file_data['channels'][user_id][channel_id] = channel_name
                 file.seek(0)
                 json.dump(file_data, file, indent=4)
@@ -187,10 +186,13 @@ def get_catalog(cat_name):
         return catalog
 
 
-def remove_cat_media_json(cat_name, media_type, media_index):
+def remove_cat_media_json(cat_name, media_type, media_indexes):
     with open('data.json', 'r+', encoding='utf-8') as file:
         file_data = json.load(file)
-        del file_data['catalogs'][cat_name][media_type][media_index]
+        print(media_indexes[::-1])
+        for index in media_indexes[::-1]:
+            del file_data['catalogs'][cat_name][media_type][index]
+
         file.seek(0)
         json.dump(file_data, file, ensure_ascii=False, indent=4)
         file.truncate()

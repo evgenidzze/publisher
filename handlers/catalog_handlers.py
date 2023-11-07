@@ -13,7 +13,7 @@ from json_functionality import add_media_to_catalog, catalog_list_json, cat_name
 from keyboards.kb_client import base_manage_panel_kb, back_kb, self_or_random_kb, post_formatting_kb, \
     change_create_post_kb, cat_types_kb, back, cancel_sending_media_kb, back_to_catalog, edit_catalog_kb, \
     create_catalogs_kb
-from utils import pressed_back_button, cat_content, restrict_media, set_caption, show_post
+from utils import pressed_back_button, show_cat_content, restrict_media, set_caption, show_post
 
 
 async def media_base_panel(message, state: FSMContext):
@@ -100,7 +100,7 @@ async def show_catalog_content(call: types.CallbackQuery, state: FSMContext):
     catalog_data = get_catalog(cat_name)
 
     if any(catalog_data.get(data) for data in catalog_data):
-        await cat_content(call=call, catalog_data=catalog_data)
+        await show_cat_content(message=call, catalog_data=catalog_data)
         await media_base_panel(message=call, state=state)
     else:
         await state.reset_state(with_data=False)
@@ -205,7 +205,7 @@ async def choose_media_from_cat(call: types.CallbackQuery, state: FSMContext):
 
     catalog_data = get_catalog(cat_name)
     await state.update_data(media_type_add_from_cat=call.data)
-    await cat_content(call=call, catalog_data=catalog_data, media_type=call.data)
+    await show_cat_content(message=call, catalog_data=catalog_data, media_type=call.data)
 
     await call.message.answer(
         text='Надішліть номер медіа(або кілька номерів через пробіл), які бажаєте додати до посту:',
@@ -378,20 +378,23 @@ async def catalog_remove_media_numder(call: types.CallbackQuery, state: FSMConte
 
     catalog_data = get_catalog(cat_name)
     await state.update_data(catalog_media_type_remove=call.data)
-    await cat_content(call=call, catalog_data=catalog_data, media_type=call.data)
+    await show_cat_content(message=call, catalog_data=catalog_data, media_type=call.data)
 
-    await call.message.answer(text='Надішліть номер медіа, яке бажаєте видалити:')
+    await call.message.answer(text='Надішліть номер медіа, яке бажаєте видалити:\n'
+                                   '<i>Якщо потрібно видалити кілька медіа, введіть номери через пробіл.</i>', parse_mode='html')
 
     await FSMClient.del_cat_media_number.set()
 
 
 async def remove_cat_media_by_number(message: types.Message, state: FSMContext):
     fsm_data = await state.get_data()
+    media_indexes = [int(x) - 1 for x in message.text.split(' ') if x.isdigit()]
     cat_name = fsm_data.get('cat_name')
     media_type = fsm_data.get('catalog_media_type_remove')
-    media_index = int(message.text) - 1
     try:
-        remove_cat_media_json(cat_name, media_type, media_index)
+        remove_cat_media_json(cat_name, media_type, media_indexes)
+        catalog_data = get_catalog(cat_name)
+        await show_cat_content(message, catalog_data)
         await message.answer(text='Медіа видалено', reply_markup=base_manage_panel_kb)
         await state.reset_state(with_data=False)
     except IndexError:
