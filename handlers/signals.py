@@ -216,8 +216,10 @@ async def channel_signals_list_delete(call: types.CallbackQuery, state: FSMConte
     if all_jobs:
         for job in all_jobs:
             job_data = job.kwargs.get('data')
-            if channel_id in job_data.get('signal_channel_id'):
-                channel_signals[job.id] = job_data
+            signal_channel_id = job_data.get('signal_channel_id')
+            if signal_channel_id:
+                if channel_id in signal_channel_id:
+                    channel_signals[job.id] = job_data
         if channel_signals:
             kb = InlineKeyboardMarkup()
             from handlers.client import FSMClient
