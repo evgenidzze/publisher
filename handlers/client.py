@@ -783,9 +783,9 @@ async def load_media_file(messages: List[types.Message], state: FSMContext):
             await state.update_data(loaded_post_files=media)
 
     await alert_vnote_text(messages[0], state)
+    await show_post(messages[0], state)
     await messages[0].answer(text='Оформіть пост або оберіть варіант публікації.',
                              reply_markup=post_formatting_kb)
-
     await state.reset_state(with_data=False)
 
 

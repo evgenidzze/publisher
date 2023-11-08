@@ -89,6 +89,7 @@ async def send_message_time(data):
 
 
 async def send_message_cron(data):
+    print(data)
     post_text = data.get('post_text')
     media_files: types.MediaGroup = data.get('loaded_post_files')
     kb_inline = data.get('inline_kb')
@@ -96,6 +97,7 @@ async def send_message_cron(data):
     if kb_inline:
         for buttons in kb_inline.inline_keyboard:
             for button in buttons:
+                print(button)
                 randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
 
     if not media_files and (data.get('random_photos_number') or data.get('random_videos_number')):
