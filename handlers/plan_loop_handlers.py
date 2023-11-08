@@ -25,7 +25,9 @@ async def plan_menu(call: types.CallbackQuery, state: FSMContext):
                      'random_videos_number', 'random_v_notes_id']
     job_id = fsm_data.get('job_id')
     if job_id:
-        fsm_data = scheduler.get_job(job_id).kwargs['data']
+        job = scheduler.get_job(job_id)
+        if job.kwargs:
+            fsm_data = job.kwargs['data']
     if any(fsm_data.get(key) for key in keys_to_check):
         try:
             await call.message.edit_text(text='Бажаєте зациклити чи запланувати пост?\n\n'

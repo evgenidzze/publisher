@@ -1080,6 +1080,7 @@ async def reset_post(call: types.CallbackQuery, state: FSMContext):
 
 
 async def my_posts_menu(message, state: FSMContext):
+    await state.finish()
     await FSMClient.all_posts_channel_id.set()
 
     if get_all_channels(message.from_user.id):

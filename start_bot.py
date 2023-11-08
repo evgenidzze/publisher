@@ -11,6 +11,7 @@ plan_loop_handlers.register_handlers_schedule(dp)
 catalog_handlers.register_handlers_catalog(dp)
 signals.register_handlers_client(dp)
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(levelname)s] - %(name)s - "
-                                                   "(%(filename)s).%(funcName)s(%(lineno)d) - %(message)s")
+# logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(levelname)s] - %(name)s - "
+#                                                    "(%(filename)s).%(funcName)s(%(lineno)d) - %(message)s")
+logging.basicConfig(level=logging.INFO)
 executor.start_polling(dp, skip_updates=True)
