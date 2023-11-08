@@ -157,7 +157,7 @@ def add_posts_to_kb(jobs, edit_kb):
             text = f"Пост {date_p.date()} о {date_p.strftime('%H:%M')} {job_post_text}"
         elif trigger_name in ('interval', 'cron'):
             if trigger_name == 'interval':
-                skip_days = job_data.get('skip_days_loop') if job_data.get('skip_days_loop') else job_data.get('skip_days_loop_vnotes')
+                skip_days = job_data.get('skip_days_loop') if job_data.get('skip_days_loop') is not None else job_data.get('skip_days_loop_vnotes')
                 start_loop_date = job_data.get('start_loop_date').strftime("%d.%m.%Y")
                 skip_days = int(skip_days)
                 if skip_days == 0:

@@ -97,9 +97,9 @@ async def send_message_cron(data):
     if kb_inline:
         for buttons in kb_inline.inline_keyboard:
             for button in buttons:
-                print(button)
+                print(button.text)
                 randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
-
+    print(randomed_text_kb)
     if not media_files and (data.get('random_photos_number') or data.get('random_videos_number')):
         media_files = types.MediaGroup()
         add_random_media(media_files=media_files, data=data, cat_name=data.get('choose_catalog'))
@@ -199,10 +199,10 @@ async def send_post_to_channel(post_media_files: types.MediaGroup, post_text, bo
                                post_video_note,
                                inline_kb):
     randomed_text_kb = InlineKeyboardMarkup()
-    if inline_kb:
-        for buttons in inline_kb.inline_keyboard:
-            for button in buttons:
-                randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
+    # if inline_kb:
+    #     for buttons in inline_kb.inline_keyboard:
+    #         for button in buttons:
+    #             randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
     if post_media_files:
         set_caption(text=post_text, media=post_media_files),
         if len(post_media_files.media) == 1:
