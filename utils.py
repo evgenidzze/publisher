@@ -97,9 +97,7 @@ async def send_message_cron(data):
     if kb_inline:
         for buttons in kb_inline.inline_keyboard:
             for button in buttons:
-                print(button.text)
                 randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
-    print(randomed_text_kb)
     if not media_files and (data.get('random_photos_number') or data.get('random_videos_number')):
         media_files = types.MediaGroup()
         add_random_media(media_files=media_files, data=data, cat_name=data.get('choose_catalog'))
@@ -198,7 +196,7 @@ def set_caption(media, text):
 async def send_post_to_channel(post_media_files: types.MediaGroup, post_text, bot, channel_id, post_voice,
                                post_video_note,
                                inline_kb):
-    randomed_text_kb = InlineKeyboardMarkup()
+    # randomed_text_kb = InlineKeyboardMarkup()
     # if inline_kb:
     #     for buttons in inline_kb.inline_keyboard:
     #         for button in buttons:
@@ -208,22 +206,22 @@ async def send_post_to_channel(post_media_files: types.MediaGroup, post_text, bo
         if len(post_media_files.media) == 1:
             if post_media_files.media[0]['type'] == 'photo':
                 await bot.send_photo(chat_id=channel_id, photo=post_media_files.media[0]['media'], caption=post_text,
-                                     reply_markup=randomed_text_kb)
+                                     reply_markup=inline_kb)
             elif post_media_files.media[0]['type'] == 'video':
                 await bot.send_video(chat_id=channel_id, video=post_media_files.media[0]['media'], caption=post_text,
-                                     reply_markup=randomed_text_kb)
+                                     reply_markup=inline_kb)
             elif post_media_files.media[0]['type'] == 'document':
                 await post_media_files.bot.send_document(chat_id=channel_id,
                                                          document=post_media_files.media[0]['media'], caption=post_text,
-                                                         reply_markup=randomed_text_kb)
+                                                         reply_markup=inline_kb)
         else:
             await bot.send_media_group(chat_id=channel_id, media=post_media_files)
     elif post_voice:
-        await bot.send_voice(chat_id=channel_id, voice=post_voice, caption=post_text, reply_markup=randomed_text_kb)
+        await bot.send_voice(chat_id=channel_id, voice=post_voice, caption=post_text, reply_markup=inline_kb)
     elif post_video_note:
-        await bot.send_video_note(chat_id=channel_id, video_note=post_video_note, reply_markup=randomed_text_kb)
+        await bot.send_video_note(chat_id=channel_id, video_note=post_video_note, reply_markup=inline_kb)
     else:
-        await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=randomed_text_kb)
+        await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=inline_kb)
 
 
 async def show_cat_content(message, catalog_data: dict, media_type: str = None):

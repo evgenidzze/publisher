@@ -26,8 +26,7 @@ from keyboards.kb_client import (main_kb, kb_manage_channel_inline, cancel_kb, p
                                  back_to_media_settings, my_posts_inline,
                                  create_catalogs_kb)
 from aiogram_calendar import simple_cal_callback
-from aiogram_timepicker.panel import FullTimePicker
-
+import random
 locale.setlocale(locale.LC_ALL, 'uk_UA.utf8')
 
 
@@ -464,6 +463,12 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
         inline_kb = data.get('inline_kb')
         cat_name = data.get('choose_catalog')
 
+        randomed_text_kb = InlineKeyboardMarkup()
+        if inline_kb:
+            for buttons in inline_kb.inline_keyboard:
+                for button in buttons:
+                    randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
+
         if post_text is None:
             post_text = ''
         elif isinstance(post_text, list):
@@ -473,7 +478,7 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
             post_media_files = types.MediaGroup()
             add_random_media(media_files=post_media_files, data=data, cat_name=cat_name)
         await send_post_to_channel(post_media_files=post_media_files, post_text=post_text, post_voice=post_voice,
-                                   channel_id=channel_id, post_video_note=post_video_note, bot=bot, inline_kb=inline_kb)
+                                   channel_id=channel_id, post_video_note=post_video_note, bot=bot, inline_kb=randomed_text_kb)
         # await show_post(call, state, send_to_channel=True)
         await call.message.delete()
         await call.message.answer(
