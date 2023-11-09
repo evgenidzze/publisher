@@ -52,9 +52,12 @@ back_to_catalog = InlineKeyboardButton('« Назад', callback_data='back_to_c
 inlines_menu_kb = InlineKeyboardMarkup(row_width=2)
 add_inline = InlineKeyboardButton(text='Додати інлайн', callback_data='add_inline')
 del_inline = InlineKeyboardButton(text='Видалити інлайн', callback_data='del_inline')
+edit_inline_link = InlineKeyboardButton(text='Змінити посилання', callback_data='edit_inline_link')
+back_to_inlines = InlineKeyboardButton(text='« Назад', callback_data='inlines')
+inlines_menu_kb.add(add_inline, edit_inline_link, back_to_formatting, del_inline)
+
 back = InlineKeyboardButton(text='« Назад', callback_data='back')
 back_to_main_menu = InlineKeyboardButton(text='« Назад', callback_data='main_menu')
-inlines_menu_kb.add(add_inline, del_inline, back_to_formatting)
 
 back_edit_post_inline = InlineKeyboardButton(text='« Назад', callback_data='Змінити пост')
 

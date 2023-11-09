@@ -24,13 +24,16 @@ from keyboards.kb_client import (main_kb, kb_manage_channel_inline, cancel_kb, p
                                  back_edit_post_inline, \
                                  change_create_post_kb, create_post_inline, back_to_my_posts_inline,
                                  back_to_media_settings, my_posts_inline,
-                                 create_catalogs_kb)
+                                 create_catalogs_kb, back_to_inlines)
 from aiogram_calendar import simple_cal_callback
 import random
+
 locale.setlocale(locale.LC_ALL, 'uk_UA.utf8')
 
 
 class FSMClient(StatesGroup):
+    new_inline_link = State()
+    change_button_index = State()
     start_loop_date = State()
     skip_days_loop_vnotes = State()
     skip_days_loop = State()
@@ -268,14 +271,6 @@ async def change_job(call: types.CallbackQuery, state: FSMContext):
     job_id = call.data
     job = scheduler.get_job(job_id=job_id)
     await state.update_data(job_id=job_id)
-
-    job_data = job.kwargs.get('data')
-    # post_text = job_data.get("post_text")
-    # post_media_files = job_data.get('loaded_post_files')
-    # post_voice = job_data.get('voice')
-    # post_video_note = job_data.get('video_note')
-    #
-    # link_kb = job_data.get('inline_kb')
     await show_post(call, state)
 
     await state.reset_state(with_data=False)
@@ -478,7 +473,8 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
             post_media_files = types.MediaGroup()
             add_random_media(media_files=post_media_files, data=data, cat_name=cat_name)
         await send_post_to_channel(post_media_files=post_media_files, post_text=post_text, post_voice=post_voice,
-                                   channel_id=channel_id, post_video_note=post_video_note, bot=bot, inline_kb=randomed_text_kb)
+                                   channel_id=channel_id, post_video_note=post_video_note, bot=bot,
+                                   inline_kb=randomed_text_kb)
         # await show_post(call, state, send_to_channel=True)
         await call.message.delete()
         await call.message.answer(
@@ -859,9 +855,6 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
                                          reply_markup=self_or_random_kb)
 
 
-
-
-
 async def number_of_random_photos(message, state: FSMContext):
     if isinstance(message, types.CallbackQuery):
         await FSMClient.random_or_self.set()
@@ -920,15 +913,9 @@ async def number_of_random_videos(message, state: FSMContext):
     await message.answer(text='Відео додано у рандомну вибірку.', reply_markup=post_formatting_kb)
     await state.reset_state(with_data=False)
 
-    # if post_type == 'looped':
-    #     await post_looping(message, state)
-    # elif post_type == 'planned':
-    #     await nav_cal_handler(message, state)
-    # elif post_type == 'now':
-    #     await post_now_menu_handler(message, state)
-
 
 async def inlines(call: types.CallbackQuery, state: FSMContext):
+    await state.reset_state(with_data=False)
     await call.answer()
     try:
         await call.message.edit_text(text='Бажаєте додати чи видалити інлайн до посту?', reply_markup=inlines_menu_kb)
@@ -983,6 +970,73 @@ async def add_inline(call: types.CallbackQuery, state: FSMContext):
         pass
 
 
+async def edit_inline(call: types.CallbackQuery, state: FSMContext):
+    await call.answer()
+    data = await state.get_data()
+    job_id = data.get('job_id')
+    if job_id:
+        data = scheduler.get_job(job_id).kwargs.get('data')
+    inline_kb = data.get('inline_kb')
+    randomed_text_kb = InlineKeyboardMarkup()
+    if inline_kb:
+        await FSMClient.change_button_index.set()
+        for buttons in inline_kb.inline_keyboard:
+            button_index = inline_kb.inline_keyboard.index(buttons)
+            for button in buttons:
+                randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), callback_data=button_index))
+        randomed_text_kb.add(back_to_inlines)
+        await call.message.edit_text(text='Оберіть кнопку, у якій бажаєте змінити посилання:',
+                                     reply_markup=randomed_text_kb)
+    else:
+        try:
+            await call.message.edit_text(text='Немає кнопок у пості.', reply_markup=inlines_menu_kb)
+        except:
+            pass
+
+
+async def enter_new_link(call: types.CallbackQuery, state: FSMContext):
+    await call.answer()
+    data = await state.get_data()
+    job_id = data.get('job_id')
+    if job_id:
+        job = scheduler.get_job(job_id)
+        data['change_button_index'] = int(call.data)
+        job.modify(kwargs={'data': data})
+    else:
+        await state.update_data(change_button_index=int(call.data))
+    await FSMClient.new_inline_link.set()
+    await call.message.answer(text='Надішліть посилання, яке бажаєте прикріпити до інлайну:', reply_markup=back_kb)
+
+
+async def load_new_inline_link(message: types.Message, state: FSMContext):
+    if 'entities' in message and message.entities[0]['type'] == 'url':
+        url = message.text
+        data = await state.get_data()
+        job_id = data.get('job_id')
+        if job_id:
+            data = scheduler.get_job(job_id).kwargs.get('data')
+            print(data)
+
+        button_index = int(data.get('change_button_index'))
+        inline_kb = data.get('inline_kb')
+        button_list = inline_kb.inline_keyboard
+        button_list[button_index][0].url = url
+        if job_id:
+            job = scheduler.get_job(job_id)
+            data['inline_kb'] = inline_kb
+            job.modify(kwargs={'data': data})
+            text = '✅ Змінено посилання кнопки у запланованому(зацикленому) пості.'
+        else:
+            await state.update_data(inline_kb=inline_kb)
+            text = '✅ Змінено посилання кнопки у пості.'
+        await message.answer(text, reply_markup=inlines_menu_kb)
+        await state.reset_state(with_data=False)
+
+    else:
+        await message.answer(text='Невірний формат.\n'
+                                  'Потрібно надіслати саме посилання:')
+
+
 async def pick_inline_to_delete(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     fsm_data = await state.get_data()
@@ -1003,7 +1057,7 @@ async def pick_inline_to_delete(call: types.CallbackQuery, state: FSMContext):
         await FSMClient.inline_to_delete.set()
     else:
         try:
-            await call.message.edit_text('У пості немає інлайнів', reply_markup=post_formatting_kb)
+            await call.message.edit_text('Немає кнопок у пості.', reply_markup=inlines_menu_kb)
         except:
             pass
 
@@ -1147,7 +1201,6 @@ async def my_posts_by_date(callback_query: types.CallbackQuery, callback_data: d
         kb = InlineKeyboardMarkup()
         jobs_in_channel = sorted(jobs_in_channel, key=sorting_key_jobs)
         for job_in_channel in jobs_in_channel:
-            print(job_in_channel)
             job_in_channel_data = job_in_channel.kwargs.get('data')
             post_type = job_in_channel_data.get('post_type')
             if post_type == 'planned':
@@ -1239,9 +1292,12 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_callback_query_handler(number_of_random_videos, state=FSMClient.number_of_rand_video)
     dp.register_callback_query_handler(random_or_self, state=FSMClient.random_or_self)
 
-    dp.register_callback_query_handler(inlines, Text(equals='inlines'))
+    dp.register_callback_query_handler(inlines, Text(equals='inlines'), state='*')
     dp.register_callback_query_handler(add_inline, Text(equals='add_inline'))
     dp.register_callback_query_handler(pick_inline_to_delete, Text(equals='del_inline'))
+    dp.register_callback_query_handler(edit_inline, Text(equals='edit_inline_link'))
+    dp.register_callback_query_handler(enter_new_link, state=FSMClient.change_button_index)
+    dp.register_message_handler(load_new_inline_link, state=FSMClient.new_inline_link)
     dp.register_message_handler(inline_text_load, state=FSMClient.inline_text)
     dp.register_callback_query_handler(inline_text_load, state=FSMClient.inline_text)
     dp.register_message_handler(inline_link_load, state=FSMClient.inline_link)

@@ -398,6 +398,15 @@ async def show_post(message, state: FSMContext, send_to_channel=False):
             text = random.choice(text)
     if isinstance(text, list) and not send_to_channel:
         text = '"Текст буде обраний рандомно."'
+    if job_id:
+        if scheduler.get_job(job_id).name == 'send_message_cron':
+            text = (f"{text}\n"
+                    "————————\n"
+                    f"🌀")
+        elif scheduler.get_job(job_id).name == 'send_message_time':
+            text = (f"{text}\n"
+                    "————————\n"
+                    f"🗓")
     if post_media_files:
         if len(post_media_files.media) == 1:
             m = post_media_files.media[0]
@@ -431,7 +440,7 @@ def job_list_by_channel(data, date: datetime.datetime):
         if job_data.get('channel_id') == all_posts_channel_id:
             date_planning: datetime.datetime = job.next_run_time
             if date_planning:
-                if date_planning.date() == date.date() or job_data.get('post_type') == 'looped':
+                if date_planning.date() == date.date() or job.name == 'send_message_cron':
                     jobs_in_channel.append(job)
             else:
                 jobs_in_channel.append(job)
