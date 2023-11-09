@@ -1006,7 +1006,9 @@ async def enter_new_link(call: types.CallbackQuery, state: FSMContext):
     else:
         await state.update_data(change_button_index=int(call.data))
     await FSMClient.new_inline_link.set()
-    await call.message.answer(text='Надішліть посилання, яке бажаєте прикріпити до інлайну:', reply_markup=back_kb)
+    kb = InlineKeyboardMarkup()
+    kb.add(back_to_inlines)
+    await call.message.answer(text='Надішліть посилання, яке бажаєте прикріпити до інлайну:', reply_markup=kb)
 
 
 async def load_new_inline_link(message: types.Message, state: FSMContext):
@@ -1092,7 +1094,9 @@ async def inline_text_load(message, state: FSMContext):
     elif isinstance(message, types.Message):
         inline_text = message.text.split('\n')
         await state.update_data(inline_text=inline_text)
-        await message.answer(text='Надішліть посилання, яке бажаєте прикріпити до інлайну:', reply_markup=back_kb)
+        kb = InlineKeyboardMarkup()
+        kb.add(back_to_inlines)
+        await message.answer(text='Надішліть посилання, яке бажаєте прикріпити до інлайну:', reply_markup=kb)
         await FSMClient.inline_link.set()
 
 
