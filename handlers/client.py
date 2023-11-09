@@ -1,5 +1,6 @@
 import datetime
 import locale
+import string
 from copy import deepcopy
 from typing import List
 import aiogram.utils.exceptions
@@ -1098,7 +1099,7 @@ async def inline_text_load(message, state: FSMContext):
 async def inline_link_load(message: types.Message, state: FSMContext):
     if 'entities' in message:
         if message.entities[0]['type'] == 'url':
-            url = message.text
+            url = message.text.lstrip(string.punctuation).rstrip(string.punctuation)
 
             data = await state.get_data()
             inline_text = data.get('inline_text')
