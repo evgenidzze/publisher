@@ -270,6 +270,9 @@ async def add_media_from_catalog(message: types.Message, state: FSMContext):
         elif media_type == 'photos':
             for photo in messages:
                 media.attach_photo(photo=photo.file_id)
+        elif media_type == 'gifs':
+            for document in messages:
+                media.attach_document(document=document.file_id)
         elif media_type == 'documents':
             for document in messages:
                 media.attach_document(document=document.file_id)

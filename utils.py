@@ -196,11 +196,6 @@ def set_caption(media, text):
 async def send_post_to_channel(post_media_files: types.MediaGroup, post_text, bot, channel_id, post_voice,
                                post_video_note,
                                inline_kb):
-    # randomed_text_kb = InlineKeyboardMarkup()
-    # if inline_kb:
-    #     for buttons in inline_kb.inline_keyboard:
-    #         for button in buttons:
-    #             randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
     if post_media_files:
         set_caption(text=post_text, media=post_media_files),
         if len(post_media_files.media) == 1:
