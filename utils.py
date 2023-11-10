@@ -89,7 +89,6 @@ async def send_message_time(data):
 
 
 async def send_message_cron(data):
-    print(data)
     post_text = data.get('post_text')
     media_files: types.MediaGroup = data.get('loaded_post_files')
     kb_inline = data.get('inline_kb')

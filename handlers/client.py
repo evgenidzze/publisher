@@ -1001,6 +1001,7 @@ async def enter_new_link(call: types.CallbackQuery, state: FSMContext):
     job_id = data.get('job_id')
     if job_id:
         job = scheduler.get_job(job_id)
+        data = job.kwargs.get('data')
         data['change_button_index'] = int(call.data)
         job.modify(kwargs={'data': data})
     else:
@@ -1017,9 +1018,8 @@ async def load_new_inline_link(message: types.Message, state: FSMContext):
         data = await state.get_data()
         job_id = data.get('job_id')
         if job_id:
-            data = scheduler.get_job(job_id).kwargs.get('data')
-            print(data)
-
+            job = scheduler.get_job(job_id)
+            data = job.kwargs.get('data')
         button_index = int(data.get('change_button_index'))
         inline_kb = data.get('inline_kb')
         button_list = inline_kb.inline_keyboard
