@@ -1177,8 +1177,13 @@ async def load_channel_id_enter_date(call: types.CallbackQuery, state: FSMContex
     all_jobs = scheduler.get_jobs()
     channel_id = call.data
     if all_jobs:
-        jobs_in_channel = [job.kwargs.get('data') for job in all_jobs if
-                           channel_id in job.kwargs.get('data').get('channel_id')]
+
+        jobs_in_channel = []
+        for job in all_jobs:
+            job_data = job.kwargs.get('data')
+            job_channel = job_data.get('channel_id')
+            if channel_id == job_channel:
+                jobs_in_channel.append(job_data)
         if jobs_in_channel:
             await state.update_data(all_posts_channel_id=channel_id)
             await FSMClient.posts_by_data.set()
