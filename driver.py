@@ -22,63 +22,54 @@ stealth(
     fix_hairline=True,
 )
 
-try:
-    wait = WebDriverWait(driver, 30)
-    driver.maximize_window()
-    driver.get('https://viks.com/uz#sign-in')
-    email_button = wait.until(
-        EC.visibility_of_element_located((By.CSS_SELECTOR, 'div[data-tab="email"].item.smooth-toggle_item')))
-    ActionChains(driver).move_to_element(email_button).click(email_button).perform()
-    email = wait.until(EC.visibility_of_element_located((By.ID, 'i-40324f4a-login')))
-    email.clear()
-    email.send_keys('predict3@tuta.io')
+wait = WebDriverWait(driver, 30)
+driver.maximize_window()
+driver.get('https://viks.com/uz#sign-in')
+email_button = wait.until(
+    EC.visibility_of_element_located((By.CSS_SELECTOR, 'div[data-tab="email"].item.smooth-toggle_item')))
+ActionChains(driver).move_to_element(email_button).click(email_button).perform()
+email = wait.until(EC.visibility_of_element_located((By.ID, 'i-40324f4a-login')))
+email.clear()
+email.send_keys('predict3@tuta.io')
 
-    password = wait.until(EC.visibility_of_element_located((By.ID, 'i-40324f4a-password')))
-    password.clear()
-    password.send_keys('Predict3')
-    password.send_keys(Keys.ENTER)
+password = wait.until(EC.visibility_of_element_located((By.ID, 'i-40324f4a-password')))
+password.clear()
+password.send_keys('Predict3')
+password.send_keys(Keys.ENTER)
 
-    sign_in_btn = (
-        "xpath", "//button[@type='submit' and @class='button primary big shadow fluid']/span[text()='Kirish']")
-    wait.until(EC.invisibility_of_element_located(sign_in_btn))
-    driver.get('https://viks.com/uz/game/spribe/aviator3/real')
+sign_in_btn = (
+    "xpath", "//button[@type='submit' and @class='button primary big shadow fluid']/span[text()='Kirish']")
+wait.until(EC.invisibility_of_element_located(sign_in_btn))
+driver.get('https://viks.com/uz/game/spribe/aviator3/real')
 
-    game_iframe = wait.until(EC.visibility_of_element_located((By.ID, 'game-iframe')))
-    driver.switch_to.frame(game_iframe)
+game_iframe = wait.until(EC.visibility_of_element_located((By.ID, 'game-iframe')))
+driver.switch_to.frame(game_iframe)
 
-    # Find and switch to the second iframe within the first iframe
-    second_iframe = wait.until(EC.visibility_of_element_located((By.TAG_NAME, 'iframe')))
-    driver.switch_to.frame(second_iframe)
+# Find and switch to the second iframe within the first iframe
+second_iframe = wait.until(EC.visibility_of_element_located((By.TAG_NAME, 'iframe')))
+driver.switch_to.frame(second_iframe)
 
-    # Find and switch to the third iframe within the second iframe
-    third_iframe = wait.until(EC.visibility_of_element_located((By.NAME, 'game')))
-    driver.switch_to.frame(third_iframe)
+# Find and switch to the third iframe within the second iframe
+third_iframe = wait.until(EC.visibility_of_element_located((By.NAME, 'game')))
+driver.switch_to.frame(third_iframe)
 
 
-    async def wait_for_new_coef():
-        try:
-            div_element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'payouts-block')))
-            div_content = div_element.text.split('\n')
-            if float(div_content[0].split('x')[0]) > 1.5:
-                last_coefs = div_content
-                while last_coefs[:4] == div_content[:4]:
-                    div_element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'payouts-block')))
-                    div_content = div_element.text.split('\n')
-                else:
-                    return div_content[0].split('x')[0]
+async def wait_for_new_coef():
+    try:
+        div_element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'payouts-block')))
+        div_content = div_element.text.split('\n')
+        if float(div_content[0].split('x')[0]) > 1.5:
+            last_coefs = div_content
+            while last_coefs[:4] == div_content[:4]:
+                div_element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'payouts-block')))
+                div_content = div_element.text.split('\n')
             else:
-                await asyncio.sleep(2)
-                await wait_for_new_coef()
+                return div_content[0].split('x')[0]
+        else:
+            await asyncio.sleep(2)
+            await wait_for_new_coef()
 
 
 
-        except:
-            pass
-
-    # async def start_monitor_coefs():
-    #     wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'payouts-block')))
-    #     await check_for_div_element_and_print_content(driver)
-
-
-except Exception as ex:
-    print(ex)
+    except:
+        pass
