@@ -10,7 +10,7 @@ from aiogram.dispatcher.handler import CancelHandler
 from aiogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove
 
 from create_bot import bot, scheduler
-from driver import wait_for_new_coef
+# from driver import wait_for_new_coef
 from json_functionality import get_all_channels, get_users_dict
 from aiogram.dispatcher.middlewares import BaseMiddleware
 import io
