@@ -10,6 +10,7 @@ from aiogram.dispatcher.handler import CancelHandler
 from aiogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove
 
 from create_bot import bot, scheduler
+from driver import wait_for_new_coef
 from json_functionality import get_all_channels, get_users_dict
 from aiogram.dispatcher.middlewares import BaseMiddleware
 import io
@@ -250,7 +251,7 @@ async def show_cat_content(message, catalog_data: dict, media_type: str = None):
             if media == media_type:
                 for document_num in range(len(catalog_data[media])):
                     await message.answer_document(document=catalog_data[media][document_num],
-                                                       caption=str(document_num + 1))
+                                                  caption=str(document_num + 1))
                 return
             elif not media_type:
                 for document in catalog_data[media]:
@@ -259,7 +260,7 @@ async def show_cat_content(message, catalog_data: dict, media_type: str = None):
             if media == media_type:
                 for gif_num in range(len(catalog_data[media])):
                     await message.answer_animation(animation=catalog_data[media][gif_num],
-                                                        caption=str(gif_num + 1))
+                                                   caption=str(gif_num + 1))
                 return
             elif not media_type:
                 for gif in catalog_data[media]:
@@ -329,30 +330,50 @@ one_to_ten_uz = {
     10: "O'ninchi signal"
 }
 
+one_to_ten_br = {
+    1: "Primeiro signal",
+    2: "Segundo signal",
+    3: "Terceiro signal",
+    4: "Quarto signal",
+    5: "Quinto signal",
+    6: "Sexto signal",
+    7: "Sétimo signal",
+    8: "Oitavo signal",
+    9: "Nono signal",
+    10: "Décimo signal"
+}
+
 
 async def cron_signals(data):
     signal_channel_id = data.get('signal_channel_id')
     signal_bet = data.get('signal_bet')
-    start_coef = data.get('start_coef')
-    end_coef = data.get('end_coef')
     signals_count = data.get('signals_count')
     signal_period_minutes = data.get('signal_period_minutes')
+    signal_location = data.get('signal_location')
 
     koef_font = ImageFont.truetype('./media/fonts/Roboto-Bold.ttf', 22)
     win_sum_font = ImageFont.truetype('./media/fonts/arialbd.ttf', 22)
 
     for signal_num in range(int(signals_count)):
-        i = Image.open('./media/signal_uzs.png')
+        if signal_location == 'uz':
+            i = Image.open('media/proove_uz.png')
+            text = (f'🚨⚡️ BOT {one_to_ten_uz[signal_num + 1]} signal berdi 🤖\n\n'
+                    f"🛫 Stavka qilaman: {signal_bet} so'm")
 
-        coef = float(format(random.uniform(start_coef, end_coef), '.2f'))
+        else:
+            i = Image.open('media/proove_br.png')
+            text = (f'🚨⚡️ {one_to_ten_br[signal_num + 1]} sinal do canal VIP! 🤖\n\n'
+                    f'🛫 Minha aposta: {signal_bet} reais')
+
+        coef = float(await wait_for_new_coef()) - 0.12
+
         Im = ImageDraw.Draw(i)
 
-        await bot.send_message(chat_id=signal_channel_id, text=f'📣{one_to_ten_uz[signal_num + 1]}📣\n\n'
-                                                               f">x {coef}🚀")
-        await asyncio.sleep(15)
+        await bot.send_message(chat_id=signal_channel_id, text=text)
+        # await asyncio.sleep(15)
 
-        win_sum = int(signal_bet) * coef
-        Im.text((88, 43), f"{coef}x", fill=(220, 220, 220), font=koef_font)
+        win_sum = (int(signal_bet) * coef)
+        Im.text((88, 43), f"{format(coef, '.2f')}x", fill=(220, 220, 220), font=koef_font)
         Im.text((280, 62), f"{format(win_sum, '.2f')}", fill=(240, 240, 240), font=win_sum_font, anchor='mb')
 
         image_buffer = io.BytesIO()
@@ -361,7 +382,7 @@ async def cron_signals(data):
         image_buffer.seek(0)
 
         await bot.send_photo(chat_id=signal_channel_id, photo=image_buffer)
-        await asyncio.sleep(int(signal_period_minutes) * 60)
+        await asyncio.sleep(int(signal_period_minutes))
 
 
 def sorting_key_jobs(job):

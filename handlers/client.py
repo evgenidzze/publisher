@@ -13,7 +13,7 @@ from aiogram_calendar import SimpleCalendar
 from aiogram_media_group import media_group_handler
 from create_bot import bot, scheduler
 from handlers.catalog_handlers import media_type_from_cat, media_base_panel
-from handlers.signals import signal_menu
+from handlers.signals import pick_signal_location
 from utils import kb_channels, AuthMiddleware, send_voice_from_audio, restrict_media, set_caption, send_post_to_channel, \
     pressed_back_button, add_random_media, sorting_key_jobs, show_post, job_list_by_channel, alert_vnote_text
 from json_functionality import get_all_channels, save_channel_json, remove_channel_id_from_json, catalog_list_json, \
@@ -33,6 +33,7 @@ locale.setlocale(locale.LC_ALL, 'uk_UA.utf8')
 
 
 class FSMClient(StatesGroup):
+    signal_location = State()
     new_inline_link = State()
     change_button_index = State()
     start_loop_date = State()
@@ -1256,8 +1257,8 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(edit_create_post_channel_list, Text(equals='Змінити пост'), state="*")
     dp.register_callback_query_handler(edit_create_post_channel_list, Text(equals='Змінити пост'), state="*")
     dp.register_message_handler(media_base_panel, Text(equals='База даних'), state='*')
-    dp.register_message_handler(signal_menu, Text(equals='📣 Сигнали'), state='*')
-    dp.register_callback_query_handler(signal_menu, Text(equals='📣 Сигнали'), state='*')
+    dp.register_message_handler(pick_signal_location, Text(equals='📣 Сигнали'), state='*')
+    dp.register_callback_query_handler(pick_signal_location, Text(equals='📣 Сигнали'), state='*')
     dp.register_message_handler(my_posts_menu, Text(equals='Мої пости'), state='*')
     dp.register_callback_query_handler(my_posts_menu, Text(equals='Мої пости'), state='*')
     dp.register_callback_query_handler(load_channel_id_enter_date, state=FSMClient.all_posts_channel_id)

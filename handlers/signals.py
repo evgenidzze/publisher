@@ -7,38 +7,50 @@ from aiogram_timepicker.panel import FullTimePicker, full_timep_callback
 from create_bot import bot, scheduler
 from json_functionality import get_all_channels
 from keyboards.kb_client import main_kb, add_channel_inline
-from keyboards.kb_signals import signal_menu_kb, back_to_signal_menu_inline, back_to_choose_channel_inline, \
-    back_to_enter_bet_inline, back_to_enter_coef_inline, back_enter_signal_count_inline
+from keyboards.kb_signals import signal_menu_kb, back_to_signal_panel_inline, back_to_choose_channel_inline, \
+    back_to_enter_bet_inline, back_to_enter_coef_inline, back_enter_signal_count_inline, signal_locations_kb
 
 from utils import kb_channels, is_float_int, cron_signals
 
 
-async def signal_menu(message, state: FSMContext):
+async def pick_signal_location(message, state: FSMContext):
     await state.finish()
+    from handlers.client import FSMClient
+    await FSMClient.signal_location.set()
     if isinstance(message, types.Message):
-        await message.answer(text='Панель управління групами сигналів', reply_markup=signal_menu_kb)
+        await message.answer(text='Оберіть локацію:', reply_markup=signal_locations_kb)
     elif isinstance(message, types.CallbackQuery):
         await message.answer()
         try:
-            await message.message.edit_text(text='Панель управління групами сигналів', reply_markup=signal_menu_kb)
+            await message.message.edit_text(text='Оберіть локацію:', reply_markup=signal_locations_kb)
         except:
             pass
+
+
+async def signal_menu(call: types.CallbackQuery, state: FSMContext):
+    await call.answer()
+    if call.data in ('uz', 'br'):
+        await state.update_data(signal_location=call.data)
+    await state.reset_state(with_data=False)
+    try:
+        await call.message.edit_text(text='Панель управління групами сигналів', reply_markup=signal_menu_kb)
+    except:
+        pass
 
 
 async def create_signal_choose_channel(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     await state.reset_state(with_data=False)
     if get_all_channels(call.from_user.id):
-
         kb = await kb_channels(call, bot)
-        kb.add(back_to_signal_menu_inline)
+        kb.add(back_to_signal_panel_inline)
         from handlers.client import FSMClient
         await FSMClient.signal_channel_id.set()
-        try:
-            await call.message.edit_text(text='Оберіть канал, у якому бажаєте створити групу сигналів:',
-                                         reply_markup=kb)
-        except:
-            pass
+        # try:
+        await call.message.edit_text(text='Оберіть канал, у якому бажаєте створити групу сигналів:',
+                                     reply_markup=kb)
+        # except:
+        #     pass
     else:
         add_channel_kb = InlineKeyboardMarkup().add(add_channel_inline)
         await call.message.edit_text(text='У вас немає підключених каналів.', reply_markup=add_channel_kb)
@@ -65,10 +77,9 @@ async def load_bet_enter_coef(message, state: FSMContext):
             kb.add(back_to_enter_bet_inline)
             await state.update_data(signal_bet=bet)
             await message.answer(text='Ставку збережено.\n'
-                                      'Введіть через дефіс(-) діапазон коефіцієнту виграшу:\n'
-                                      '<i>Наприклад</i>: <b>2 - 3.21</b>', parse_mode='html', reply_markup=kb)
+                                      'Введіть кількість сигналів:', parse_mode='html', reply_markup=kb)
             from handlers.client import FSMClient
-            await FSMClient.signal_coef.set()
+            await FSMClient.signals_count.set()
         else:
             kb = InlineKeyboardMarkup()
             kb.add(back_to_choose_channel_inline)
@@ -76,13 +87,14 @@ async def load_bet_enter_coef(message, state: FSMContext):
 
     elif isinstance(message, types.CallbackQuery):
         try:
+            if message.data == 'enter_coef':
+                await load_channel_enter_bet(message, state)
+                return
             kb = InlineKeyboardMarkup()
             kb.add(back_to_enter_bet_inline)
             from handlers.client import FSMClient
-            await FSMClient.signal_coef.set()
-            await message.message.edit_text(text='Введіть через дефіс(-) діапазон коефіцієнту виграшу:\n'
-                                                 '<i>Наприклад</i>: <b>2 - 3.21</b>', parse_mode='html',
-                                            reply_markup=kb)
+            await FSMClient.signals_count.set()
+            await message.message.edit_text(text='Введіть кількість сигналів:', reply_markup=kb)
         except:
             pass
 
@@ -140,7 +152,7 @@ async def load_count_enter_period_time(message, state: FSMContext):
                 from handlers.client import FSMClient
                 await FSMClient.signal_period_minutes.set()
                 await message.answer(text=f'Кількість сигналів {count}.\n'
-                                          f'Введіть проміжок часу між публікаціями сигналів (у хвилинах):',
+                                          f'Введіть проміжок часу між публікаціями сигналів (у секундах):',
                                      reply_markup=kb)
 
             else:
@@ -196,7 +208,7 @@ async def delete_signal_choose_channel(call: types.CallbackQuery, state: FSMCont
     await state.reset_state(with_data=False)
     if get_all_channels(call.from_user.id):
         kb = await kb_channels(call, bot)
-        kb.add(back_to_signal_menu_inline)
+        kb.add(back_to_signal_panel_inline)
         await FSMClient.del_signal_channel_id.set()
         try:
             await call.message.edit_text(text='Оберіть канал, в якому бажаєте видалити групу сигналів:',
@@ -232,7 +244,7 @@ async def channel_signals_list_delete(call: types.CallbackQuery, state: FSMConte
                 kb.add(
                     InlineKeyboardButton(text=f"{signal_time} - коеф.({start_coef}-{end_coef}), к-сть:{signals_count}",
                                          callback_data=job.id))
-            kb.add(back_to_signal_menu_inline)
+            kb.add(back_to_signal_panel_inline)
             await call.message.answer(text='Оберіть сигнал, який бажаєте видалити.', reply_markup=kb)
 
         else:
@@ -290,6 +302,8 @@ async def my_signals(call: types.CallbackQuery):
 
 def register_handlers_client(dp: Dispatcher):
     from handlers.client import FSMClient
+    dp.register_callback_query_handler(signal_menu,  state=FSMClient.signal_location)
+    dp.register_callback_query_handler(signal_menu,  Text(equals='signal_panel'), state='*')
     dp.register_callback_query_handler(create_signal_choose_channel, Text(equals='create_signal_group'), state='*')
     dp.register_callback_query_handler(delete_signal_choose_channel, Text(equals='delete_signal_group'), state='*')
     dp.register_callback_query_handler(my_signals, Text(equals='my_signal_groups'), state='*')
