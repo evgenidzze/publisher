@@ -1,3 +1,5 @@
+import logging
+
 from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
 import time
@@ -156,7 +158,9 @@ async def full_picker_handler(callback_query: types.CallbackQuery, callback_data
             selected_date_str = data.get("date_planning").strftime("%d/%m/%Y")
 
             if job_id:
-                job.reschedule(trigger='date', run_date=selected_date)
+                job.remove()
+                scheduler.add_job(send_message_time, trigger='date', run_date=selected_date,
+                                  kwargs={'data': data})
                 await callback_query.message.answer(
                     f'Планування змінено на {selected_time_str} - {selected_date_str}',
                     reply_markup=post_formatting_kb)
@@ -169,7 +173,7 @@ async def full_picker_handler(callback_query: types.CallbackQuery, callback_data
                 scheduler.add_job(send_message_time, trigger='date', run_date=selected_date,
                                   kwargs={'data': data})
             await state.reset_state(with_data=False)
-
+            logging.info(f'POST PLANNED {data}')
 
         elif s == 'FSMClient:time_loop':
             if job_id:
@@ -209,7 +213,6 @@ async def load_skip_days_add_job(message, state: FSMContext):
             selected_time_str_4min = (r.datetime + minutes_to_add).strftime("%H:%M")
 
             if job_id:
-                print(data)
                 new_date: datetime = data.get('start_loop_date').replace(hour=time_loop.hour, minute=time_loop.minute)
 
                 job.reschedule(trigger='interval', days=int(days_skip) + 1, start_date=str(new_date))
@@ -218,6 +221,8 @@ async def load_skip_days_add_job(message, state: FSMContext):
                 else:
                     text = f'Змінено: публікація з проміжком в {days_skip} дні(-в) в діапазоні {selected_time_str} - {selected_time_str_4min}'
                 await message.answer(text, reply_markup=change_create_post_kb)
+                logging.info(f'POST RE-PLANNED {data}')
+
             else:
                 data = await state.get_data()
                 if days_skip == 0:
@@ -228,6 +233,8 @@ async def load_skip_days_add_job(message, state: FSMContext):
                 await message.answer(text, reply_markup=change_create_post_kb)
                 scheduler.add_job(send_message_cron, trigger='interval', days=int(days_skip) + 1,
                                   start_date=str(new_date), kwargs={'data': data})
+                logging.info(f'POST PLANNED {data}')
+
 
         else:
             await message.answer(text='Введіть коректне значення:')
@@ -256,6 +263,7 @@ async def pick_time_random_v_notes(callback_query: types.CallbackQuery, callback
                 text = f'Змінено: відеоповідомлення кожного дня в діапазоні {selected_time_str} - {selected_time_str_4min}'
             else:
                 text = f'Змінено: відеоповідомлення з проміжком в {days_skip} дні(-в) в діапазоні {selected_time_str} - {selected_time_str_4min}'
+            logging.info(f'VIDEO NOTE RE-PLANNED {job_data}')
 
         else:
             await state.update_data(time_random_video_notes=r.time)
@@ -269,6 +277,8 @@ async def pick_time_random_v_notes(callback_query: types.CallbackQuery, callback
             await callback_query.message.answer(text=text, reply_markup=change_create_post_kb)
             scheduler.add_job(send_v_notes_cron, trigger='interval', days=int(days_skip) + 1, start_date=str(new_date),
                               kwargs={'data': data})
+            logging.info(f'VIDEO NOTE PLANNED {data}')
+
         await state.reset_state(with_data=False)
 
 
