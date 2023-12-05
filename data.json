@@ -1,7 +1,8 @@
 {
     "users": {
         "397875584": "evgenidzee",
-        "1311521096": "Im_Gods_Son"
+        "1311521096": "Im_Gods_Son",
+        "6204985621": "brianmclaurendaily"
     },
     "admins": [
         "1311521096",
@@ -10,9 +11,176 @@
     "channels": {
         "397875584": {
             "-1001967754187": "Schedule Test 1"
+        },
+        "6204985621": {
+            "-1001957709068": "AVIATOR | Sinais De Dinheiro",
+            "-1001346929508": "🛩Aviator Signallari TEPAGA🚨"
         }
     },
     "catalogs": {
-
+        "trash": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [
+                "DQACAgEAAxkBAAJZMWU6cYjBGgO0WZDZfzawU4TBevAGAAIiAwAChWrRRetS4Gk24qoLMAQ",
+                "DQACAgEAAxkBAAJZNGU6cc-Z55zQMeUwDdRm4JRHoqSJAAIPBAAChWrJReiZ5s4JcezlMAQ"
+            ]
+        },
+        "1502": {
+            "videos": [
+                "BAACAgUAAxkBAAJZh2U6eeBvj0FTIITM0eX3idBWR1L2AAJ_CgACJTLYVf9dhB4c5lTeMAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": []
+        },
+        "1735": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [
+                "CgACAgUAAxkBAAJZjmU6emyXcJUTVPxesB-liHUAAapflQACggoAAiUy2FU7qQb2W1jpbzAE"
+            ],
+            "video_notes": []
+        },
+        "1804": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJZkmU6eycwfChFLy3RS735ndN2kQGvAAIHuDEbJTLYVcyRCAzVcDlpAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZk2U6eyf166JBmrssQJBL4x6tq6TPAAIIuDEbJTLYVdUu_gABjWA7FwEAAwIAA3MAAzAE",
+                "AgACAgUAAxkBAAJZlGU6eycRXauInSHT7rbg9fcUoCF_AAIJuDEbJTLYVWo39ZlpZ6bNAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZlWU6eyd8fWzQGqJ_HHLn_8zIryVRAAIKuDEbJTLYVQyPaWQOX93uAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZlmU6eydEmYbUO5dmrW0aih0x75dkAAILuDEbJTLYVUwINnTkUcUCAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZl2U6eycUl8Xe-Nun4bHgGcxaA9_hAAIMuDEbJTLYVUGTRRjT7uIrAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZmGU6eycemJX8ZTU9x0w9axV-Gs1MAAINuDEbJTLYVYOSzjhvvXOmAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZmWU6eyd-RTP2FchSxELmfFZPzabAAAIOuDEbJTLYVZhvXCCOlqhnAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZmmU6eycTVGp6E9YcOcWFCBGX5-lxAAIPuDEbJTLYVf8Sw-NkZkxWAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZm2U6eyebylSB_1XY1_BXaFF-vccZAAIQuDEbJTLYVSPBFr2sGnzJAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ1mU6fCMXWFMy4WW_h6sc0RTQ76ZYAAIZuDEbJTLYVSvFsaZj9mS4AQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ12U6fCO9qwqTKkJubjJpof7lrQm-AAIRuDEbJTLYVW7H_n418MThAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ2GU6fCPzgHIYOy3rICPKdycrnbfAAAISuDEbJTLYVQhXrUCKgwzRAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ2WU6fCPnclC4DkSzsK0gMIVBi9BtAAITuDEbJTLYVd6j1Ra3hSCtAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ2mU6fCOyxwjjac1kAlJMXyrRjVqkAAIUuDEbJTLYVSyt1DW-OUNCAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ22U6fCO1v8S2j6ENFB3JceJq2l2rAAIVuDEbJTLYVUo3SQqbBXKTAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ3GU6fCPMKB7JPRC8mo5DRoi_1QsXAAIWuDEbJTLYVTPqGZTOlVoKAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ3WU6fCNK6VaULn-01y2UB8M3tLJYAAIXuDEbJTLYVduTFEkxRzMgAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ3mU6fCNNZWT96d2gTuH1l_YEgb4QAAIYuDEbJTLYVZ6GVvSzfqN8AQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ4WU6fTv6dGoPEVYC452hhRH7cSLCAAIeuDEbJTLYVbDByQVnmBxyAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ4mU6fTv6og1o9rzNSKAQU-wFI5uHAAIfuDEbJTLYVerHOxgIluyfAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ42U6fTvptONuPvUm6a9t0l03lV32AAIguDEbJTLYVV5loC9GhkWQAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ5GU6fTuhP6qAhUFIH50nrk227gLpAAIhuDEbJTLYVfP9J42eJmsoAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ5WU6fTsQbSoGXWO3KJA7AAHAd7PWiQACIrgxGyUy2FVUaA-XCRJmdgEAAwIAA3MAAzAE",
+                "AgACAgUAAxkBAAJZ5mU6fTtGbwrF7G31RZXEXvS7Gm8tAAIauDEbJTLYVSUTKjA9VoEdAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ52U6fTtXbUAVnqxLR1Gyjk4W5usgAAIbuDEbJTLYVcVlSifGacvRAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ6GU6fTuBhYwn-xuXBNuOTm9g5FabAAIcuDEbJTLYVRwUJ4h6hA-vAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ6WU6fTuQ8WdY9lxJf3q8cr-hNxHzAAIduDEbJTLYVUmdzbI0x7jxAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ7GU6fWzJH_TXREb-qrbXPQp8cKgpAAIkuDEbJTLYVe3wGuBscJYAAQEAAwIAA3MAAzAE",
+                "AgACAgUAAxkBAAJZ7WU6fWzMgd8_GP2p8k8pKa-uxBQqAAIluDEbJTLYVYbydFbkp_5eAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ7mU6fWxDXi6TE4EKy7USZVNLJwRrAAImuDEbJTLYVWmgKyca0avzAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ72U6fWy_iryM74HmhMl7QR1wmT2fAAInuDEbJTLYVcxPCLnIs8SqAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ8GU6fWyudqtYsF-FfEP1kgW-h8WwAAIouDEbJTLYVSSu55Hht_AjAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ8WU6fWwyEouCkNqFFJmzmJ7zt34AAym4MRslMthV_VQbu4hp7IwBAAMCAANzAAMwBA",
+                "AgACAgUAAxkBAAJZ8mU6fWykxmf4xfEEpJHSVZwwG5TCAAILuDEbJTLYVUwINnTkUcUCAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ82U6fWxjUQHz72B9DI7saGEgEacCAAIquDEbJTLYVeliU0gs2sQJAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ9GU6fWwwopEiP0pcB8eW73Z2Vy_5AAISuDEbJTLYVQhXrUCKgwzRAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ92U6ffr_ooCpBsZdwIXBjraic1bzAAIsuDEbJTLYVSMpFPt-mpiQAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ-GU6ffp32j01hIXK1hc25v0QReo5AAItuDEbJTLYVVAEN9f1G6CBAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ-WU6ffoB2ikc9jLyX9wC0vaLAza5AAIuuDEbJTLYVYWsvRlDTQItAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ-mU6ffpxl8Y1pBIz7VcAAePSDsKnSgACL7gxGyUy2FVYkVki_Eip-gEAAwIAA3MAAzAE",
+                "AgACAgUAAxkBAAJZ-2U6ffriKfaPWpUBqk8FSfILi_DZAAIauDEbJTLYVSUTKjA9VoEdAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ_GU6ffoLz3xR11khTqkT3IeV2Y3DAAIhuDEbJTLYVfP9J42eJmsoAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ_WU6ffoqFFi819hpe6w0Qb1FMiCpAAIwuDEbJTLYVXIBD4tF3kwkAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ_mU6ffolDxIGyu62SMbr74NQbAohAAIxuDEbJTLYVWhJXaSzFe4mAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJZ_2U6ffrZIbTWcjuCiUN6ezKkiexdAAIruDEbJTLYVSlqoghdSuItAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJaAmU6fi5SspS6wO4HiNizyM9AFBmeAAI5uDEbJTLYVehlQxjzqbsGAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJaA2U6fi6ss8x0TlGHE1fGtDtxZaf_AAIHuDEbJTLYVcyRCAzVcDlpAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJaBGU6fi_pp4LuEDUsJHb8IbYmOPIsAAIyuDEbJTLYVXmsRIVihLZOAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJaBWU6fi-c3CV76-kq1JPCjac4a4lOAAIzuDEbJTLYVQb7doDMdvP9AQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJaBmU6fi_tX5UvlMp9vwvnwhXnaZulAAI0uDEbJTLYVZLvPDE1CEEWAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJaB2U6fi_fTdTYrvF7JDFr2PwkSuoTAAI1uDEbJTLYVcUwUOgdTyMoAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJaCGU6fi9BHVgAARJc7D5Bz3rqrpU1xQACNrgxGyUy2FX10E2aRtA-7gEAAwIAA3MAAzAE",
+                "AgACAgUAAxkBAAJaCWU6fi8gqkQBokzlocrJ_AYrY8FiAAI3uDEbJTLYVbxpMy7e7u9cAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJaCmU6fi_5wS7vWmzk4dmAtBSc-nfPAAI4uDEbJTLYVST844bq-vD8AQADAgADcwADMAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": []
+        },
+        "Тепага с машиной (3 пост)": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJaUmU7esfy8BuDAlub1azl2_PxTe8LAAJQtjEbaETgVbWWsUFWhwyJAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJaW2U7ezmwd23gKHgBVOTxDClqcW7dAAJUtjEbaETgVf2_vtcF7y5SAQADAgADcwADMAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": []
+        },
+        "Видео Бэк с машиной": {
+            "videos": [
+                "BAACAgUAAxkBAAJaiWU7gJrxoN_SEBqXWCnNQxB-t_8wAAKiCgACaETgVVLWKssr7Cf6MAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": []
+        },
+        "Тепага с машиной (2 пост)": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJar2U7iZyFpfzsDhtTg9eICAgUwbzHAAJttjEbaETgVfzOMEjjq-cNAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJasGU7iZyBTkOzUiQllVhFdTxggJWVAAJutjEbaETgVQitSsTggFylAQADAgADcwADMAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": []
+        },
+        "Тьяго Приветственные Кругляши": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [
+                "DQACAgIAAxkBAAJblmU_u2Aun7rrE8ioneJHnHl3yXvmAAL4PAACVVwAAUrHcfT_GxRzjjAE",
+                "DQACAgIAAxkBAAJbomU_u4GzM5QEl_kXS4bpcrDXH2rUAAL8PAACVVwAAUpPF_z8TxKfbzAE",
+                "DQACAgIAAxkBAAJbpWU_u4-sG-ZPOPlskYr-1I8UNUbDAAL9PAACVVwAAUr6Mw8RIoxEwzAE",
+                "DQACAgIAAxkBAAJbqGU_u5-RTq6hOP2vrMCgOJ1j_zHmAAL-PAACVVwAAUrOSj7SQmgnsTAE",
+                "DQACAgIAAxkBAAJbq2U_u7x6lWiZBn9Jkdy7ZmrVg8HPAAM9AAJVXAABSvsFXJ_dmzSeMAQ",
+                "DQACAgIAAxkBAAJbrmU_u9tTcmxMAeDv8SBYWmNWV8E1AAICPQACVVwAAUqp5j21s7RP5zAE",
+                "DQACAgIAAxkBAAJbs2U_u_IzjeqKMuzLIDfVHjquEoF-AAIDPQACVVwAAUqeNEzyzvAoTDAE"
+            ]
+        },
+        "Тьяго Прощальные Кругляши": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [
+                "DQACAgIAAxkBAAJbwGU_vpb5XTfPIfKRa0ErpTs5e_DSAAIYPQACVVwAAUpZRFcvW1kr9TAE",
+                "DQACAgIAAxkBAAJb0GU_v-xzgC0HSwEfR47rjZvTtKRTAAIZPQACVVwAAUoMJKRarOJAoTAE",
+                "DQACAgIAAxkBAAJb02U_v_0bG7wUVwxWLdDkwIWHjsNaAAIaPQACVVwAAUoMAQmb_ZD_LjAE",
+                "DQACAgIAAxkBAAJb1mU_wBYovyTaw-K233WP-6b-l_opAAIcPQACVVwAAUq7n4O3Q8IK0jAE",
+                "DQACAgIAAxkBAAJb2WU_wDBBK3usMUCsrYAOn7DFCYDhAAIePQACVVwAAUqKVfNn1XppaTAE",
+                "DQACAgIAAxkBAAJb3GU_wEA1bNT7TtaD2muUmIeVFfMcAAIfPQACVVwAAUpRhOCRu3lJ2jAE",
+                "DQACAgIAAxkBAAJb32U_wIpWp0-LWtfy7lsJI-W_jBLZAAIkPQACVVwAAUpNtlCOUM9jvDAE",
+                "DQACAgIAAxkBAAJb4mU_wJvh6SQ0IOaUQRTAOGOCyfe6AAImPQACVVwAAUrtmDbcImhyRjAE",
+                "DQACAgIAAxkBAAJb5WU_wKzJfnedOlTu-xure5vJISHkAAInPQACVVwAAUrp0Stucou_BzAE",
+                "DQACAgIAAxkBAAJb6GU_wL-fqS5ru9OHdZbX3gT3Mge6AAIoPQACVVwAAUrGXCtA5q4rejAE",
+                "DQACAgIAAxkBAAJb62U_wNchElY8NFXF5MD3TazygGP6AAIpPQACVVwAAUqjXPFaJ8N_AAEwBA",
+                "DQACAgIAAxkBAAJb7mU_wOQMuwABzRW8F7sLqwHSXNuUngACKz0AAlVcAAFKokBi3c1T87QwBA"
+            ]
+        }
     }
 }

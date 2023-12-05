@@ -5,6 +5,8 @@ from apscheduler_di import ContextSchedulerDecorator
 from config import TOKEN_API
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+import os
+os.environ['TZ'] = 'Europe/Kyiv'
 
 job_stores = {
     "default": RedisJobStore(
@@ -15,7 +17,7 @@ job_stores = {
 }
 
 
-scheduler = ContextSchedulerDecorator(AsyncIOScheduler(jobstores=job_stores, timezone='Europe/Kiev'))
+scheduler = ContextSchedulerDecorator(AsyncIOScheduler(jobstores=job_stores))
 # scheduler = AsyncIOScheduler(timezone='Europe/Kiev')
 storage = MemoryStorage()
 scheduler.start()
