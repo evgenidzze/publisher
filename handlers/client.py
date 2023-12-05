@@ -871,6 +871,7 @@ async def number_of_random_photos(message, state: FSMContext):
 
     elif isinstance(message, types.Message):
         data = await state.get_data()
+        cat_name = data.get('choose_catalog')
         job_id = data.get('job_id')
 
         if job_id:
@@ -885,7 +886,6 @@ async def number_of_random_photos(message, state: FSMContext):
             else:
                 await state.update_data(loaded_post_files=None)
 
-        cat_name = data.get('choose_catalog')
         cat_data = get_catalog(cat_name)
         await state.update_data(random_photos_number=message.text)
         await message.answer(text='Фото додано у рандомну вибірку.')
