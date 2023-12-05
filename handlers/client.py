@@ -33,6 +33,7 @@ locale.setlocale(locale.LC_ALL, 'uk_UA.utf8')
 
 
 class FSMClient(StatesGroup):
+    skip_minutes_loop = State()
     signal_location = State()
     new_inline_link = State()
     change_button_index = State()
@@ -846,10 +847,6 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
             await FSMClient.start_loop_date.set()
             await call.message.edit_text(text='З якого числа почати розсилку?',
                                          reply_markup=await SimpleCalendar().start_calendar())
-            # await FSMClient.skip_days_loop_vnotes.set()
-            # await call.message.edit_text(text='Скільки днів пропускати між постами?\n\n'
-            #                                   '<i>Якщо потрібно, щоб пост виходив кожного дня, надішліть "0"</i>',
-            #                              parse_mode='html', reply_markup=back_kb)
 
 
         else:
@@ -871,6 +868,8 @@ async def number_of_random_photos(message, state: FSMContext):
 
     elif isinstance(message, types.Message):
         data = await state.get_data()
+        cat_name = data.get('choose_catalog')
+
         job_id = data.get('job_id')
 
         if job_id:
@@ -884,8 +883,6 @@ async def number_of_random_photos(message, state: FSMContext):
                 job.modify(kwargs={'data': data})
             else:
                 await state.update_data(loaded_post_files=None)
-
-        cat_name = data.get('choose_catalog')
         cat_data = get_catalog(cat_name)
         await state.update_data(random_photos_number=message.text)
         await message.answer(text='Фото додано у рандомну вибірку.')
