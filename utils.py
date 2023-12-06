@@ -113,10 +113,13 @@ async def send_message_cron(data):
         if post_video_note:
             post_video_note = post_video_note[0]
 
-    random_minutes = data.get('skip_minutes_loop').split('-')
-    from_minute = int(random_minutes[0])
-    to_minute = int(random_minutes[1])
-    random_number = random.randint(from_minute, to_minute)
+    if data.get('skip_minutes_loop'):
+        random_minutes = data.get('skip_minutes_loop').split('-')
+        from_minute = int(random_minutes[0])
+        to_minute = int(random_minutes[1])
+        random_number = random.randint(from_minute, to_minute)
+    else:
+        random_number = 4
     print(f"post in {random_number} minutes")
     await asyncio.sleep(random_number * 60)
     await send_post_to_channel(post_media_files=media_files, post_text=post_text, bot=bot,
