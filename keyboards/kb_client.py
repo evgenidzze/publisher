@@ -63,7 +63,6 @@ back_edit_post_inline = InlineKeyboardButton(text='« Назад', callback_data
 
 create_post_inline_kb = InlineKeyboardMarkup(row_width=2)
 create_post_inline = InlineKeyboardButton(text='Створити пост', callback_data='Створити пост')
-my_posts_inline = InlineKeyboardButton(text='Мої пости', callback_data='Мої пости')
 create_post_inline_kb.add(create_post_inline, back_edit_post_inline)
 
 media_choice_kb = InlineKeyboardMarkup(row_width=2)
@@ -125,6 +124,7 @@ change_post = InlineKeyboardButton(text='Змінити пост', callback_data
 change_post_kb.add(change_post)
 
 change_create_post_kb = InlineKeyboardMarkup(row_width=2)
+my_posts_inline = InlineKeyboardButton(text='Мої пости', callback_data='Мої пости')
 change_create_post_kb.add(create_post_inline, change_post, my_posts_inline)
 
 self_or_random_kb = InlineKeyboardMarkup(row_width=2)

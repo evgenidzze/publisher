@@ -189,7 +189,9 @@ async def full_picker_handler(callback_query: types.CallbackQuery, callback_data
             kb = InlineKeyboardMarkup(row_width=2)
             kb.add(InlineKeyboardButton(text='1-4 хв', callback_data='1-4'),
                    InlineKeyboardButton(text='5-30 хв', callback_data='5-30'),
-                   back_to_plan_menu)
+                   back_to_plan_menu,
+                   InlineKeyboardButton(text='Без затримки', callback_data='0')
+                   )
             await callback_query.message.edit_text(text='На скільки хвилин затримати публікацію?', reply_markup=kb)
 
 
@@ -198,7 +200,7 @@ async def load_skip_minutes(call: types.CallbackQuery, state: FSMContext):
     fsm_data = await state.get_data()
     job_id = fsm_data.get('job_id')
     skip_minutes = call.data
-    if skip_minutes in ('1-4', '5-30'):
+    if skip_minutes in ('0', '1-4', '5-30'):
         if job_id:
             job = scheduler.get_job(job_id)
             data = job.kwargs.get('data')

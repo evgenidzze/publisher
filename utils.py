@@ -93,6 +93,7 @@ async def send_message_cron(data):
     post_text = data.get('post_text')
     media_files: types.MediaGroup = data.get('loaded_post_files')
     kb_inline = data.get('inline_kb')
+    skip_minutes_loop = data.get('skip_minutes_loop')
     randomed_text_kb = InlineKeyboardMarkup()
     if kb_inline:
         for buttons in kb_inline.inline_keyboard:
@@ -113,11 +114,14 @@ async def send_message_cron(data):
         if post_video_note:
             post_video_note = post_video_note[0]
 
-    if data.get('skip_minutes_loop'):
-        random_minutes = data.get('skip_minutes_loop').split('-')
-        from_minute = int(random_minutes[0])
-        to_minute = int(random_minutes[1])
-        random_number = random.randint(from_minute, to_minute)
+    if skip_minutes_loop:
+        if skip_minutes_loop == '0':
+            random_number = 0
+        else:
+            random_minutes = data.get('skip_minutes_loop').split('-')
+            from_minute = int(random_minutes[0])
+            to_minute = int(random_minutes[1])
+            random_number = random.randint(from_minute, to_minute)
     else:
         random_number = 4
     print(f"post in {random_number} minutes")
