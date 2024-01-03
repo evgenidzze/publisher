@@ -262,7 +262,7 @@ async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
             await message.message.answer('Ваші заплановані та зациклені пости.\n'
                                          'Оберіть потрібний вам:', reply_markup=edit_kb)
         except Exception as err:
-            logging.info(f'ERROR: {err}')
+            logging.info(f'ERROR: {err}; {edit_kb}')
         await FSMClient.job_id.set()
     else:
         await message.answer()
