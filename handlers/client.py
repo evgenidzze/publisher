@@ -1,5 +1,6 @@
 import datetime
 import locale
+import logging
 import string
 from copy import deepcopy
 from typing import List
@@ -257,8 +258,11 @@ async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
         add_posts_to_kb(jobs=posts, edit_kb=edit_kb)
         edit_kb.add(back_edit_post_inline)
         await message.answer()
-        await message.message.answer('Ваші заплановані та зациклені пости.\n'
-                                     'Оберіть потрібний вам:', reply_markup=edit_kb)
+        try:
+            await message.message.answer('Ваші заплановані та зациклені пости.\n'
+                                         'Оберіть потрібний вам:', reply_markup=edit_kb)
+        except Exception as err:
+            logging.info(f'ERROR: {err}')
         await FSMClient.job_id.set()
     else:
         await message.answer()
