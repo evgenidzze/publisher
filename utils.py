@@ -488,5 +488,6 @@ async def alert_vnote_text(message: types.Message, state: FSMContext):
 
 async def paginate(kb: types.InlineKeyboardMarkup):
     back_btn = InlineKeyboardButton(text='⬅️', callback_data='-')
+    page_btn = InlineKeyboardButton(text='1', callback_data='1')
     next_btn = InlineKeyboardButton(text='➡️', callback_data='+')
-    kb.add(back_btn, next_btn)
+    kb.add(back_btn, page_btn, next_btn)

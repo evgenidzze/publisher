@@ -264,22 +264,22 @@ async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
         if job_data.get('channel_id') == channel_id:
             posts.append(job)
 
-    if len(posts) > 15:
-        post_chunks = np.array_split(posts, len(posts) // 15)
+    if len(posts) > 30:
+        post_chunks = np.array_split(posts, len(posts) // 30)
     else:
         post_chunks = np.array_split(posts, 1)
     if page_num >= len(post_chunks):
         page_num = len(post_chunks)
         await state.update_data(page_num=page_num)
-    posts = list(post_chunks[page_num-1])
+    posts = list(post_chunks[page_num - 1])
     if posts:
         add_posts_to_kb(jobs=posts, edit_kb=edit_kb)
         edit_kb.add(back_edit_post_inline)
         await paginate(edit_kb)
+        edit_kb.inline_keyboard[-1][-2].text = page_num
         await message.answer()
         try:
-            await message.message.edit_text(f'{page_num}\n'
-                                            f'Ваші заплановані та зациклені пости.\n'
+            await message.message.edit_text(f'Ваші заплановані та зациклені пости.\n'
                                             'Оберіть потрібний вам:', reply_markup=edit_kb)
         except Exception as err:
             logging.info(f'ERROR: {err}; {edit_kb}')
