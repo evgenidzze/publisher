@@ -154,7 +154,7 @@ def add_posts_to_kb(jobs, edit_kb):
         elif not job_data.get('post_text') and job_data.get('random_v_notes_id'):
             job_post_text = '- кругляш'
         else:
-            job_post_text = f'- "{job_data.get("post_text")}"'
+            job_post_text = f'- "{job_data.get("post_text")[:10]}"'
         trigger_name = str(j.trigger).split('[')[0]
         if trigger_name == 'date':
             text = f"Пост {date_p.date()} о {date_p.strftime('%H:%M')} {job_post_text}"
