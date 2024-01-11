@@ -16,7 +16,7 @@ from create_bot import bot, scheduler
 from handlers.catalog_handlers import media_type_from_cat, media_base_panel
 from handlers.signals import pick_signal_location
 from utils import kb_channels, AuthMiddleware, send_voice_from_audio, restrict_media, set_caption, send_post_to_channel, \
-    pressed_back_button, add_random_media, sorting_key_jobs, show_post, job_list_by_channel, alert_vnote_text
+    pressed_back_button, add_random_media, sorting_key_jobs, show_post, job_list_by_channel, alert_vnote_text, paginate
 from json_functionality import get_all_channels, save_channel_json, remove_channel_id_from_json, catalog_list_json, \
     get_catalog, get_video_notes_by_cat, get_texts_from_cat
 from keyboards.kb_client import (main_kb, kb_manage_channel_inline, cancel_kb, post_formatting_kb, add_channel_inline, \
@@ -29,6 +29,7 @@ from keyboards.kb_client import (main_kb, kb_manage_channel_inline, cancel_kb, p
                                  create_catalogs_kb, back_to_inlines)
 from aiogram_calendar import simple_cal_callback
 import random
+import numpy as np
 
 locale.setlocale(locale.LC_ALL, 'uk_UA.utf8')
 
@@ -243,8 +244,16 @@ async def edit_create_post_channel_list(message, state: FSMContext):
 
 
 async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
-    # await state.finish()
-    channel_id = message.data
+    data = await state.get_data()
+    if message.data not in ('+', '-'):
+        channel_id = message.data
+        await state.update_data(edit_channel_id=channel_id)
+    else:
+        channel_id = data.get('edit_channel_id')
+    if not data.get('page_num'):
+        await state.update_data(page_num=1)
+    data = await state.get_data()
+    page_num = data.get('page_num')
 
     jobs = scheduler.get_jobs()
     edit_kb = InlineKeyboardMarkup()
@@ -254,13 +263,24 @@ async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
         job_data = job.kwargs.get('data')
         if job_data.get('channel_id') == channel_id:
             posts.append(job)
+
+    if len(posts) > 15:
+        post_chunks = np.array_split(posts, len(posts) // 15)
+    else:
+        post_chunks = np.array_split(posts, 1)
+    if page_num >= len(post_chunks):
+        page_num = len(post_chunks)
+        await state.update_data(page_num=page_num)
+    posts = list(post_chunks[page_num-1])
     if posts:
         add_posts_to_kb(jobs=posts, edit_kb=edit_kb)
         edit_kb.add(back_edit_post_inline)
+        await paginate(edit_kb)
         await message.answer()
         try:
-            await message.message.answer('Ваші заплановані та зациклені пости.\n'
-                                         'Оберіть потрібний вам:', reply_markup=edit_kb)
+            await message.message.edit_text(f'{page_num}\n'
+                                            f'Ваші заплановані та зациклені пости.\n'
+                                            'Оберіть потрібний вам:', reply_markup=edit_kb)
         except Exception as err:
             logging.info(f'ERROR: {err}; {edit_kb}')
         await FSMClient.job_id.set()
@@ -275,22 +295,34 @@ async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
 
 async def change_job(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
+    data = await state.get_data()
+    if call.data in ('+', "-"):
+        page_num = data.get('page_num')
+        if page_num and call.data == '+':
+            await state.update_data(page_num=page_num + 1)
+        elif page_num and call.data == '-' and page_num > 1:
+            await state.update_data(page_num=page_num - 1)
+        elif not page_num:
+            await state.update_data(page_num=1)
+        await edit_post_list(call, state)
+        return
     job_id = call.data
     job = scheduler.get_job(job_id=job_id)
-    await state.update_data(job_id=job_id)
-    await show_post(call, state)
+    if job:
+        await state.update_data(job_id=job_id)
+        await show_post(call, state)
 
-    await state.reset_state(with_data=False)
+        await state.reset_state(with_data=False)
 
-    if job_id:
-        kb_job = deepcopy(post_formatting_kb)
-        del kb_job.inline_keyboard[-1]
-        kb_job.add(del_post_inline)
-        await call.message.answer(
-            text='Налаштуйте оформлення посту', reply_markup=kb_job)
-    else:
-        await call.message.answer(
-            text='Налаштуйте оформлення посту', reply_markup=post_formatting_kb)
+        if job_id:
+            kb_job = deepcopy(post_formatting_kb)
+            del kb_job.inline_keyboard[-1]
+            kb_job.add(del_post_inline)
+            await call.message.answer(
+                text='Налаштуйте оформлення посту', reply_markup=kb_job)
+        else:
+            await call.message.answer(
+                text='Налаштуйте оформлення посту', reply_markup=post_formatting_kb)
 
 
 async def enter_change_text(message: types.CallbackQuery, state: FSMContext):

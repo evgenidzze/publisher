@@ -410,7 +410,8 @@ async def show_post(message, state: FSMContext, send_to_channel=False):
     data = await state.get_data()
     job_id = data.get('job_id')
     if job_id:
-        data = scheduler.get_job(job_id).kwargs.get('data')
+        job = scheduler.get_job(job_id)
+        data = job.kwargs.get('data')
     post_media_files = data.get('loaded_post_files')
     kb_inline: InlineKeyboardMarkup = data.get('inline_kb')
     randomed_text_kb = InlineKeyboardMarkup()
@@ -483,3 +484,9 @@ async def alert_vnote_text(message: types.Message, state: FSMContext):
     if data.get('post_text') and data.get('video_note'):
         await message.answer(text='⚠️ Текст з посту видалено.\n'
                                   '<i>Текст неможоливо додати до відеоповідомлення.</i>', parse_mode='html')
+
+
+async def paginate(kb: types.InlineKeyboardMarkup):
+    back_btn = InlineKeyboardButton(text='⬅️', callback_data='-')
+    next_btn = InlineKeyboardButton(text='➡️', callback_data='+')
+    kb.add(back_btn, next_btn)
