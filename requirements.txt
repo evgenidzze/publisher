@@ -1,7 +1,6 @@
 aiofiles==23.2.1
 aiogram==2.25.1
 aiogram-calendar==0.1.1
-aiogram-inline-paginations==0.1.12
 aiogram-timepicker==0.2.0
 aiohttp==3.8.5
 aiosignal==1.3.1
