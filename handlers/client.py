@@ -867,10 +867,10 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
             await call.message.edit_text(
                 text=f'Скільки відео буде у вибірці? (доступно {len(cat_data.get("videos"))})',
                 reply_markup=back_kb)
-        elif cat_data.get('documents'):
+        elif cat_data.get('documents') or cat_data.get('gifs'):
             await FSMClient.number_of_rand_gifs.set()
             await call.message.edit_text(
-                text=f'Скільки gif буде у вибірці? (доступно {len(cat_data.get("documents"))})\n'
+                text=f'Скільки gif буде у вибірці?\n'
                      f'Доступне значення - 1',
                 reply_markup=back_kb)
         else:
