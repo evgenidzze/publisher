@@ -346,7 +346,7 @@ def get_random_gifs(count, cat_name) -> list:
         file_data = json.load(file)
         res = []
         gifs_id = file_data['catalogs'][cat_name]['documents']
-        print(gifs_id)
+        gifs_id.extend(file_data['catalogs'][cat_name]['gifs'])
 
         random.shuffle(gifs_id)
         for i in range(1):
