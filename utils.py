@@ -222,34 +222,31 @@ def set_caption(media, text):
 async def send_post_to_channel(post_media_files: types.MediaGroup, post_text, bot_instance, channel_id, post_voice,
                                post_video_note,
                                inline_kb, data=None):
-    try:
-        if post_media_files:
-            set_caption(text=post_text, media=post_media_files),
-            if len(post_media_files.media) == 1:
-                if post_media_files.media[0]['type'] == 'photo':
-                    await bot_instance.send_photo(chat_id=channel_id, photo=post_media_files.media[0]['media'],
-                                                  caption=post_text,
-                                                  reply_markup=inline_kb)
-                elif post_media_files.media[0]['type'] == 'video':
-                    await bot_instance.send_video(chat_id=channel_id, video=post_media_files.media[0]['media'],
-                                                  caption=post_text,
-                                                  reply_markup=inline_kb)
-                elif post_media_files.media[0]['type'] == 'document':
-                    await post_media_files.bot.send_document(chat_id=channel_id,
-                                                             document=post_media_files.media[0]['media'],
-                                                             caption=post_text,
-                                                             reply_markup=inline_kb)
-            else:
-                await bot_instance.send_media_group(chat_id=channel_id, media=post_media_files)
-        elif post_voice:
-            await bot_instance.send_voice(chat_id=channel_id, voice=post_voice, caption=post_text,
-                                          reply_markup=inline_kb)
-        elif post_video_note:
-            await bot_instance.send_video_note(chat_id=channel_id, video_note=post_video_note, reply_markup=inline_kb)
+    if post_media_files:
+        set_caption(text=post_text, media=post_media_files),
+        if len(post_media_files.media) == 1:
+            if post_media_files.media[0]['type'] == 'photo':
+                await bot.send_photo(chat_id=channel_id, photo=post_media_files.media[0]['media'],
+                                     caption=post_text,
+                                     reply_markup=inline_kb)
+            elif post_media_files.media[0]['type'] == 'video':
+                await bot.send_video(chat_id=channel_id, video=post_media_files.media[0]['media'],
+                                     caption=post_text,
+                                     reply_markup=inline_kb)
+            elif post_media_files.media[0]['type'] == 'document':
+                await bot.send_document(chat_id=channel_id,
+                                        document=post_media_files.media[0]['media'],
+                                        caption=post_text,
+                                        reply_markup=inline_kb)
         else:
-            await bot_instance.send_message(chat_id=channel_id, text=post_text, reply_markup=inline_kb)
-    except Exception as err:
-        logging.info(f"ERROR {err}; DATA: {data}; BOT: {bot_instance}")
+            await bot.send_media_group(chat_id=channel_id, media=post_media_files)
+    elif post_voice:
+        await bot.send_voice(chat_id=channel_id, voice=post_voice, caption=post_text,
+                             reply_markup=inline_kb)
+    elif post_video_note:
+        await bot.send_video_note(chat_id=channel_id, video_note=post_video_note, reply_markup=inline_kb)
+    else:
+        await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=inline_kb)
 
 
 async def show_cat_content(message, catalog_data: dict, media_type: str = None):
