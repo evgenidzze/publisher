@@ -1,6 +1,7 @@
 import asyncio
 import datetime
 import json
+import logging
 import random
 
 import aiogram_timepicker
@@ -51,6 +52,7 @@ def pressed_back_button(message):
 def add_random_media(media_files, data, cat_name):
     random_photos_number = data.get('random_photos_number')
     random_videos_number = data.get('random_videos_number')
+    random_gifs_number = data.get('random_gifs_number')
 
     if random_photos_number:
         r_photos = get_random_photos(count=int(random_photos_number), cat_name=cat_name)
@@ -61,6 +63,11 @@ def add_random_media(media_files, data, cat_name):
         r_videos = get_random_videos(count=int(random_videos_number), cat_name=cat_name)
         for rand_video in r_videos:
             media_files.attach_video(rand_video)
+
+    if random_gifs_number:
+        r_gifs = get_random_gifs(count=int(random_gifs_number), cat_name=cat_name)
+        for rand_gifs in r_gifs:
+            media_files.attach_video(rand_gifs)
 
 
 async def send_message_time(data):
@@ -78,12 +85,14 @@ async def send_message_time(data):
             for button in buttons:
                 randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
 
-    if not media_files and (data.get('random_photos_number') or data.get('random_videos_number')):
+    if not media_files and (
+            data.get('random_photos_number') or data.get('random_videos_number') or data.get('random_gifs_number')):
         media_files = types.MediaGroup()
         add_random_media(media_files=media_files, data=data, cat_name=cat_name)
     if isinstance(post_text, list):
         post_text = random.choice(post_text)
-    await send_post_to_channel(post_media_files=media_files, post_text=post_text, bot=bot, channel_id=channel_id,
+    await send_post_to_channel(post_media_files=media_files, post_text=post_text, bot_instance=bot,
+                               channel_id=channel_id,
                                post_voice=voice,
                                post_video_note=video_note,
                                inline_kb=randomed_text_kb)
@@ -99,7 +108,8 @@ async def send_message_cron(data):
         for buttons in kb_inline.inline_keyboard:
             for button in buttons:
                 randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
-    if not media_files and (data.get('random_photos_number') or data.get('random_videos_number')):
+    if not media_files and (
+            data.get('random_photos_number') or data.get('random_videos_number') or data.get('random_gifs_number')):
         media_files = types.MediaGroup()
         add_random_media(media_files=media_files, data=data, cat_name=data.get('choose_catalog'))
 
@@ -126,10 +136,10 @@ async def send_message_cron(data):
         random_number = 4
     print(f"post in {random_number} minutes")
     await asyncio.sleep(random_number * 60)
-    await send_post_to_channel(post_media_files=media_files, post_text=post_text, bot=bot,
+    await send_post_to_channel(post_media_files=media_files, post_text=post_text, bot_instance=bot,
                                channel_id=data.get('channel_id'), post_voice=data.get('voice'),
                                post_video_note=post_video_note,
-                               inline_kb=randomed_text_kb)
+                               inline_kb=randomed_text_kb, data=data)
 
 
 async def send_v_notes_cron(data):
@@ -209,30 +219,37 @@ def set_caption(media, text):
             media.media[m].caption = text
 
 
-async def send_post_to_channel(post_media_files: types.MediaGroup, post_text, bot, channel_id, post_voice,
+async def send_post_to_channel(post_media_files: types.MediaGroup, post_text, bot_instance, channel_id, post_voice,
                                post_video_note,
-                               inline_kb):
-    if post_media_files:
-        set_caption(text=post_text, media=post_media_files),
-        if len(post_media_files.media) == 1:
-            if post_media_files.media[0]['type'] == 'photo':
-                await bot.send_photo(chat_id=channel_id, photo=post_media_files.media[0]['media'], caption=post_text,
-                                     reply_markup=inline_kb)
-            elif post_media_files.media[0]['type'] == 'video':
-                await bot.send_video(chat_id=channel_id, video=post_media_files.media[0]['media'], caption=post_text,
-                                     reply_markup=inline_kb)
-            elif post_media_files.media[0]['type'] == 'document':
-                await post_media_files.bot.send_document(chat_id=channel_id,
-                                                         document=post_media_files.media[0]['media'], caption=post_text,
-                                                         reply_markup=inline_kb)
+                               inline_kb, data=None):
+    try:
+        if post_media_files:
+            set_caption(text=post_text, media=post_media_files),
+            if len(post_media_files.media) == 1:
+                if post_media_files.media[0]['type'] == 'photo':
+                    await bot_instance.send_photo(chat_id=channel_id, photo=post_media_files.media[0]['media'],
+                                                  caption=post_text,
+                                                  reply_markup=inline_kb)
+                elif post_media_files.media[0]['type'] == 'video':
+                    await bot_instance.send_video(chat_id=channel_id, video=post_media_files.media[0]['media'],
+                                                  caption=post_text,
+                                                  reply_markup=inline_kb)
+                elif post_media_files.media[0]['type'] == 'document':
+                    await post_media_files.bot.send_document(chat_id=channel_id,
+                                                             document=post_media_files.media[0]['media'],
+                                                             caption=post_text,
+                                                             reply_markup=inline_kb)
+            else:
+                await bot_instance.send_media_group(chat_id=channel_id, media=post_media_files)
+        elif post_voice:
+            await bot_instance.send_voice(chat_id=channel_id, voice=post_voice, caption=post_text,
+                                          reply_markup=inline_kb)
+        elif post_video_note:
+            await bot_instance.send_video_note(chat_id=channel_id, video_note=post_video_note, reply_markup=inline_kb)
         else:
-            await bot.send_media_group(chat_id=channel_id, media=post_media_files)
-    elif post_voice:
-        await bot.send_voice(chat_id=channel_id, voice=post_voice, caption=post_text, reply_markup=inline_kb)
-    elif post_video_note:
-        await bot.send_video_note(chat_id=channel_id, video_note=post_video_note, reply_markup=inline_kb)
-    else:
-        await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=inline_kb)
+            await bot_instance.send_message(chat_id=channel_id, text=post_text, reply_markup=inline_kb)
+    except Exception as err:
+        logging.info(f"ERROR {err}; DATA: {data}; BOT: {bot_instance}")
 
 
 async def show_cat_content(message, catalog_data: dict, media_type: str = None):
@@ -324,6 +341,19 @@ def get_random_videos(count, cat_name) -> list:
         return res
 
 
+def get_random_gifs(count, cat_name) -> list:
+    with open('data.json', 'r', encoding='utf-8') as file:
+        file_data = json.load(file)
+        res = []
+        gifs_id = file_data['catalogs'][cat_name]['documents']
+        print(gifs_id)
+
+        random.shuffle(gifs_id)
+        for i in range(1):
+            res.append(gifs_id[i])
+        return res
+
+
 def is_float_int(string: str):
     string = string.replace(',', '.')
     try:
@@ -381,6 +411,7 @@ async def cron_signals(data):
             text = (f'🚨⚡️ {one_to_ten_br[signal_num + 1]} sinal do canal VIP! 🤖\n\n'
                     f'🛫 Minha aposta: {signal_bet} reais')
 
+        from driver import wait_for_new_coef
         coef = float(await wait_for_new_coef()) - 0.12
 
         Im = ImageDraw.Draw(i)

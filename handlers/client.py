@@ -64,6 +64,7 @@ class FSMClient(StatesGroup):
     channel_change_post = State()
     random_or_self = State()
     number_of_rand_video = State()
+    number_of_rand_gifs = State()
     number_of_rand_photo = State()
     choose_catalog = State()
     user_name = State()
@@ -484,7 +485,7 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
     if job_id:
         data = scheduler.get_job(job_id).kwargs['data']
     keys_to_check = ['post_text', 'loaded_post_files', 'voice', 'video_note', 'random_photos_number',
-                     'random_videos_number']
+                     'random_videos_number', 'random_gifs_number']
     if any(data.get(key) for key in keys_to_check):
         channel_id = data.get('channel_id')
         chat_info = await bot.get_chat(chat_id=channel_id)
@@ -508,11 +509,12 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
         elif isinstance(post_text, list):
             post_text = post_text[0]
 
-        if not post_media_files and (data.get('random_photos_number') or data.get('random_videos_number')):
+        if not post_media_files and (
+                data.get('random_photos_number') or data.get('random_videos_number') or data.get('random_gifs_number')):
             post_media_files = types.MediaGroup()
             add_random_media(media_files=post_media_files, data=data, cat_name=cat_name)
         await send_post_to_channel(post_media_files=post_media_files, post_text=post_text, post_voice=post_voice,
-                                   channel_id=channel_id, post_video_note=post_video_note, bot=bot,
+                                   channel_id=channel_id, post_video_note=post_video_note, bot_instance=bot,
                                    inline_kb=randomed_text_kb)
         # await show_post(call, state, send_to_channel=True)
         await call.message.delete()
@@ -849,10 +851,10 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
         except:
             pass
 
-    if cat_data.get('photos'):
-        media_len += len(cat_data.get('photos'))
-    if cat_data.get('videos'):
-        media_len += len(cat_data.get('videos'))
+    media_types = ['photos', 'videos', 'documents']
+
+    for media_type in media_types:
+        media_len += len(cat_data.get(media_type, []))
 
     if message_data == 'random_media':
         if cat_data.get('photos') and media_len > 1:
@@ -864,6 +866,12 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
             await FSMClient.number_of_rand_video.set()
             await call.message.edit_text(
                 text=f'Скільки відео буде у вибірці? (доступно {len(cat_data.get("videos"))})',
+                reply_markup=back_kb)
+        elif cat_data.get('documents') and media_len > 1:
+            await FSMClient.number_of_rand_gifs.set()
+            await call.message.edit_text(
+                text=f'Скільки gif буде у вибірці? (доступно {len(cat_data.get("documents"))})\n'
+                     f'Доступне значення - 1',
                 reply_markup=back_kb)
         else:
             try:
@@ -946,6 +954,24 @@ async def number_of_random_videos(message, state: FSMContext):
     await state.update_data(random_videos_number=message.text)
     await show_post(message, state)
     await message.answer(text='Відео додано у рандомну вибірку.', reply_markup=post_formatting_kb)
+    await state.reset_state(with_data=False)
+
+
+async def number_of_random_gifs(message, state: FSMContext):
+    if isinstance(message, types.CallbackQuery):
+        await FSMClient.random_or_self.set()
+        try:
+            await message.message.edit_text(
+                text='Якщо хочете щоб медіа обирались для посту автоматично - оберіть "Рандом медіа".',
+                reply_markup=self_or_random_kb)
+        except:
+            await message.message.answer(
+                text='Якщо хочете щоб медіа обирались для посту автоматично - оберіть "Рандом медіа".',
+                reply_markup=self_or_random_kb)
+        return
+    await state.update_data(random_gifs_number='1')
+    await show_post(message, state)
+    await message.answer(text='GIF додано у рандомну вибірку.', reply_markup=post_formatting_kb)
     await state.reset_state(with_data=False)
 
 
@@ -1332,8 +1358,12 @@ def register_handlers_client(dp: Dispatcher):
 
     dp.register_message_handler(number_of_random_photos, state=FSMClient.number_of_rand_photo)
     dp.register_callback_query_handler(number_of_random_photos, state=FSMClient.number_of_rand_photo)
+
     dp.register_message_handler(number_of_random_videos, state=FSMClient.number_of_rand_video)
     dp.register_callback_query_handler(number_of_random_videos, state=FSMClient.number_of_rand_video)
+
+    dp.register_message_handler(number_of_random_gifs, state=FSMClient.number_of_rand_gifs)
+    dp.register_callback_query_handler(number_of_random_gifs, state=FSMClient.number_of_rand_gifs)
     dp.register_callback_query_handler(random_or_self, state=FSMClient.random_or_self)
 
     dp.register_callback_query_handler(inlines, Text(equals='inlines'), state='*')

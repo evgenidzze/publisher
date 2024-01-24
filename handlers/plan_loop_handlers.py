@@ -24,7 +24,7 @@ async def plan_menu(call: types.CallbackQuery, state: FSMContext):
     await state.reset_state(with_data=False)
     fsm_data = await state.get_data()
     keys_to_check = ['post_text', 'loaded_post_files', 'voice', 'video_note', 'random_photos_number',
-                     'random_videos_number', 'random_v_notes_id']
+                     'random_videos_number', 'random_v_notes_id', 'random_gifs_number']
     job_id = fsm_data.get('job_id')
     if job_id:
         job = scheduler.get_job(job_id)
