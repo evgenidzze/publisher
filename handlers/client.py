@@ -929,6 +929,7 @@ async def number_of_random_photos(message, state: FSMContext):
                 await state.update_data(loaded_post_files=None)
         cat_data = get_catalog(cat_name)
         await state.update_data(random_photos_number=message.text)
+        await state.update_data(random_gifs_number=None)
         await message.answer(text='Фото додано у рандомну вибірку.')
 
         if cat_data.get('videos'):
@@ -952,6 +953,8 @@ async def number_of_random_videos(message, state: FSMContext):
                 reply_markup=self_or_random_kb)
         return
     await state.update_data(random_videos_number=message.text)
+    await state.update_data(random_gifs_number=None)
+
     await show_post(message, state)
     await message.answer(text='Відео додано у рандомну вибірку.', reply_markup=post_formatting_kb)
     await state.reset_state(with_data=False)
@@ -970,6 +973,9 @@ async def number_of_random_gifs(message, state: FSMContext):
                 reply_markup=self_or_random_kb)
         return
     await state.update_data(random_gifs_number='1')
+    await state.update_data(random_videos_number=None)
+    await state.update_data(random_photos_number=None)
+
     await show_post(message, state)
     await message.answer(text='GIF додано у рандомну вибірку.', reply_markup=post_formatting_kb)
     await state.reset_state(with_data=False)
