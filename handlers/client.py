@@ -507,7 +507,7 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
         if post_text is None:
             post_text = ''
         elif isinstance(post_text, list):
-            post_text = post_text[0]
+            post_text = random.choice(post_text)
 
         if not post_media_files and (
                 data.get('random_photos_number') or data.get('random_videos_number') or data.get('random_gifs_number')):
@@ -516,7 +516,6 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
         await send_post_to_channel(post_media_files=post_media_files, post_text=post_text, post_voice=post_voice,
                                    channel_id=channel_id, post_video_note=post_video_note, bot_instance=bot,
                                    inline_kb=randomed_text_kb)
-        # await show_post(call, state, send_to_channel=True)
         await call.message.delete()
         await call.message.answer(
             text=f'🚀 Повідомлення {post_text[:10]}... опубліковано у <a href="{chat_url}">{chat_title}</a>.',

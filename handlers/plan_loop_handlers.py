@@ -262,8 +262,10 @@ async def load_skip_days_add_job(message, state: FSMContext):
                     text = f'Пост буде публікуватись з проміжком в {days_skip} дні(-в) в діапазоні {first_time} - {second_time}'
                 new_date: datetime = data.get('start_loop_date').replace(hour=time_loop.hour, minute=time_loop.minute)
                 await message.answer(text, reply_markup=change_create_post_kb)
-                scheduler.add_job(send_message_cron, trigger='interval', days=int(days_skip) + 1,
+                add_job = scheduler.add_job(send_message_cron, trigger='interval', days=int(days_skip) + 1,
                                   start_date=str(new_date), kwargs={'data': data})
+                data['job_id'] = add_job.id
+                scheduler.modify_job(add_job.id, kwargs={'data': data})
                 logging.info(f'POST PLANNED {data}')
 
 

@@ -99,6 +99,7 @@ async def send_message_time(data):
 
 
 async def send_message_cron(data):
+    job_id = data.get('job_id')
     post_text = data.get('post_text')
     media_files: types.MediaGroup = data.get('loaded_post_files')
     kb_inline = data.get('inline_kb')
@@ -113,10 +114,16 @@ async def send_message_cron(data):
         media_files = types.MediaGroup()
         add_random_media(media_files=media_files, data=data, cat_name=data.get('choose_catalog'))
 
-    if isinstance(post_text, list):
-        post_text = post_text[0]
-        data['post_text'].append(post_text[0])
+    if isinstance(post_text, list) and job_id:
+        text = post_text[0]
+        data['post_text'].append(text)
         del data['post_text'][0]
+        scheduler.modify_job(job_id, kwargs={'data': data})
+    elif isinstance(post_text, list):
+        text = random.choice(post_text)
+    else:
+        text = None
+
     if data.get('video_note'):
         post_video_note = data.get('video_note')
     else:
@@ -136,7 +143,7 @@ async def send_message_cron(data):
         random_number = 4
     print(f"post in {random_number} minutes")
     await asyncio.sleep(random_number * 60)
-    await send_post_to_channel(post_media_files=media_files, post_text=post_text, bot_instance=bot,
+    await send_post_to_channel(post_media_files=media_files, post_text=text, bot_instance=bot,
                                channel_id=data.get('channel_id'), post_voice=data.get('voice'),
                                post_video_note=post_video_note,
                                inline_kb=randomed_text_kb, data=data)
@@ -247,6 +254,7 @@ async def send_post_to_channel(post_media_files: types.MediaGroup, post_text, bo
         await bot.send_video_note(chat_id=channel_id, video_note=post_video_note, reply_markup=inline_kb)
     else:
         await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=inline_kb)
+    logging.info(f'POST SENT; DATA: {data}')
 
 
 async def show_cat_content(message, catalog_data: dict, media_type: str = None):
@@ -434,7 +442,7 @@ def sorting_key_jobs(job):
     return next_run.time()
 
 
-async def show_post(message, state: FSMContext, send_to_channel=False):
+async def show_post(message, state: FSMContext):
     data = await state.get_data()
     job_id = data.get('job_id')
     if job_id:
@@ -452,11 +460,7 @@ async def show_post(message, state: FSMContext, send_to_channel=False):
     random_v_notes_id = data.get('random_v_notes_id')
     chat_id = message.from_user.id
     text = data.get('post_text')
-    if send_to_channel:
-        chat_id = data.get('channel_id')
-        if isinstance(text, list):
-            text = random.choice(text)
-    if isinstance(text, list) and not send_to_channel:
+    if isinstance(text, list):
         text = '"Текст буде обраний рандомно."'
     if job_id:
         if scheduler.get_job(job_id).name == 'send_message_cron':
