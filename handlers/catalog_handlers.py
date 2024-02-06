@@ -130,6 +130,7 @@ async def edit_catalog_list(call: types.CallbackQuery, state: FSMContext):
 
 async def choose_catalog(call: types.CallbackQuery, state: FSMContext):
     fsm_data = await state.get_data()
+    job_id = fsm_data.get('job_id')
     post_type = fsm_data.get('post_type')
     await call.answer()
     if call.data == 'back':
@@ -137,8 +138,14 @@ async def choose_catalog(call: types.CallbackQuery, state: FSMContext):
         await state.reset_state(with_data=False)
         await choose_or_self_media(call, state)
         return
+
     if call.data not in ('random_media', 'self_media', 'take_from_db', 'back_to_catalog'):
         await state.update_data(choose_catalog=call.data)
+        if job_id:
+            job = scheduler.get_job(job_id)
+            job_data = job.kwargs.get('data')
+            job_data['choose_catalog'] = call.data
+            job.modify(kwargs={'data': job_data})
     from handlers.client import FSMClient
 
     if post_type == 'now':

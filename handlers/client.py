@@ -35,6 +35,7 @@ locale.setlocale(locale.LC_ALL, 'uk_UA.utf8')
 
 
 class FSMClient(StatesGroup):
+    del_random_video_answer = State()
     skip_minutes_loop = State()
     signal_location = State()
     new_inline_link = State()
@@ -317,7 +318,7 @@ async def change_job(call: types.CallbackQuery, state: FSMContext):
 
         if job_id:
             kb_job = deepcopy(post_formatting_kb)
-            del kb_job.inline_keyboard[-1]
+            del kb_job.inline_keyboard[-1][0]
             kb_job.add(del_post_inline)
             await call.message.answer(
                 text='Налаштуйте оформлення посту', reply_markup=kb_job)
@@ -497,7 +498,7 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
         post_video_note = data.get('video_note')
         inline_kb = data.get('inline_kb')
         cat_name = data.get('choose_catalog')
-
+        print(cat_name)
         randomed_text_kb = InlineKeyboardMarkup()
         if inline_kb:
             for buttons in inline_kb.inline_keyboard:
@@ -515,7 +516,7 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
             add_random_media(media_files=post_media_files, data=data, cat_name=cat_name)
         await send_post_to_channel(post_media_files=post_media_files, post_text=post_text, post_voice=post_voice,
                                    channel_id=channel_id, post_video_note=post_video_note, bot_instance=bot,
-                                   inline_kb=randomed_text_kb)
+                                   inline_kb=randomed_text_kb, data=data)
         await call.message.delete()
         await call.message.answer(
             text=f'🚀 Повідомлення {post_text[:10]}... опубліковано у <a href="{chat_url}">{chat_title}</a>.',
@@ -611,9 +612,10 @@ async def load_media_answer(call: types.CallbackQuery, state: FSMContext):
             job = scheduler.get_job(fsm_data.get('job_id'))
             job_data = job.kwargs.get('data')
 
-            if any(job_data.get(key) for key in ('voice', 'loaded_post_files')):
+            if any(job_data.get(key) for key in ('voice', 'loaded_post_files', 'random_videos_number', 'random_gifs_number', 'random_photos_number')):
                 voice = job_data.get('voice')
                 loaded_post_files = job_data.get('loaded_post_files')
+                random_videos_number = job_data.get('random_videos_number')
                 if voice:
                     await FSMClient.del_voice_or_vnote_answer.set()
                     await call.message.answer_voice(voice=voice)
@@ -629,6 +631,10 @@ async def load_media_answer(call: types.CallbackQuery, state: FSMContext):
                             await call.message.answer_document(document=media.media[m].media, caption=m + 1)
                     await FSMClient.del_media_answer.set()
                     await call.message.answer(text='Надішліть номер медіа, яке хочете прибрати з посту:')
+                if random_videos_number:
+                    await FSMClient.del_random_video_answer.set()
+                    await call.message.answer(text='Бажаєте видалити рандомні медіа з посту?',
+                                              reply_markup=del_voice_kb)
             else:
                 await state.reset_state(with_data=False)
                 try:
@@ -728,7 +734,42 @@ async def del_voice_or_video_note(call: types.CallbackQuery, state: FSMContext):
                 reply_markup=post_formatting_kb)
         except:
             pass
+    else:
+        return
+    await state.reset_state(with_data=False)
 
+
+async def del_random_media(call: types.CallbackQuery, state: FSMContext):
+    await call.answer()
+    fsm_data = await state.get_data()
+    job_id = fsm_data.get('job_id')
+    if call.data == 'yes':
+        if job_id:
+            job = scheduler.get_job(job_id)
+            job_data = job.kwargs.get('data')
+            if 'choose_catalog' in job_data:
+                del job_data['choose_catalog']
+            if 'random_videos_number' in job_data:
+                del job_data['random_videos_number']
+            if 'random_photos_number' in job_data:
+                del job_data['random_photos_number']
+            job.modify(kwargs={'data': job_data})
+        else:
+            if 'choose_catalog' in fsm_data:
+                await state.update_data(choose_catalog=None)
+            if 'random_videos_number' in fsm_data:
+                await state.update_data(random_videos_number=None)
+            if 'random_photos_number' in fsm_data:
+                await state.update_data(random_photos_number=None)
+        await call.message.answer(text='✅ Рандом відео видалено.', reply_markup=post_formatting_kb)
+
+    elif call.data == 'no':
+        try:
+            await call.message.edit_text(
+                text='Налаштуйте оформлення посту.',
+                reply_markup=post_formatting_kb)
+        except:
+            pass
     else:
         return
     await state.reset_state(with_data=False)
@@ -940,6 +981,8 @@ async def number_of_random_photos(message, state: FSMContext):
 
 
 async def number_of_random_videos(message, state: FSMContext):
+    fsm_data = await state.get_data()
+    job_id = fsm_data.get('job_id')
     if isinstance(message, types.CallbackQuery):
         await FSMClient.random_or_self.set()
         try:
@@ -953,6 +996,12 @@ async def number_of_random_videos(message, state: FSMContext):
         return
     await state.update_data(random_videos_number=message.text)
     await state.update_data(random_gifs_number=None)
+    if job_id:
+        job = scheduler.get_job(job_id)
+        job_data = job.kwargs.get('data')
+        job_data['random_videos_number'] = message.text
+        job_data['random_gifs_number'] = None
+        job.modify(kwargs={'data': job_data})
 
     await show_post(message, state)
     await message.answer(text='Відео додано у рандомну вибірку.', reply_markup=post_formatting_kb)
@@ -1358,6 +1407,7 @@ def register_handlers_client(dp: Dispatcher):
 
     dp.register_callback_query_handler(enter_change_text, Text(equals='Змінити текст'), state='*')
     dp.register_callback_query_handler(del_voice_or_video_note, state=FSMClient.del_voice_or_vnote_answer)
+    dp.register_callback_query_handler(del_random_media, state=FSMClient.del_random_video_answer)
     dp.register_message_handler(del_media, state=FSMClient.del_media_answer)
     dp.register_callback_query_handler(del_media, state=FSMClient.del_media_answer)
 

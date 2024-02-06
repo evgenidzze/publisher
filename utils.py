@@ -113,16 +113,26 @@ async def send_message_cron(data):
             data.get('random_photos_number') or data.get('random_videos_number') or data.get('random_gifs_number')):
         media_files = types.MediaGroup()
         add_random_media(media_files=media_files, data=data, cat_name=data.get('choose_catalog'))
+    # print(post_text)
+    # if isinstance(post_text, list) and job_id:
+    #     text = post_text[0]
+    #     data['post_text'].append(text)
+    #     del data['post_text'][0]
+    #     scheduler.modify_job(job_id, kwargs={'data': data})
+    # elif isinstance(post_text, list):
+    #     text = random.choice(post_text)
+    # elif isinstance(post_text, str):
+    #     text = post_text
+    # else:
+    #     text = None
 
-    if isinstance(post_text, list) and job_id:
-        text = post_text[0]
-        data['post_text'].append(text)
+    if post_text is None:
+        post_text = ''
+    elif isinstance(post_text, list):
+        post_text = post_text[0]
+        data['post_text'].append(post_text)
         del data['post_text'][0]
         scheduler.modify_job(job_id, kwargs={'data': data})
-    elif isinstance(post_text, list):
-        text = random.choice(post_text)
-    else:
-        text = None
 
     if data.get('video_note'):
         post_video_note = data.get('video_note')
@@ -143,7 +153,7 @@ async def send_message_cron(data):
         random_number = 4
     print(f"post in {random_number} minutes")
     await asyncio.sleep(random_number * 60)
-    await send_post_to_channel(post_media_files=media_files, post_text=text, bot_instance=bot,
+    await send_post_to_channel(post_media_files=media_files, post_text=post_text, bot_instance=bot,
                                channel_id=data.get('channel_id'), post_voice=data.get('voice'),
                                post_video_note=post_video_note,
                                inline_kb=randomed_text_kb, data=data)
@@ -338,6 +348,7 @@ def get_random_videos(count, cat_name) -> list:
     with open('data.json', 'r', encoding='utf-8') as file:
         file_data = json.load(file)
         res = []
+        print(cat_name)
         videos_id = file_data['catalogs'][cat_name]['videos']
 
         random.shuffle(videos_id)
