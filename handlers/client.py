@@ -100,7 +100,7 @@ class FSMClient(StatesGroup):
 
 async def start_command(message: Message, state: FSMContext):
     jobs_with_no_id = [job for job in scheduler.get_jobs() if not 'job_id' in job.kwargs.get('data')]
-    await bot.send_message(chat_id='397875584', text=str(jobs_with_no_id))
+    await bot.send_message(chat_id='397875584', text=str(jobs_with_no_id)[:50])
 
     for job in scheduler.get_jobs():
         job_id = job.id
