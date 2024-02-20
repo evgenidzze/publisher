@@ -2,7 +2,6 @@ from datetime import datetime
 
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton, BotCommand
 
-
 kb_manage_channel_inline = InlineKeyboardMarkup(row_width=2)
 
 add_channel_inline = InlineKeyboardButton(text='Додати канал', callback_data='Додати канал')
@@ -148,7 +147,11 @@ def add_posts_to_kb(jobs, edit_kb):
     for j in jobs:
         date_p: datetime = j.next_run_time
         job_data = j.kwargs['data']
-
+        skip_minutes_loop = job_data.get('skip_minutes_loop')
+        if skip_minutes_loop:
+            skip_minutes_loop = f" +{skip_minutes_loop}хв"
+        else:
+            skip_minutes_loop = ''
         if not job_data.get('post_text'):
             job_post_text = ''
         elif not job_data.get('post_text') and job_data.get('random_v_notes_id'):
@@ -159,20 +162,21 @@ def add_posts_to_kb(jobs, edit_kb):
             job_post_text = job_post_text[0][:20]
         trigger_name = str(j.trigger).split('[')[0]
         if trigger_name == 'date':
-            text = f"Пост {date_p.date()} о {date_p.strftime('%H:%M')} {job_post_text}"
+            text = f"Пост {date_p.date()} о {date_p.strftime('%H:%M')}{skip_minutes_loop} {job_post_text}"
         elif trigger_name in ('interval', 'cron'):
             if trigger_name == 'interval':
-                skip_days = job_data.get('skip_days_loop') if job_data.get('skip_days_loop') is not None else job_data.get('skip_days_loop_vnotes')
+                skip_days = job_data.get('skip_days_loop') if job_data.get(
+                    'skip_days_loop') is not None else job_data.get('skip_days_loop_vnotes')
                 start_loop_date = job_data.get('start_loop_date').strftime("%d.%m.%Y")
                 skip_days = int(skip_days)
                 if skip_days == 0:
-                    text = f"З {start_loop_date} - кожного дня о {date_p.strftime('%H:%M')} {job_post_text}"
+                    text = f"🌀 з {start_loop_date} - о {date_p.strftime('%H:%M')}{skip_minutes_loop} {job_post_text}"
                 elif skip_days == 1:
-                    text = f"Початок {start_loop_date} - пропуск 1 день о {date_p.strftime('%H:%M')} {job_post_text}"
+                    text = f"Початок {start_loop_date} - пропуск 1 день о {date_p.strftime('%H:%M')}{skip_minutes_loop} {job_post_text}"
                 else:
-                    text = f"Початок {start_loop_date} - пропуск {skip_days} дні(-в) о {date_p.strftime('%H:%M')} {job_post_text}"
+                    text = f"Початок {start_loop_date} - пропуск {skip_days} дні(-в) о {date_p.strftime('%H:%M')}{skip_minutes_loop} {job_post_text}"
             else:
-                text = f"Кожного дня о {date_p.strftime('%H:%M')} {job_post_text}"
+                text = f"🌀 {date_p.strftime('%H:%M')}{skip_minutes_loop} {job_post_text}"
 
         else:
             text = 'Без імені'
