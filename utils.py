@@ -113,19 +113,6 @@ async def send_message_cron(data):
             data.get('random_photos_number') or data.get('random_videos_number') or data.get('random_gifs_number')):
         media_files = types.MediaGroup()
         add_random_media(media_files=media_files, data=data, cat_name=data.get('choose_catalog'))
-    # print(post_text)
-    # if isinstance(post_text, list) and job_id:
-    #     text = post_text[0]
-    #     data['post_text'].append(text)
-    #     del data['post_text'][0]
-    #     scheduler.modify_job(job_id, kwargs={'data': data})
-    # elif isinstance(post_text, list):
-    #     text = random.choice(post_text)
-    # elif isinstance(post_text, str):
-    #     text = post_text
-    # else:
-    #     text = None
-
     if post_text is None:
         post_text = ''
     elif isinstance(post_text, list):
@@ -263,7 +250,7 @@ async def send_post_to_channel(post_media_files: types.MediaGroup, post_text, bo
     elif post_video_note:
         await bot.send_video_note(chat_id=channel_id, video_note=post_video_note, reply_markup=inline_kb)
     else:
-        await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=inline_kb)
+        await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=inline_kb, disable_web_page_preview=True)
     logging.info(f'POST SENT; DATA: {data}')
 
 
