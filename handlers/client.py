@@ -376,7 +376,7 @@ async def load_changed_text(message, state: FSMContext):
     await show_post(message, state)
 
     await bot.send_message(chat_id=message.from_user.id, text='Налаштуйте оформлення посту.',
-                           reply_markup=post_formatting_kb)
+                           reply_markup=post_formatting_kb, parse_mode='Markdown')
     await state.reset_state(with_data=False)
 
 
@@ -498,7 +498,6 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
         post_video_note = data.get('video_note')
         inline_kb = data.get('inline_kb')
         cat_name = data.get('choose_catalog')
-        print(cat_name)
         randomed_text_kb = InlineKeyboardMarkup()
         if inline_kb:
             for buttons in inline_kb.inline_keyboard:
@@ -612,7 +611,8 @@ async def load_media_answer(call: types.CallbackQuery, state: FSMContext):
             job = scheduler.get_job(fsm_data.get('job_id'))
             job_data = job.kwargs.get('data')
 
-            if any(job_data.get(key) for key in ('voice', 'loaded_post_files', 'random_videos_number', 'random_gifs_number', 'random_photos_number')):
+            if any(job_data.get(key) for key in (
+            'voice', 'loaded_post_files', 'random_videos_number', 'random_gifs_number', 'random_photos_number')):
                 voice = job_data.get('voice')
                 loaded_post_files = job_data.get('loaded_post_files')
                 random_videos_number = job_data.get('random_videos_number')

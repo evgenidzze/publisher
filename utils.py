@@ -221,6 +221,7 @@ def set_caption(media, text):
                 media.media[m].caption = None
         else:
             media.media[m].caption = text
+            media.media[m].parse_mode = 'Markdown'
 
 
 async def send_post_to_channel(post_media_files: types.MediaGroup, post_text, bot_instance, channel_id, post_voice,
@@ -232,16 +233,16 @@ async def send_post_to_channel(post_media_files: types.MediaGroup, post_text, bo
             if post_media_files.media[0]['type'] == 'photo':
                 await bot.send_photo(chat_id=channel_id, photo=post_media_files.media[0]['media'],
                                      caption=post_text,
-                                     reply_markup=inline_kb)
+                                     reply_markup=inline_kb, parse_mode='Markdown')
             elif post_media_files.media[0]['type'] == 'video':
                 await bot.send_video(chat_id=channel_id, video=post_media_files.media[0]['media'],
                                      caption=post_text,
-                                     reply_markup=inline_kb)
+                                     reply_markup=inline_kb, parse_mode='Markdown')
             elif post_media_files.media[0]['type'] == 'document':
                 await bot.send_document(chat_id=channel_id,
                                         document=post_media_files.media[0]['media'],
                                         caption=post_text,
-                                        reply_markup=inline_kb)
+                                        reply_markup=inline_kb, parse_mode='Markdown')
         else:
             await bot.send_media_group(chat_id=channel_id, media=post_media_files)
     elif post_voice:
@@ -250,7 +251,8 @@ async def send_post_to_channel(post_media_files: types.MediaGroup, post_text, bo
     elif post_video_note:
         await bot.send_video_note(chat_id=channel_id, video_note=post_video_note, reply_markup=inline_kb)
     else:
-        await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=inline_kb, disable_web_page_preview=True)
+        await bot.send_message(chat_id=channel_id, text=post_text, reply_markup=inline_kb,
+                               disable_web_page_preview=True, parse_mode='Markdown')
     logging.info(f'POST SENT; DATA: {data}')
 
 
@@ -473,12 +475,14 @@ async def show_post(message, state: FSMContext):
         if len(post_media_files.media) == 1:
             m = post_media_files.media[0]
             if m.type == 'video':
-                await bot.send_video(chat_id=chat_id, video=m.media, caption=text, reply_markup=randomed_text_kb)
+                await bot.send_video(chat_id=chat_id, video=m.media, caption=text, reply_markup=randomed_text_kb,
+                                     parse_mode='Markdown')
             elif m.type == 'photo':
-                await bot.send_photo(chat_id=chat_id, photo=m.media, caption=text, reply_markup=randomed_text_kb)
+                await bot.send_photo(chat_id=chat_id, photo=m.media, caption=text, reply_markup=randomed_text_kb,
+                                     parse_mode='Markdown')
             elif m.type == 'document':
                 await bot.send_document(chat_id=chat_id, document=m.media, caption=text,
-                                        reply_markup=randomed_text_kb)
+                                        reply_markup=randomed_text_kb, parse_mode='Markdown')
         else:
             set_caption(text=text, media=post_media_files),
             await bot.send_media_group(chat_id=chat_id, media=post_media_files)
@@ -490,7 +494,7 @@ async def show_post(message, state: FSMContext):
         await bot.send_video_note(chat_id=chat_id, video_note=random.choice(random_v_notes_id),
                                   reply_markup=randomed_text_kb)
     elif text:
-        await bot.send_message(chat_id=chat_id, text=text, reply_markup=randomed_text_kb)
+        await bot.send_message(chat_id=chat_id, text=text, reply_markup=randomed_text_kb, parse_mode='Markdown')
 
 
 def job_list_by_channel(data, date: datetime.datetime):
