@@ -178,7 +178,7 @@ async def add_media_to_catalog(messages: List[types.Message], bot, catalog_name)
         json.dump(file_data, file, ensure_ascii=False, indent=4)
 
 
-def get_catalog(cat_name):
+async def get_catalog(cat_name):
     with open('data.json', 'r', encoding='utf-8') as file:
         file_data = json.load(file)
         catalog = file_data['catalogs'][cat_name]

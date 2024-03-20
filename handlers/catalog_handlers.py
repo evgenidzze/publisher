@@ -97,7 +97,7 @@ async def show_catalog_content(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     cat_name = call.data
 
-    catalog_data = get_catalog(cat_name)
+    catalog_data = await get_catalog(cat_name)
 
     if any(catalog_data.get(data) for data in catalog_data):
         await show_cat_content(message=call, catalog_data=catalog_data)
@@ -169,12 +169,12 @@ async def media_type_from_cat(call: types.CallbackQuery, state: FSMContext):
     if not cat_name:
         cat_name = call.data
     await state.update_data(catalog_for_post=cat_name)
-    catalog_data = get_catalog(cat_name)
+    catalog_data = await get_catalog(cat_name)
     catalog_data.pop('texts', None)
 
 
     if any(catalog_data.get(data) for data in catalog_data):
-        catalog = get_catalog(cat_name)
+        catalog = await get_catalog(cat_name)
         cat_data_types = [media_type for media_type in catalog if catalog.get(media_type)]
         kb = cat_types_kb(cat_data_types)
         kb.add(back_to_catalog)
@@ -210,7 +210,7 @@ async def choose_media_from_cat(call: types.CallbackQuery, state: FSMContext):
     if not cat_name:
         cat_name = fsm_data.get('choose_catalog')
 
-    catalog_data = get_catalog(cat_name)
+    catalog_data = await get_catalog(cat_name)
     await state.update_data(media_type_add_from_cat=call.data)
     await show_cat_content(message=call, catalog_data=catalog_data, media_type=call.data)
 
@@ -337,10 +337,10 @@ async def edit_cat(call: types.CallbackQuery, state: FSMContext):
         await state.reset_state(with_data=False)
         await FSMClient.loaded_catalog_file.set()
     elif message_data == 'del_cat_media':
-        catalog_data = get_catalog(cat_name)
+        catalog_data = await get_catalog(cat_name)
 
         if any(catalog_data.get(data) for data in catalog_data):
-            catalog = get_catalog(cat_name)
+            catalog = await get_catalog(cat_name)
             cat_data_types = [media_type for media_type in catalog if catalog.get(media_type)]
             kb = cat_types_kb(cat_data_types)
             await call.message.edit_text(text='Що бажаєте видалити?', reply_markup=kb)
@@ -386,7 +386,7 @@ async def catalog_remove_media_numder(call: types.CallbackQuery, state: FSMConte
     fsm_data = await state.get_data()
     cat_name = fsm_data.get('cat_name')
 
-    catalog_data = get_catalog(cat_name)
+    catalog_data = await get_catalog(cat_name)
     await state.update_data(catalog_media_type_remove=call.data)
     await show_cat_content(message=call, catalog_data=catalog_data, media_type=call.data)
 
@@ -403,7 +403,7 @@ async def remove_cat_media_by_number(message: types.Message, state: FSMContext):
     media_type = fsm_data.get('catalog_media_type_remove')
     try:
         remove_cat_media_json(cat_name, media_type, media_indexes)
-        catalog_data = get_catalog(cat_name)
+        catalog_data = await get_catalog(cat_name)
         await show_cat_content(message, catalog_data)
         await message.answer(text='Медіа видалено', reply_markup=base_manage_panel_kb)
         await state.reset_state(with_data=False)

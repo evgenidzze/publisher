@@ -8,11 +8,10 @@ import aiogram_timepicker
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.handler import CancelHandler
-from aiogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove
 
 from create_bot import bot, scheduler
-# from driver import wait_for_new_coef
-from json_functionality import get_all_channels, get_users_dict
+from json_functionality import get_all_channels, get_users_dict, get_catalog
 from aiogram.dispatcher.middlewares import BaseMiddleware
 import io
 from PIL import Image
@@ -72,54 +71,25 @@ def add_random_media(media_files, data, cat_name):
 
 async def send_message_time(data):
     channel_id = data.get('channel_id')
-    post_text = data.get('post_text')
-    media_files = data.get('loaded_post_files')
     voice = data.get('voice')
     video_note = data.get('video_note')
-    cat_name = data.get('choose_catalog')
     kb_inline = data.get('inline_kb')
-
-    randomed_text_kb = InlineKeyboardMarkup()
-    if kb_inline:
-        for buttons in kb_inline.inline_keyboard:
-            for button in buttons:
-                randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
-
-    if not media_files and (
-            data.get('random_photos_number') or data.get('random_videos_number') or data.get('random_gifs_number')):
-        media_files = types.MediaGroup()
-        add_random_media(media_files=media_files, data=data, cat_name=cat_name)
-    if isinstance(post_text, list):
-        post_text = random.choice(post_text)
+    post_text = await create_text(data)
+    kb = await create_kb(kb_inline)
+    media_files = await create_random_media(data)
     await send_post_to_channel(post_media_files=media_files, post_text=post_text, bot_instance=bot,
                                channel_id=channel_id,
                                post_voice=voice,
                                post_video_note=video_note,
-                               inline_kb=randomed_text_kb)
+                               inline_kb=kb)
 
 
 async def send_message_cron(data):
-    job_id = data.get('job_id')
-    post_text = data.get('post_text')
-    media_files: types.MediaGroup = data.get('loaded_post_files')
     kb_inline = data.get('inline_kb')
     skip_minutes_loop = data.get('skip_minutes_loop')
-    randomed_text_kb = InlineKeyboardMarkup()
-    if kb_inline:
-        for buttons in kb_inline.inline_keyboard:
-            for button in buttons:
-                randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
-    if not media_files and (
-            data.get('random_photos_number') or data.get('random_videos_number') or data.get('random_gifs_number')):
-        media_files = types.MediaGroup()
-        add_random_media(media_files=media_files, data=data, cat_name=data.get('choose_catalog'))
-    if post_text is None:
-        post_text = ''
-    elif isinstance(post_text, list):
-        post_text = post_text[0]
-        data['post_text'].append(post_text)
-        del data['post_text'][0]
-        scheduler.modify_job(job_id, kwargs={'data': data})
+    post_text = await create_text(data)
+    kb = await create_kb(kb_inline)
+    media_files = await create_random_media(data)
 
     if data.get('video_note'):
         post_video_note = data.get('video_note')
@@ -143,7 +113,21 @@ async def send_message_cron(data):
     await send_post_to_channel(post_media_files=media_files, post_text=post_text, bot_instance=bot,
                                channel_id=data.get('channel_id'), post_voice=data.get('voice'),
                                post_video_note=post_video_note,
-                               inline_kb=randomed_text_kb, data=data)
+                               inline_kb=kb, data=data)
+
+
+async def create_text(data):
+    post_text = '' if not data.get("post_text") else data.get('post_text')
+    text_index = data.get('text_index')
+    catalog_for_text = data.get('catalog_for_text')
+    if catalog_for_text:
+        texts = await get_catalog(catalog_for_text)
+        texts = texts.get('texts')
+        if text_index:
+            post_text = texts[int(text_index) - 1]
+        else:
+            post_text = random.choice(texts)
+    return post_text
 
 
 async def send_v_notes_cron(data):
@@ -525,3 +509,22 @@ async def paginate(kb: types.InlineKeyboardMarkup):
     page_btn = InlineKeyboardButton(text='1', callback_data='1')
     next_btn = InlineKeyboardButton(text='➡️', callback_data='+')
     kb.add(back_btn, page_btn, next_btn)
+
+
+async def create_kb(inline_kb):
+    kb = InlineKeyboardMarkup()
+    if inline_kb:
+        for buttons in inline_kb.inline_keyboard:
+            for button in buttons:
+                kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
+    return kb
+
+
+async def create_random_media(data):
+    cat_name = data.get('catalog_for_text')
+    media_files = data.get('loaded_post_files')
+    if not media_files and (
+            data.get('random_photos_number') or data.get('random_videos_number') or data.get('random_gifs_number')):
+        media_files = types.MediaGroup()
+        add_random_media(media_files=media_files, data=data, cat_name=cat_name)
+    return media_files

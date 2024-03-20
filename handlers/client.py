@@ -16,7 +16,8 @@ from create_bot import bot, scheduler
 from handlers.catalog_handlers import media_type_from_cat, media_base_panel
 from handlers.signals import pick_signal_location
 from utils import kb_channels, AuthMiddleware, send_voice_from_audio, restrict_media, set_caption, send_post_to_channel, \
-    pressed_back_button, add_random_media, sorting_key_jobs, show_post, job_list_by_channel, alert_vnote_text, paginate
+    pressed_back_button, add_random_media, sorting_key_jobs, show_post, job_list_by_channel, alert_vnote_text, paginate, \
+    create_text, create_kb, create_random_media
 from json_functionality import get_all_channels, save_channel_json, remove_channel_id_from_json, catalog_list_json, \
     get_catalog, get_video_notes_by_cat, get_texts_from_cat
 from keyboards.kb_client import (main_kb, kb_manage_channel_inline, cancel_kb, post_formatting_kb, add_channel_inline, \
@@ -398,7 +399,7 @@ async def pick_text(call: types.CallbackQuery, state: FSMContext):
     catalogs_kb.add(InlineKeyboardButton(text='« Назад', callback_data='Змінити текст'))
 
     if texts:
-        await state.update_data(texts_in_cat=texts)
+        await state.update_data(catalog_for_text=cat_name)
         for text_num in range(len(texts)):
             message = await call.message.answer(text=texts[text_num])
             await message.reply(text=str(text_num + 1))
@@ -421,9 +422,9 @@ async def load_random_text(call: types.CallbackQuery, state: FSMContext):
         if job_id:
             job = scheduler.get_job(job_id)
             job_data = job.kwargs.get('data')
-            job_data['post_text'] = texts
+            job_data['catalog_for_text'] = cat_name
         else:
-            await state.update_data(post_text=texts)
+            await state.update_data(catalog_for_text=cat_name)
     else:
         await call.message.edit_text('❌ У каталозі немає заготовлених текстів.', reply_markup=catalogs_kb)
         return
@@ -436,16 +437,16 @@ async def load_random_text(call: types.CallbackQuery, state: FSMContext):
 async def set_text_in_post_from_db(message: types.Message, state: FSMContext):
     data = await state.get_data()
     job_id = data.get('job_id')
-    texts = data.get('texts_in_cat')
+    catalog_for_text = data.get('catalog_for_text')
+    texts = await get_catalog(catalog_for_text)
+    texts = texts.get('texts')
     if message.text.isdigit() and int(message.text) <= len(texts):
-        picked_text = texts[int(message.text) - 1]
-
         if job_id:
             job = scheduler.get_job(job_id)
             job_data = job.kwargs.get('data')
-            job_data['post_text'] = picked_text
+            job_data['text_index'] = message.text
         else:
-            await state.update_data(post_text=picked_text)
+            await state.update_data(text_index=message.text)
         await show_post(message, state)
         await message.answer(text='Текст обрано.', reply_markup=post_formatting_kb)
         await state.reset_state(with_data=False)
@@ -486,36 +487,22 @@ async def make_post_now(call: types.CallbackQuery, state: FSMContext):
     if job_id:
         data = scheduler.get_job(job_id).kwargs['data']
     keys_to_check = ['post_text', 'loaded_post_files', 'voice', 'video_note', 'random_photos_number',
-                     'random_videos_number', 'random_gifs_number']
+                     'random_videos_number', 'random_gifs_number', 'text_index', 'catalog_for_text']
     if any(data.get(key) for key in keys_to_check):
         channel_id = data.get('channel_id')
         chat_info = await bot.get_chat(chat_id=channel_id)
         chat_title = chat_info.title
         chat_url = await chat_info.get_url()
-        post_text = data.get("post_text")
-        post_media_files = data.get('loaded_post_files')
         post_voice = data.get('voice')
         post_video_note = data.get('video_note')
         inline_kb = data.get('inline_kb')
-        cat_name = data.get('choose_catalog')
-        randomed_text_kb = InlineKeyboardMarkup()
-        if inline_kb:
-            for buttons in inline_kb.inline_keyboard:
-                for button in buttons:
-                    randomed_text_kb.add(InlineKeyboardButton(text=random.choice(button.text), url=button.url))
+        post_text = await create_text(data)
+        kb = await create_kb(inline_kb)
+        post_media_files = await create_random_media(data)
 
-        if post_text is None:
-            post_text = ''
-        elif isinstance(post_text, list):
-            post_text = random.choice(post_text)
-
-        if not post_media_files and (
-                data.get('random_photos_number') or data.get('random_videos_number') or data.get('random_gifs_number')):
-            post_media_files = types.MediaGroup()
-            add_random_media(media_files=post_media_files, data=data, cat_name=cat_name)
         await send_post_to_channel(post_media_files=post_media_files, post_text=post_text, post_voice=post_voice,
                                    channel_id=channel_id, post_video_note=post_video_note, bot_instance=bot,
-                                   inline_kb=randomed_text_kb, data=data)
+                                   inline_kb=kb, data=data)
         await call.message.delete()
         await call.message.answer(
             text=f'🚀 Повідомлення {post_text[:10]}... опубліковано у <a href="{chat_url}">{chat_title}</a>.',
@@ -612,7 +599,8 @@ async def load_media_answer(call: types.CallbackQuery, state: FSMContext):
             job_data = job.kwargs.get('data')
 
             if any(job_data.get(key) for key in (
-            'voice', 'loaded_post_files', 'random_videos_number', 'random_gifs_number', 'random_photos_number')):
+                    'voice', 'loaded_post_files', 'random_videos_number', 'random_gifs_number',
+                    'random_photos_number')):
                 voice = job_data.get('voice')
                 loaded_post_files = job_data.get('loaded_post_files')
                 random_videos_number = job_data.get('random_videos_number')
@@ -875,7 +863,7 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     fsm_data = await state.get_data()
     cat_name = fsm_data.get('choose_catalog')
-    cat_data = get_catalog(cat_name)
+    cat_data = await get_catalog(cat_name)
     message_data = call.data
     media_len = 0
     existing_random_v_notes_id: list = fsm_data.get('random_v_notes_id')
@@ -967,7 +955,7 @@ async def number_of_random_photos(message, state: FSMContext):
                 job.modify(kwargs={'data': data})
             else:
                 await state.update_data(loaded_post_files=None)
-        cat_data = get_catalog(cat_name)
+        cat_data = await get_catalog(cat_name)
         await state.update_data(random_photos_number=message.text)
         await state.update_data(random_gifs_number=None)
         await message.answer(text='Фото додано у рандомну вибірку.')

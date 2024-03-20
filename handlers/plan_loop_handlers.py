@@ -24,7 +24,7 @@ async def plan_menu(call: types.CallbackQuery, state: FSMContext):
     await state.reset_state(with_data=False)
     fsm_data = await state.get_data()
     keys_to_check = ['post_text', 'loaded_post_files', 'voice', 'video_note', 'random_photos_number',
-                     'random_videos_number', 'random_v_notes_id', 'random_gifs_number']
+                     'random_videos_number', 'random_gifs_number', 'text_index', 'catalog_for_text']
     job_id = fsm_data.get('job_id')
     if job_id:
         job = scheduler.get_job(job_id)
@@ -150,6 +150,7 @@ async def full_picker_handler(callback_query: types.CallbackQuery, callback_data
         if s == 'FSMClient:time_planning':
             await state.update_data(time_planning=r.time)
             data = await state.get_data()
+            print(data)
             selected_time: time = data.get("time_planning")
             selected_date: datetime = data.get("date_planning")
             selected_date = selected_date.replace(hour=selected_time.hour, minute=selected_time.minute)
