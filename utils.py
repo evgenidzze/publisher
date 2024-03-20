@@ -522,6 +522,9 @@ async def create_kb(inline_kb):
 
 async def create_random_media(data):
     cat_name = data.get('catalog_for_text')
+    if not cat_name:
+        cat_name = data.get('choose_catalog')
+
     media_files = data.get('loaded_post_files')
     if not media_files and (
             data.get('random_photos_number') or data.get('random_videos_number') or data.get('random_gifs_number')):
