@@ -127,6 +127,8 @@ async def create_text(data):
             post_text = texts[int(text_index) - 1]
         else:
             post_text = random.choice(texts)
+    elif isinstance(post_text, list):
+        post_text = random.choice(post_text)
     return post_text
 
 
