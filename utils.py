@@ -445,9 +445,14 @@ async def show_post(message, state: FSMContext):
     video_note = data.get('video_note')
     random_v_notes_id = data.get('random_v_notes_id')
     chat_id = message.from_user.id
-    text = data.get('post_text')
+    text = data.get('post_text') if data.get('post_text') else ''
     if isinstance(text, list):
         text = '"Текст буде обраний рандомно."'
+        if data.get('cat_name'):
+            text += f"Назва каталогу: \n\n{data.get('cat_name')}"
+    if data.get('catalog_for_text'):
+        text += f"\n\nНазва каталогу: {data.get('catalog_for_text')}"
+
     if job_id:
         if scheduler.get_job(job_id).name == 'send_message_cron':
             text = (f"{text}\n"
