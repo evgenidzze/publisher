@@ -11,9 +11,8 @@ from create_bot import bot, scheduler
 from json_functionality import add_media_to_catalog, catalog_list_json, cat_name_exist, save_cat_json, get_catalog, \
     get_media_from_base, remove_cat_media_json, delete_catalog_json, change_cat_name
 from keyboards.kb_client import base_manage_panel_kb, back_kb, self_or_random_kb, post_formatting_kb, \
-    change_create_post_kb, cat_types_kb, back, cancel_sending_media_kb, back_to_catalog, edit_catalog_kb, \
-    create_catalogs_kb
-from utils import pressed_back_button, show_cat_content, restrict_media, set_caption, show_post
+    change_create_post_kb, cat_types_kb, back, cancel_sending_media_kb, back_to_catalog, edit_catalog_kb
+from utils import pressed_back_button, show_cat_content, restrict_media, set_caption, show_post, catalog_paginate
 
 
 async def media_base_panel(message, state: FSMContext):
@@ -48,12 +47,12 @@ async def load_media_for_catalog(messages: List[types.Message], state: FSMContex
     await messages[0].answer(text=f'Медіа додано у каталог "{cat_name}"', reply_markup=edit_catalog_kb)
 
 
-async def catalog_list(call: types.CallbackQuery):
+async def catalog_list(call: types.CallbackQuery, state: FSMContext):
     from handlers.client import FSMClient
     await call.answer()
     catalogs = catalog_list_json()
     if catalogs:
-        catalogs_kb = create_catalogs_kb()
+        catalogs_kb = await catalog_paginate(state)
         await FSMClient.show_catalog.set()
         await call.message.answer(text='Оберіть каталог, щоб подивитись зміст:', reply_markup=catalogs_kb)
     else:
@@ -95,6 +94,20 @@ async def load_cat_name(message, state: FSMContext):
 
 async def show_catalog_content(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
+    data = await state.get_data()
+    if call.data in ('+', "-"):
+        page_num = data.get('page_num')
+        if page_num and call.data == '+':
+            await state.update_data(page_num=page_num + 1)
+        elif page_num and call.data == '-' and page_num > 1:
+            await state.update_data(page_num=page_num - 1)
+        elif not page_num:
+            await state.update_data(page_num=1)
+        await catalog_list(call, state)
+        return
+    elif call.data == 'back_to_base_menu':
+        await media_base_panel(call, state)
+        return
     cat_name = call.data
 
     catalog_data = await get_catalog(cat_name)
@@ -117,8 +130,7 @@ async def edit_catalog_list(call: types.CallbackQuery, state: FSMContext):
     catalogs = catalog_list_json()
 
     if catalogs:
-        catalogs_kb = create_catalogs_kb()
-        catalogs_kb.add(InlineKeyboardButton(text='« Назад', callback_data='back_to_base_menu'))
+        catalogs_kb = await catalog_paginate(state)
         await FSMClient.edit_catalog.set()
         await call.message.edit_text(text='Оберіть каталог, який хочете редагувати: ', reply_markup=catalogs_kb)
     else:
@@ -172,7 +184,6 @@ async def media_type_from_cat(call: types.CallbackQuery, state: FSMContext):
     catalog_data = await get_catalog(cat_name)
     catalog_data.pop('texts', None)
 
-
     if any(catalog_data.get(data) for data in catalog_data):
         catalog = await get_catalog(cat_name)
         cat_data_types = [media_type for media_type in catalog if catalog.get(media_type)]
@@ -187,7 +198,7 @@ async def media_type_from_cat(call: types.CallbackQuery, state: FSMContext):
         try:
             catalogs = catalog_list_json()
             if catalogs:
-                catalogs_kb = create_catalogs_kb()
+                catalogs_kb = await catalog_paginate(state)
                 catalogs_kb.add(back)
                 await FSMClient.choose_catalog.set()
             await call.message.edit_text(text='У каталозі немає медіа.', reply_markup=catalogs_kb)
@@ -391,7 +402,8 @@ async def catalog_remove_media_numder(call: types.CallbackQuery, state: FSMConte
     await show_cat_content(message=call, catalog_data=catalog_data, media_type=call.data)
 
     await call.message.answer(text='Надішліть номер медіа, яке бажаєте видалити:\n'
-                                   '<i>Якщо потрібно видалити кілька медіа, введіть номери через пробіл.</i>', parse_mode='html')
+                                   '<i>Якщо потрібно видалити кілька медіа, введіть номери через пробіл.</i>',
+                              parse_mode='html')
 
     await FSMClient.del_cat_media_number.set()
 
@@ -411,11 +423,11 @@ async def remove_cat_media_by_number(message: types.Message, state: FSMContext):
         await message.answer(text='Введіть коректний номер:')
 
 
-async def delete_catalog_list(call: types.CallbackQuery):
+async def delete_catalog_list(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     catalogs = catalog_list_json()
     if catalogs:
-        catalogs_kb = create_catalogs_kb()
+        catalogs_kb = await catalog_paginate(state)
         await call.message.edit_text(text='🗑 Оберіть каталог, який хочете видалити:\n'
                                           '<i>Всі медіа у каталозі буде видалено.</i>', parse_mode='html',
                                      reply_markup=catalogs_kb)

@@ -16,8 +16,8 @@ from create_bot import bot, scheduler
 from handlers.catalog_handlers import media_type_from_cat, media_base_panel
 from handlers.signals import pick_signal_location
 from utils import kb_channels, AuthMiddleware, send_voice_from_audio, restrict_media, set_caption, send_post_to_channel, \
-    pressed_back_button, add_random_media, sorting_key_jobs, show_post, job_list_by_channel, alert_vnote_text, paginate, \
-    create_text, create_kb, create_random_media
+    pressed_back_button, sorting_key_jobs, show_post, job_list_by_channel, alert_vnote_text, paginate, \
+    create_text, create_kb, create_random_media, catalog_paginate
 from json_functionality import get_all_channels, save_channel_json, remove_channel_id_from_json, catalog_list_json, \
     get_catalog, get_video_notes_by_cat, get_texts_from_cat
 from keyboards.kb_client import (main_kb, kb_manage_channel_inline, cancel_kb, post_formatting_kb, add_channel_inline, \
@@ -26,8 +26,7 @@ from keyboards.kb_client import (main_kb, kb_manage_channel_inline, cancel_kb, p
                                  media_kb, inlines_menu_kb, back, self_or_random_kb, del_post_inline, back_to_main_menu,
                                  back_edit_post_inline, \
                                  change_create_post_kb, create_post_inline, back_to_my_posts_inline,
-                                 back_to_media_settings, my_posts_inline,
-                                 create_catalogs_kb, back_to_inlines)
+                                 back_to_media_settings, my_posts_inline, back_to_inlines)
 from aiogram_calendar import simple_cal_callback
 import random
 import numpy as np
@@ -382,7 +381,7 @@ async def load_changed_text(message, state: FSMContext):
 
 
 async def pick_text_catalog(call: types.CallbackQuery, state: FSMContext):
-    catalogs_kb = create_catalogs_kb()
+    catalogs_kb = await catalog_paginate(state)
     catalogs_kb.add(InlineKeyboardButton(text='« Назад', callback_data='Змінити текст'))
     await call.message.edit_text(text='Оберіть каталог, з якого бажаєте додати текст:', reply_markup=catalogs_kb)
     if call.data == 'pick_text_from_db':
@@ -395,7 +394,7 @@ async def pick_text(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     cat_name = call.data
     texts = get_texts_from_cat(cat_name)
-    catalogs_kb = create_catalogs_kb()
+    catalogs_kb = await catalog_paginate(state)
     catalogs_kb.add(InlineKeyboardButton(text='« Назад', callback_data='Змінити текст'))
 
     if texts:
@@ -415,7 +414,7 @@ async def load_random_text(call: types.CallbackQuery, state: FSMContext):
     job_id = data.get('job_id')
     cat_name = call.data
     texts = get_texts_from_cat(cat_name)
-    catalogs_kb = create_catalogs_kb()
+    catalogs_kb = await catalog_paginate(state)
     catalogs_kb.add(InlineKeyboardButton(text='« Назад', callback_data='Змінити текст'))
 
     if texts:
@@ -534,7 +533,7 @@ async def load_media_answer(call: types.CallbackQuery, state: FSMContext):
         await formatting_main_menu(call, state)
     elif data in 'take_from_db':
         catalogs = catalog_list_json()
-        catalogs_kb = create_catalogs_kb()
+        catalogs_kb = await catalog_paginate(state)
         if catalogs:
             catalogs_kb.add(back)
             await FSMClient.choose_catalog.set()
@@ -870,7 +869,7 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
 
     if message_data == 'back':
         catalogs = catalog_list_json()
-        catalogs_kb = create_catalogs_kb()
+        catalogs_kb = await catalog_paginate(state)
         if catalogs:
             catalogs_kb.add(back)
             await FSMClient.choose_catalog.set()

@@ -17,6 +17,7 @@ import io
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
+from keyboards.kb_client import create_catalogs_kb
 
 aiogram_timepicker.panel.full._default['select'] = 'Обрати'
 aiogram_timepicker.panel.full._default['cancel'] = 'Скасувати'
@@ -538,3 +539,20 @@ async def create_random_media(data):
         media_files = types.MediaGroup()
         add_random_media(media_files=media_files, data=data, cat_name=cat_name)
     return media_files
+
+
+async def get_create_page_num(data, state):
+    if not data.get('page_num'):
+        await state.update_data(page_num=1)
+
+
+async def catalog_paginate(state):
+    data = await state.get_data()
+    await get_create_page_num(data, state)
+    data = await state.get_data()
+    page_num = data.get('page_num')
+    catalogs_kb = create_catalogs_kb(page_num)
+    await paginate(catalogs_kb)
+    catalogs_kb.inline_keyboard[-1][-2].text = page_num
+    catalogs_kb.add(InlineKeyboardButton(text='« Назад', callback_data='back_to_base_menu'))
+    return catalogs_kb

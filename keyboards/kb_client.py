@@ -196,9 +196,11 @@ def cat_types_kb(cat_data_types):
     return kb
 
 
-def create_catalogs_kb():
+def create_catalogs_kb(page=None):
     catalogs_kb = InlineKeyboardMarkup()
     from json_functionality import catalog_list_json
-    for cat in catalog_list_json():
-        catalogs_kb.add(InlineKeyboardButton(text=cat, callback_data=cat))
+    catalogs: dict = catalog_list_json()
+    catalog_by_page = list(catalogs)[page-1:30*page]
+    for cat_name in catalog_by_page:
+        catalogs_kb.add(InlineKeyboardButton(text=cat_name, callback_data=cat_name))
     return catalogs_kb
