@@ -319,7 +319,18 @@ async def what_to_edit_cat(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
 
     message_data = call.data
-    if message_data == 'back_to_base_menu':
+    if message_data in ('+', "-"):
+        data = await state.get_data()
+        page_num = data.get('page_num')
+        if page_num and call.data == '+':
+            await state.update_data(page_num=page_num + 1)
+        elif page_num and call.data == '-' and page_num > 1:
+            await state.update_data(page_num=page_num - 1)
+        elif not page_num:
+            await state.update_data(page_num=1)
+        await catalog_list(call, state)
+        return
+    elif message_data == 'back_to_base_menu':
         await media_base_panel(call, state)
         return
     await state.update_data(cat_name=message_data)
