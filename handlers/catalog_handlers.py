@@ -11,7 +11,8 @@ from create_bot import bot, scheduler
 from json_functionality import add_media_to_catalog, catalog_list_json, cat_name_exist, save_cat_json, get_catalog, \
     get_media_from_base, remove_cat_media_json, delete_catalog_json, change_cat_name
 from keyboards.kb_client import base_manage_panel_kb, back_kb, self_or_random_kb, post_formatting_kb, \
-    change_create_post_kb, cat_types_kb, back, cancel_sending_media_kb, back_to_catalog, edit_catalog_kb
+    change_create_post_kb, cat_types_kb, back, cancel_sending_media_kb, back_to_catalog, edit_catalog_kb, \
+    back_to_base_menu_btn
 from utils import pressed_back_button, show_cat_content, restrict_media, set_caption, show_post, catalog_paginate
 
 
@@ -53,6 +54,7 @@ async def catalog_list(call: types.CallbackQuery, state: FSMContext):
     catalogs = catalog_list_json()
     if catalogs:
         catalogs_kb = await catalog_paginate(state)
+        catalogs_kb.add(back_to_base_menu_btn)
         await FSMClient.show_catalog.set()
         await call.message.answer(text='Оберіть каталог, щоб подивитись зміст:', reply_markup=catalogs_kb)
     else:
@@ -131,6 +133,7 @@ async def edit_catalog_list(call: types.CallbackQuery, state: FSMContext):
 
     if catalogs:
         catalogs_kb = await catalog_paginate(state)
+        catalogs_kb.add(back_to_base_menu_btn)
         await FSMClient.edit_catalog.set()
         await call.message.edit_text(text='Оберіть каталог, який хочете редагувати: ', reply_markup=catalogs_kb)
     else:

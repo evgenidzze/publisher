@@ -392,6 +392,17 @@ async def pick_text_catalog(call: types.CallbackQuery, state: FSMContext):
 
 async def pick_text(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
+    data = await state.get_data()
+    if call.data in ('+', "-"):
+        page_num = data.get('page_num')
+        if page_num and call.data == '+':
+            await state.update_data(page_num=page_num + 1)
+        elif page_num and call.data == '-' and page_num > 1:
+            await state.update_data(page_num=page_num - 1)
+        elif not page_num:
+            await state.update_data(page_num=1)
+        await pick_text_catalog(call, state)
+        return
     cat_name = call.data
     texts = get_texts_from_cat(cat_name)
     catalogs_kb = await catalog_paginate(state)
@@ -411,6 +422,16 @@ async def pick_text(call: types.CallbackQuery, state: FSMContext):
 async def load_random_text(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     data = await state.get_data()
+    if call.data in ('+', "-"):
+        page_num = data.get('page_num')
+        if page_num and call.data == '+':
+            await state.update_data(page_num=page_num + 1)
+        elif page_num and call.data == '-' and page_num > 1:
+            await state.update_data(page_num=page_num - 1)
+        elif not page_num:
+            await state.update_data(page_num=1)
+        await pick_text_catalog(call, state)
+        return
     job_id = data.get('job_id')
     cat_name = call.data
     texts = get_texts_from_cat(cat_name)

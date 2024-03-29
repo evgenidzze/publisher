@@ -96,10 +96,11 @@ del_voice_kb = InlineKeyboardMarkup()
 del_voice_kb.add(InlineKeyboardButton(text='Так', callback_data='yes'))
 del_voice_kb.add(InlineKeyboardButton(text='Ні', callback_data='no'))
 
+back_to_base_menu_btn = InlineKeyboardButton(text='« Назад', callback_data='back_to_base_menu')
 edit_catalog_kb = InlineKeyboardMarkup(row_width=2)
 edit_catalog_kb.add(InlineKeyboardButton(text='Додати медіа', callback_data='add_cat_media'),
                     InlineKeyboardButton(text='Змінити назву', callback_data='change_cat_name'),
-                    InlineKeyboardButton(text='« Назад', callback_data='back_to_base_menu'),
+                    back_to_base_menu_btn,
                     InlineKeyboardButton(text='Видалити медіа', callback_data='del_cat_media'),
 
                     )

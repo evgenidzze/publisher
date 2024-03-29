@@ -554,5 +554,4 @@ async def catalog_paginate(state):
     catalogs_kb = create_catalogs_kb(page_num)
     await paginate(catalogs_kb)
     catalogs_kb.inline_keyboard[-1][-2].text = page_num
-    catalogs_kb.add(InlineKeyboardButton(text='« Назад', callback_data='back_to_base_menu'))
     return catalogs_kb
