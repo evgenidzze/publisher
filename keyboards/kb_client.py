@@ -144,7 +144,7 @@ back_to_media_variant = InlineKeyboardButton(text='Відміна', callback_dat
 random_v_note_kb.add(save_added_v_notes, back_to_media_variant)
 
 
-def add_posts_to_kb(jobs, edit_kb):
+async def add_posts_to_kb(jobs, edit_kb):
     for j in jobs:
         date_p: datetime = j.next_run_time
         job_data = j.kwargs['data']
@@ -190,18 +190,18 @@ media_types = {"videos": video_type, "photos": photo_type, "gifs": animation_typ
                "documents": document_type, 'video_notes': v_note_type, 'texts': text_type}
 
 
-def cat_types_kb(cat_data_types):
+async def cat_types_kb(cat_data_types):
     kb = InlineKeyboardMarkup()
     for data_type in cat_data_types:
         kb.add(media_types[data_type])
     return kb
 
 
-def create_catalogs_kb(page=None):
+async def create_catalogs_kb(page=None):
     catalogs_kb = InlineKeyboardMarkup()
     from json_functionality import catalog_list_json
     catalogs: dict = catalog_list_json()
-    catalog_by_page = list(catalogs)[page-1:30*page]
+    catalog_by_page = list(catalogs)[(page-1)*30:30*page]
     for cat_name in catalog_by_page:
         catalogs_kb.add(InlineKeyboardButton(text=cat_name, callback_data=cat_name))
     return catalogs_kb

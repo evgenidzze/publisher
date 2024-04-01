@@ -551,7 +551,7 @@ async def catalog_paginate(state):
     await get_create_page_num(data, state)
     data = await state.get_data()
     page_num = data.get('page_num')
-    catalogs_kb = create_catalogs_kb(page_num)
+    catalogs_kb = await create_catalogs_kb(page_num)
     await paginate(catalogs_kb)
     catalogs_kb.inline_keyboard[-1][-2].text = page_num
     return catalogs_kb

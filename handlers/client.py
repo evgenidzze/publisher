@@ -275,7 +275,7 @@ async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
         await state.update_data(page_num=page_num)
     posts = list(post_chunks[page_num - 1])
     if posts:
-        add_posts_to_kb(jobs=posts, edit_kb=edit_kb)
+        await add_posts_to_kb(jobs=posts, edit_kb=edit_kb)
         edit_kb.add(back_edit_post_inline)
         await paginate(edit_kb)
         edit_kb.inline_keyboard[-1][-2].text = page_num
