@@ -144,6 +144,7 @@ async def edit_catalog_list(call: types.CallbackQuery, state: FSMContext):
 
 
 async def choose_catalog(call: types.CallbackQuery, state: FSMContext):
+    print(call)
     fsm_data = await state.get_data()
     job_id = fsm_data.get('job_id')
     post_type = fsm_data.get('post_type')
@@ -153,8 +154,20 @@ async def choose_catalog(call: types.CallbackQuery, state: FSMContext):
         await state.reset_state(with_data=False)
         await choose_or_self_media(call, state)
         return
-
-    if call.data not in ('random_media', 'self_media', 'take_from_db', 'back_to_catalog'):
+    elif call.data in ('+', "-"):
+        page_num = fsm_data.get('page_num')
+        print(page_num)
+        if page_num and call.data == '+':
+            await state.update_data(page_num=page_num + 1)
+        elif page_num and call.data == '-' and page_num > 1:
+            await state.update_data(page_num=page_num - 1)
+        elif not page_num:
+            await state.update_data(page_num=1)
+        from handlers.client import load_media_answer
+        call.data = 'take_from_db'
+        await load_media_answer(call, state)
+        return
+    elif call.data not in ('random_media', 'self_media', 'take_from_db', 'back_to_catalog'):
         await state.update_data(choose_catalog=call.data)
         if job_id:
             job = scheduler.get_job(job_id)

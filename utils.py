@@ -448,11 +448,14 @@ async def show_post(message, state: FSMContext):
     chat_id = message.from_user.id
     text = data.get('post_text') if data.get('post_text') else ''
     if isinstance(text, list) or data.get('catalog_for_text'):
-        text = 'Текст буде обраний рандомно.'
-        if data.get('cat_name'):
-            text += f"Назва каталогу: \n\n{data.get('cat_name')}"
-        elif data.get('catalog_for_text'):
-            text += f"\n\nНазва каталогу: {data.get('catalog_for_text')}"
+        if data.get('text_index'):
+            text = await create_text(data)
+        else:
+            text = 'Текст буде обраний рандомно.'
+            if data.get('cat_name'):
+                text += f"Назва каталогу: \n\n{data.get('cat_name')}"
+            elif data.get('catalog_for_text'):
+                text += f"\n\nНазва каталогу: {data.get('catalog_for_text')}"
 
     if job_id:
         if scheduler.get_job(job_id).name == 'send_message_cron':

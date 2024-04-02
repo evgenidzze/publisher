@@ -465,8 +465,11 @@ async def set_text_in_post_from_db(message: types.Message, state: FSMContext):
             job = scheduler.get_job(job_id)
             job_data = job.kwargs.get('data')
             job_data['text_index'] = message.text
+            job_data['catalog_for_text'] = catalog_for_text
+            job.modify(kwargs={'data': job_data})
         else:
             await state.update_data(text_index=message.text)
+            await state.update_data(post_text=None)
         await show_post(message, state)
         await message.answer(text='Текст обрано.', reply_markup=post_formatting_kb)
         await state.reset_state(with_data=False)
