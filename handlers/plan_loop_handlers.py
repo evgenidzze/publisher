@@ -132,12 +132,14 @@ async def full_picker_handler(callback_query: types.CallbackQuery, callback_data
             selected_date_str = data.get("date_planning").strftime("%d/%m/%Y")
 
             if job_id:
-                job.remove()
-                scheduler.add_job(send_message_time, trigger='date', run_date=selected_date,
-                                  kwargs={'data': data})
+                scheduler.reschedule_job(job_id, trigger='date', run_date=selected_date)
+                # job_data = scheduler.get_job(job_id).kwargs.get('data')
+                # scheduler.modify_job(job_id, kwargs={'data': data})
                 await callback_query.message.answer(
                     f'Планування змінено на {selected_time_str} - {selected_date_str}',
                     reply_markup=post_formatting_kb)
+                logging.info(f'POST RE-PLANNED {scheduler.get_job(job_id).kwargs.get("data")}')
+
             else:
                 await callback_query.message.answer(
                     f'Публікацію заплановано на {selected_time_str} - {selected_date_str}',
@@ -146,8 +148,9 @@ async def full_picker_handler(callback_query: types.CallbackQuery, callback_data
                 await callback_query.message.delete_reply_markup()
                 scheduler.add_job(send_message_time, trigger='date', run_date=selected_date,
                                   kwargs={'data': data})
+                logging.info(f'POST PLANNED {data}')
+
             await state.reset_state(with_data=False)
-            logging.info(f'POST PLANNED {data}')
 
         elif s == 'FSMClient:time_loop':
             if job_id:
@@ -221,14 +224,13 @@ async def load_skip_days_add_job(message, state: FSMContext):
 
             if job_id:
                 new_date: datetime = data.get('start_loop_date').replace(hour=time_loop.hour, minute=time_loop.minute)
-
-                job.reschedule(trigger='interval', days=int(days_skip) + 1, start_date=str(new_date))
+                scheduler.reschedule_job(job_id, trigger='interval', days=int(days_skip) + 1, start_date=str(new_date))
                 if days_skip == 0:
                     text = f'Змінено: публікація щодня в діапазоні {first_time} - {second_time}'
                 else:
                     text = f'Змінено: публікація з проміжком в {days_skip} дні(-в) в діапазоні {first_time} - {second_time}'
                 await message.answer(text, reply_markup=change_create_post_kb)
-                logging.info(f'POST RE-PLANNED {data}')
+                logging.info(f'POST RE-LOOPED {data}')
 
             else:
                 data = await state.get_data()
@@ -239,10 +241,10 @@ async def load_skip_days_add_job(message, state: FSMContext):
                 new_date: datetime = data.get('start_loop_date').replace(hour=time_loop.hour, minute=time_loop.minute)
                 await message.answer(text, reply_markup=change_create_post_kb)
                 add_job = scheduler.add_job(send_message_cron, trigger='interval', days=int(days_skip) + 1,
-                                  start_date=str(new_date), kwargs={'data': data})
+                                            start_date=str(new_date), kwargs={'data': data})
                 data['job_id'] = add_job.id
                 scheduler.modify_job(add_job.id, kwargs={'data': data})
-                logging.info(f'POST PLANNED {data}')
+                logging.info(f'POST LOOPED {data}')
 
 
         else:

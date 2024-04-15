@@ -461,11 +461,6 @@ async def set_text_in_post_from_db(message: types.Message, state: FSMContext):
 
 
 async def formatting_main_menu(message, state: FSMContext):
-    data = await state.get_data()
-    job_id = data.get('job_id')
-    if job_id:
-        job = scheduler.get_job(job_id)
-        data = job.kwargs.get('data')
     if isinstance(message, types.CallbackQuery):
         await message.answer()
         if message.data in ('back', 'formatting_main_menu'):
