@@ -46,11 +46,8 @@ async def create_signal_choose_channel(call: types.CallbackQuery, state: FSMCont
         kb.add(back_to_signal_panel_inline)
         from handlers.client import FSMClient
         await FSMClient.signal_channel_id.set()
-        # try:
         await call.message.edit_text(text='Оберіть канал, у якому бажаєте створити групу сигналів:',
                                      reply_markup=kb)
-        # except:
-        #     pass
     else:
         add_channel_kb = InlineKeyboardMarkup().add(add_channel_inline)
         await call.message.edit_text(text='У вас немає підключених каналів.', reply_markup=add_channel_kb)

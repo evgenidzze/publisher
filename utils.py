@@ -558,3 +558,13 @@ async def catalog_paginate(state):
     await paginate(catalogs_kb)
     catalogs_kb.inline_keyboard[-1][-2].text = page_num
     return catalogs_kb
+
+
+async def update_page_num(data, call, state):
+    page_num = data.get('page_num')
+    if page_num and call.data == '+':
+        await state.update_data(page_num=page_num + 1)
+    elif page_num and call.data == '-' and page_num > 1:
+        await state.update_data(page_num=page_num - 1)
+    elif not page_num:
+        await state.update_data(page_num=1)

@@ -14,7 +14,7 @@ from aiogram_calendar import SimpleCalendar
 from create_bot import scheduler
 from aiogram_timepicker.panel import FullTimePicker, full_timep_callback
 
-from handlers.client import number_of_random_videos, number_of_random_photos, FSMClient
+from handlers.client import number_of_random_videos, FSMClient
 from keyboards.kb_client import post_formatting_kb, change_create_post_kb, media_kb, \
     plan_menu_kb, back_to_plan_menu, back
 from utils import send_message_time, send_message_cron, send_v_notes_cron
@@ -53,25 +53,6 @@ async def plan_menu(call: types.CallbackQuery, state: FSMContext):
                                          reply_markup=media_kb)
         except:
             pass
-
-
-# async def choose_loop_time(message: types.Message, state: FSMContext):
-#     from handlers.client import FSMClient
-#     data = await state.get_data()
-#     job_id = data.get('job_id')
-#     if job_id:
-#         job = scheduler.get_job(job_id)
-#         data = job.kwargs.get('data')
-#         data['post_type'] = 'looped'
-#         data['skip_days_loop'] = message.text
-#         job.modify(kwargs={'data': data})
-#     else:
-#         await state.update_data(post_type='looped')
-#         await state.update_data(skip_days_loop=message.text)
-#
-#     await FSMClient.time_loop.set()
-#     await message.answer(text="Ваша публікація буде опублікована кожного дня в обраний час: ",
-#                          reply_markup=await FullTimePicker().start_picker())
 
 
 async def process_simple_calendar(callback_query: types.CallbackQuery, callback_data: dict, state: FSMContext):
@@ -120,14 +101,7 @@ async def load_start_date_enter_time(callback_query: types.CallbackQuery, callba
     from handlers.client import FSMClient
     selected, date = await SimpleCalendar().process_selection(callback_query, callback_data)
     if selected:
-        data = await state.get_data()
-        job_id = data.get('job_id')
-        if job_id:
-            job = scheduler.get_job(job_id)
-            job_data = job.kwargs.get('data')
-            job_data['start_loop_date'] = date
-        else:
-            await state.update_data(start_loop_date=date)
+        await state.update_data(start_loop_date=date)
         await FSMClient.time_loop.set()
         await callback_query.message.edit_text(text='Оберіть час, коли вони будуть публікуватись:',
                                                reply_markup=await FullTimePicker().start_picker())
@@ -150,7 +124,6 @@ async def full_picker_handler(callback_query: types.CallbackQuery, callback_data
         if s == 'FSMClient:time_planning':
             await state.update_data(time_planning=r.time)
             data = await state.get_data()
-            print(data)
             selected_time: time = data.get("time_planning")
             selected_date: datetime = data.get("date_planning")
             selected_date = selected_date.replace(hour=selected_time.hour, minute=selected_time.minute)
@@ -224,11 +197,13 @@ async def load_skip_days_add_job(message, state: FSMContext):
         if message.text.isdigit():
             data = await state.get_data()
             days_skip = int(message.text)
+            start_loop_date = data.get('start_loop_date')
             job_id = data.get('job_id')
             if job_id:
                 job = scheduler.get_job(job_id)
                 data = job.kwargs.get('data')
                 data['skip_days_loop'] = days_skip
+                data['start_loop_date'] = start_loop_date
                 job.modify(kwargs={'data': data})
             else:
                 await state.update_data(skip_days_loop=days_skip)

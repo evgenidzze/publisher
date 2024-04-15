@@ -4,8 +4,7 @@ from aiogram.utils.exceptions import BadRequest
 from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, InputMediaVideo
-
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram_media_group import media_group_handler
 from create_bot import bot, scheduler
 from json_functionality import add_media_to_catalog, catalog_list_json, cat_name_exist, save_cat_json, get_catalog, \
@@ -13,7 +12,8 @@ from json_functionality import add_media_to_catalog, catalog_list_json, cat_name
 from keyboards.kb_client import base_manage_panel_kb, back_kb, self_or_random_kb, post_formatting_kb, \
     change_create_post_kb, cat_types_kb, back, cancel_sending_media_kb, back_to_catalog, edit_catalog_kb, \
     back_to_base_menu_btn
-from utils import pressed_back_button, show_cat_content, restrict_media, set_caption, show_post, catalog_paginate
+from utils import pressed_back_button, show_cat_content, restrict_media, set_caption, show_post, catalog_paginate, \
+    update_page_num
 
 
 async def media_base_panel(message, state: FSMContext):
@@ -98,13 +98,7 @@ async def show_catalog_content(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     data = await state.get_data()
     if call.data in ('+', "-"):
-        page_num = data.get('page_num')
-        if page_num and call.data == '+':
-            await state.update_data(page_num=page_num + 1)
-        elif page_num and call.data == '-' and page_num > 1:
-            await state.update_data(page_num=page_num - 1)
-        elif not page_num:
-            await state.update_data(page_num=1)
+        await update_page_num(data, call, state)
         await catalog_list(call, state)
         return
     elif call.data == 'back_to_base_menu':
@@ -155,14 +149,7 @@ async def choose_catalog(call: types.CallbackQuery, state: FSMContext):
         await choose_or_self_media(call, state)
         return
     elif call.data in ('+', "-"):
-        page_num = fsm_data.get('page_num')
-        print(page_num)
-        if page_num and call.data == '+':
-            await state.update_data(page_num=page_num + 1)
-        elif page_num and call.data == '-' and page_num > 1:
-            await state.update_data(page_num=page_num - 1)
-        elif not page_num:
-            await state.update_data(page_num=1)
+        await update_page_num(fsm_data, call, state)
         from handlers.client import load_media_answer
         call.data = 'take_from_db'
         await load_media_answer(call, state)
@@ -337,13 +324,7 @@ async def what_to_edit_cat(call: types.CallbackQuery, state: FSMContext):
     message_data = call.data
     if message_data in ('+', "-"):
         data = await state.get_data()
-        page_num = data.get('page_num')
-        if page_num and call.data == '+':
-            await state.update_data(page_num=page_num + 1)
-        elif page_num and call.data == '-' and page_num > 1:
-            await state.update_data(page_num=page_num - 1)
-        elif not page_num:
-            await state.update_data(page_num=1)
+        await update_page_num(data, call, state)
         await catalog_list(call, state)
         return
     elif message_data == 'back_to_base_menu':
@@ -476,7 +457,6 @@ async def delete_catalog(call: types.CallbackQuery, state: FSMContext):
 
 def register_handlers_catalog(dp: Dispatcher):
     from handlers.client import FSMClient
-    # dp.register_message_handler(media_base_panel, Text(equals='База медіа'), state='*')
     dp.register_callback_query_handler(edit_cat, state=FSMClient.add_delete_cat_media)
     dp.register_callback_query_handler(catalog_remove_media_numder, state=FSMClient.catalog_media_type_remove)
     dp.register_callback_query_handler(delete_catalog_list, Text(equals='delete_cat'))

@@ -17,7 +17,7 @@ from handlers.catalog_handlers import media_type_from_cat, media_base_panel
 from handlers.signals import pick_signal_location
 from utils import kb_channels, AuthMiddleware, send_voice_from_audio, restrict_media, set_caption, send_post_to_channel, \
     pressed_back_button, sorting_key_jobs, show_post, job_list_by_channel, alert_vnote_text, paginate, \
-    create_text, create_kb, create_random_media, catalog_paginate
+    create_text, create_kb, create_random_media, catalog_paginate, update_page_num
 from json_functionality import get_all_channels, save_channel_json, remove_channel_id_from_json, catalog_list_json, \
     get_catalog, get_video_notes_by_cat, get_texts_from_cat
 from keyboards.kb_client import (main_kb, kb_manage_channel_inline, cancel_kb, post_formatting_kb, add_channel_inline, \
@@ -299,13 +299,7 @@ async def change_job(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     data = await state.get_data()
     if call.data in ('+', "-"):
-        page_num = data.get('page_num')
-        if page_num and call.data == '+':
-            await state.update_data(page_num=page_num + 1)
-        elif page_num and call.data == '-' and page_num > 1:
-            await state.update_data(page_num=page_num - 1)
-        elif not page_num:
-            await state.update_data(page_num=1)
+        await update_page_num(data, call, state)
         await edit_post_list(call, state)
         return
     job_id = call.data
@@ -394,13 +388,7 @@ async def pick_text(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     data = await state.get_data()
     if call.data in ('+', "-"):
-        page_num = data.get('page_num')
-        if page_num and call.data == '+':
-            await state.update_data(page_num=page_num + 1)
-        elif page_num and call.data == '-' and page_num > 1:
-            await state.update_data(page_num=page_num - 1)
-        elif not page_num:
-            await state.update_data(page_num=1)
+        await update_page_num(data, call, state)
         await pick_text_catalog(call, state)
         return
     cat_name = call.data
@@ -423,13 +411,7 @@ async def load_random_text(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     data = await state.get_data()
     if call.data in ('+', "-"):
-        page_num = data.get('page_num')
-        if page_num and call.data == '+':
-            await state.update_data(page_num=page_num + 1)
-        elif page_num and call.data == '-' and page_num > 1:
-            await state.update_data(page_num=page_num - 1)
-        elif not page_num:
-            await state.update_data(page_num=1)
+        await update_page_num(data, call, state)
         await pick_text_catalog(call, state)
         return
     job_id = data.get('job_id')
@@ -584,74 +566,48 @@ async def load_media_answer(call: types.CallbackQuery, state: FSMContext):
                                           '\t<i>-файл;</i>', parse_mode='html', reply_markup=back_kb)
 
     elif data == 'remove_media':
-        if not fsm_data.get('job_id'):
-            if any(fsm_data.get(key) for key in ('voice', 'loaded_post_files', 'video_note')):
-                voice = fsm_data.get('voice')
-                loaded_post_files = fsm_data.get('loaded_post_files')
-                video_note = fsm_data.get('video_note')
-                if voice:
-                    await FSMClient.del_voice_or_vnote_answer.set()
-                    await call.message.answer_voice(voice=voice)
-                    await call.message.answer(text='Бажаєте видалити голосове з посту?', reply_markup=del_voice_kb)
-                elif video_note:
-                    await FSMClient.del_voice_or_vnote_answer.set()
-                    await call.message.answer_video_note(video_note=video_note)
-                    await call.message.answer(text='Бажаєте видалити відеоповідомлення з посту?',
-                                              reply_markup=del_voice_kb)
-                elif loaded_post_files:
-                    media: types.MediaGroup = fsm_data.get('loaded_post_files')
-                    for m in range(len(media.media)):
-                        if media.media[m].type == 'video':
-                            await call.message.answer_video(video=media.media[m].media, caption=m + 1)
-                        elif media.media[m].type == 'photo':
-                            await call.message.answer_photo(photo=media.media[m].media, caption=m + 1)
-                        elif media.media[m].type == 'document':
-                            await call.message.answer_document(document=media.media[m].media, caption=m + 1)
-                    await FSMClient.del_media_answer.set()
-                    await call.message.answer(text='Надішліть номер медіа, яке хочете прибрати з посту:',
-                                              reply_markup=back_kb)
-
-            else:
-                try:
-                    await call.message.edit_text(text="У пості немає медіа.", reply_markup=media_kb)
-                except:
-                    pass
-
-        elif fsm_data.get('job_id'):
+        post_data = fsm_data
+        if fsm_data.get('job_id'):
             job = scheduler.get_job(fsm_data.get('job_id'))
-            job_data = job.kwargs.get('data')
-
-            if any(job_data.get(key) for key in (
-                    'voice', 'loaded_post_files', 'random_videos_number', 'random_gifs_number',
-                    'random_photos_number')):
-                voice = job_data.get('voice')
-                loaded_post_files = job_data.get('loaded_post_files')
-                random_videos_number = job_data.get('random_videos_number')
-                if voice:
-                    await FSMClient.del_voice_or_vnote_answer.set()
-                    await call.message.answer_voice(voice=voice)
-                    await call.message.answer(text='Бажаєте видалити голосове з посту?', reply_markup=del_voice_kb)
-                if loaded_post_files:
-                    media: types.MediaGroup = job_data.get('loaded_post_files')
-                    for m in range(len(media.media)):
-                        if media.media[m].type == 'video':
-                            await call.message.answer_video(video=media.media[m].media, caption=m + 1)
-                        elif media.media[m].type == 'photo':
-                            await call.message.answer_photo(photo=media.media[m].media, caption=m + 1)
-                        elif media.media[m].type == 'document':
-                            await call.message.answer_document(document=media.media[m].media, caption=m + 1)
-                    await FSMClient.del_media_answer.set()
-                    await call.message.answer(text='Надішліть номер медіа, яке хочете прибрати з посту:')
-                if random_videos_number:
-                    await FSMClient.del_random_video_answer.set()
-                    await call.message.answer(text='Бажаєте видалити рандомні медіа з посту?',
-                                              reply_markup=del_voice_kb)
-            else:
-                await state.reset_state(with_data=False)
-                try:
-                    await call.message.edit_text(text="У пості немає медіа.", reply_markup=post_formatting_kb)
-                except:
-                    pass
+            post_data = job.kwargs.get('data')
+        if any(post_data.get(key) for key in (
+                'voice', 'loaded_post_files', 'random_videos_number', 'random_gifs_number',
+                'random_photos_number')):
+            voice = post_data.get('voice')
+            loaded_post_files = post_data.get('loaded_post_files')
+            video_note = post_data.get('video_note')
+            random_videos_number = post_data.get('random_videos_number')
+            if voice:
+                await FSMClient.del_voice_or_vnote_answer.set()
+                await call.message.answer_voice(voice=voice)
+                await call.message.answer(text='Бажаєте видалити голосове з посту?', reply_markup=del_voice_kb)
+            elif video_note:
+                await FSMClient.del_voice_or_vnote_answer.set()
+                await call.message.answer_video_note(video_note=video_note)
+                await call.message.answer(text='Бажаєте видалити відеоповідомлення з посту?',
+                                          reply_markup=del_voice_kb)
+            elif loaded_post_files:
+                media: types.MediaGroup = fsm_data.get('loaded_post_files')
+                for m in range(len(media.media)):
+                    if media.media[m].type == 'video':
+                        await call.message.answer_video(video=media.media[m].media, caption=m + 1)
+                    elif media.media[m].type == 'photo':
+                        await call.message.answer_photo(photo=media.media[m].media, caption=m + 1)
+                    elif media.media[m].type == 'document':
+                        await call.message.answer_document(document=media.media[m].media, caption=m + 1)
+                await FSMClient.del_media_answer.set()
+                await call.message.answer(text='Надішліть номер медіа, яке хочете прибрати з посту:',
+                                          reply_markup=back_kb)
+            if random_videos_number:
+                await FSMClient.del_random_video_answer.set()
+                await call.message.answer(text='Бажаєте видалити рандомні медіа з посту?',
+                                          reply_markup=del_voice_kb)
+        else:
+            await state.reset_state(with_data=False)
+            try:
+                await call.message.edit_text(text="У пості немає медіа.", reply_markup=media_kb)
+            except:
+                pass
 
 
 async def del_media(message: types.Message, state: FSMContext):
