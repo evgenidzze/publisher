@@ -435,6 +435,7 @@ async def show_post(message, state: FSMContext):
     if job_id:
         job = scheduler.get_job(job_id)
         data = job.kwargs.get('data')
+    print(data)
     post_media_files = data.get('loaded_post_files')
     kb_inline: InlineKeyboardMarkup = data.get('inline_kb')
     randomed_text_kb = InlineKeyboardMarkup()
@@ -447,6 +448,7 @@ async def show_post(message, state: FSMContext):
     random_v_notes_id = data.get('random_v_notes_id')
     chat_id = message.from_user.id
     text = data.get('post_text') if data.get('post_text') else ''
+    text += f"\nКаталог: {data.get('choose_catalog')}" if data.get('choose_catalog') else ''
     if isinstance(text, list) or data.get('catalog_for_text'):
         if data.get('text_index'):
             text = await create_text(data)
