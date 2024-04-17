@@ -56,7 +56,7 @@ async def catalog_list(call: types.CallbackQuery, state: FSMContext):
         catalogs_kb = await catalog_paginate(state)
         catalogs_kb.add(back_to_base_menu_btn)
         await FSMClient.show_catalog.set()
-        await call.message.answer(text='Оберіть каталог, щоб подивитись зміст:', reply_markup=catalogs_kb)
+        await call.message.edit_text(text='Оберіть каталог, щоб подивитись зміст:', reply_markup=catalogs_kb)
     else:
         try:
             await call.message.edit_text(text='Немає жодного каталогу', reply_markup=base_manage_panel_kb)
