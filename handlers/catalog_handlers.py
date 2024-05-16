@@ -325,7 +325,7 @@ async def what_to_edit_cat(call: types.CallbackQuery, state: FSMContext):
     if message_data in ('+', "-"):
         data = await state.get_data()
         await update_page_num(data, call, state)
-        await catalog_list(call, state)
+        await edit_catalog_list(call, state)
         return
     elif message_data == 'back_to_base_menu':
         await media_base_panel(call, state)
@@ -450,6 +450,11 @@ async def delete_catalog_list(call: types.CallbackQuery, state: FSMContext):
 
 async def delete_catalog(call: types.CallbackQuery, state: FSMContext):
     cat_name = call.data
+    if cat_name in ('+', '-'):
+        data = await state.get_data()
+        await update_page_num(data, call, state)
+        await delete_catalog_list(call, state)
+        return
     delete_catalog_json(cat_name=cat_name)
     await call.message.edit_text(text=f'Каталог {cat_name} видалено.', reply_markup=base_manage_panel_kb)
     await state.reset_state(with_data=False)

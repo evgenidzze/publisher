@@ -435,7 +435,6 @@ async def show_post(message, state: FSMContext):
     if job_id:
         job = scheduler.get_job(job_id)
         data = job.kwargs.get('data')
-    print(data)
     post_media_files = data.get('loaded_post_files')
     kb_inline: InlineKeyboardMarkup = data.get('inline_kb')
     randomed_text_kb = InlineKeyboardMarkup()

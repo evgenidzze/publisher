@@ -78,17 +78,20 @@ async def save_channel_json(channel_id: str, message: types.Message):
 
 
 async def save_cat_json(cat_name, message: types.Message):
-    with open('data.json', 'r+', encoding='utf-8') as file:
+    with open('data.json', 'r', encoding='utf-8') as file:
         file_data = json.load(file)
-        file_data['catalogs'][cat_name] = {"videos": [],
-                                           "photos": [],
-                                           "voices": [],
-                                           "documents": [],
-                                           'gifs': [],
-                                           'video_notes': [],
-                                           'texts': []
-                                           }
-        file.seek(0)
+
+    # Створення нового словника cat_name
+    file_data['catalogs'][cat_name] = {"videos": [],
+                                       "photos": [],
+                                       "voices": [],
+                                       "documents": [],
+                                       'gifs': [],
+                                       'video_notes': [],
+                                       'texts': []
+                                       }
+    # Записуємо оновлені дані назад у файл
+    with open('data.json', 'w', encoding='utf-8') as file:
         json.dump(file_data, file, ensure_ascii=False, indent=4)
 
 
