@@ -248,7 +248,7 @@ async def edit_create_post_channel_list(message, state: FSMContext):
 async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
     data = await state.get_data()
 
-    if message.data not in ('+', '-'):
+    if isinstance(message, types.CallbackQuery) and message.data not in ('+', '-'):
         channel_id = message.data
         await state.update_data(edit_channel_id=channel_id)
     else:
