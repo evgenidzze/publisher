@@ -247,14 +247,12 @@ async def edit_create_post_channel_list(message, state: FSMContext):
 
 async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
     data = await state.get_data()
-    channel_id = data.get('edit_channel_id')
-    if isinstance(message, types.Message):
-        if message.text == 'Канали':
-            await state.reset_state()
-    elif message.data not in ('+', '-'):
-        await message.answer()
+
+    if message.data not in ('+', '-'):
         channel_id = message.data
         await state.update_data(edit_channel_id=channel_id)
+    else:
+        channel_id = data.get('edit_channel_id')
     if not data.get('page_num'):
         await state.update_data(page_num=1)
     data = await state.get_data()
@@ -282,24 +280,20 @@ async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
         edit_kb.add(back_edit_post_inline)
         await paginate(edit_kb)
         edit_kb.inline_keyboard[-1][-2].text = page_num
+        await message.answer()
         try:
             await message.message.edit_text(f'Ваші заплановані та зациклені пости.\n'
                                             'Оберіть потрібний вам:', reply_markup=edit_kb)
         except Exception as err:
-            await message.answer(f'Ваші заплановані та зациклені пости.\n'
-                                 'Оберіть потрібний вам:', reply_markup=edit_kb)
-
+            logging.info(f'ERROR: {err}; {edit_kb}')
         await FSMClient.job_id.set()
-    elif isinstance(message, types.CallbackQuery):
+    else:
         await message.answer()
         try:
             await message.message.edit_text('У вас немає запланованих або зациклених постів.',
                                             reply_markup=create_post_inline_kb)
         except:
             pass
-    else:
-        await message.answer(text='У вас немає запланованих або зациклених постів.',
-                             reply_markup=create_post_inline_kb)
 
 
 async def change_job(call: types.CallbackQuery, state: FSMContext):
