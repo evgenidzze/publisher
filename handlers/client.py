@@ -252,6 +252,7 @@ async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
         if message.text == 'Канали':
             await state.reset_state()
     elif message.data not in ('+', '-'):
+        await message.answer()
         channel_id = message.data
         await state.update_data(edit_channel_id=channel_id)
     if not data.get('page_num'):
@@ -281,7 +282,6 @@ async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
         edit_kb.add(back_edit_post_inline)
         await paginate(edit_kb)
         edit_kb.inline_keyboard[-1][-2].text = page_num
-        await message.answer()
         try:
             await message.message.edit_text(f'Ваші заплановані та зациклені пости.\n'
                                             'Оберіть потрібний вам:', reply_markup=edit_kb)
