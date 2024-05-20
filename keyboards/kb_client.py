@@ -165,10 +165,11 @@ async def add_posts_to_kb(jobs, edit_kb):
         if trigger_name == 'date':
             text = f"Пост {date_p.date()} о {date_p.strftime('%H:%M')}{skip_minutes_loop} {job_post_text}"
         elif trigger_name in ('interval', 'cron'):
-            if trigger_name == 'interval':
+            start_loop_date = job_data.get('start_loop_date')
+            if trigger_name == 'interval' and start_loop_date:
                 skip_days = job_data.get('skip_days_loop') if job_data.get(
                     'skip_days_loop') is not None else job_data.get('skip_days_loop_vnotes')
-                start_loop_date = job_data.get('start_loop_date').strftime("%d.%m.%Y")
+                start_loop_date = start_loop_date.strftime("%d.%m.%Y")
                 skip_days = int(skip_days)
                 if skip_days == 0:
                     text = f"🌀 з {start_loop_date} - о {date_p.strftime('%H:%M')}{skip_minutes_loop} {job_post_text}"
