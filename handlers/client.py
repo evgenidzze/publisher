@@ -115,6 +115,7 @@ async def main_menu(call: types.CallbackQuery, state: FSMContext):
 
 
 async def channel_manage_menu(message: types.Message, state: FSMContext):
+    print('123')
     await state.finish()
     await bot.send_message(chat_id=message.from_user.id, text="Панель управління каналами",
                            reply_markup=kb_manage_channel_inline)
@@ -1337,6 +1338,7 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_callback_query_handler(pick_signal_location, Text(equals='📣 Сигнали'), state='*')
     dp.register_message_handler(my_posts_menu, Text(equals='Мої пости'), state='*')
     dp.register_callback_query_handler(my_posts_menu, Text(equals='Мої пости'), state='*')
+    dp.register_message_handler(channel_manage_menu, Text(equals='Канали'), state='*')
     dp.register_callback_query_handler(load_channel_id_enter_date, state=FSMClient.all_posts_channel_id)
     dp.register_callback_query_handler(my_posts_by_date, simple_cal_callback.filter(),
                                        state=FSMClient.posts_by_data)
@@ -1346,7 +1348,6 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_callback_query_handler(edit_post_list, state=FSMClient.channel_change_post)
     dp.register_message_handler(edit_post_list, state=FSMClient.channel_change_post)
     dp.register_message_handler(add_channel, commands=['addchannel'], state='*')
-    dp.register_message_handler(channel_manage_menu, Text(equals='Канали'), state='*')
     dp.register_callback_query_handler(deny_channel, Text(equals='Видалити канал'))
     dp.register_message_handler(remove_channel_id, state=FSMClient.remove_channel_id)
 
