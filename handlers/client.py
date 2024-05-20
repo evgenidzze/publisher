@@ -286,7 +286,9 @@ async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
             await message.message.edit_text(f'Ваші заплановані та зациклені пости.\n'
                                             'Оберіть потрібний вам:', reply_markup=edit_kb)
         except Exception as err:
-            logging.info(f'ERROR: {err}; {edit_kb}')
+            await message.answer(f'Ваші заплановані та зациклені пости.\n'
+                                 'Оберіть потрібний вам:', reply_markup=edit_kb)
+
         await FSMClient.job_id.set()
     elif isinstance(message, types.CallbackQuery):
         await message.answer()
