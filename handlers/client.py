@@ -280,8 +280,8 @@ async def edit_post_list(message: types.CallbackQuery, state: FSMContext):
         edit_kb.add(back_edit_post_inline)
         await paginate(edit_kb)
         edit_kb.inline_keyboard[-1][-2].text = page_num
-        await message.answer()
         try:
+            await message.answer()
             await message.message.edit_text(f'Ваші заплановані та зациклені пости.\n'
                                             'Оберіть потрібний вам:', reply_markup=edit_kb)
         except Exception as err:
