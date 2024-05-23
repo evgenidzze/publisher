@@ -9,6 +9,7 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.handler import CancelHandler
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove
+from aiogram.utils.exceptions import CantParseEntities
 
 from create_bot import bot, scheduler
 from json_functionality import get_all_channels, get_users_dict, get_catalog
@@ -490,7 +491,11 @@ async def show_post(message, state: FSMContext):
         await bot.send_video_note(chat_id=chat_id, video_note=random.choice(random_v_notes_id),
                                   reply_markup=randomed_text_kb)
     elif text:
-        await bot.send_message(chat_id=chat_id, text=text, reply_markup=randomed_text_kb, parse_mode='Markdown')
+        try:
+            await bot.send_message(chat_id=chat_id, text=text, reply_markup=randomed_text_kb, parse_mode='Markdown')
+        except CantParseEntities as err:
+            print(err)
+            await bot.send_message(chat_id=chat_id, text=text, reply_markup=randomed_text_kb)
 
 
 def job_list_by_channel(data, date: datetime.datetime):
