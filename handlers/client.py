@@ -11,15 +11,15 @@ from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import StatesGroup, State
 from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram_calendar import SimpleCalendar
-from aiogram_media_group import media_group_handler
+from utils.aiogram_media_group import media_group_handler
 from create_bot import bot, scheduler
 from handlers.catalog_handlers import media_type_from_cat, media_base_panel
-from handlers.signals import pick_signal_location
-from utils import kb_channels, AuthMiddleware, send_voice_from_audio, restrict_media, set_caption, send_post_to_channel, \
+from utils.utils import kb_channels, AuthMiddleware, send_voice_from_audio, restrict_media, set_caption, \
+    send_post_to_channel, \
     pressed_back_button, sorting_key_jobs, show_post, job_list_by_channel, alert_vnote_text, paginate, \
     create_text, create_kb, create_random_media, catalog_paginate, update_page_num
-from json_functionality import get_all_channels, save_channel_json, remove_channel_id_from_json, catalog_list_json, \
-    get_catalog, get_video_notes_by_cat, get_texts_from_cat
+from json_functionality import get_all_channels, save_channel_json, remove_channel_id_from_json, catalog_list_db, \
+    get_all_catalog_media, get_video_notes_by_cat, get_media_by_type
 from keyboards.kb_client import (main_kb, kb_manage_channel_inline, cancel_kb, post_formatting_kb, add_channel_inline, \
                                  create_post_inline_kb, back_kb, base_manage_panel_kb, enter_text_kb, del_voice_kb,
                                  add_posts_to_kb, take_from_db, \
@@ -37,7 +37,6 @@ locale.setlocale(locale.LC_ALL, 'uk_UA.utf8')
 class FSMClient(StatesGroup):
     del_random_video_answer = State()
     skip_minutes_loop = State()
-    signal_location = State()
     new_inline_link = State()
     change_button_index = State()
     start_loop_date = State()
@@ -52,14 +51,6 @@ class FSMClient(StatesGroup):
     # random_v_notes_id = State()
     posts_by_data = State()
     all_posts_channel_id = State()
-    del_signal_id = State()
-    del_signal_channel_id = State()
-    signal_start_time = State()
-    signal_period_minutes = State()
-    signals_count = State()
-    signal_coef = State()
-    signal_bet = State()
-    signal_channel_id = State()
     inline_link = State()
     inline_text = State()
     channel_change_post = State()
@@ -115,7 +106,6 @@ async def main_menu(call: types.CallbackQuery, state: FSMContext):
 
 
 async def channel_manage_menu(message: types.Message, state: FSMContext):
-    print('123')
     await state.finish()
     await bot.send_message(chat_id=message.from_user.id, text="Панель управління каналами",
                            reply_markup=kb_manage_channel_inline)
@@ -123,8 +113,8 @@ async def channel_manage_menu(message: types.Message, state: FSMContext):
 
 async def deny_channel(message: types.Message):
     await FSMClient.remove_channel_id.set()
-    all_channels = get_all_channels(message.from_user.id)
-    channel_list = '\n'.join([f"{name} <code>{key}</code>" for key, name in all_channels.items()])
+    all_channels = await get_all_channels(message.from_user.id)
+    channel_list = '\n'.join([f"{channel.name} <code>{channel.channel_id}</code>" for channel in all_channels])
 
     await bot.send_message(chat_id=message.from_user.id,
                            text=f'Надішліть id каналу, який хочете відключити.\n\n'
@@ -187,11 +177,10 @@ async def load_channel_id(message: types.Message, state: FSMContext):
 
 async def channel_list(call: types.CallbackQuery):
     await call.answer()
-    all_channels = get_all_channels(call.from_user.id)
-
+    all_channels = await get_all_channels(call.from_user.id)
     try:
         if all_channels:
-            channel_list = '\n'.join([f"{name} <code>{key}</code>" for key, name in all_channels.items()])
+            channel_list = '\n'.join([f"{channel.name} <code>{channel.channel_id}</code>" for channel in all_channels])
 
             await call.message.edit_text(text=channel_list, parse_mode='html',
                                          reply_markup=kb_manage_channel_inline)
@@ -205,7 +194,7 @@ async def channel_list(call: types.CallbackQuery):
 async def edit_create_post_channel_list(message, state: FSMContext):
     if isinstance(message, types.Message):
         await state.finish()
-        if get_all_channels(message.from_user.id):
+        if await get_all_channels(message.from_user.id):
             kb = await kb_channels(message, bot)
             kb.add(back_to_main_menu)
             if message.text == 'Створити пост':
@@ -220,7 +209,7 @@ async def edit_create_post_channel_list(message, state: FSMContext):
             await add_channel(message, state)
     elif isinstance(message, types.CallbackQuery):
         await message.answer()
-        if get_all_channels(message.from_user.id):
+        if await get_all_channels(message.from_user.id):
             kb = await kb_channels(message, bot)
             if message.data == 'Створити пост':
                 await state.finish()
@@ -394,7 +383,8 @@ async def pick_text(call: types.CallbackQuery, state: FSMContext):
         await pick_text_catalog(call, state)
         return
     cat_name = call.data
-    texts = get_texts_from_cat(cat_name)
+    texts = await get_media_by_type(cat_name, media_type='text')
+    texts = [text.text for text in texts]
     catalogs_kb = await catalog_paginate(state)
     catalogs_kb.add(InlineKeyboardButton(text='« Назад', callback_data='Змінити текст'))
 
@@ -418,7 +408,8 @@ async def load_random_text(call: types.CallbackQuery, state: FSMContext):
         return
     job_id = data.get('job_id')
     cat_name = call.data
-    texts = get_texts_from_cat(cat_name)
+    texts = await get_media_by_type(cat_name, media_type='text')
+    texts = [text.text for text in texts]
     catalogs_kb = await catalog_paginate(state)
     catalogs_kb.add(InlineKeyboardButton(text='« Назад', callback_data='Змінити текст'))
 
@@ -442,8 +433,8 @@ async def set_text_in_post_from_db(message: types.Message, state: FSMContext):
     data = await state.get_data()
     job_id = data.get('job_id')
     catalog_for_text = data.get('catalog_for_text')
-    texts = await get_catalog(catalog_for_text)
-    texts = texts.get('texts')
+    texts = await get_media_by_type(catalog_for_text, media_type='text')
+    texts = [text.text for text in texts]
     if message.text.isdigit() and int(message.text) <= len(texts):
         if job_id:
             job = scheduler.get_job(job_id)
@@ -535,7 +526,7 @@ async def load_media_answer(call: types.CallbackQuery, state: FSMContext):
     if data == 'formatting_main_menu':
         await formatting_main_menu(call, state)
     elif data in 'take_from_db':
-        catalogs = catalog_list_json()
+        catalogs = await catalog_list_db()
         catalogs_kb = await catalog_paginate(state)
         if catalogs:
             catalogs_kb.add(back)
@@ -584,7 +575,7 @@ async def load_media_answer(call: types.CallbackQuery, state: FSMContext):
                 await call.message.answer(text='Бажаєте видалити відеоповідомлення з посту?',
                                           reply_markup=del_voice_kb)
             elif loaded_post_files:
-                media: types.MediaGroup = fsm_data.get('loaded_post_files')
+                media: types.MediaGroup = loaded_post_files
                 for m in range(len(media.media)):
                     if media.media[m].type == 'video':
                         await call.message.answer_video(video=media.media[m].media, caption=m + 1)
@@ -839,13 +830,13 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
     fsm_data = await state.get_data()
     cat_name = fsm_data.get('choose_catalog')
-    cat_data = await get_catalog(cat_name)
+    cat_data = await get_all_catalog_media(cat_name)
     message_data = call.data
     media_len = 0
     existing_random_v_notes_id: list = fsm_data.get('random_v_notes_id')
 
     if message_data == 'back':
-        catalogs = catalog_list_json()
+        catalogs = await catalog_list_db()
         catalogs_kb = await catalog_paginate(state)
         if catalogs:
             catalogs_kb.add(back)
@@ -855,10 +846,9 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
         except:
             pass
 
-    media_types = ['photos', 'videos', 'documents']
-
+    media_types = ['photo', 'video', 'document']
     for media_type in media_types:
-        media_len += len(cat_data.get(media_type, []))
+        media_len += cat_data.count(media_type)
 
     if message_data == 'random_media':
         if cat_data.get('photos') and media_len > 1:
@@ -888,7 +878,7 @@ async def random_or_self(call: types.CallbackQuery, state: FSMContext):
         await media_type_from_cat(call, state)
 
     elif message_data == 'random_videonote':
-        video_notes = get_video_notes_by_cat(cat_name)
+        video_notes = await get_video_notes_by_cat(cat_name)
         if video_notes:
             await state.update_data(random_v_notes_id=video_notes)
             await state.update_data(post_type='looped')
@@ -931,7 +921,7 @@ async def number_of_random_photos(message, state: FSMContext):
                 job.modify(kwargs={'data': data})
             else:
                 await state.update_data(loaded_post_files=None)
-        cat_data = await get_catalog(cat_name)
+        cat_data = await get_all_catalog_media(cat_name)
         await state.update_data(random_photos_number=message.text)
         await state.update_data(random_gifs_number=None)
         await message.answer(text='Фото додано у рандомну вибірку.')
@@ -1225,12 +1215,12 @@ async def my_posts_menu(message, state: FSMContext):
     await state.finish()
     await FSMClient.all_posts_channel_id.set()
 
-    if get_all_channels(message.from_user.id):
+    if await get_all_channels(message.from_user.id):
         kb = await kb_channels(message, bot)
         kb.add(back_to_main_menu)
 
         if isinstance(message, types.Message):
-            if get_all_channels(message.from_user.id):
+            if await get_all_channels(message.from_user.id):
                 await message.answer(text='Оберіть канал, щоб переглянути заплановані або зациклені пости:',
                                      reply_markup=kb)
             else:
@@ -1239,7 +1229,7 @@ async def my_posts_menu(message, state: FSMContext):
 
         elif isinstance(message, types.CallbackQuery):
             await message.answer()
-            if get_all_channels(message.from_user.id):
+            if await get_all_channels(message.from_user.id):
                 await message.message.answer(text='Оберіть канал, щоб переглянути заплановані або зациклені пости:',
                                              reply_markup=kb)
             else:
@@ -1312,7 +1302,6 @@ async def my_posts_by_date(callback_query: types.CallbackQuery, callback_data: d
                             text=f"Пост о {time_loop} - {job_in_channel_data.get('post_text')}",
                             callback_data=job_in_channel.id))
 
-        # add_posts_to_kb(jobs_in_channel, kb)
         kb.add(back_to_my_posts_inline)
         await FSMClient.job_id.set()
         try:
@@ -1334,8 +1323,6 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(edit_create_post_channel_list, Text(equals='Змінити пост'), state="*")
     dp.register_callback_query_handler(edit_create_post_channel_list, Text(equals='Змінити пост'), state="*")
     dp.register_message_handler(media_base_panel, Text(equals='База даних'), state='*')
-    dp.register_message_handler(pick_signal_location, Text(equals='📣 Сигнали'), state='*')
-    dp.register_callback_query_handler(pick_signal_location, Text(equals='📣 Сигнали'), state='*')
     dp.register_message_handler(my_posts_menu, Text(equals='Мої пости'), state='*')
     dp.register_callback_query_handler(my_posts_menu, Text(equals='Мої пости'), state='*')
     dp.register_message_handler(channel_manage_menu, Text(equals='Канали'), state='*')

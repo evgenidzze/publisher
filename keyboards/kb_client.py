@@ -15,9 +15,8 @@ channel_menu = KeyboardButton(text='Канали')
 create_post = KeyboardButton(text='Створити пост')
 edit_post = KeyboardButton(text='Змінити пост')
 media_base = KeyboardButton(text='База даних')
-signals = KeyboardButton(text='📣 Сигнали')
 my_posts = KeyboardButton(text='Мої пости')
-main_kb.add(create_post, channel_menu, edit_post, media_base, my_posts, signals)
+main_kb.add(create_post, channel_menu, edit_post, media_base, my_posts)
 
 cancel_kb = InlineKeyboardMarkup()
 cancel = InlineKeyboardButton(text='Відміна', callback_data='Відміна')
@@ -106,13 +105,13 @@ edit_catalog_kb.add(InlineKeyboardButton(text='Додати медіа', callbac
                     )
 
 # remove_media_cat_type = InlineKeyboardMarkup()
-video_type = InlineKeyboardButton(text='Відео', callback_data='videos')
-photo_type = InlineKeyboardButton(text='Фото', callback_data='photos')
-animation_type = InlineKeyboardButton(text='GIF', callback_data='gifs')
-voice_type = InlineKeyboardButton(text='Голосове', callback_data='voices')
-document_type = InlineKeyboardButton(text='Файл', callback_data='documents')
-v_note_type = InlineKeyboardButton(text='Відеоповідомлення', callback_data='video_notes')
-text_type = InlineKeyboardButton(text='Текст', callback_data='texts')
+video_type = InlineKeyboardButton(text='Відео', callback_data='video')
+photo_type = InlineKeyboardButton(text='Фото', callback_data='photo')
+animation_type = InlineKeyboardButton(text='GIF', callback_data='gif')
+voice_type = InlineKeyboardButton(text='Голосове', callback_data='voice')
+document_type = InlineKeyboardButton(text='Файл', callback_data='document')
+v_note_type = InlineKeyboardButton(text='Відеоповідомлення', callback_data='video_note')
+text_type = InlineKeyboardButton(text='Текст', callback_data='text')
 
 # planning_kb = InlineKeyboardMarkup(row_width=2)
 # date_choose = InlineKeyboardButton(text='Обрати дату/час', callback_data='choose_date')
@@ -186,8 +185,8 @@ async def add_posts_to_kb(jobs, edit_kb):
                                          callback_data=j.id))
 
 
-media_types = {"videos": video_type, "photos": photo_type, "gifs": animation_type, "voices": voice_type,
-               "documents": document_type, 'video_notes': v_note_type, 'texts': text_type}
+media_types = {"video": video_type, "photo": photo_type, "gif": animation_type, "voice": voice_type,
+               "document": document_type, 'video_note': v_note_type, 'text': text_type}
 
 
 async def cat_types_kb(cat_data_types):
@@ -199,9 +198,9 @@ async def cat_types_kb(cat_data_types):
 
 async def create_catalogs_kb(page=None):
     catalogs_kb = InlineKeyboardMarkup()
-    from json_functionality import catalog_list_json
-    catalogs: dict = catalog_list_json()
-    catalog_by_page = list(catalogs)[(page-1)*30:30*page]
-    for cat_name in catalog_by_page:
-        catalogs_kb.add(InlineKeyboardButton(text=cat_name, callback_data=cat_name))
+    from json_functionality import catalog_list_db
+    catalogs = await catalog_list_db()
+    catalog_by_page = catalogs[(page - 1) * 30:30 * page]
+    for catalog in catalog_by_page:
+        catalogs_kb.add(InlineKeyboardButton(text=catalog.name, callback_data=catalog.id))
     return catalogs_kb

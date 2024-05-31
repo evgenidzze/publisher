@@ -3,9 +3,8 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
 
-from config import ADMINS
 from create_bot import bot
-from json_functionality import save_user_id_to_json, remove_user_id_from_json, get_all_users_str
+from json_functionality import save_user, delete_user, get_all_users_str, get_user
 from keyboards.kb_admin import kb_manage_user, back_main_moder_menu_kb
 
 
@@ -16,31 +15,34 @@ class FSMAdmin(StatesGroup):
 
 async def moderator_start(message: types.Message, state: FSMContext):
     await state.finish()
+    user = await get_user(message.from_user.id)
     if isinstance(message, types.Message):
-        if str(message.from_user.id) in ADMINS:
+        if user.is_admin:
             await message.answer(text='Вітаю, адміністратор!', reply_markup=kb_manage_user)
         else:
             await message.answer(text='У вас немає прав модератора.')
     elif isinstance(message, types.CallbackQuery):
         await message.answer()
-        if str(message.from_user.id) in ADMINS:
+        if user.is_admin:
             await message.message.edit_text(text='Вітаю, адміністратор!', reply_markup=kb_manage_user)
         else:
             await message.message.edit_text(text='У вас немає прав модератора.')
 
 
 async def manage_menu(message: types.Message):
+    user = await get_user(message.from_user.id)
     if isinstance(message, types.CallbackQuery):
         await message.answer()
-    if str(message.from_user.id) in ADMINS:
+    if user.is_admin:
         await bot.send_message(chat_id=message.from_user.id, text="Панель управління користувачами",
                                reply_markup=kb_manage_user)
 
 
 async def add_user(message: types.CallbackQuery):
+    user = await get_user(message.from_user.id)
     if isinstance(message, types.CallbackQuery):
         await message.answer()
-    if str(message.from_user.id) in ADMINS:
+    if user.is_admin:
         await message.message.edit_text(text='Перешліть будь-яке повідомлення користувача.',
                                         reply_markup=back_main_moder_menu_kb)
 
@@ -48,11 +50,12 @@ async def add_user(message: types.CallbackQuery):
 
 
 async def load_id(message: types.Message, state: FSMContext):
+    user = await get_user(message.from_user.id)
     if isinstance(message, types.CallbackQuery):
         await message.answer()
-    if str(message.from_user.id) in ADMINS:
+    if user.is_admin:
         if message.forward_from:
-            await save_user_id_to_json(str(message.forward_from.id), message=message)
+            await save_user(str(message.forward_from.id), message=message)
         elif message.forward_sender_name:
             await bot.send_message(chat_id=message.from_user.id, text='У користувача прихований id')
         else:
@@ -62,45 +65,52 @@ async def load_id(message: types.Message, state: FSMContext):
 
 # Скасувати працівнику права
 async def deny_user_access(message, state: FSMContext):
+    user = await get_user(message.from_user.id)
     await state.reset_state(with_data=False)
     if isinstance(message, types.CallbackQuery):
         await message.answer()
-    if str(message.from_user.id) in ADMINS:
+    if user.is_admin:
         await FSMAdmin.remove_user_id.set()
-        all_users = get_all_users_str()
+        users = await get_all_users_str()
+        formatted_user_list = "\n".join([f"{user.username} - `{user.telegram_id}`" for user in users])
         try:
             await message.message.edit_text(text=f'Надішліть id користувача, якому хочете скасувати права.\n\n'
-                                                 f'{all_users}', reply_markup=kb_manage_user, parse_mode="Markdown")
+                                                 f'{formatted_user_list}', reply_markup=kb_manage_user, parse_mode="Markdown")
         except:
             pass
 
 
 async def remove_id(message: types.Message, state: FSMContext):
+    user = await get_user(message.from_user.id)
     if isinstance(message, types.CallbackQuery):
         await message.answer()
-    if str(message.from_user.id) in ADMINS:
+    if user.is_admin:
         user_id = message.text
         if user_id.isdigit():
-            await remove_user_id_from_json(user_id, message)
+            await delete_user(user_id, message)
             await state.finish()
         else:
             await message.answer('id має складатись тільки з цифр, надішліть ще раз.')
 
 
 async def user_list(call: types.CallbackQuery):
+    user = await get_user(call.from_user.id)
     if isinstance(call, types.CallbackQuery):
         await call.answer()
-    if str(call.from_user.id) in ADMINS:
+    if user.is_admin:
         try:
-            await call.message.edit_text(text=get_all_users_str(), parse_mode="Markdown", reply_markup=kb_manage_user)
+            users = await get_all_users_str()
+            formatted_user_list = "\n".join([f"{user.username} - `{user.telegram_id}`" for user in users])
+            await call.message.edit_text(text=formatted_user_list, parse_mode="Markdown", reply_markup=kb_manage_user)
         except:
             pass
 
 
 async def cancel_handler(message: types.Message, state: FSMContext):
+    user = await get_user(message.from_user.id)
     if isinstance(message, types.CallbackQuery):
         await message.answer()
-    if str(message.from_user.id) in ADMINS:
+    if user.is_admin:
         current_state = await state.get_state()
         if current_state is None:
             await message.answer('OK')

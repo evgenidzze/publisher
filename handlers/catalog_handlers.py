@@ -5,15 +5,15 @@ from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from aiogram_media_group import media_group_handler
+from utils.aiogram_media_group import media_group_handler
 from create_bot import bot, scheduler
-from json_functionality import add_media_to_catalog, catalog_list_json, cat_name_exist, save_cat_json, get_catalog, \
-    get_media_from_base, remove_cat_media_json, delete_catalog_json, change_cat_name
+from json_functionality import add_media_to_catalog, catalog_list_db, cat_name_exist, save_cat, get_all_catalog_media, \
+    remove_cat_media_json, delete_catalog_json, change_cat_name, get_media_by_indexes
 from keyboards.kb_client import base_manage_panel_kb, back_kb, self_or_random_kb, post_formatting_kb, \
     change_create_post_kb, cat_types_kb, back, cancel_sending_media_kb, back_to_catalog, edit_catalog_kb, \
     back_to_base_menu_btn
-from utils import pressed_back_button, show_cat_content, restrict_media, set_caption, show_post, catalog_paginate, \
-    update_page_num
+from utils.utils import pressed_back_button, show_cat_content, restrict_media, set_caption, show_post, catalog_paginate, \
+    update_page_num, show_media_by_type
 
 
 async def media_base_panel(message, state: FSMContext):
@@ -40,18 +40,18 @@ async def load_media_for_catalog(messages: List[types.Message], state: FSMContex
         await state.reset_state(with_data=False)
         await media_base_panel(message=messages[0], state=state)
         return
-    cat_name = fsm_data.get('cat_name')
-    await add_media_to_catalog(messages, bot=bot, catalog_name=cat_name)
+    cat_id = fsm_data.get('cat_name')
+    await add_media_to_catalog(messages, bot=bot, cat_id=cat_id)
     await state.reset_state(with_data=False)
     await FSMClient.add_delete_cat_media.set()
 
-    await messages[0].answer(text=f'Медіа додано у каталог "{cat_name}"', reply_markup=edit_catalog_kb)
+    await messages[0].answer(text=f'Медіа додано у каталог "{cat_id}"', reply_markup=edit_catalog_kb)
 
 
 async def catalog_list(call: types.CallbackQuery, state: FSMContext):
     from handlers.client import FSMClient
     await call.answer()
-    catalogs = catalog_list_json()
+    catalogs = await catalog_list_db()
     if catalogs:
         catalogs_kb = await catalog_paginate(state)
         catalogs_kb.add(back_to_base_menu_btn)
@@ -75,11 +75,11 @@ async def load_cat_name(message, state: FSMContext):
         await state.reset_state(with_data=False)
         await media_base_panel(message=message, state=state)
         return
-    if cat_name_exist(cat_name=message.text):
+    if await cat_name_exist(cat_name=message.text):
         await message.answer(text='Такий каталог вже існує.\n'
                                   'Введіть іншу назву:')
     else:
-        await save_cat_json(message.text, message=message)
+        await save_cat(message.text)
         await state.update_data(cat_name=message.text)
         await message.answer(f'Каталог "{message.text}" створено.\n'
                              f'🎞 Надішліть або перешліть сюди медіа.\n'
@@ -104,11 +104,10 @@ async def show_catalog_content(call: types.CallbackQuery, state: FSMContext):
     elif call.data == 'back_to_base_menu':
         await media_base_panel(call, state)
         return
-    cat_name = call.data
+    cat_id = call.data
 
-    catalog_data = await get_catalog(cat_name)
-
-    if any(catalog_data.get(data) for data in catalog_data):
+    catalog_data = await get_all_catalog_media(cat_id, with_text=True)
+    if catalog_data:
         await show_cat_content(message=call, catalog_data=catalog_data)
         await media_base_panel(message=call, state=state)
     else:
@@ -123,7 +122,7 @@ async def edit_catalog_list(call: types.CallbackQuery, state: FSMContext):
     from handlers.client import FSMClient
     await call.answer()
 
-    catalogs = catalog_list_json()
+    catalogs = await catalog_list_db()
 
     if catalogs:
         catalogs_kb = await catalog_paginate(state)
@@ -138,7 +137,6 @@ async def edit_catalog_list(call: types.CallbackQuery, state: FSMContext):
 
 
 async def choose_catalog(call: types.CallbackQuery, state: FSMContext):
-    print(call)
     fsm_data = await state.get_data()
     job_id = fsm_data.get('job_id')
     post_type = fsm_data.get('post_type')
@@ -184,12 +182,11 @@ async def media_type_from_cat(call: types.CallbackQuery, state: FSMContext):
     if not cat_name:
         cat_name = call.data
     await state.update_data(catalog_for_post=cat_name)
-    catalog_data = await get_catalog(cat_name)
-    catalog_data.pop('texts', None)
+    catalog_data = await get_all_catalog_media(cat_name)
 
-    if any(catalog_data.get(data) for data in catalog_data):
-        catalog = await get_catalog(cat_name)
-        cat_data_types = [media_type for media_type in catalog if catalog.get(media_type)]
+    if catalog_data:
+        catalog = await get_all_catalog_media(cat_name)
+        cat_data_types = {media.media_type for media in catalog}
         kb = await cat_types_kb(cat_data_types)
         kb.add(back_to_catalog)
         try:
@@ -199,7 +196,7 @@ async def media_type_from_cat(call: types.CallbackQuery, state: FSMContext):
         await FSMClient.media_type_add_from_cat.set()
     else:
         try:
-            catalogs = catalog_list_json()
+            catalogs = await catalog_list_db()
             if catalogs:
                 catalogs_kb = await catalog_paginate(state)
                 catalogs_kb.add(back)
@@ -224,9 +221,8 @@ async def choose_media_from_cat(call: types.CallbackQuery, state: FSMContext):
     if not cat_name:
         cat_name = fsm_data.get('choose_catalog')
 
-    catalog_data = await get_catalog(cat_name)
     await state.update_data(media_type_add_from_cat=call.data)
-    await show_cat_content(message=call, catalog_data=catalog_data, media_type=call.data)
+    await show_media_by_type(message=call, cat_id=cat_name, media_type=call.data)
 
     await call.message.answer(
         text='Надішліть номер медіа(або кілька номерів через пробіл), які бажаєте додати до посту:',
@@ -243,7 +239,7 @@ async def add_media_from_catalog(message: types.Message, state: FSMContext):
     cat_name = data.get('catalog_for_post')
     job_id = data.get('job_id')
     kb_inline = data.get('inline_kb')
-
+    print(data)
     # if job_id то дані будуть з джоба
     if job_id:
         job = scheduler.get_job(job_id)
@@ -254,66 +250,68 @@ async def add_media_from_catalog(message: types.Message, state: FSMContext):
             return
 
     elif isinstance(message, types.Message):
-        media_indexes = [int(x) - 1 for x in message.text.split(' ') if x.isdigit()]
-        messages = await get_media_from_base(message, cat_name, media_type, media_indexes)
-        media = data.get('loaded_post_files')
-        if not media:
-            media = types.MediaGroup()
-        if not messages:
-            return
-        if await restrict_media(messages=messages, state=state, data=data, post_formatting_kb=post_formatting_kb):
-            return
-        if media_type == 'voices':
+        media_indexes = [int(x) for x in message.text.split(' ') if x.isdigit()]
+        messages = await get_media_by_indexes(cat_name, media_indexes)
+        if messages:
+            media = data.get('loaded_post_files')
+            if not media:
+                media = types.MediaGroup()
+            # if await restrict_media(messages=messages, state=state, data=data, post_formatting_kb=post_formatting_kb):
+            #     return
+            if media_type == 'voice':
+                if job_id:
+                    data['voice'] = messages[0].file_id
+                    job.modify(kwargs={'data': data})
+                else:
+                    await state.update_data(voice=messages[0].file_id)
+
+                await message.answer_voice(voice=messages[0].file_id, reply_markup=kb_inline)
+                await message.answer(text='✅ Голосове додано до посту.', reply_markup=post_formatting_kb)
+                await state.reset_state(with_data=False)
+                return
+            elif media_type == 'video_note':
+                if job_id:
+                    data['video_note'] = messages[0].file_id
+                    job.modify(kwargs={'data': data})
+                else:
+                    await state.update_data(video_note=messages[0].file_id)
+                await message.answer_video_note(video_note=messages[0].file_id, reply_markup=kb_inline)
+                await message.answer(text='✅ Відеоповідомлення додано до посту.', reply_markup=post_formatting_kb)
+                await state.reset_state(with_data=False)
+                return
+
+            if media_type == 'video':
+                for video in messages:
+                    media.attach_video(video=video.file_id)
+            elif media_type == 'photo':
+                for photo in messages:
+                    media.attach_photo(photo=photo.file_id)
+            elif media_type == 'gif':
+                for document in messages:
+                    media.attach_document(document=document.file_id)
+            elif media_type == 'document':
+                for document in messages:
+                    media.attach_document(document=document.file_id)
+            set_caption(media=media, text=post_text)
             if job_id:
-                data['voice'] = messages[0].file_id
+                data['loaded_post_files'] = media
                 job.modify(kwargs={'data': data})
             else:
-                await state.update_data(voice=messages[0].file_id)
+                await state.update_data(loaded_post_files=media)
+            try:
+                await show_post(message, state)
+            except BadRequest:
+                await message.answer(text='❌ Цей тип медіа не може бути згрупований з попередніми медіа.')
+                media.media.pop()
 
-            await message.answer_voice(voice=messages[0].file_id, reply_markup=kb_inline)
-            await message.answer(text='✅ Голосове додано до посту.', reply_markup=post_formatting_kb)
-            await state.reset_state(with_data=False)
-            return
-        elif media_type == 'video_notes':
             if job_id:
-                data['video_note'] = messages[0].file_id
-                job.modify(kwargs={'data': data})
+                await message.answer(text='✅ Медіа змінено.', reply_markup=change_create_post_kb)
             else:
-                await state.update_data(video_note=messages[0].file_id)
-            await message.answer_video_note(video_note=messages[0].file_id, reply_markup=kb_inline)
-            await message.answer(text='✅ Відеоповідомлення додано до посту.', reply_markup=post_formatting_kb)
-            await state.reset_state(with_data=False)
+                await message.answer(text='✅ Медіа додано.\n'
+                                          'Оберіть варіант:', reply_markup=post_formatting_kb)
+        else:
+            await message.answer(text='Введіть допустимі значення:')
             return
-
-        if media_type == 'videos':
-            for video in messages:
-                media.attach_video(video=video.file_id)
-        elif media_type == 'photos':
-            for photo in messages:
-                media.attach_photo(photo=photo.file_id)
-        elif media_type == 'gifs':
-            for document in messages:
-                media.attach_document(document=document.file_id)
-        elif media_type == 'documents':
-            for document in messages:
-                media.attach_document(document=document.file_id)
-        set_caption(media=media, text=post_text)
-        if job_id:
-            data['loaded_post_files'] = media
-            job.modify(kwargs={'data': data})
-        else:
-            await state.update_data(loaded_post_files=media)
-        try:
-            await show_post(message, state)
-        except BadRequest:
-            await message.answer(text='❌ Цей тип медіа не може бути згрупований з попередніми медіа.')
-            media.media.pop()
-
-        if job_id:
-            await message.answer(text='✅ Медіа змінено.', reply_markup=change_create_post_kb)
-        else:
-            await message.answer(text='✅ Медіа додано.\n'
-                                      'Оберіть варіант:', reply_markup=post_formatting_kb)
     await state.reset_state(with_data=False)
 
 
@@ -356,11 +354,11 @@ async def edit_cat(call: types.CallbackQuery, state: FSMContext):
         await state.reset_state(with_data=False)
         await FSMClient.loaded_catalog_file.set()
     elif message_data == 'del_cat_media':
-        catalog_data = await get_catalog(cat_name)
+        catalog_data = await get_all_catalog_media(cat_name)
 
-        if any(catalog_data.get(data) for data in catalog_data):
-            catalog = await get_catalog(cat_name)
-            cat_data_types = [media_type for media_type in catalog if catalog.get(media_type)]
+        if catalog_data:
+            catalog = await get_all_catalog_media(cat_name)
+            cat_data_types = {media.media_type for media in catalog}
             kb = await cat_types_kb(cat_data_types)
             await call.message.edit_text(text='Що бажаєте видалити?', reply_markup=kb)
 
@@ -385,7 +383,7 @@ async def load_new_cat_name(message, state: FSMContext):
     from handlers.client import FSMClient
     if isinstance(message, types.Message):
         new_name = message.text
-        change_cat_name(cat_name=cat_name, new_name=new_name)
+        await change_cat_name(cat_id=cat_name, new_name=new_name)
         await state.update_data(cat_name=new_name)
         await message.answer(text=f'✅ Назву каталога змінено на {new_name}', reply_markup=edit_catalog_kb)
         await FSMClient.add_delete_cat_media.set()
@@ -405,9 +403,8 @@ async def catalog_remove_media_numder(call: types.CallbackQuery, state: FSMConte
     fsm_data = await state.get_data()
     cat_name = fsm_data.get('cat_name')
 
-    catalog_data = await get_catalog(cat_name)
     await state.update_data(catalog_media_type_remove=call.data)
-    await show_cat_content(message=call, catalog_data=catalog_data, media_type=call.data)
+    await show_media_by_type(message=call, cat_id=cat_name, media_type=call.data)
 
     await call.message.answer(text='Надішліть номер медіа, яке бажаєте видалити:\n'
                                    '<i>Якщо потрібно видалити кілька медіа, введіть номери через пробіл.</i>',
@@ -418,13 +415,12 @@ async def catalog_remove_media_numder(call: types.CallbackQuery, state: FSMConte
 
 async def remove_cat_media_by_number(message: types.Message, state: FSMContext):
     fsm_data = await state.get_data()
-    media_indexes = [int(x) - 1 for x in message.text.split(' ') if x.isdigit()]
+    media_indexes = [int(x) for x in message.text.split(' ') if x.isdigit()]
     cat_name = fsm_data.get('cat_name')
     media_type = fsm_data.get('catalog_media_type_remove')
     try:
-        remove_cat_media_json(cat_name, media_type, media_indexes)
-        catalog_data = await get_catalog(cat_name)
-        await show_cat_content(message, catalog_data)
+        await remove_cat_media_json(cat_name, media_indexes)
+        await show_media_by_type(message, cat_name, media_type)
         await message.answer(text='Медіа видалено', reply_markup=base_manage_panel_kb)
         await state.reset_state(with_data=False)
     except IndexError:
@@ -433,7 +429,7 @@ async def remove_cat_media_by_number(message: types.Message, state: FSMContext):
 
 async def delete_catalog_list(call: types.CallbackQuery, state: FSMContext):
     await call.answer()
-    catalogs = catalog_list_json()
+    catalogs = await catalog_list_db()
     if catalogs:
         catalogs_kb = await catalog_paginate(state)
         await call.message.edit_text(text='🗑 Оберіть каталог, який хочете видалити:\n'
@@ -455,7 +451,7 @@ async def delete_catalog(call: types.CallbackQuery, state: FSMContext):
         await update_page_num(data, call, state)
         await delete_catalog_list(call, state)
         return
-    delete_catalog_json(cat_name=cat_name)
+    await delete_catalog_json(cat_id=cat_name)
     await call.message.edit_text(text=f'Каталог {cat_name} видалено.', reply_markup=base_manage_panel_kb)
     await state.reset_state(with_data=False)
 

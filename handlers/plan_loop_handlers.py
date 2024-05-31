@@ -17,7 +17,7 @@ from aiogram_timepicker.panel import FullTimePicker, full_timep_callback
 from handlers.client import number_of_random_videos, FSMClient
 from keyboards.kb_client import post_formatting_kb, change_create_post_kb, media_kb, \
     plan_menu_kb, back_to_plan_menu, back
-from utils import send_message_time, send_message_cron, send_v_notes_cron
+from utils.utils import send_message_time, send_message_cron, send_v_notes_cron
 
 
 async def plan_menu(call: types.CallbackQuery, state: FSMContext):

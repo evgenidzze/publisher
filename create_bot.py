@@ -17,7 +17,6 @@ job_stores = {
 
 
 scheduler = ContextSchedulerDecorator(AsyncIOScheduler(jobstores=job_stores))
-# scheduler = AsyncIOScheduler(timezone='Europe/Kiev')
 storage = MemoryStorage()
 scheduler.start()
 
