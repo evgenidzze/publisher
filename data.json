@@ -2,14 +2,17 @@
     "users": {
         "397875584": "evgenidzee",
         "1311521096": "Im_Gods_Son",
-        "6204985621": "brianmclaurendaily"
+        "6204985621": "brianmclaurendaily",
+        "1249829378": "Nukess"
     },
     "admins": [
         "1311521096",
         "397875584"
     ],
     "channels": {
-        "397875584": {},
+        "397875584": {
+            "-1001967754187": "Schedule Test 1"
+        },
         "6204985621": {
             "-1001957709068": "AVIATOR | Sinais De Dinheiro",
             "-1001346929508": "🛩Aviator Signallari TEPAGA🚨",
@@ -17,7 +20,9 @@
             "-1001891933788": "Farrux | Tepaga VIP club 🎰",
             "-1001967754187": "Schedule Test 1",
             "-1001829624877": "🚨 TEPAGA | Aviator Signallari 🛩",
-            "-1001114705340": "👑RAEL MADRED | RASMIY"
+            "-1001114705340": "👑RAEL MADRED | RASMIY",
+            "-1001908138533": "TROUBLE JET. Hack 🇺🇿👨🏻‍💻",
+            "-1002135622348": "JOGO JET HACKEADO"
         },
         "1311521096": {
             "-1001971679480": "Aviator|VIDA Linda🏖",
@@ -26,7 +31,305 @@
         }
     },
     "catalogs": {
-        "FreeFly": {
+        "trash": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [
+                "DQACAgEAAxkBAAJZMWU6cYjBGgO0WZDZfzawU4TBevAGAAIiAwAChWrRRetS4Gk24qoLMAQ",
+                "DQACAgEAAxkBAAJZNGU6cc-Z55zQMeUwDdRm4JRHoqSJAAIPBAAChWrJReiZ5s4JcezlMAQ"
+            ]
+        },
+        "1502": {
+            "videos": [
+                "BAACAgUAAxkBAAJZh2U6eeBvj0FTIITM0eX3idBWR1L2AAJ_CgACJTLYVf9dhB4c5lTeMAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": []
+        },
+        "1735": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [
+                "CgACAgUAAxkBAAJZjmU6emyXcJUTVPxesB-liHUAAapflQACggoAAiUy2FU7qQb2W1jpbzAE"
+            ],
+            "video_notes": []
+        },
+        "Тепага с машиной (3 пост)": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJaUmU7esfy8BuDAlub1azl2_PxTe8LAAJQtjEbaETgVbWWsUFWhwyJAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJaW2U7ezmwd23gKHgBVOTxDClqcW7dAAJUtjEbaETgVf2_vtcF7y5SAQADAgADcwADMAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": []
+        },
+        "Видео Бэк с машиной": {
+            "videos": [
+                "BAACAgUAAxkBAAJaiWU7gJrxoN_SEBqXWCnNQxB-t_8wAAKiCgACaETgVVLWKssr7Cf6MAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": []
+        },
+        "Тепага с машиной (2 пост)": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJar2U7iZyFpfzsDhtTg9eICAgUwbzHAAJttjEbaETgVfzOMEjjq-cNAQADAgADcwADMAQ",
+                "AgACAgUAAxkBAAJasGU7iZyBTkOzUiQllVhFdTxggJWVAAJutjEbaETgVQitSsTggFylAQADAgADcwADMAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": []
+        },
+        "БР Футбол": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJdiWVA0ObG1ZrUevvPvzvT5hUpOubNAALsuDEbHlUJVn3T4cb7Xo-bAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJdjGVA0PEtcCR9WlKHe__2dvsR863lAALtuDEbHlUJVrG7Kb8wc7V3AQADAgADcwADMwQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": []
+        },
+        "VidaLinda Отзывы": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJfVmVCeTi0KGEbsnvgokRqcq8dZjtcAAKYuzEbwBMQVkZJ5tsVmfYoAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfWWVCeUN19nh6Ep68zTr7H8DQIvBsAAKZuzEbwBMQVlZbWHJoV_-vAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfYGVCeViWxkofMOA_ctB4FKzjD1h-AAKauzEbwBMQVnPQDw-e3V-5AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfY2VCeWPGuVvEOROA0-hUJF9F67XQAAKbuzEbwBMQVvJ0DYxNGc0mAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfZmVCeW6Fkj03lQrePPDs0aSwjmqeAAKcuzEbwBMQVmjlXdj1JY6vAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfaWVCeXeLwPktUuv6CpC-9K0O3u-dAAKduzEbwBMQVnTA7Gg8dRYHAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfbGVCeYBvIDL-4zj8rB1tCeaQc6gtAAKeuzEbwBMQVnf-pC52UFdgAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfb2VCeZLyeOaX6TDffnjViHDKb1JMAAKfuzEbwBMQVj2uXXXD99lAAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfcmVCeZ2uUJqVjoMwfvzpzwOJSu5UAAKguzEbwBMQVopvMWzZyHJlAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfdWVCffpnGBLn8QM8zlAQd5qVex9NAAKiuzEbwBMQVlnU3Rbn_4i-AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfeGVCfgdZUSoybfDnq583r8idsciJAAKjuzEbwBMQVoaKkhUEXfxPAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfe2VCfhJaIvIWcKUkZmpN78nUXKObAAKkuzEbwBMQVjQB0ib0gcR7AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJffmVCfh3aXpvvSBdKP-W8BJCqeTW7AAKluzEbwBMQVmxB9fZI8vqRAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfgWVCfihpBjoW47XGudVkRrIY83CHAAKmuzEbwBMQVoEq8TQ8CGAcAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfhGVCfjG0QO2dUEhndXjaAToQRaGEAAKnuzEbwBMQVpMomDLOd0KWAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfh2VCfkL64UhbB_eqOEZBLp8XLU8tAAKouzEbwBMQVpPEJfEIrLr6AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfimVCfkvQAti1MTJ1keJD4tchnQ8-AAKpuzEbwBMQVs7qT-EHJbokAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfjWVCfld6ncaq5Zln7kbweYxOR59GAAKquzEbwBMQVkWVsyG6wKQkAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfkGVCfnfdXaa6MAkNs0oQF-9TwPUwAAKruzEbwBMQVgqNakb0_7CZAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfk2VCfpM17opWQ7loFnQvKgtVeqzJAAKsuzEbwBMQVuTOru6EXBROAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJflmVCfp9lrsaKMAmwKOytGfb_inngAAKtuzEbwBMQVjjFYq3kEI_IAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfmWVCfqmp7rGrnCqXUBEtWCdGl6_-AAKuuzEbwBMQVknuHtJpl2g9AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfnGVCfrHDZJ3GxRxrZpbZw4QjSXr6AAKvuzEbwBMQVkoN_hNUC_QbAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfn2VCfrtszUHahNd1oCMCdoYrgmX3AAKwuzEbwBMQVv7ae485buzdAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfomVCfsbo-LUIe3pPCrLHHobIrne7AAKxuzEbwBMQVoc5hmRcM3QEAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfpWVCftG9qgABwWu22wAB8aeG6-UzrMoAArK7MRvAExBWgMM3cJPtDvYBAAMCAANzAAMzBA",
+                "AgACAgUAAxkBAAJfqGVCftrV3UNYS95ZWkLWvCtg8wqwAAKzuzEbwBMQVoxCQ_bsMWO3AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfq2VCfuXrK7qCusny_YhGaOx6eAd2AAK0uzEbwBMQVgVxC1a6pJAiAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfrmVCfvDqRi-4l5_E1eW72bBv5dTzAAK1uzEbwBMQVszBvYJVKxYXAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfsWVCfvhfKXiWLWncEjd83K6KGY7BAAK2uzEbwBMQViOAtnh1lmScAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJftGVCfwTRJFH_YrgxwkXUrLdC5AABQgACt7sxG8ATEFYWENINeMszVAEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJft2VCfxOvSV46fWFeHo7N9LxTZ3rvAAK4uzEbwBMQVkps5BleHi_8AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfumVCfx6STTCoH7QG24YcVXQhTJYLAAK5uzEbwBMQVjva1ESNXvdDAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfvWVCfyy6TtbRRCj9mRviJvuyF3TKAAK6uzEbwBMQVvUsmAZy1SjGAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfwGVCfzPsLipWoh2q6aYjs20AAaR-fgACu7sxG8ATEFbYMdeX2_R10wEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJfw2VCfzrldBAAAbPqIUZ02sERf11-UAACvLsxG8ATEFa7uLLaWasmyAEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJfxmVCf0MOwkXPvc42mq6Tj5iJH05tAAK9uzEbwBMQVupi5Le-JdgGAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfyWVCf0xHa-XjOJVd0x2_CBiUQ0_QAAK-uzEbwBMQVpFcOoJ-V8ZGAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfzGVCf28EgYmREqWApUPsGp6yCBXqAAK_uzEbwBMQVuX_gCLqKnpuAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJfz2VCf4ZbVjJyoQQwHmQNagMCvHYfAALAuzEbwBMQVoVA_qv46OjKAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJf0mVCf5UYHc7x47uLamiKZ99cWGU0AALBuzEbwBMQVvvZvPybQyCrAQADAgADcwADMwQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": []
+        },
+        "Vida Linda Кругляши с игрой": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [
+                "DQACAgIAAxkBAAJgBGVDZPLfXiWT7McGdjvlQIzYXcthAAKdPAACD78YSrcAAbmgrLIndzME",
+                "DQACAgIAAxkBAAJgB2VDZP8mbWjdlQ-gfsUTp26JLcOWAAKePAACD78YSjcgDlj_tpSOMwQ",
+                "DQACAgIAAxkBAAJgCmVDZRVYD_6BbMushKScmljuIk65AAKfPAACD78YSv3nqHpK1SuFMwQ",
+                "DQACAgIAAxkBAAJgDWVDZSCtAvifWODAKlEbVsrFSXDqAAKgPAACD78YSpylc_XEB4llMwQ",
+                "DQACAgIAAxkBAAJgEGVDZTGBNm7NTUzfOKmAmY2YZyRWAAKjPAACD78YSsjyIFv2R2rBMwQ",
+                "DQACAgIAAxkBAAJgE2VDZZtApleFPUcMrIznQA3AtC0EAAKkPAACD78YSgnagt17eArAMwQ",
+                "DQACAgIAAxkBAAJgFmVDZapCXX8G4qXg5l4kJPZw7-RRAAKlPAACD78YSmeQl2nivCIhMwQ",
+                "DQACAgIAAxkBAAJgGWVDZdTMoDRL7ZbIRcS9sFOCq0KQAAKmPAACD78YSgyXMGhXhy_uMwQ",
+                "DQACAgIAAxkBAAJgHGVDZgYdZeTrDFmnRzXSYQFZ3cyJAAKnPAACD78YSjdLqPFkAAHnTDME",
+                "DQACAgIAAxkBAAJgH2VDZjyLOR6XgvNTiKYAAQzLmvFgLAACqDwAAg-_GErfeBja-BWKyTME",
+                "DQACAgIAAxkBAAJgImVDZkkPgLtQDwUUKdixyBEFP6DSAAKpPAACD78YSqY2xZBIKYuSMwQ"
+            ]
+        },
+        "Отзывы Бразилия": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJh2GVDp1gY8twWGrAUl4WR0hFjA958AAIzvDEbtGIhVj0u6WngYZNqAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJh22VDp18tgmp84mSOvNQ9iiGtD6aoAAI0vDEbtGIhVvYsi_PX3mEYAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJh3mVDp2Svl0hFqOPNI0Ul1PYrgCHAAAI1vDEbtGIhVqqJ5L-wLiU2AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJh4WVDp2rdRoYLvtSZ0SdP0uL0qssmAAI2vDEbtGIhVrs1_KasUBTeAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJh5GVDp26iT2ndAchwzCufBlEmMjnDAAI3vDEbtGIhViAt-vxGSgohAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJh52VDp3O_nhZHhl0aH5tD6ltu0WLKAAI4vDEbtGIhVu4cTTEFxPb6AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJh6mVDp3iSnhdr5tJvSo1Y1Qa_HHQcAAI5vDEbtGIhVvfMc2NA5ZjuAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJh7WVDp3t4NIpIi2P417DZirGRyqlVAAI6vDEbtGIhVldCTCQIZJpCAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJh8GVDp4Hvr9Pxgl_RnRRTFOuRGB74AAI7vDEbtGIhVlhYKlwlccO2AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJh82VDp4bu0TIzl94__Qp2rmkVijbTAAI8vDEbtGIhVoa7GQTGI6RpAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJh9mVDp4q6FAm_hP749V6xhcbcDy_uAAI9vDEbtGIhVrzRMlzD6-aZAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJh-WVDp47KWMe72PBdOno_nWHvOjB-AAI-vDEbtGIhVmqqeWsVceiNAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJh_GVDp5P2Jhq1JbavplzXNRwO66zwAAI_vDEbtGIhVvFFlIW1f9nxAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJh_2VDp5gnSF7HiTd6vYiAI31qb463AAJAvDEbtGIhVlzh0A2q_VgzAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiAmVDp527c8g1pBiWfvzBJBWsdGcMAAJBvDEbtGIhViRAG8N9tavpAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiBWVDp6J7FRsP_-OhDy-vPVjp-IwnAAJCvDEbtGIhVph-I5Y5ueDrAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiCGVDp6fM4qwQjgl3Eqbw5jaX_vBzAAJDvDEbtGIhVhN_WUCYlQeYAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiC2VDp6yz6wND7g9KqpcudEu6UJgdAAJEvDEbtGIhVtfGNdbZE8h-AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiDmVDp7F2o031PJeDxAuOOhaIO6epAAJFvDEbtGIhVtihOfe1i2GsAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiEWVDp7YnX8xJkqw_kK10XnPX0VyfAAJGvDEbtGIhVkcz7VO0epoJAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiFGVDp7veiNtg7OVH2xJ21paKwZ3lAAJIvDEbtGIhVgxzOAwr_73eAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiF2VDp792kdxgv5XlDNAe2kw_-8bUAAJJvDEbtGIhVmvem7BKYxPQAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiGmVDp8TDbMpgMB-w6okwLiyIVBGDAAJKvDEbtGIhVnab_2nNGGZ9AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiHWVDp8mEqXg3VTaBAmYgRT5lisZPAAJLvDEbtGIhVi7plAmZGwv1AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiIGVDp9Cba_Qmq11xCt7lbxlUB7G1AAJMvDEbtGIhViT_sFIjAAHVfQEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJiI2VDp9UtkkbjAYFB9Y-ce_jlIL24AAJNvDEbtGIhVuGiMvlYdL-kAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiJmVDp92WwI0ZCr-DnCgOMT2zdFLKAAJOvDEbtGIhVlHyF9jn3NPwAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiKWVDp-PELXb9WK_BkMP8ViKOlft1AAJPvDEbtGIhVjBWHeytxz06AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiLGVDp-sv2JvzkLqSeqQImzGAQC9fAAJQvDEbtGIhVnCBJf6jh-ioAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiL2VDp_ADajiMD_aIgO0WXf4kCz6cAAJRvDEbtGIhVoK57BVZQKcPAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiMmVDp_XTx5-CUuGIHg7qFx6GzmJHAAJSvDEbtGIhVodNBtHs_j7SAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiNWVDp_qPsCa5V6GjdxXLP3FIcxgpAAJTvDEbtGIhVkEFxNAeSIfMAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiOGVDp_70-KrsMR3jXwABxB1diHRoZgACubsxG8ATEFY72tREjV73QwEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJiO2VDqAODJm-mTWhqA767xOfwFdnuAAJUvDEbtGIhVsZZK6WfPK9JAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiPmVDqAfUqIPDVSPHrjZQh0jOt58AA1W8MRu0YiFWXxkDNbwG_pkBAAMCAANzAAMzBA",
+                "AgACAgUAAxkBAAJiQWVDqAxdn-Exe-0VyflAhgs6bNlEAAJWvDEbtGIhVpArRZGiF5MBAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiRGVDqBK5Jk75BQr9--OZjn8tl2aCAAJXvDEbtGIhVlPuEg2gHK_5AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiR2VDqBb3WpAVO2-iHT5C_EK1CPe-AAJYvDEbtGIhVohp0s5q8g7XAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiSmVDqBoFDc65Rb5jT0QahsoMRYG4AAJZvDEbtGIhVsiklHL7YKKzAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiTWVDqB42LLiCP91XFaZx5XH_q5M2AAJavDEbtGIhVuHcD7M5UtkBAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiUGVDqCQUmbG4duQpzMQYb-TKxneaAAJbvDEbtGIhVlLbR9E5Z_DaAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJiU2VDqCqQlwO4Z5iL3B-ohdiSR8_RAAJcvDEbtGIhVpjM7X6v1R2nAQADAgADcwADMwQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "БР инструкции по частым вопросам": {
+            "videos": [
+                "BAACAgUAAxkBAAJixWVDr1R509EEslQ0qI4gylI08CBGAALTDAACtGIhVul_dvDtZ1xyMwQ",
+                "BAACAgUAAxkBAAJiyGVDr8P75pMTv3-Sc1Af8eUQIlSHAALVDAACtGIhVlcNO0YXxeHEMwQ",
+                "BAACAgUAAxkBAAJiy2VDsMMIp0gjhHogvAINDLqDPvC3AALXDAACtGIhVt-bmHpAyNHWMwQ",
+                "BAACAgUAAxkBAAJizmVDsN2T0iVqnHrI3zfTjEtjXeaFAALYDAACtGIhVvv9YF-7HxW8MwQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "БР Цитаты перед кефом": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJjRGVDtrYKNQxzuvroLF97xYfATl3SAAJ2vDEbtGIhVjqVgWKY6AKSAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjR2VDtrtlP-Q_92bTGKt5H3t1Ks2SAAJ3vDEbtGIhVvalXNVg62uNAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjSmVDtsA-Gp-IPHUVjkBxtEGQMgKnAAJ4vDEbtGIhVsIGrVo4KiWDAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjTWVDtsZhawF58iKomW_y2tB5cmy7AAJ5vDEbtGIhVtrUgnEuLMneAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjUGVDtsx3QsvUnHbTwA-9HU-RAAFz0AACerwxG7RiIVa0St_TJD1PPgEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJjU2VDttEK2hJsiwSVM6zzeQUz3JowAAJ7vDEbtGIhVqXhbA1ED17uAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjVmVDtth6LbxsDqOKsYL0aQNH85HAAAJ8vDEbtGIhVgIhKciKrEIfAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjWWVDtt3qqhbVEqSyHPDgg3UhBenSAAJ9vDEbtGIhVoF-8G_78JzzAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjXGVDtuTMKff4uFjJfkAyu5OYCKZIAAJ-vDEbtGIhVs5ERS_mxoEPAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjX2VDtulJT_-FcGsUTK4FICH8lS1SAAJ_vDEbtGIhVrzluwABWbHfOQEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJjYmVDtvAkTO67iPkpvDc12maC-CBsAAKAvDEbtGIhVr-l0TTkMuRTAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjZWVDtvens7uEdOguz3clXj7TMLwjAAJ2vDEbtGIhVjqVgWKY6AKSAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjaGVDtv0hTDIAATrNmSU33una81in8wACgbwxG7RiIVZ0ZNRl7jfHaAEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJja2VDtwIzq4oY8dLjXCJW20vVRgvUAAKCvDEbtGIhVjw44M9H61xWAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjbmVDtwe2-Sz1PFB91HzWqSMC8wpWAAJ_vDEbtGIhVrzluwABWbHfOQEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJjcWVDtwyeYsO1dPVZnkLkzASnu3thAAKAvDEbtGIhVr-l0TTkMuRTAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjdGVDtxTvKLbRt-sja5xOlawo6uQDAAKBvDEbtGIhVnRk1GXuN8doAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjd2VDtxnqyHox2Y-ppU0osgRtTbkHAAKCvDEbtGIhVjw44M9H61xWAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjemVDtx4s3phSUS_w2RK81lxWuJ96AAKDvDEbtGIhVvVkRed5a4f0AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjfWVDtyMSDrBKjOj2KaoTyiDhhx5JAAKEvDEbtGIhVnB8yeT-qsJLAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjgGVDtymcFr6au5vV7UCEIh4CWIVGAAKFvDEbtGIhVsDEDZ522FzeAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjg2VDty0vXlxI0QqGKfQRsjzaBYb1AAKGvDEbtGIhVm950WAy9JeSAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjhmVDtzy3a0F2BrfWdhWKLrhI3vuBAAKHvDEbtGIhVoBEeWhVeEnBAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjiWVDt0J66NMc5aQF2topkab7-BM3AAKIvDEbtGIhVju19epFJFteAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjjGVDt1fYW5fYAWfGezsJiheHk4S_AAKJvDEbtGIhVsRUYsUAAWKoNwEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJjj2VDt17vQX-9p2yTlM_tU7H1jORdAAKKvDEbtGIhVuIPNmKYbkACAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjkmVDt2S-dv0yFFI2IZql4PcWSCj2AAKLvDEbtGIhVpO1M2A9SHJRAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjlWVDt2ncad21ha4IDZ22BxfmBTalAAKMvDEbtGIhVqYTwFbPY8ZQAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjmGVDt26VBGrTp-c8vk3k7a_eFzxMAAKNvDEbtGIhVuwRa_becw5lAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjm2VDt3RlrYBKnFnTGEmQAdJYJCYyAAKOvDEbtGIhVtOGJs_xVe4bAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjnmVDt3rlGX0wbIu9oWkYWEGGEznpAAKPvDEbtGIhVlVO3fPJR9KDAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjoWVDt3-FEXKc8uY5vqF2Eqc27KbNAAKQvDEbtGIhVmwn5OW7-_2tAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjpGVDt4VKyH-xC82SoieJUVlY5iQKAAKRvDEbtGIhVlTzZ48E0ihxAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjp2VDt4qK-cZZaXdNFr__mvt3xgN2AAKSvDEbtGIhVsqb-fAGGS_5AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjqmVDt5EXloldMItTTi4AAWWKxx45oAACf7wxG7RiIVa85bsAAVmx3zkBAAMCAANzAAMzBA",
+                "AgACAgUAAxkBAAJjrWVDt5ZaEyLxf6DBpI8hZApf04c2AAKAvDEbtGIhVr-l0TTkMuRTAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjsGVDt5t7PgSOnOdMvruHfUNlCG-9AAJ2vDEbtGIhVjqVgWKY6AKSAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjs2VDt6D-wrhA9vQKQByHLQ8bNwyuAAKBvDEbtGIhVnRk1GXuN8doAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJjtmVDt6ZWEBav8naVrLdlZjn8-Gt3AAKCvDEbtGIhVjw44M9H61xWAQADAgADcwADMwQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "FreeFly Текста": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🤝 Hurmatli obunachilar, men sizlarning har biringizni qadrlayman va bu yerda Aviator ajoyib vaqt o'tkazish va... kartadagi daromadlar ekanligini biladigan,aql bovar qilmaydigan miqdordagi ajoyib odamlarni to'plaganimdan juda minnatdorman.\n\nShuning uchun sizlarga syurprizim bor. qanaqa? Viks veb-saytidan reklama! Sizda Aviator bilan bepul parvozlar ega bo'lish imkoniyati mavjud!\n\nNima qilish kerak?\n\n☝️Ushbu havola orqali saytga o'ting:\n🎉 Bonusni faollashtiring!\n💸 Hisobingizni 125 000 so‘mga to‘ldiring\n✈️ Aviatorda 10 ta bepul parvozga ega bo'ling!\n🤩 Natijada: hisobingizda 125 000 va 10 ta parvozlar bo'ladi.\n📍Aksiya faqat obunachilarim uchun amal qiladi!",
+                "❗️Aviatorda bepul parvozlarni olishni xohlaysizmi?\n\nEndi bu mumkin! Ushbu oddiy ko'rsatmalarga amal qiling, bonusingizni hoziroq oling va katta yutiqlarga imkoniyatingizni oshiring!\n\n👀Ushbu havolaga oʻting:\n⚡️Bonusni faollashtiring\n💵Depozitingizni 125 000 so‘mga to‘ldiring\n🔥Qo'shimcha 10 ta bepul parvozga ega bo'ling!\n\n❗️❗️Aksiya faqat obunachilarim uchun❗️❗️",
+                "Siz ajoyib yangiliklardan xabardormisiz?\n\n🔥 Mening obunachilarim uchun qaynoq eksklyuziv: Aviator bilan bepul parvozlar ko'rinishidagi bonusdan bahramand bo'lishingiz mumkin! Ha, ha, to'g'ri, men ham xursandman!\n\nQanday qilib bepul parvozlar olish mumkin?\n\n➡️ Ushbu havola orqali Viks veb-saytiga kiring:\n📌 Istagan bonusni faollashtiring!\n🔼 Hisobingizni 125 000 so'mga to'ldiring\n😍 Mukofot sifatida 10 ta bepul parvozga ega bo'ling!\n🔥 Natija: hisobingizda 125 000 so'm va 10 ta parvozlar mavjud.\n\n❗️Taklif cheklangan! Aksiya  vaqti 3 kun❗️"
+            ]
+        },
+        "Farrux Приложение": {
+            "videos": [
+                "BAACAgUAAxkBAAJkkmVDymFtlofUe3YoMpiQjriN78I_AAL4DAACtGIhVseLQX9ucm5gMwQ",
+                "BAACAgUAAxkBAAJklWVDyp16VxBNJp_wkT6zbMlmHmjYAAIBDQACtGIhVp8EDPHMvJF7MwQ",
+                "BAACAgUAAxkBAAJkmGVDytGamI40m8pvXf9quLJtTXtEAAICDQACtGIhVtTuPwNwc366MwQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "FreeFly Дневные": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🤝 Hurmatli obunachilar, men sizlarning har biringizni qadrlayman va bu yerda Aviator ajoyib vaqt o'tkazish va... kartadagi daromadlar ekanligini biladigan,aql bovar qilmaydigan miqdordagi ajoyib odamlarni to'plaganimdan juda minnatdorman.\n\nShuning uchun sizlarga syurprizim bor. qanaqa? Viks veb-saytidan reklama! Sizda Aviator bilan bepul parvozlar ega bo'lish imkoniyati mavjud!\n\nNima qilish kerak?\n\n☝️Ushbu havola orqali saytga o'ting:\n🎉 Bonusni faollashtiring!\n💸 Hisobingizni 125 000 so‘mga to‘ldiring\n✈️ Aviatorda 10 ta bepul parvozga ega bo'ling!\n🤩 Natijada: hisobingizda 125 000 va 10 ta parvozlar bo'ladi.\n📍Aksiya faqat obunachilarim uchun amal qiladi!",
+                "❗️Aviatorda bepul parvozlarni olishni xohlaysizmi?\n\nEndi bu mumkin! Ushbu oddiy ko'rsatmalarga amal qiling, bonusingizni hoziroq oling va katta yutiqlarga imkoniyatingizni oshiring!\n\n👀Ushbu havolaga oʻting:\n⚡️Bonusni faollashtiring\n💵Depozitingizni 125 000 so‘mga to‘ldiring\n🔥Qo'shimcha 10 ta bepul parvozga ega bo'ling!\n\n❗️❗️Aksiya faqat obunachilarim uchun❗️❗️",
+                "Siz ajoyib yangiliklardan xabardormisiz?\n\n🔥 Mening obunachilarim uchun qaynoq eksklyuziv: Aviator bilan bepul parvozlar ko'rinishidagi bonusdan bahramand bo'lishingiz mumkin! Ha, ha, to'g'ri, men ham xursandman!\n\nQanday qilib bepul parvozlar olish mumkin?\n\n➡️ Ushbu havola orqali Viks veb-saytiga kiring:\n📌 Istagan bonusni faollashtiring!\n🔼 Hisobingizni 125 000 so'mga to'ldiring\n😍 Mukofot sifatida 10 ta bepul parvozga ega bo'ling!\n🔥 Natija: hisobingizda 125 000 so'm va 10 ta parvozlar mavjud.\n\n❗️Taklif cheklangan! Aksiya  vaqti 3 kun❗️"
+            ]
+        },
+        "FreeFly Вечерние": {
             "videos": [],
             "photos": [],
             "voices": [],
@@ -38,6 +341,1725 @@
                 "Siz ajoyib yangiliklardan xabardormisiz?\n\n🔥 Mening obunachilarim uchun qaynoq eksklyuziv: Aviator bilan bepul parvozlar ko'rinishidagi bonusdan bahramand bo'lishingiz mumkin! Ha, ha, to'g'ri, men ham xursandman!\n\nQanday qilib bepul parvozlar olish mumkin?\n\n➡️ Ushbu havola orqali Viks veb-saytiga kiring:\n📌 Istagan bonusni faollashtiring!\n🔼 Hisobingizni 125 000 so'mga to'ldiring\n😍 Mukofot sifatida 10 ta bepul parvozga ega bo'ling!\n🔥 Natija: hisobingizda 125 000 so'm va 10 ta parvozlar mavjud.\n\n❗️Taklif cheklangan! Aksiya  vaqti 3 kun❗️",
                 "🤝 Hurmatli obunachilar, men sizlarning har biringizni qadrlayman va bu yerda Aviator ajoyib vaqt o'tkazish va... kartadagi daromadlar ekanligini biladigan,aql bovar qilmaydigan miqdordagi ajoyib odamlarni to'plaganimdan juda minnatdorman.\n\nShuning uchun sizlarga syurprizim bor. qanaqa? Viks veb-saytidan reklama! Sizda Aviator bilan bepul parvozlar ega bo'lish imkoniyati mavjud!\n\nNima qilish kerak?\n\n☝️Ushbu havola orqali saytga o'ting:\n🎉 Bonusni faollashtiring!\n💸 Hisobingizni 125 000 so‘mga to‘ldiring\n✈️ Aviatorda 10 ta bepul parvozga ega bo'ling!\n🤩 Natijada: hisobingizda 125 000 va 10 ta parvozlar bo'ladi.\n📍Aksiya faqat obunachilarim uchun amal qiladi!"
             ]
+        },
+        "Farrux Бэк с машиной": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJpM2VIssa35qbw7dBrkg8xvwh7ytdcAALNwTEb3yNAVmTVdwiMB17kAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJpNmVIstAk6nm6xngypgMMxAE47gVWAALOwTEb3yNAVhQ6NhZOMdm8AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJpOWVIstZCHQABx8ITse8VaRRpu2ydLwACz8ExG98jQFZN-raXYJR6YQEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJpPGVIstw0DmkKm87XUrtk9hlU-xQsAALQwTEb3yNAVrnOySlEPRzWAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJpP2VIsuOkX4zgqKKYj8PapljP4vjyAALRwTEb3yNAVs5S5Uoa6dZXAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJpQmVIsur4ObPwbh7k8KR0w_MeFgSdAALSwTEb3yNAVthw0y9TAdgtAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJpRWVIsvGVAS0Vky9b6g9O6iSFGlNSAALTwTEb3yNAVukYlL1JOmNHAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJpSGVIsvfGpnw7nXynvkup8oD2hguOAALUwTEb3yNAVmeIlk9AeXfxAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJpWmVIsyJnmCkuRK0W_ji1jrIqOOpfAALWwTEb3yNAVtXh1-lqYIT6AQADAgADcwADMwQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "Kechki shahar chiroqlari.\nBugun kechqurun katta g'alabalar uchun o'zimizni to'ldiraylik.\n“Farruh bilan parvoz” deb shaxsiy-ga yozing - biz birgalikda parvozda pul ishlaymiz.",
+                "Tun - katta stavkalarni qo'lga olish uchun eng yaxshi vaqt.\n\"Farruh bilan parvoz\" deb yozing - men sizga qanday qilib onlayn parvoz qilishimiz mumkunligini aytib beraman"
+            ]
+        },
+        "Цитаты Фаррух": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "Imkoniyatlar o'z-o'zidan paydo bo'lmaydi - ularni siz yaratasiz",
+                "Muvaffaqiyat odatda juda band bo'lganlarga keladi,shunchaki kutish uchun",
+                "Muvaffaqiyatli bo'lish uchun pul ta'qib qilishni to'xtating, orzuingiz uchun harakat qiling",
+                "Yaxshilik uchun yaxshilikni qurbon qilishdan qo'rqmang.",
+                "Ikki xil odamlar borki, siz biror narsaga erisha olmaysiz, deb aytadilar: O'zlari esa sinab korishdan qo'rqadiganlar yoki muvaffaqiyatga erishishingizdan qo'rqadiganlar.",
+                "Muvaffaqiyatli odamlar muvaffaqiyatsiz odamlar qilishni istamagan narsani qilishadi. Osonroq bo'lishga intilmang, yaxshiroq bo'lishga intiling.",
+                "Ko'p odamlar muvaffaqiyatga ikki qadam qolganda taslim bo'lishi sababli muvaffaqiyatsizlikka uchrashadi",
+                "Investitsiya - bu o'zingizni haqligingizni isbotlashdan oldin uzoq vaqt davomida haqiqatan ham ahmoq bo'lib ko'rinishingiz mumkin bo'lgan biznes.",
+                "Doimiy g'alaba qozonish istagidan farqli o'laroq, bitta g'alaba muvaffaqiyatga olib kelmaydi",
+                "Orzularingizni amalga oshiring yoki kimdir sizni o'z orzularini amalga oshirish uchun yollaydi.",
+                "Muvaffaqiyat - bu zinapoya, qo'l cho'ntagingizda  bo'lib unga ko'tarila olmaysiz",
+                "Har doim esda tutingki, muvaffaqiyatga erishish uchun sizning qat'iyatingiz hamma narsadan muhimroqdir.",
+                "Men omadga qat'iy ishonaman va men qanchalik ko'p ishlasam, shunchalik omadli ekanligini payqadim.",
+                "Bugun boshqalar istamagan narsani qiling, ertaga siz boshqalar yashay olmaydigan narsani yashaysiz",
+                "Muvaffaqiyat sizning maqsadlaringizga erishish uchun yengishingiz kerak bo'lgan to'siqlar bilan o'lchanishi kerak.",
+                "Har bir orzu sizga uni amalga oshirish uchun zarur bo'lgan kuchlar bilan birga beriladi. Biroq, buning uchun siz qattiq ishlashingiz kerak bo'lishi mumkin",
+                "Agar siz qirg'oqni yo'qotishdan qo'rqsangiz, hech qachon okean bo'ylab suzmaysiz.",
+                "Biz qat'iyatli bo'lish uchun tug'ilganmiz, chunki faqat qat'iyatlilik orqali biz haqiqatan ham nimaga loyiq ekanligimizni bilamiz.",
+                "Agar siz oxirigacha bormasangiz, nega buni qilyapsiz?",
+                "Qilaolshingizga Ishonavering va allaqachon yo'lning yarmi yurilgan",
+                "Agar siz har safar kimdir sizni haqorat qilganda yoki tupurganida to'xtasangiz, unda siz borish kerak bo'lgan joyga hech qachon yetib borolmaysiz.",
+                "Siz abadiy yashayotgandek orzu qiling. Bugun o'layotgandek yashang",
+                "Ajoyib ishlarni qilish kerak, ular haqida to'xtamay o'ylamaslik kerak",
+                "O'zini oqlash - bu o'zingizga aytadigan yolg'ondir. No'xat qilishni, shikoyat qilishni va bolalar kabi harakat qilishni bas qiling. Oqlashlik odamni kambag'al qiladi",
+                "Qiyinchiliklarga duch kelmagan kishi kuchni bilmaydi",
+                "Yo siz kunni boshqarasiz yoki kun sizni boshqaradi",
+                "Xatolaringizdan saboq oling, ularni tan oling va davom eting",
+                "Eng katta xavf - bu tavakkal qilishdan qo'rqish",
+                "O'zingizga va orzuingizga qattiq ishonsangiz, kimligingiz muhim emas."
+            ]
+        },
+        "Бэк отобранные": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJrUmVLUref--7P4dIpW9LcO4sHlr4yAAKxtTEbQmlYVj_jaRxx_UI1AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJrVWVLUr8mVn9JVMrIzGtP3cN2_KBqAAKytTEbQmlYVkEQCncAAVyo4AEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJrWGVLUsYWKXY1QXVP_mK1Mrp9l1RkAAKztTEbQmlYVm6XwwKYIdxJAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJrW2VLUs0tkyZd0YgL_g4Fjn7wryBxAAK0tTEbQmlYVkyk0XySD-w_AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJrXmVLUtS8JtYY8kopDr3iW0T8oEJwAAK1tTEbQmlYVsNUFJxhVR0KAQADAgADcwADMwQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Кнопки с призывом": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "Sizga yutishni o'rgataman!",
+                "Havola bo'yicha o'ting va hayotingizni o'zgartiring",
+                "Moliyaviy ozodlikga eshikni oching",
+                "Millioner bo'lish imkoniyatini o'zingizga sovg'a qiling",
+                "Muvaffaqiyat va boylik imkoniyatingizni oshiring",
+                "Qadam tashlang",
+                "Ko'proq istasangiz- hammasi sizga bog'liq!"
+            ]
+        },
+        "123": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "Ikki xil odamlar borki, siz biror narsaga erisha olmaysiz, deb aytadilar: O'zlari esa sinab korishdan qo'rqadiganlar yoki muvaffaqiyatga erishishingizdan qo'rqadiganlar."
+            ]
+        },
+        "Тепага 13:30 Пост1": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJuGmVM3ooM2G1xvpg_WsqwDOKV6Gm6AAL5uTEbJCNoVuA5ZZ61RR-YAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJuHWVM3pSKYE7y9kr6z4f0-QK6yuj8AAL6uTEbJCNoVnxw7BceikKyAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJuIGVM3qHF78K-g_g4m9jI73nRqikUAAL7uTEbJCNoVrK8qGbImyDpAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJuI2VM3qn8HRRrwt78K5eUhbNdHGqrAAL8uTEbJCNoVmc9ihivLxi2AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJuJmVM3rMSC0JRLgfiqOkFIKLd8kuKAAL9uTEbJCNoVoxn7frJUxLOAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJuKWVM3rrzh15YA-0gGsKqLiqDSExlAAL_uTEbJCNoVjBCawafySCYAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJuLGVM3sHdjnF8xi5yIduxHo1rCt4GAAO6MRskI2hWZ3bTB9S3pcYBAAMCAANzAAMzBA",
+                "AgACAgUAAxkBAAJuL2VM3sizXt-2B8y9TQLmN9yqpynDAAIBujEbJCNoVm5GYLQI6UM4AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJuMmVM3tE23WxT3dZSYRH3qfFLOBtCAAICujEbJCNoVopT_TVh038XAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJuNWVM3tsJWL63_kb-ErjD8_sNF0HWAAIDujEbJCNoVhYYyDDhhKafAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJuOGVM3vSTbn2Vx6NaFeuLKAE2lDpCAAIEujEbJCNoVlcqnnBCFldIAQADAgADcwADMwQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "Bugun ajoyib ob-havo! Men parkda qahva bilan aylanishga qaror qildim. Hammaningizni yaxshi ko'raman!",
+                "☀️ Bugun ajoyib ob-havo! Men parkda qahva bilan aylanishga qaror qildim. ☕️ Hammaningizni yaxshi ko'raman!",
+                "🔥 Bugun ajoyib ob-havo! Men parkda qahva bilan aylanishga qaror qildim. 😎 Hammaningizni yaxshi ko'raman!"
+            ]
+        },
+        "Тепага 13:30 Пост2": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJuU2VM4nTlleiMZF__OEwNDcScsZs9AAIJujEbJCNoViTruMCOYeItAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJuVmVM4ovnzj2FMaZ65ca0yjNDaEdQAAIKujEbJCNoVs85kvC_zLXBAQADAgADcwADMwQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🍂 Men kuzni rang-barang ranglar va oyoqlarim ostidagi barglarning shitirlashi uchun yaxshi ko'raman. Ular menga 💸💸💸 shovqinini eslatadi."
+            ]
+        },
+        "Фразы для креативов": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "Imkoniyatlar o'z-o'zidan paydo bo'lmaydi - ularni siz yaratasiz",
+                "Muvaffaqiyat odatda juda band bo'lganlarga keladi,shunchaki kutish uchun",
+                "Muvaffaqiyatli bo'lish uchun pul ta'qib qilishni to'xtating, orzuingiz uchun harakat qiling",
+                "Yaxshilik uchun yaxshilikni qurbon qilishdan qo'rqmang.",
+                "Ikki xil odamlar borki, siz biror narsaga erisha olmaysiz, deb aytadilar: O'zlari esa sinab korishdan qo'rqadiganlar yoki muvaffaqiyatga erishishingizdan qo'rqadiganlar.",
+                "Muvaffaqiyatli odamlar muvaffaqiyatsiz odamlar qilishni istamagan narsani qilishadi. Osonroq bo'lishga intilmang, yaxshiroq bo'lishga intiling.",
+                "Ko'p odamlar muvaffaqiyatga ikki qadam qolganda taslim bo'lishi sababli muvaffaqiyatsizlikka uchrashadi",
+                "Investitsiya - bu o'zingizni haqligingizni isbotlashdan oldin uzoq vaqt davomida haqiqatan ham ahmoq bo'lib ko'rinishingiz mumkin bo'lgan biznes.",
+                "Doimiy g'alaba qozonish istagidan farqli o'laroq, bitta g'alaba muvaffaqiyatga olib kelmaydi",
+                "Orzularingizni amalga oshiring yoki kimdir sizni o'z orzularini amalga oshirish uchun yollaydi.",
+                "Muvaffaqiyat - bu zinapoya, qo'l cho'ntagingizda  bo'lib unga ko'tarila olmaysiz",
+                "Har doim esda tutingki, muvaffaqiyatga erishish uchun sizning qat'iyatingiz hamma narsadan muhimroqdir.",
+                "Men omadga qat'iy ishonaman va men qanchalik ko'p ishlasam, shunchalik omadli ekanligini payqadim.",
+                "Bugun boshqalar istamagan narsani qiling, ertaga siz boshqalar yashay olmaydigan narsani yashaysiz",
+                "Muvaffaqiyat sizning maqsadlaringizga erishish uchun yengishingiz kerak bo'lgan to'siqlar bilan o'lchanishi kerak.",
+                "Har bir orzu sizga uni amalga oshirish uchun zarur bo'lgan kuchlar bilan birga beriladi. Biroq, buning uchun siz qattiq ishlashingiz kerak bo'lishi mumkin",
+                "Agar siz qirg'oqni yo'qotishdan qo'rqsangiz, hech qachon okean bo'ylab suzmaysiz.",
+                "Biz qat'iyatli bo'lish uchun tug'ilganmiz, chunki faqat qat'iyatlilik orqali biz haqiqatan ham nimaga loyiq ekanligimizni bilamiz.",
+                "Agar siz oxirigacha bormasangiz, nega buni qilyapsiz?",
+                "Qilaolshingizga Ishonavering va allaqachon yo'lning yarmi yurilgan",
+                "Agar siz har safar kimdir sizni haqorat qilganda yoki tupurganida to'xtasangiz, unda siz borish kerak bo'lgan joyga hech qachon yetib borolmaysiz.",
+                "Siz abadiy yashayotgandek orzu qiling. Bugun o'layotgandek yashang",
+                "Ajoyib ishlarni qilish kerak, ular haqida to'xtamay o'ylamaslik kerak",
+                "O'zini oqlash - bu o'zingizga aytadigan yolg'ondir. No'xat qilishni, shikoyat qilishni va bolalar kabi harakat qilishni bas qiling. Oqlashlik odamni kambag'al qiladi",
+                "Qiyinchiliklarga duch kelmagan kishi kuchni bilmaydi",
+                "Yo siz kunni boshqarasiz yoki kun sizni boshqaradi",
+                "Xatolaringizdan saboq oling, ularni tan oling va davom eting",
+                "Eng katta xavf - bu tavakkal qilishdan qo'rqish",
+                "O'zingizga va orzuingizga qattiq ishonsangiz, kimligingiz muhim emas."
+            ]
+        },
+        "Тексты про Vip-Канал": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [
+                "CgACAgUAAxkBAAJvQmVM-WjnVffHdltspGW4f_vA8Y69AAJkDQACJCNoVgg9cNgnpYTRMwQ"
+            ],
+            "video_notes": [],
+            "texts": [
+                "Do'stlar, sizlarga yangiligim bor! Agar signallarni kechayu kunduz va mutlaqo bepul qabul qilishingiz mumkinligini aytsam-chi? Ayniqsa, obunachilarim uchun signallar uzluksiz chiqadigan VIP kanal yaratdim! Endi siz qoidalarni o'zingiz belgilashingiz va kunning istalgan vaqtida Aviator o'ynashingiz mumkin! Bu asosiy kanaldagi signallarni kuzatishga vaqtlari bo'lmaganlar uchun qulay. VIP kanalga kirish juda oson. Shaxsiyga menga VIP so'zini yozing va kirish huquqi sizniki bo'ladi!",
+                "Do'stlar, chin qalbimdan sizlarga o'z mahsulotlarimdan biri - VIP kanalni tavsiya qilmoqchiman. Signallar u yerda uzilishlarsiz chiqadi! Endi siz qayerdan, qachon va qancha pul ishlashingizni hal qilasiz. Aviatorni siz uchun qulay bo'lgan istalgan vaqtda va cheksiz miqdorda o'ynang. Men sizga ushbu eksklyuziv kanalga kirish imkoniyatini beraman, shunchaki shaxsiyga menga VIP so'zini yozing.",
+                "Istalgan vaqtda Aviator o'ynashni va pul ishlashni xohlaysizmi? ayniqsa, Aviatorning bunday muxlislari uchun men VIP kanalni taklif qilishim mumkin. Men uni o'zlariga qulay va har qanday sharoitda o'ynashlari uchun maxsus obunachilarim uchun yaratdim. Signallar u yerda 24/7 uzilishlarsiz chiqadi. Bu kanalga kirish juda oson. Menga shaxsiyga VIP so'zini yuboring va men sizga batafsil ko'rsatmalar beraman."
+            ]
+        },
+        "Farrux Бэк Приветствие": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [
+                "DQACAgIAAxkBAAJv1mVN7Wnqo_ANpdOFnFn1QDTNPDVBAAIfLwACNr_ZS7cDftxHauxsMwQ",
+                "DQACAgIAAxkBAAJv2WVN7XDHZoNyY49T-LauKt6_y_Q_AAIeLwACNr_ZS9TXwv5sSElHMwQ",
+                "DQACAgIAAxkBAAJv3GVN7XbkRd2OiqDsBBvXPgkF7xRGAAIdLwACNr_ZS7j1fxnpD2kcMwQ",
+                "DQACAgIAAxkBAAJv32VN7YAte4AEDZ4kLhbKXy5Mgg53AAIcLwACNr_ZS2PyZvvyPFjwMwQ",
+                "DQACAgIAAxkBAAJv4mVN7YY7TWzDKIfN__WvBF1qYal0AAIbLwACNr_ZSx1hud1k0jy2MwQ",
+                "DQACAgIAAxkBAAJv5WVN7YwRnAowv_WxZpDhNzcizPAgAAIaLwACNr_ZS9EfIPLo2vASMwQ",
+                "DQACAgIAAxkBAAJv6GVN7ZX3ZfK16rLfOxI2rTmLA2QiAAIYLwACNr_ZS-st6NkmxnV8MwQ",
+                "DQACAgIAAxkBAAJv62VN7fWB7a_V-LeqMr7fxcbyWuT8AAIXLwACNr_ZS24nRrAKJzKnMwQ",
+                "DQACAgIAAxkBAAJv7mVN7fsG9P1ltcqitFfO-39Dd8HgAAIWLwACNr_ZS-ZavA-tm_UHMwQ",
+                "DQACAgIAAxkBAAJv8WVN7gHn8DuFWFkuBZLfnvJG8GNGAAIVLwACNr_ZS77d94g0YRbUMwQ",
+                "DQACAgIAAxkBAAJv9GVN7hRrraTf-1pKSy0GfvO0iqQiAAIULwACNr_ZS7eCsGTGlz0VMwQ"
+            ],
+            "texts": []
+        },
+        "Farrux Бэк Прощальные": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [
+                "DQACAgIAAxkBAAJv-mVN8DjE0QVlWbHR3xddcwe8JWTgAAL2LgACNr_ZSzGzAAHEhOqEajME",
+                "DQACAgIAAxkBAAJv_WVN8ELKekuQ9Rr0fMK1iZFvT8IWAAL3LgACNr_ZS4Lvh7ehMYmdMwQ",
+                "DQACAgIAAxkBAAJwAAFlTfBJoPaiLqxETYhIsOopFzLX7AAC-C4AAja_2UtmRIEKyvSlAAEzBA",
+                "DQACAgIAAxkBAAJwA2VN8FHkuFWy1CxV8nUAAVMxYGh6ugAC-i4AAja_2UvSTJF3iRU80TME",
+                "DQACAgIAAxkBAAJwBmVN8FhZKgjhpKthnlcWsEZqFq_xAAL8LgACNr_ZS1uo2GLSGS7WMwQ",
+                "DQACAgIAAxkBAAJwCWVN8F-_5eMFDLCOmppOIpGJuu6NAAL9LgACNr_ZS3LOI1soejqFMwQ",
+                "DQACAgIAAxkBAAJwDGVN8Gd_8lcmTG6WczTK5UJ0BtsbAAL_LgACNr_ZS9GTKiR_llumMwQ",
+                "DQACAgIAAxkBAAJwD2VN8G3NqjfrTDHD84WOr5KajR8HAAMvAAI2v9lLao0aUz9c92UzBA",
+                "DQACAgIAAxkBAAJwEmVN8HMQaK-4A6wQ0-nulLbay8FHAAIBLwACNr_ZS94pezEfb57qMwQ",
+                "DQACAgIAAxkBAAJwFWVN8R0EV8cVk-VO39pbFbLFsYzOAAICLwACNr_ZS-avAR_Kp-VkMwQ",
+                "DQACAgIAAxkBAAJwGGVN8SP90EtdY4Saj7kRQrr7RiRpAAIDLwACNr_ZS3GTrhzvqWbvMwQ",
+                "DQACAgIAAxkBAAJwG2VN8S3I7Kg7k-01MvVsAQtO1RrCAAIGLwACNr_ZS2bGiSGV9FqWMwQ",
+                "DQACAgIAAxkBAAJwHmVN8TSLUdXgcOcR_MY7myKNqQ1MAAIHLwACNr_ZSxDb8sK3tHQxMwQ",
+                "DQACAgIAAxkBAAJwIWVN8TqpRDcccSfQteD61Jy3l74OAAIJLwACNr_ZS7UCPONsE8adMwQ",
+                "DQACAgIAAxkBAAJwJGVN8UMp-peeh2F2cr34yaKFh7mqAAINLwACNr_ZS1b2BC1V6iHfMwQ",
+                "DQACAgIAAxkBAAJwJ2VN8UnghH-e6aaSi1j22f2TbKjIAAIPLwACNr_ZS2akCOVGjPxhMwQ",
+                "DQACAgIAAxkBAAJwKmVN8VHw0vFvFJpDRugoTeK-laClAAIQLwACNr_ZS50go-rlRSWpMwQ",
+                "DQACAgIAAxkBAAJwLWVN8VgXxesAASMoKU8NUVPVUOE14QACEi8AAja_2UuiJUjm-gfc5jME"
+            ],
+            "texts": []
+        },
+        "Farrux Бэк Vip Приветствие": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [
+                "DQACAgIAAxkBAAJwM2VN9T_Sx2ZtIfKjNdW_bvifqhi6AAICNwACDJsZSNVOVHBehGbeMwQ",
+                "DQACAgIAAxkBAAJwNmVN9UYsMGZ5Rbmlj55PaMqj31jxAAL_NgACDJsZSH3Oyxdd782HMwQ",
+                "DQACAgIAAxkBAAJwOWVN9UzZ-pZ1sIpAwGlyLZLJytdvAAKBNAACUVQZSKeBZUxFTXadMwQ",
+                "DQACAgIAAxkBAAJwPGVN9VO45E-EWyl5G50I7sRYJR-1AAJ_NAACUVQZSE0Z7E6oNoNFMwQ",
+                "DQACAgIAAxkBAAJwP2VN9V8T21SRowZzzts9sKahDjQ4AAJINAACUVQZSGaG-ljP2nI7MwQ",
+                "DQACAgIAAxkBAAJwQmVN9Wbul4LqA_L8un6mKrFFLR8eAAJFNAACUVQZSMLYEnVy_6vmMwQ"
+            ],
+            "texts": []
+        },
+        "Farrux Бэк Vip Прощальное": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [
+                "DQACAgIAAxkBAAJwSmVN9efSRBS0ayMexu8PmnwRPFhwAAITOQACDJsZSAz1zx3AQXS4MwQ",
+                "DQACAgIAAxkBAAJwTWVN9e7obhM7RZ2aYUx2MQ_XHKZFAAIYOQACDJsZSOtLe7hPiJJ5MwQ",
+                "DQACAgIAAxkBAAJwUGVN9fTzcYJXvm_Tzg5IFtqK3QcZAALrOQACDJsZSBnGFVpNN2qvMwQ",
+                "DQACAgIAAxkBAAJwU2VN9fpOsQq--r6rBc6e4aqi2vJYAALxOQACDJsZSKJ9WVD2BZlzMwQ",
+                "DQACAgIAAxkBAAJwVmVN9f_MdZvNL9-TKFv6rRpq8PgMAAIcOgACDJsZSLTCEFfEns-LMwQ",
+                "DQACAgIAAxkBAAJwWWVN9gT5cbvLs9CZd0u4aShUI1cYAAIjOgACDJsZSO10laULa9UjMwQ"
+            ],
+            "texts": []
+        },
+        "Farrux Отзывы фото": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJwZmVN9m8ZaKaMKS1n3BRmZtYOL3mNAAKqtzEbgy9xVs0gL1uxf6nJAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwaWVN9n90D3jTswN79JVIXSqpMboKAAKrtzEbgy9xVmPQKTPqc64ZAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwbGVN9oWbfyY4JU9UVxlqDj7WDRh5AAKstzEbgy9xVtGcG7PWt0k3AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwb2VN9ougowIFyfyf2rAgJ4Tesu8KAAKttzEbgy9xVrNWvBndWvcsAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwcmVN9pAfCkh1xAwZcr6pNaqTW7_MAAKutzEbgy9xVqEKlkBM32gkAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwdWVN9pdtyZBpZXMVlu3MpSJkahBvAAKvtzEbgy9xVqbJwHbj2Q3cAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJweGVN9pw4L4s6PeEKYNXtMtcIl7XUAAKwtzEbgy9xVn76QhuB-NnsAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwe2VN9qUuxJBB0LdWESmS0Mjac6YzAAKxtzEbgy9xVk2zG8nKf7s1AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwfmVN9q90ShTgeTi7AbykBFJ0w63sAAKztzEbgy9xVlQu2zaUHOyhAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwgWVN9rSYxjP05vzB4g-Z2l1qeGmxAAK0tzEbgy9xVg5g4uGC2tvlAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwhGVN9rphgmhkzC0TKlZIQjvg9cj3AAK1tzEbgy9xVodYUcFIczyJAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwh2VN9sIWkBbRhvpVu2nvSBJPXIkaAAK2tzEbgy9xVszvtZ4E2pYWAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwimVN9shR-Nbydp2s-uw-QZEePijjAAK3tzEbgy9xVsrlbXXcMa7LAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwjWVN9s3c44_GKi7xSIEukJ2O33_JAAK4tzEbgy9xVpdfOMEkXzZWAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwkGVN9tYAASRlhFJQNP3U2mO_oWq4EAACurcxG4MvcVZtTGL6y91qxAEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJwk2VN9t2ER6GNC3FnLVa8tIFG_yO6AAK7tzEbgy9xVvridtCdwnR3AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwlmVN9uMK4fe6dR0zRW6WfyY9_wIrAAK8tzEbgy9xVp6Q2kCLOJMcAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwmWVN9ukBhFkY4wNreov39XxN92NkAAK9tzEbgy9xVg1yyLg9NsSFAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwnGVN9u8BoCVUUx1jgjOts2lEa2egAAK-tzEbgy9xViYGmmDiy__MAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwn2VN9vdVPAABmWhztJ9QsXOsI10M5gACv7cxG4MvcVbBQLshxKJ3TwEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJwomVN9v4eDp8zeJyfCMKXTeISFmpVAALAtzEbgy9xVtqhTGC_dg7KAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwpWVN9wU6toldhOb42rxSaz2JfKetAALBtzEbgy9xVhJWur58X_btAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwqGVN9wkMxx-daKrKdYcAAfPXfD8PowACwrcxG4MvcVaVvuiZ9a-fJQEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJwq2VN9xAXyuY66e8qU2VcJdAeIqHIAALDtzEbgy9xVj0Jca9mvI7hAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwrmVN9xR2Nd7RMaapZILJT6VZ5iUYAALEtzEbgy9xVuwi26Wy_0JxAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwsWVN9x2d4l_BbBtFCWJ4PVGabjfIAALFtzEbgy9xVppy7qBmg7KYAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwtGVN9yQY7nSECCQbYXZa9gM-aaz-AALGtzEbgy9xVgABuSi5cVftugEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJwt2VN9ypPEBrmhytrFaYVC3NnIUwmAALHtzEbgy9xVjK9xPeOCllcAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwumVN9y-X1qIcrRzga1306iftUqXMAALItzEbgy9xVs-PCbUoVZSOAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwvWVN9zacn3DIcCFNId6y8wFfjiU9AALJtzEbgy9xVkEjMxGz2MrUAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJwwGVN9zvKfoZoCO9NUy85qSrgbXBrAALKtzEbgy9xVvx_DvgW0oj4AQADAgADcwADMwQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Игра": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [
+                "DQACAgIAAxkBAAJwymVN-JpIsf-S01eZD1h1Cd0F6L2XAALcNAACI6wYSFl8MtMshTM8MwQ",
+                "DQACAgIAAxkBAAJwzWVN-KGMIgq7NkzHfViNp9srYZEcAALeNAACI6wYSDuZqSWVp8a6MwQ",
+                "DQACAgIAAxkBAAJw0GVN-KgIoekPHgkno0xamdUi-_JzAALfNAACI6wYSPDEuDarOC7yMwQ",
+                "DQACAgIAAxkBAAJw02VN-MTa7BlNELK3TS3zRfcRSystAALgNAACI6wYSNtj_z4YJzByMwQ",
+                "DQACAgIAAxkBAAJw1mVN-PhrwsA6xQs2JC99hW7mqExfAALjNAACI6wYSA2ZQ725L-8oMwQ",
+                "DQACAgIAAxkBAAJw2WVN-P32wZeaa25oGeXSygkZLm7RAALpNAACI6wYSLCbOxps-ysVMwQ",
+                "DQACAgIAAxkBAAJw3GVN-QMlrZBhiqlV-_tdfTvI_BJMAALsNAACI6wYSJ4vuwQ9iJpZMwQ",
+                "DQACAgIAAxkBAAJw32VN-QmppaCSqNOGXdAAAYD7QVpCVQAC7TQAAiOsGEj7C8zKSpO_BDME",
+                "DQACAgIAAxkBAAJw4mVN-Q_VZJDCWYvahsQpOEukl5IGAALuNAACI6wYSBCpyvmWRjrnMwQ",
+                "DQACAgIAAxkBAAJw5WVN-RcBilmvqK_6iOHA7Nl3BqMgAALvNAACI6wYSFl3cYDr7SBNMwQ",
+                "DQACAgIAAxkBAAJw6GVN-R8KWcPIr-Abo4LzN0htnoFTAALwNAACI6wYSPm8CWoEXMOaMwQ",
+                "DQACAgIAAxkBAAJw62VN-SUS3DnPhcZ_Alf8FwcptPqKAALxNAACI6wYSHJBz72ef7ulMwQ",
+                "DQACAgIAAxkBAAJw7mVN-S9dTSn2gTLvMX_W0IbTtaKUAALyNAACI6wYSKqZsLmUsuKBMwQ",
+                "DQACAgIAAxkBAAJw8WVN-Ta1oaGZvmavN9AcJunldNETAAL0NAACI6wYSLu6WJEJFX2JMwQ",
+                "DQACAgIAAxkBAAJw9GVN-TyZKd9AXI4kvhS8qSisLQRVAAL4NAACI6wYSPQYwijRVQpLMwQ",
+                "DQACAgIAAxkBAAJw92VN-UJkd4wwJuwvcQP5Sko9XrFHAAL-NAACI6wYSLPHlO56Scr1MwQ",
+                "DQACAgIAAxkBAAJw-mVN-UiYZK2TSHsEpX7-N7Mtl6VzAAM1AAIjrBhIr3CjqYqEauYzBA"
+            ],
+            "texts": []
+        },
+        "Тепага Приветствие": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [
+                "DQACAgIAAxkBAAJ0YmVbbUiN2HJERI81fYTcL4qQi4y1AAL3LgAC4S0AAUgV29TyQIAcKjME",
+                "DQACAgIAAxkBAAJ0ZWVbbawT2RK6F6sa9PSvt_oFJr_QAAL5LgAC4S0AAUg4sVfWIzzGXDME",
+                "DQACAgIAAxkBAAJ0aGVbbbQIyHSVV4nnUBnQiPKXREU_AAL8LgAC4S0AAUiQ-XKWUVb0hjME",
+                "DQACAgIAAxkBAAJ0a2VbbbzA8qjGle2A82j820s9V8NFAAL-LgAC4S0AAUiaPFEQbedYbjME",
+                "DQACAgIAAxkBAAJ0bmVbbcSpqvfUFacB6bVpVjR8BT_QAAIFLwAC4S0AAUgJdFl2yW8TgDME",
+                "DQACAgIAAxkBAAJ0cWVbbc0HZlDlncmICPFwPBSfIkUuAAIILwAC4S0AAUhfaRrVtLGt8jME",
+                "DQACAgIAAxkBAAJ0dGVbbdbEO6qyRIw2S8_oXGFRYX29AAIJLwAC4S0AAUh9fX2dRmehKTME",
+                "DQACAgIAAxkBAAJ0d2Vbbd6idyo7oyXg-vbmmIhMsYKCAAIKLwAC4S0AAUhhJMZgkRss5jME",
+                "DQACAgIAAxkBAAJ0emVbbeiyr1CRpL6gPwP7Yxt2Q5tRAAIOLwAC4S0AAUgDIr56bZ-dgjME",
+                "DQACAgIAAxkBAAJ0fWVbbfQ-zEnAbnUtSL4NSDcWEIgdAAIQLwAC4S0AAUhS-f-n39Vm9TME"
+            ],
+            "texts": []
+        },
+        "Тепага Прощание": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [
+                "DQACAgIAAxkBAAJ0nWVbcNbozH-5eXw6b8tzGe1pO3YTAAIZLwAC4S0AAUiZkl8F3Pwo_zME",
+                "DQACAgIAAxkBAAJ0oGVbcV24Mlf1SXimKGo6dCZivdc3AAIbLwAC4S0AAUioJ1E2NsrjDDME",
+                "DQACAgIAAxkBAAJ0o2VbcZIlEsQbQpfz-ePHvZo7Cc_oAAIfLwAC4S0AAUhk1xHo14XaxTME",
+                "DQACAgIAAxkBAAJ0pmVbcZ_j1LYhnvc-72DPyh5_iLNYAAIhLwAC4S0AAUiKL8y1qMgD-jME",
+                "DQACAgIAAxkBAAJ0qWVbcasK33UBm7WeyM-cCZKjA1IzAAInLwAC4S0AAUiZVLG1v9IIijME",
+                "DQACAgIAAxkBAAJ0rGVbddV3IHo585fOZCuyrzTW9gisAAIoLwAC4S0AAUhanMUPHZruezME"
+            ],
+            "texts": []
+        },
+        "Тепага - Инструкция": {
+            "videos": [
+                "BAACAgUAAxkBAAJ0smVbemx0vyOH6yPrtiYWw8E366tDAAKfCgAC5AnYVsOQ9k7qQ7iLMwQ",
+                "BAACAgUAAxkBAAJ0tWVbespkpZhi9aO0tJEFVlvw1Rf9AAKhCgAC5AnYVt26JSVWS6nLMwQ",
+                "BAACAgUAAxkBAAJ0uGVbeulMP8eTwP91JCOHBOs17exMAAKiCgAC5AnYVpMRup6dreqhMwQ",
+                "BAACAgUAAxkBAAJ0u2VbexZu7WANL8rau1KVtQasmC78AAKkCgAC5AnYVikrA3fxGYqJMwQ",
+                "BAACAgUAAxkBAAJ0vmVbe2ffffpZW6TrLlOIW2M50QlOAAKlCgAC5AnYVoBVIeg-AaMrMwQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Тепага - Фото Бек": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJ1PmVcjKhpPUOm1gcAATaToXtEQkuGfQAC_LoxG-QJ4FZI5-7_R6Z4zgEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJ1QWVcjLJXUXD-FZ_zTAaoL8-d-MIcAAL9ujEb5AngVuWkesdLd0YEAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1RGVcjLoH0U0wan9Jm_lFuG2MzCh1AAL-ujEb5AngVswQcZbWOswBAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1R2VcjMqJdMxGlRyz9LiMQcy6HlQsAAL_ujEb5AngVrifAvOAnRy-AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1SmVcjP5wzcvOi5-IofnnFx1AjnblAAO7MRvkCeBW1hVlPMTX6foBAAMCAANzAAMzBA",
+                "AgACAgUAAxkBAAJ1TWVcjQaqD7SMgEM9RyMVi8a7tAOnAAIBuzEb5AngVgdriI9yFEGiAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1UGVcjQ9HvhCerYdZXlfw-5ApHV1CAAICuzEb5AngVigCZlhahC-IAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1U2VcjTXQZ1sRsXyNXvgO_err6Kg7AAIDuzEb5AngVg5HSNf81FOnAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1VmVcjT8g5GEt5yWdPGfOai1pktTlAAIEuzEb5AngVgYCvWh5U2kGAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1WWVcjUYLxkaiSpIqmumx6cG93BlfAAIFuzEb5AngVp7fay3XaKBVAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1XGVcjU6juSdIxHthfpKo468b-EduAAIGuzEb5AngVk5Quf83vFwHAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1X2VcjVYIbOSJFlrXPOAyZuPnqoaFAAIHuzEb5AngVh7JYjzlgWJ0AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1YmVcjV2mUOt5KSJm0ngIxhG-4SOxAAIIuzEb5AngVudaiQgennUbAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1ZWVcjWfxZdQ4I-4YaLje-LamqIMWAAIJuzEb5AngVnXo1r5wtFoNAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1aGVcjW7vVPTnhD9NLGi_D3Q9hiPgAAIKuzEb5AngVkqzIvfT55MRAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1a2VcjX3IJoK71RkphiYBtStY_z53AAILuzEb5AngVjv3epzq021XAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1bmVcjYXyl2swiXqLWpYiu8tPZIriAAIMuzEb5AngVrwG4tavkJXLAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1cWVcjY3UhRx9j1ZWxZfNhLmW26rfAAINuzEb5AngVrlNx04AARDN2QEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJ1dGVcjZSJbHP6ffTieVB5UKBxZuX0AAIOuzEb5AngVoRBpIJ5SzS1AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1d2VcjZ2y7DJMlCtxMGmX_ths5EV-AAIPuzEb5AngVuhd4vN7PJDoAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1emVcjaZdoxFt3rJ-HF2_T1uyYG_AAAIQuzEb5AngVlmnzmCzwngdAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1fWVcjbKM5ZuT5fwxjvaXVluhPchGAAIRuzEb5AngVkNuzD4ucyJ0AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1gGVcjbk6TNd1MyfDP9dJ_xliGj7RAAISuzEb5AngVvS4CwQUKaomAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1g2VcjcA0hI2Kc_JFe1DPE23SthhiAAITuzEb5AngVicPw7PjHZJlAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1hmVcjcgODdvbxD6C9ipgaao4UjpSAAIUuzEb5AngVnN8BJjbOfLbAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1iWVcjdGuynGwLgXM10vPkAABwapj7AACFbsxG-QJ4FYXQ9I2XZwgyQEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJ1jGVcjdiDb0CzCdn-q4RV51KaedNjAAIWuzEb5AngVv3yIW7CJeVWAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1j2VcjePzdXjftBGoxLJ2DPJG3JVUAAIXuzEb5AngVstbsk5bF6AHAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1kmVcjghl4diZ_dGcJJpXNzwlL4DPAAIYuzEb5AngVhK5Rumkfvy0AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1lWVcjhBRivnIHIOGU4ohozcZvPX_AAIZuzEb5AngVkn7rn87-lPnAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1mGVcjhkezqhh_qbHRvD3Kxvaz4bwAAIauzEb5AngVoM79K03jOrIAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1m2VcjiHrzBSoUhVk72FOlQABT7loFwACG7sxG-QJ4FbwPyr3Iy8gmgEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJ1nmVcjjApisRSw_Xxw0djPZKdpLSxAAIcuzEb5AngVtRx80zHxbyHAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1oWVcjjfhTB6tt91wUIRzCEQwt4JIAAIduzEb5AngVqb6OA0J7hSpAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1pGVcjj8hP2Ix9pZvHLsGOXYB585fAAIeuzEb5AngVnb2zWYLo8oEAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1p2VcjkcBPTpuokOYYC2U66-UyvmYAAIfuzEb5AngVsQQmpc2e38jAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1qmVcjlI9UBt3VBMkVQGto7qqpY8gAAIguzEb5AngVmfrUDwKpXqJAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1rWVcjlmRhKFiv4XO0EkJpYXqzCd_AAIhuzEb5AngVjjz1rE16hvvAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1sGVcjmwwPAjl766naLIjVNRjyiXmAAIiuzEb5AngVjE1_4aRQSKxAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1s2VcjnRNgKoaLi5SBtm3joMHAAHrMgACI7sxG-QJ4FbrnVO6MOkEDgEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJ1tmVcjo-AvTgPKAldQSqnyys7s71TAAIkuzEb5AngVvTJOGOkrLUhAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1uWVcjpwoL3JcPP0Q_9mfc7OJ-BPrAAIluzEb5AngVny2kAVstosNAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1vGVcjsVqIMlsBunq7B9U0MwGPMnsAAImuzEb5AngVieNpDflayoLAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1v2VcjsxdAzsUSLZnlWV3ayzUa_jBAAInuzEb5AngVtv57mbc80-NAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1wmVcjuHcTkdSztptQMMXVxvEZqFgAAIouzEb5AngVnL3zUFA3huJAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1xWVcj2kxedNJkl-IuYqUUc7gsuw5AAIpuzEb5AngVtgxASrVkClOAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1yGVcj3Jr9Rg5MAnwA_SjFiSmTtqyAAIquzEb5AngVvbQgZTAZi-cAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1y2Vcj3ibtblEJ3xz0C_EmlBwK1NhAAIruzEb5AngVjrpJuHm1f0PAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1zmVcj4isjOfABNyBsq4DYj_U0R0eAAIsuzEb5AngVi5WyA63BAFfAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ10WVcj6NQ4hHR0pElnmD5gBzyhHlvAAItuzEb5AngVkGerhrcwarsAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ11GVcj7t6y6LECW7UcHU6WHNvgcECAAIuuzEb5AngVscjCGPRGX9uAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ112Vcj8O10XgLtRS2TQGck3VTCM_DAAIvuzEb5AngVtqYo2a--u7iAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ12mVcj-8zvulK0r-huGHBSktxZSGQAAIwuzEb5AngVkxbrnf1ZsRPAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ13WVcj_cXom4oGH8NgAr1gFtkTtM6AAIxuzEb5AngVhHd7mlkzyT_AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ14GVcj_1zj0-ouLypBJ35eGiokBUFAAIyuzEb5AngVjE9X7pDYux2AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ142VckAY4ZtHEtzRVOuQry_ktPhr9AAIzuzEb5AngVpSHXp4MsjEbAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ15mVckBbLMV-m1e2vl8I4x0n1ad7lAAI0uzEb5AngVmDs9hayx-rOAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ16WVckCBSx-sZtWji8z4LJEDcuY7KAAI1uzEb5AngVnZbZirxP0hdAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ17GVckCip6xxRCM81Unsb7RW-lXZeAAI3uzEb5AngVvDKsUBqCMUdAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ172VckDGFoKAp2yNURDLxgaRFv1C2AAI4uzEb5AngVmT8YLwxB7aWAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ18mVckE_J1DQm3KAZdUwRniEwvrBeAAI5uzEb5AngVuTmEQ22_azjAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ19WVckFdT8DA4HvFLpOKk-nAHkzJ5AAI6uzEb5AngVkh1_85AP2Y6AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1-GVckGCezFpgqN9S97X8LZsVmKHLAAI7uzEb5AngVpf41yfiUCTxAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ1-2VckG8eKlRbx88UXNkpGLawyln5AAI8uzEb5AngVnz0HqAkj7avAQADAgADcwADMwQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Тепага - Отзывы УЗ": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJ2mWVcllZpUfBGc-jcu1U_8u6JbR2tAAJBuzEb5AngVvnOlQIwVhV-AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2nGVclmHTrMpTlOlG49g4W5h0lc7sAAJCuzEb5AngVoXDIkfw5pLZAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2n2Vclm03jQ7hKS23oU8REK8czbC5AAJDuzEb5AngVmwOhmJR1PIDAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2omVclnPVJeutMaezRGvFBAiMl-O1AAJEuzEb5AngVimnkQGfd9-NAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2pWVclncNQaJ4ZJ-RqXmPTsTp3CULAAJFuzEb5AngVpdL513f9B8VAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2qGVcloBjo2FHhiKYNWFQF0Ly-OkhAAJGuzEb5AngVs0U3yy-8uB5AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2q2VcloWdfogqFrQmixVKxJwDfGcdAAJHuzEb5AngVpOiIt0r-WrRAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2rmVclo8Kg3zIY0xn3RkpPxl6yY0MAAJIuzEb5AngVps9CDR_MJ1AAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2sWVclpeiE2PzVpj-twOQHF_bsbi6AAJJuzEb5AngVoaIOb6zCTKGAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2tGVclp0Nav1IrdJrQjQuYN1EGM4cAAJKuzEb5AngVqD4N8vNRAcwAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2t2VclqThx02WM20OXy-kBXKog_otAAJLuzEb5AngVtar3eFxtX4dAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2umVclqlxauSoJvilJHiL537p1xm0AAJMuzEb5AngVs9VfizVQX8oAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2vWVclq8mNVhKf8iaPbaKI2yU-YhXAAJNuzEb5AngVpmdFzBn4zLKAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2wGVclrW0hJr552oF9TOtAw6j1l4TAAJOuzEb5AngVsp-FWI-QO_aAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2w2Vclr2Uzyl0B-calpWF6LgRpznsAAJPuzEb5AngVs73l4-eyzD_AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2xmVclsPBP5nDNdfHurnGvkXtQBPYAAJQuzEb5AngVp9YMiZ_XFOaAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2yWVcls6s1o9MGukY7kNdsQoycsodAAJRuzEb5AngVoua_SWVNjijAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2zGVcltlhosfgKD-qWhjqQI29CfGcAAJSuzEb5AngVgaLv8WjVuVOAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2z2Vclt5U_tKvySJaOAbq2vZglkgtAAJTuzEb5AngVnfw5zX2hq3FAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ20mVcluaNRMb6ZGQlSoR8S-pLGeS0AAJUuzEb5AngVsHgG6WPSWXKAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ21WVcluuG-L0X4Iu1Qx094kVFTJViAAJVuzEb5AngVvKiV3wPo8N7AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ22GVclvBUO0UGPLf7mg4LsDPd1X_CAAJWuzEb5AngVocWOob2jPfGAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ222VclvZFa1gAAT2PbnGugIqcHgIFXAACV7sxG-QJ4FapC-yssurbTwEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJ23mVclvx7k8U_w8xHpTRB5APTM_1UAAJYuzEb5AngVqLZtAokxpnlAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ24WVclwpMSe8_KRRc79JB-SvkQfveAAJZuzEb5AngVtJXvKKCaW1BAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ25GVclxlr3vovtwABojeTKe3YHekrTwACWrsxG-QJ4FZlp5usgPGfuwEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJ252Vcly6NmB54XpbqVh1w_Bmv7JgfAAJbuzEb5AngVi6lAvgDnLEoAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ26mVclzPzyaXf7Yb76FsIcW92R3NiAAJcuzEb5AngVhP1P9I2feE-AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ27WVclzpIQQ7zqrPVt1ESMBM8e1Q7AAJduzEb5AngVseeXW1SowM1AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ28GVclz-a1BbJMmCUT0zyZLnLMHUHAAJeuzEb5AngVrW5Au5JVVpjAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ282Vcl0QcKjTNPQUgurgomPfYhK5MAAJfuzEb5AngVqnsWYY4ig_pAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ29mVcl0kv1KrLp9BRXAuZnhmGOON5AAJguzEb5AngVh-PusHLdPnmAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2-WVcl1Cqths3lHMhIMU13XBWMmFaAAJhuzEb5AngVoUY1KOEmR77AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2_GVcl1anMmxRLpuDRrqGaldjqHSWAAJiuzEb5AngVi_NjYM7W29oAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ2_2Vcl1x-C6zt9yrJH7eChui-x0ZrAAJjuzEb5AngVupq8yeojn5oAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3AmVcl2DrPBxC2ZjZKqmYU41Bs57iAAJkuzEb5AngVmI4MSJnR3OKAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3BWVcl2e8Uhj1q2TkThhiDY1-gpDlAAJluzEb5AngVtWWhO0uRoWzAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3CGVcl2yRr6UoZ0k-q3kVIj6rJTjxAAJmuzEb5AngVrzKGkHa4EjvAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3C2Vcl3GaszjD_dVWalRK66sVeQL7AAJnuzEb5AngVmFm56TLoy2hAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3DmVcl3cNPbctKlXFNfblWX8SWhc7AAJouzEb5AngVkzrY0bGoWw4AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3EWVcl3yHMBkjmbo7Tbjg9XVNfySXAAJpuzEb5AngVrUelMPeeyWeAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3FGVcl4TNI-5I_RcSRTSomqG0VnVfAAJquzEb5AngVgRhX_gypJDWAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3F2Vcl4syW6JiIF0nHAHV-YphP2oTAAJruzEb5AngVp5Zjd0Tdz6FAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3GmVcl5AcqAEbO0Hgh0IJ-iYF-YuCAAJsuzEb5AngVulDiZxMbSu0AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3HWVcl5Zby3E4gsO8jp36IaZtUnf-AAJtuzEb5AngVs5pTHiEJ0emAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3IGVcl6Lq6x8WlP0qC27YfJS3AgjmAAJuuzEb5AngVmWn_j-FtusGAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3I2Vcl6wprrYL0oGz0F9WKCSpMQ5SAAJvuzEb5AngVq80m7J_bZsaAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3JmVcl7Ul_aMH9F14qBHX4CX0LUiTAAJwuzEb5AngVn9Y1OoaXfJdAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3KWVcl7sFwR9boWuNkdYQrUOxsC2PAAJxuzEb5AngVoEDCaJFG4WjAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3LGVcl7-Pls_StGqSkYWu8CP-tSI8AAJyuzEb5AngVrUlsojQkCXSAQADAgADcwADMwQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Тепага - цитаты": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJ3uWVcpxzENKw6GInQHPneB-x7VEHqAAKauzEb5AngVqk6TzIxRt3uAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3vGVcpyUHm0YPRNEfZZuBeyTRakGsAAKbuzEb5AngVv_VDI-MnFjSAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3v2VcpzD0V33-JWZYK24Lfqpfl57xAAKcuzEb5AngVti-QWTfHrW1AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3wmVcpztvIqhjgng5OreDL-dT7H_9AAKduzEb5AngVlJe-dah30fwAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3xWVcp1OI0d8gOrQbAAHOJoHtAbulMgACnrsxG-QJ4FYltcuL6DHbyAEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJ3yGVcp2YENYL1JQw5bb_C7Ono2KcAA5-7MRvkCeBW_rwqD6YKK6oBAAMCAANzAAMzBA",
+                "AgACAgUAAxkBAAJ3y2Vcp4JWV8_kXyLY3WKQuI9eGxDWAAKguzEb5AngVnFTSQF-1P6_AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3zmVcp79IUItjD9-PuYvEYKruFF4iAAKhuzEb5AngVvwcPFeJLZl4AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ30WVcp8bbZ8MDYbWdN4tKl1l5JuNnAAKiuzEb5AngVotG8vf3__1RAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ31GVcp81p8tg-D3fo8kRqoYetA2_xAAKjuzEb5AngVkAEerFnWTJMAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ312Vcp9awbeJo4-LQu0rB9N7jsbBMAAKkuzEb5AngVsXe54UUTryYAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ32mVcp97R-cZWEJAkk9Rq1t9PefTZAAKluzEb5AngVsNKpjnhs5SaAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ33WVcp-m5utsPCmW4jka7d2OXOfIqAAKmuzEb5AngVgcn4aRSNQhFAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ34GVcp_QWsuZAxWq7K1tccZh08PYpAAKnuzEb5AngVigUi9665JeBAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ342Vcp_zmSSJQ8du_OxlVVnGtIIMnAAKouzEb5AngVtqULmcmjEYeAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ35mVcqAOu4dtz4tBMFBvPIudR0BVAAAKpuzEb5AngVhS5DbGdDpl8AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ36WVcqBb_dI5ztmQhmKBFdfsn7duxAAKquzEb5AngVppvC4KakVOuAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ37GVcqB4pQ_7NT05wc9apsPxcb7Q4AAKruzEb5AngVkA9ulkcRYAJAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ372VcqNAYbbL7OfA9zP4AAa0bG_2uNQACrbsxG-QJ4FYjWffUqvvLXwEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJ38mVcqOAMv_8jJ8u05UlqQhwf6tt8AAKuuzEb5AngVgWdQZgEI44cAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ39WVcqOdLOxtsvQhqsGr9bYolgcXXAAKvuzEb5AngVrywAYBBaWWaAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3-GVcqRxNp4Yblthevmr3RUUETe20AAKwuzEb5AngVupZYMH9LBIgAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3-2VcqSWnHOHW84eB-J5bO4eORD_UAAKxuzEb5AngVrlmfqPA5pRRAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3_mVcqS29Gw3hK9zRRUKCQLbV1R2wAAKyuzEb5AngVs1d-15uUGz1AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ4AWVcqTR3LfU8U5CZSwgfSxso4lOwAAKzuzEb5AngVtlJN8xiszFhAQADAgADcwADMwQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Тепага Цитаты про успешный успех": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAJ3v2VcpzD0V33-JWZYK24Lfqpfl57xAAKcuzEb5AngVti-QWTfHrW1AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3wmVcpztvIqhjgng5OreDL-dT7H_9AAKduzEb5AngVlJe-dah30fwAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3xWVcp1OI0d8gOrQbAAHOJoHtAbulMgACnrsxG-QJ4FYltcuL6DHbyAEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJ3yGVcp2YENYL1JQw5bb_C7Ono2KcAA5-7MRvkCeBW_rwqD6YKK6oBAAMCAANzAAMzBA",
+                "AgACAgUAAxkBAAJ3y2Vcp4JWV8_kXyLY3WKQuI9eGxDWAAKguzEb5AngVnFTSQF-1P6_AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3zmVcp79IUItjD9-PuYvEYKruFF4iAAKhuzEb5AngVvwcPFeJLZl4AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ30WVcp8bbZ8MDYbWdN4tKl1l5JuNnAAKiuzEb5AngVotG8vf3__1RAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ31GVcp81p8tg-D3fo8kRqoYetA2_xAAKjuzEb5AngVkAEerFnWTJMAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ312Vcp9awbeJo4-LQu0rB9N7jsbBMAAKkuzEb5AngVsXe54UUTryYAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ32mVcp97R-cZWEJAkk9Rq1t9PefTZAAKluzEb5AngVsNKpjnhs5SaAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ33WVcp-m5utsPCmW4jka7d2OXOfIqAAKmuzEb5AngVgcn4aRSNQhFAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ34GVcp_QWsuZAxWq7K1tccZh08PYpAAKnuzEb5AngVigUi9665JeBAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ342Vcp_zmSSJQ8du_OxlVVnGtIIMnAAKouzEb5AngVtqULmcmjEYeAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ35mVcqAOu4dtz4tBMFBvPIudR0BVAAAKpuzEb5AngVhS5DbGdDpl8AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ36WVcqBb_dI5ztmQhmKBFdfsn7duxAAKquzEb5AngVppvC4KakVOuAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ37GVcqB4pQ_7NT05wc9apsPxcb7Q4AAKruzEb5AngVkA9ulkcRYAJAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ372VcqNAYbbL7OfA9zP4AAa0bG_2uNQACrbsxG-QJ4FYjWffUqvvLXwEAAwIAA3MAAzME",
+                "AgACAgUAAxkBAAJ38mVcqOAMv_8jJ8u05UlqQhwf6tt8AAKuuzEb5AngVgWdQZgEI44cAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ39WVcqOdLOxtsvQhqsGr9bYolgcXXAAKvuzEb5AngVrywAYBBaWWaAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3-GVcqRxNp4Yblthevmr3RUUETe20AAKwuzEb5AngVupZYMH9LBIgAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3-2VcqSWnHOHW84eB-J5bO4eORD_UAAKxuzEb5AngVrlmfqPA5pRRAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ3_mVcqS29Gw3hK9zRRUKCQLbV1R2wAAKyuzEb5AngVs1d-15uUGz1AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAJ4AWVcqTR3LfU8U5CZSwgfSxso4lOwAAKzuzEb5AngVtlJN8xiszFhAQADAgADcwADMwQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "Men sayohat qilishni yaxshi ko'raman, u meni doimo yangi yutuqlar uchun quvvat bilan to'ldiradi",
+                "ajoyib kun - bu dam olish va bir vaqtning o'zida pul ishlash",
+                "Meni hozir kimligimga aylantirgan har bir tanlov uchun o'zimga minnatdorman",
+                "Muvaffaqiyat - bu maqsad emas, balki qiziqarli sayohat",
+                "Muvaffaqiyatingizni birovning muvaffaqiyati bilan solishtirmasligingiz kerak - har kimning o'ziga xos yo'li bor",
+                "Muvaffaqiyat siri - qilayotgan ishingizdan zavqlanishdir",
+                "Muvaffaqiyat - bu mashaqqatli mehnat, qat'iyat va bir nechta muvaffaqiyatsizliklar natijasidir.",
+                "Yutqazishdan qo'rqmang, bu ko'pincha muvaffaqiyat sari pog'onadir.",
+                "Kelajakni bashorat qilishning eng ishonchli usuli - uni o'zingiz yaratishingizdir",
+                "Muvaffaqiyat sabr-toqat va o'z-o'zini takomillashtirishga doimiy intilishni talab qiladi",
+                "Kelajagingizni bashorat qilishning eng yaxshi usuli uni yaratishdir",
+                "Qiyinchiliklar tufayli to'xtamang, ular vaqtinchalik, lekin muvaffaqiyat abadiydir",
+                "Muvaffaqiyat nafaqat maqsadlarga erishish, balki erishish jarayonida qoniqishdir",
+                "Orzularingizda qat'iyatli bo'ling va muvaffaqiyat sizga o'zi keladi",
+                "Muvaffaqiyat - bu sizning ichingizdagi to'xtatib bo'lmaydigan kuch bo'lib, sizni qiyinchiliklardan yuqoriga ko'taradi.",
+                "Qayta boshlashdan qo'rqmang. Bu har doim xohlagan narsangizni yaratish imkoniyatidir.",
+                "Kelajakni bashorat qilishning eng yaxshi usuli -  uni ixtiro qilishdir",
+                "Muvaffaqiyat siri bu oddiy ishlarni juda yaxshi bajarishdir."
+            ]
+        },
+        "Успешный успех БР (Тексты)": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "O sucesso não é um destino, mas uma jornada emocionante",
+                "Você não deve comparar o seu sucesso com o de outra pessoa - cada um tem seu próprio caminho",
+                "O segredo do sucesso é encontrar prazer no que você faz",
+                "O sucesso é o resultado de muito trabalho, perseverança e alguns fracassos.",
+                "Não tenha medo do fracasso, muitas vezes é um trampolim para o sucesso.",
+                "A maneira mais segura de prever o futuro é criá-lo você mesmo",
+                "O sucesso requer paciência e esforço constante de autoaperfeiçoamento",
+                "A melhor maneira de prever seu futuro é criá-lo",
+                "Não pare por causa das dificuldades, elas são temporárias, mas o sucesso é eterno",
+                "Sucesso não é apenas atingir metas, mas também satisfação no processo de alcançar",
+                "Seja persistente em seus sonhos e o sucesso chegará até você",
+                "O sucesso é a força imparável dentro de você que o eleva acima da adversidade.",
+                "Não tenha medo de começar de novo. Esta é a sua chance de criar o que você sempre quis.",
+                "A melhor maneira de prever o futuro é inventá-lo",
+                "O segredo do sucesso é fazer coisas comuns extraordinariamente bem."
+            ]
+        },
+        "\"Успешный успех БР (Фото)": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKIUmWESpUXpFYzOZXtURET17Q0pJhqAALcvzEbx48hVBLGscjh2HY3AQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAKIVWWESqQjYNgCW3DQSsLt9R16nZiGAALdvzEbx48hVAsLDlIaqHSgAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAKIWGWESqyCDvS6yZywCYzyugh1ZCSFAALfvzEbx48hVB9hFsxC9QuPAQADAgADcwADMwQ",
+                "AgACAgUAAxkBAAKRaWWv0qXZr3Qlo_Bc8f-tjllnOOozAAO-MRvC-oBVaSnszXZbPgkBAAMCAANzAAM0BA",
+                "AgACAgUAAxkBAAKRbGWv0vOukUaZdarMmDUzliz5WaerAAIBvjEbwvqAVSiXwEDPTXqSAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRb2Wv0_tOIMFJF-7Foh8BDSrG6o9TAAICvjEbwvqAVSy8-6fv1UTLAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRcmWv1AXTvMbt9i-tAiFITiIRoJslAAIDvjEbwvqAVVtQxt7nNbnYAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRdWWv1BVZ67eSX8qpAYNoO3bEgANyAAIEvjEbwvqAVciGRrRjOK6HAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKReGWv1yw9m9wcUD3p1N9Sm2NTJbSgAAIKvjEbwvqAVRpFcE-aCUSzAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRe2Wv1zVTYjxhXUFBLIgK1NcMFRksAAILvjEbwvqAVca4qu05K8vkAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRfmWv10PXQuDmDPDYxAhuxhxLS1rxAAIMvjEbwvqAVS0s3DWY5zmTAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRgWWv102vwWXtkJ20Dssvd9vCRkeNAAINvjEbwvqAVYFkCJqk6wRRAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRhGWv11lbSIaDMbVS79w-JTSTloeXAAIOvjEbwvqAVbJdoUu4hCfEAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRh2Wv12I4t9wQmEPLlRaqwIm7-6f1AAIPvjEbwvqAVd-BOnYe9XIqAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRimWv12mI_cW7Vp70S50HzyXCzCHcAAIQvjEbwvqAVaXkT4UutoP9AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRjWWv13Q1GQzUsdQmeehgCGVxIJyzAAIRvjEbwvqAVaqX-eFuAqH-AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRkGWv134Di6fjLwYBBu_izrXxZxeAAAISvjEbwvqAVR6M3FIlFTDIAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRk2Wv194YKgABDKFeOAABBgKPAYCtH2YAAhO-MRvC-oBVyHBRpbd6AAG1AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRlmWv2FzymixTBSdUGNLNLpURZlmSAAIUvjEbwvqAVSbPV3FZOqSkAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRmWWv2GX4ryoVRGdnxikez30I22lXAAIWvjEbwvqAVTXW65zb5-F-AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRnGWv2HBxSoMBpOzFN50MkM56w7A8AAIXvjEbwvqAVVSSTN_F1zh3AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRn2Wv2HhpGYw_nbHyfauA1vUxhUsSAAIYvjEbwvqAVUnxmjUqvx7WAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKRomWv2IOLBjorXLJeDphgsJ1bUqbhAAIZvjEbwvqAVaoEqlR6xmtMAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Что такое Авиатор BR": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "✈️ AVIATOR —  é um jogo muito simples, um pouco semelhante aos jogos de celular. 🕹\n\nNo AVIATOR você pode ganhar muito dinheiro. 🤑 No jogo, você faz uma aposta e precisa receber seus ganhos antes que o avião voe 🚀\n\nÉ bem possível ganhar até 3.000 reais a partir de 100 reais no primeiro dia. 💵\n\nCom meu grupo VIP você sempre saberá como não perder a trajetória do avião. 🤩",
+                "O que é Aviador? 🤔\n\nÉ um jogo de avião: quanto mais ele voa para cima, mais dinheiro você ganha ✈️ 👉 💸 \n\n❗️ Mas você precisa receber seus ganhos ANTES do avião partir de vez ❗️\n\nMeu grupo VIP vai te ajudar com isso. Irá permitir você saber o coeficiente de voo futuro, o que significa que saberá sempre quando recolher os seus ganhos! 🤑\n\nCom meu grupo VIP você pode aumentar seu depósito de 100 reais para 3.000 reais no primeiro dia de jogo! 🔥\n\nManda mensagem no privado, contarei mais detalhes 😎",
+                "Aviator é um jogo de avião, seu objetivo é coletar seus ganhos antes que ele voe de vez ✈️\n\nCriei um canal VIP onde você poderá saber com antecedência quais serão os próximos coeficientes! 🔮\n\nMeus sinais estarão disponíveis para você 24/7, você pode ganhar dinheiro a qualquer hora do dia 🕐\n\nManda uma mensagem no privado e direi como entrar no canal VIP! ✨\n\nCom esse grupo VIP você pode ganhar até R$ 3000 diariamente!!! 💸"
+            ]
+        },
+        "MoreMagicApple Tepaga 15000": {
+            "videos": [
+                "BAACAgUAAxkBAAKQAWWuMi3Q4GL_xLfNTWE4VjmiKlUQAAIsDgACwvp4VWkSMRYPA0mFNAQ",
+                "BAACAgUAAxkBAAKQBGWuMk_EJtyBtZz3358waPt0mCd1AAItDgACwvp4VZqs3orj-WCnNAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "MoreMagicApple Erish": {
+            "videos": [
+                "BAACAgUAAxkBAAKSW2WyMuiaXHMV3QtUcxz1QLLUWlVCAAKpDQACuyuQVTIUfeUoLeAgNAQ",
+                "BAACAgUAAxkBAAKSXGWyMuhmwSVwLcYYE_CXpaYmKt5jAAKrDQACuyuQVfyVj_33h4iLNAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Как работает бот (Бек)": {
+            "videos": [
+                "BAACAgUAAxkBAAKUwGXA8WjBVz2RLMGCvBXYIpszLJsaAAJPEAAC-P0AAVa3G_wqyy7PezQE",
+                "BAACAgUAAxkBAAKUw2XA8XcROpAy0p5hwKOlUjQAAUBbzgACUBAAAvj9AAFWz5-TNQolBQw0BA",
+                "BAACAgUAAxkBAAKUxmXA8YPejaNpVpommD67kFDHNW9SAAJREAAC-P0AAVZEwWvbQB7yqDQE"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Play - Приветствие": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "👋 Xayrli tong, barchaga katta X tilayman! Har doimgidek, yangi boshlavotganlar uchun men postni o'qishni maslahat beraman. Hammaga xayrli kun! 💸",
+                "Xayrli tong, umid qilamanki, siz kecha yaxshi X-ni oldingiz! Har doimgidek, yangi kelganlar postlarni o'qing. Hammaga katta X va kuningiz xayrli o'tsin! 💎",
+                "Hammaga salom! Bugun men yaxshi kayfiyatdaman, bu juda ko'p ajoyib slot va bonuslar bo'lishini anglatadi! 🎁 Yangi boshlavotganlalar bu erda nima qilayotganimizni tushunish uchun postni o'qishlari kerak, ammo men hammaga katta X ni tilayman! 🤑"
+            ]
+        },
+        "Farrux Play - Gates of Olympus": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKYqGXUmc4xGFB8975HC4WUlKxQZAy4AAIQuzEbOlCpVlR5GXD86uISAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKYq2XUmeSfZYK2W1vd6adQSqB6a2_DAAIRuzEbOlCpVnxSmyM4zZUrAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKYrmXUmfLIyGvM8W-YWZ4200n2I_UtAAISuzEbOlCpVrI-DNYg2_92AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKYsWXUmfzV2Car4CNIjEcGeYM3Dn16AAITuzEbOlCpVuZCzJZCIR4cAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "⚡️ Gates of Olympus\n\n🎰Olimp darvozalarida Zevs shohligining eshiklari va ilohiy yutuqlar siz uchun ochiq.\n\nXo'sh, nega u O'zbekistonda eng mashhurlaridan biri? Hammasi oddiy.💫\n\n✅5000x stavka miqdoridan boshlab  Jackpot!\nMultiplier belgilar - 2x dan 500x gacha olib kelishi mumkin\n✅Freespinlar\n\n😎Farruxdan fishkalar😎\n\nAsosiy xususiyat - 15 ta bepul frispin bo'lib, uning davomida ✖️ bilan yutuqli kombinatsiyaga tushadigan barcha belgilar barcha yutuqlaringizga qo'shiladi.\n\n👇Men shu yerda oʻynayman👇"
+            ]
+        },
+        "Farrux Play - Gates of Olympus (Видео)": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [
+                "CgACAgUAAxkBAAKY0WXUnGFvhKwiI25QkHfj9AbQG94GAAIrDQACOlCpVuy-uY6ZevApNAQ",
+                "CgACAgUAAxkBAAKY1GXUnIoUdb_NPixpETTaTBJxBWmVAAIsDQACOlCpVq8z0_6B4NXqNAQ"
+            ],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Play - More Magic Apple": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKZJ2XUoJ4mBmid6_zOY6PXAUACVF5AAAJBuzEbOlCpVpY5BaHBPutmAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKZKmXUoKnQnvR61WOGXVpf0mJ8yJChAAJDuzEbOlCpVkptGwhzNjX4AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKZLWXUoLdMF0mVtNpFpLA7D-cx-yTiAAJEuzEbOlCpVokrErGMVJbWAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKZMGXUoMGhXiq3nu5SgTUK0W9K8fV7AAJHuzEbOlCpVmhrOMYmr7kTAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKZM2XUoMq33eUnEapfdoSYvbFpjv3dAAJLuzEbOlCpVhGZ0l7zyEWYAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKZNmXUoNTyPMpF1aP3dR98KDAb6JbJAAJMuzEbOlCpVicXlSXlcvxXAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKZOWXUoN2x4ZT9zBI0glMIK6bLT9osAAJNuzEbOlCpVr8sWwLQhd8dAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKZPGXUoOaj00hL5EhQmx2llMn8pauHAAJOuzEbOlCpVtTRJZSMOM1MAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKZP2XUoPDBuJLZfxDq-7QjiGEIjbYEAAJPuzEbOlCpVkaD9JMC-AEFAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKZQmXUoPhkEgLdxsW9NUHsPA9VFtD6AAJQuzEbOlCpVi5w_yQ7xhh6AQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🍎More magic apple🍎\nMore Magic Apple-da ajoyib muhitni his eting!\n\nOppoq oyga olma yig'ishga yordam bering va u sizga jekpotni yutib olishga yordam beradi!\nMen bir nechta asosiy xususiyatlarni ta'kidlayman😎 \n\nOlma to'plang, bu bonusli o'yinni faollashtiradi, bu olmalardan olingan bonuslar umumlashtiriladi! Shuningdek, oltin olma to'plang va jackpotlardan birini talab qiling\n\n✅Wild\n✅ Bonus round \n✅Jekpot 5000x\n\n\n👇Bu yerda men bilan oʻynang👇",
+                "🍎More Magic Apple🍎 \n\n🍎 Oppoq oyga olma, sizga esa mashhur More Magic Apple o'yinidan jekpot\n\n😎Farruxdan fishkalar😎\n\n Olma tering, bu bonusli o'yinni faollashtiradi, bu olma bonuslari qo'shiladi! Shuningdek, oltin olma tering va jekpotlardan birini oling! \n\n✅Wild\n✅Bonus round\n✅Jackpot 5000x\n\n 👇Men shu yerda o'ynayman👇"
+            ]
+        },
+        "Farrux Play - More Magic Apple (Видео)": {
+            "videos": [
+                "BAACAgUAAxkBAAKZbmXUp1Y1Hs0zmb_l63EZnDYMstFHAAJADQACOlCpVv-RWfCiVNdnNAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [
+                "CgACAgUAAxkBAAKZZWXUppfz52_PIgWlqcwG_GaV7ow_AAI9DQACOlCpVjEewJ_dG8IvNAQ",
+                "CgACAgUAAxkBAAKZaGXUpwr2OSONAQgtYa4xmFUDG3CpAAI-DQACOlCpVrJEIOUjDvfvNAQ",
+                "CgACAgUAAxkBAAKZa2XUpyfhD9yoLepwVhCB8WY8aDiFAAI_DQACOlCpVpk3UvEeXcrgNAQ"
+            ],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Play - Sweet Bonanza": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKZ3WXUsUwLPeSSP_NFnVctoTbOXj4GAAKIuzEbOlCpVplESYqf2-5GAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKZ4GXUsVZpAT68_c6JCiW1eCKNJ8sfAAKJuzEbOlCpVoXh9vA_BSM3AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKZ42XUsV7LORIc5CZv31aUJqvAFxEeAAKKuzEbOlCpVhULNHq3Gq3sAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKZ5mXUsWWMB3TErECiE-PMvF19rwLbAAKLuzEbOlCpVrBMmbrHW74XAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKZ6WXUsWz1Uv86RUjQ1F09-nTjKV9NAAKMuzEbOlCpVoQv5Ojem863AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKZ7GXUsXScgp3XVGWTMvq72PlNbXXuAAKNuzEbOlCpVoPN3uBvYBeJAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🍫 Sweet Bonanza 🍫\n\nO'yin klassikasi o'yinchilarni hayratda qoldirishdan to'xtamaydi! G'alabaning shirin lahzasi sizni bu o'yinda tark etmaydi!\n\nKeling, O'zbekistondagi eng mashhur uyalardan biridagi chiplarni tahlil qilaylik:\n\n😎 Farruxdan fishkalar 😎\n\n ✅ Scatter Symbol-to'rtta shunday belgi tushib qolsa, freespinlar boshlanadi!\n\n✅ Ante Bet- Scatter belgilarini to'plash imkoniyatini oshirib, Spin stavkasini oshiradi.\n\n✅ Candy bomb-freespinlar raundida pul tikishdan 2x dan 100x gacha yutuqlarni oshirishi mumkin.\n\n👇 Men shu yerda o'ynayman 👇",
+                "🍫Sweet Bonanza🍫\n\nSweet Bonanza slot o'yinlari olamidagi afsona. sizni befarq qoldirmaydi!\n\nKeling,🍫 Sweet Bonanza-ning asosiy afzalliklarini ko'rib chiqaylik:\n\n😎Farruxdan fishkalar😎\n\n✅Maksimal yutuq  21 100x gacha!\n\n✅Scatter Symbol-4+ bunday belgilar paydo bo'lganda, u freespinlar raundini boshlaydi!\n\n✅Ante Bet-g'alaba multiplikatorini va Scatter belgilarini to'plash qobiliyatini oshirib, Spin stavkasini oshiradi!\n\n✅Candy bomb multiplikatori-Free Spins raundida pul tikishdan 2x dan 100x gacha yutuqlarni oshirishi mumkin!\n\n👇Men shu yerda o'ynayman👇"
+            ]
+        },
+        "Farrux Play - Sweet Bonanza (Видео)": {
+            "videos": [
+                "BAACAgUAAxkBAAKaCGXUtrBGa3LFR-qUSBjWATRpLrM3AAJMDQACOlCpVhBQGFBv5e-iNAQ",
+                "BAACAgUAAxkBAAKaC2XUt3exFNGamVRaDpyqGuRBS6XAAAJNDQACOlCpVgZhGGeRBGqvNAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Play - Sun of Egypt 3": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKatmXVyGsrYmDN6YVDY-zcHI2RCuGoAAIPvzEb5fqwVsbchUxpxY7-AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKauWXVyHf1bbnMBsIgciSgwZQ8fDZuAAIQvzEb5fqwVo4gc25WMKeGAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKavGXVyH8yAwhzng5PgDx1h7dHnJ6ZAAIRvzEb5fqwVjoWjm9NkxZaAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKav2XVyIp0bGobv6I4Xh0C84GWGYAwAAISvzEb5fqwVoK_pftSvEwOAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKawmXVyJPZ8JreODwIjNdAPWAro7IGAAITvzEb5fqwVt4s9qZLHxdjAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKaxWXVyJr_0kom7RTH8ubvsE8cI9aTAAIUvzEb5fqwVlVlmq0JqXYmAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKayGXVyKfAnsvOsHq859dBYeqs-6LmAAIVvzEb5fqwVlkamyKCNNV9AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKay2XVyLAbB8NQnQtmzb-9g8yXKA-fAAIWvzEb5fqwVt1LBQVgXFmzAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKazmXVyLi9ZGHmIK92Y49eERiZp9FUAAIXvzEb5fqwVh5UD1CNmhb1AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKa0WXVyMd1H24IrnbqSmBB8HwFhG1JAAIYvzEb5fqwVqf5zI0wfe4xAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🐫Sun of Egypt 3🐫\n\nMisr faraonlari xazinalari sari Sun of Egypt 3-da birgalikda sayohat qiling!\n\n😎Farruxdan fishkalar😎\n\n✅Hold and Win-15x gacha bo'lgan qiymatlarga ega belgilarni to'plang va yutuqlaringizni oshiring!\n\n✅Scatter's-uchta oltin idish 8 ta bepul aylanishni faollashtiradi;\n\n✅Bonus Symbol-6 + quyosh yonadigan elementlar Bonus o'yinini ishga tushiradi;\n\nRoyal Jackpot-10 000x stavkadan\n\n👇Men shu yerda o'ynayman👇",
+                "🐫Sun of Egypt 3🐫\n\nMisrning oltin qumlari juda ko'p sirlarni saqlaydi, ammo Misr quyoshi ularni biroz ochadi!\n\nKeling, eng mashhur slotlardan birini ko'rib chiqamiz\n\n😎Farruxdan fishkalar😎\n\n✅Hold & Win\n✅Free Spins\n✅SuperBonus\n\nScatter-ning 3 ta belgisi 8 ta Free Spinni olib keladi va ularni bonusli o'yin davomida takrorlash sizga yana 3 ta free spinni olib keladi.\n\n👇Men shu yerda o'ynayman👇",
+                "🐫Sun of Egypt 3🐫\n\nOltin barxan egalari slot o'yinida orzularni amalga oshiradilar \nSun of Egypt 3\n\n✅Hold & Win\n✅Free Spins\n✅Jackpot 10 000x\n\n😎Farruxdan fishkalar😎\n\nHold & Win funktsiyasi, bonusli belgilar sizning stavkangizdan 1X dan 15x gacha bo'lgan tasodifiy qiymatlari bilan tushadi!\n\nScatter-ning 3 ta belgisi 8 ta Free Spinni olib keladi va ularni bonusli o'yin davomida takrorlash sizga yana 3 ta free spinni olib keladi.\n\n👇Men shu yerda o'ynayman👇"
+            ]
+        },
+        "Farrux Play - Sun of Egypt 3 (Видео)": {
+            "videos": [
+                "BAACAgUAAxkBAAKa9GXVz8uj6k88gSIabNI9bgFjQGv6AAKSDQAC5fqwVtTyYudizYN5NAQ",
+                "BAACAgUAAxkBAAKa92XV0AvOZ6MCnusS8CVbNKZF1D0JAAKTDQAC5fqwVm-L2FI6MVMRNAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [
+                "CgACAgUAAxkBAAKa8WXVz50Qc99iKKGcfc43MyH4zedJAAKRDQAC5fqwVoKsZOaHQcoZNAQ",
+                "CgACAgUAAxkBAAKa-mXV0Csqvi1vGtjDq5tN9q_f6Ii2AAKUDQAC5fqwVtTzIppwmLknNAQ"
+            ],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Play - Royal Coins 2: Hold and Win": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKbVGXV3ternfI-FQk__zd45V1rPh2fAAJ8vzEb5fqwVqstNhiDiWPhAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKbV2XV3uD1oRU2m3U-Wv9b6f2D0lRaAAJ9vzEb5fqwVhoSVpFA7oA_AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKbWmXV3uXB6NmaElzoQGiNOl0L_LBzAAJ-vzEb5fqwVpOlabE6HiUgAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🪙👑 RoyalCoins 2: Hold and Win👑🪙\n\nYangi Royal Coins bilan omadingizni sinab ko'ring!\n\nUyaning soddaligiga qaramay, sizni ajoyib xususiyatlari kutmoqda✨\n\n😎Farruxdan fishkalar😎\n\n✅Hold and Win-3 ta javob bilan bonusli o'yinni boshlaydi. Bonus belgisi tushganda ularning soni yangilanadi.\n\n✅Bonusli o'yin paytida tegishli belgilar paydo bo'ladi va sizning stavkangiznii 1000x ga oshirishga imkon beradi!\n\n✅Va nihoyat – Pile of Gold funksiyasi tasodifiy vaqtda barabanlarga bonus belgilarini qo'shadi va bonus raundinii faollashtiradi!\n\n👇Men shu yerda o'ynayman👇",
+                "🪙👑 RoyalCoins 2: Hold and Win👑🪙\n\nHaqiqatan ham Qirollik xazinalari yangi Qirollik tangalarida o'z egasini kutmoqda!\n\n😎Farruxdan fishkalar😎\n\n✅O'yinda 4 ta Jackpot belgisi mavjud. Ular Mini, Minor, Major va Grand deb nomlanadi va narxi 25x, 50x, 150x va 1000x stavkadan.\n\n✅ Sevens wilds ramzlari, boshqa belgilarni almashtirishi mumkin va ular stavkadan 50 baravar ko'proq to'laydilar\n\n✅ Shuningdek, sizni 4030x baravar Jackpot kutmoqda!\n\n👇Qo'shiling, men shu  yerda o'ynayman👇"
+            ]
+        },
+        "Farrux Play - Royal Coins 2: Hold and Win (Видео)": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [
+                "CgACAgUAAxkBAAKbhGXV4uAnq0vCChZdHkB285V4RGQ_AAITDgAC5fqwVroYw3Vrln0dNAQ",
+                "CgACAgUAAxkBAAKbh2XV4vaehFNkih10_uwURGLybJPKAAIUDgAC5fqwVvqBfSfs--dENAQ"
+            ],
+            "video_notes": [],
+            "texts": []
+        },
+        "Тепага Бек в машине (Aviator)": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKcNWXWAAGoP8A2JTckv9A9SsvOQawKKQACzb8xG-X6sFZ6CedFHTH1NgEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAKcOGXWAAHGGxcqe75JtAgOXUBktDMFCQACzr8xG-X6sFZqX5T93UpH0AEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAKcO2XWAAHOYSrvhqHwc125R_JdRsEIRgACz78xG-X6sFbcuGvtRpSb0QEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAKcPmXWAAHUYOKYDtwxdVV9ZrrMHpmumwACV78xG-X6sFYyj793CbfddgEAAwIAA3MAAzQE"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Play - Royal Joker: Hold and Win": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKcamXWN6s_GiFKkI4WDEQxEfkk6GUQAAKbwDEb5fqwVuDUgqNpQvkMAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKcbWXWN7NJJ3-gwy7_MlIVo11aT-kTAAKcwDEb5fqwVoxuvR9vAVrjAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKccGXWN7o-bEkVNgbb2KC0sJhnrZlpAAKdwDEb5fqwVjY0L2Pe8xVRAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKcc2XWN8RG_9rgST9hShAWrJHY-mvGAAKewDEb5fqwVmCgZ0rsDrWxAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "👑 Royal Joker: Hold and Win 👑\n\nJoker allaqachon azart o'yinlari va katta yutuqlar  sinonimiga aylandi, shunday emasmi?Royal va Royal Joker ham bundan mustasno emas!\n\n😎Farruxdan fishkalar😎\n\n✅Bir vaqtning o'zida oltin va Royal tangalarini to'plash kerak. Agar uchta shunday belgi tushib qolsa, unda Grand Jackpot-ni yutib olish imkoniyati bilan bonusli o'yin boshlanadi🤑\n\n✅Joker Wild, bonus o'yinida 2x dan boshlab multiplikatorni olib keladi. agar u bir xil hujayraga kirsa, multiplikator o'sadi.\n\n✅Pile of Gold funksiyasi tasodifiy ravishda bonusli o'yinni boshlash uchun yetarli bo'lmagan tangalarni olib kelishi mumkin.\n\n👇Men shu yerda o'ynayman👇",
+                "👑Royal Joker: Hold and Win👑\n\nO'yin sanoatining haqiqiy maskoti Joker har doim hayajon ruhini va katta yutuqlarni olib keladi!\n\n ➡️Wil️d  Joker-asosiy o'yinda ham, bonusda ham yutuqlaringizni ko'paytiring 💵\n\n️ ➡️Tangalar va Royal tangalarini to'plang va bonusli o'yinni boshlang 🤩\n\n😎 Farruxdan fishka😎\n\nBonus o'yinida🔥  siz 3 Respin olasiz va yutuqlaringizni 15x gacha oshirishingiz mumkin.\n\n👇Men shu yerda o'ynayman👇"
+            ]
+        },
+        "Farrux Play - Royal Joker: Hold and Win (Видео)": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [
+                "CgACAgUAAxkBAAKckWXXAAERb6A8b7YduPSoEYlecqcxMAAC7w0AAuX6uFYgYAPXsTC2SDQE",
+                "CgACAgUAAxkBAAKclGXXAAEh6Nj-MH_7V8vtoFqZHPybrAAC8A0AAuX6uFYVriHOULfHcDQE"
+            ],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Play - Sun of Egypt 2": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKcuGXXBarvoBdljuGl3yAwe0Sf1fN9AAIXvTEb5fq4Vpdsq0APAAG2yAEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAKcu2XXBbwmshzeEDrHP_qhs1jC-wTnAAIYvTEb5fq4VhqstasshOVZAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKcvmXXBcL2T0n2p4RkobQEhElqvq0sAAIZvTEb5fq4Vu1izX6gFoZdAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKcwWXXBcoTJ4RIncP_dN_eMc6vi72aAAIavTEb5fq4VlN8oI6-XNqUAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKcxGXXBdGrFJZ26jHujIpnAhviCSydAAIbvTEb5fq4Vsex73V21gABPwEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAKcx2XXBdgUpoSyQ-sBKndFoHC4RGyxAAIcvTEb5fq4Vn82FYlug6ZmAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKcymXXBd78U1OsFz4cfD1rrr_jtz-AAAIdvTEb5fq4Vm9YF4GIBM9fAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKczWXXBeVgb_BDQ9X5Jptrm7KSSRK4AAIevTEb5fq4VvVLmAtSSKIGAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKc0GXXBeu7J_9xKw-EZmKwUX8sJrPEAAIfvTEb5fq4Vg0_vEbDPEZnAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKc02XXBfI0iX34_9zM897vO6SIVcoHAAIgvTEb5fq4Vm2MFerz-0UlAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🐫Sun of Egypt 2🐫\n\nOltin barxan egalari slot Sun of Egypt 2 o'yinida orzularni amalga oshiradilar\n\n\nMen bir nechta asosiy fishkalaarni  ta'kidlayman😎\n\n✅Jackpot - 5 000x\n✅Bonus Game\n✅ Free Spins\n✅Wild's bilan yutuqlarni ko'paytirish.\n\nScatter point-ni to'plang va Free Spins-ni oling💫\n\n👇Men shu erda o'ynayman, qo'shiling👇"
+            ]
+        },
+        "Farrux Play - Sun of Egypt 2 (Видео)": {
+            "videos": [
+                "BAACAgUAAxkBAAKc72XXB-0mfhd0x58TkY-SSD6d87c1AAIBDgAC5fq4VnBa69QyMPYrNAQ",
+                "BAACAgUAAxkBAAKc8mXXCDDR9pvx2rTtsGySk07Ptc3aAAICDgAC5fq4VjetybbGbEHwNAQ",
+                "BAACAgUAAxkBAAKc9WXXCPVZMfJBI2s_IiY5K_HW_qMAAwQOAALl-rhWyeaftIUz0_Q0BA",
+                "BAACAgUAAxkBAAKc-GXXCUcuwDs0wWpxD89DWDBfXbQzAAIFDgAC5fq4Vk0yYGE6OIjbNAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Play - Tiger Jungle": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKd9GXXMF51jo_-abkjhLTbb4_AvoaQAALEvTEb5fq4VhORCx7t5APJAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKd92XXMGqHcBB9YdP7ogNoAn8Y3rYQAALFvTEb5fq4VmYkitN7Xn_kAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKd-mXXMHVx3ASwz9UB4FtUkm5AH4FMAALGvTEb5fq4VsVrfqtjYkgYAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKd_WXXMH8U-b8wX_7tBimA85Y6C5wJAALHvTEb5fq4VlY4v0Q4hpJ2AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKeAAFl1zCFkwABA8Q9PETIth5Ek80X4mkAAsi9MRvl-rhWGsgb3ibn8FsBAAMCAANzAAM0BA"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🐯Tigger Jungle🐯\n\nTabiatda eng kuchli💪 g'alaba qozonadi , Tiger Jungle-da esa hamma g'alaba qozonadi!\n\n😎Farruxdan chiplar😎\n\n✅Uchta Scatter tushganda, 8 ta freespin ishga tushiriladi,l Wild's esa  Sticky bo'ladi!\n\n✅Hold & Win-6+ belgini to'plang, bonusli o'yinni boshlang va yutuqlaringizni oling!\n\n✅Bonus o'yinida,  butun o'yin maydoni gullar 🌸 bilan to'ldirilganda, siz  stavkadan 5000x da Grand jackpotni olasiz 💰\n\n👇Men shu yerda o'ynayman👇"
+            ]
+        },
+        "Farrux Play - Tiger Jungle (Видео)": {
+            "videos": [
+                "BAACAgUAAxkBAAKeIGXXNEvpEUQPDU200p0UmXLZvKOpAAKyDgAC5fq4VoGrYSC9LSGYNAQ",
+                "BAACAgUAAxkBAAKeI2XXNpv1EejZi4GZedsVUWmHYUIUAAK8DgAC5fq4ViaRqxLNTTYqNAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Play - Energy Coins: Hold and Win": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKeSmXXPReGOO-ardU6l1rNf_mo3rG6AAIjuDEbHj-4VlYnCtYuE2XYAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKeTWXXPYhoi82xH4fqkjNgX_fYKvfSAAIkuDEbHj-4VggkB8bmVTF8AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKeUGXXPY9Z5OHZNA_l0Lel2vQSagqtAAIluDEbHj-4Vty-TIltTpMiAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKeU2XXPZYAAfJWCYf6pB0WeX7qxCnsvQACJrgxGx4_uFY8Q5xDd7K_XAEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAKeVmXXPZ4MPHWyYtNyY1ik4UyKVBcPAAInuDEbHj-4Vs6SdB_utmblAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKeWWXXPbLmeZqY_j2nHQABzDfLEWEdTgACKLgxGx4_uFaVs3dUr7Q7VwEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAKeXGXXPbnPHkc9RPExHvAS0majYXICAAIpuDEbHj-4VngLiajp6jCNAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKeX2XXPcPDVN5ozDvS1HmTKo7XhtnKAAIruDEbHj-4VrcquHdMdz7uAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKeYmXXPct3YathpneFVSttwXrAbHT3AAIsuDEbHj-4VmMmT57kp7xHAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKeZWXXPdJCaQm41pdSG0JR1A6izEkPAAItuDEbHj-4Vt3p-y6BZPpKAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKeaGXXPdiAAqzFVXhh82gperOcbBGyAAIuuDEbHj-4VhTEn_zLIT7gAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKea2XXPeTXKE0q7mACFeZxj09POq2GAAIvuDEbHj-4VpY9O0Z_d9XDAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKebmXXPe645iglwMrgut2S9B6FMivLAAIwuDEbHj-4VuGMCE8doT2dAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKecWXXPfRUqtn14E_jsoqGQumVlTtfAAIxuDEbHj-4VgPbuNV69y9JAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKedGXXPfxXX0TY_pAyvD-Y0tRxkalpAAIyuDEbHj-4VjLjtdG6fnTFAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKed2XXPgL4iF42UUIeSpqE681e6fB_AAIzuDEbHj-4VozZBLc012cBAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKeemXXPgn8nRhgkAbmqxdMDGPCXwGoAAI0uDEbHj-4VvL1NKuKWP-RAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "⚡️EnergyCoins: Hold and Win⚡️\n\nEnergy Coins o'yinida yorqin his-tuyg'ular va katta yutuqlar bilan to'lqinlqning!\n\n😎Farruxdan fishkalar😎\n\n✅6+ Bonus yoki energiya Bonus belgilarini qidiring, Hold and Win bonus raundini boshlang.👇\n\n✅Unda sizning vazifangiz- yutuqning yakuniy miqdorini oshirib, oltin tangalarni yig'ishdir.⚡️\n\n ✅Haqiqiy omadli odamlar Grand Jackpotni qo'lga kiritishlari va stavkadan 5000x olishlari mumkin! 💸\n\n👇Men shu yerda o'ynayman👇",
+                "☄️ ́ EnergyCoins: Hold and Win\n\nUshbu o'yindan siz haqiqatan ham zaryad olasiz! G'alaba bilan siz ham zaryadlaning!\n\n😎Farruxdan fishkalar😎\n\n✅6 tanga bonusli o'yinni boshlaydi, u yerda sizda uchta Respin bo'ladi, ular har safar boshqa tanga belgisi tushganda yangilanadi.\n\n✅Energy Bonus o'zi uchun boshqa barcha belgilarning ma'nosini to'playdi va bonusli o'yin barabanida bir necha marta paydo bo'lishi mumkin.\n\n✅Va, albatta, maksimal yutuq sizningstavkangizdan 10016 marotaba oshadi!\n\n👇Men shu yerda o'ynayman👇"
+            ]
+        },
+        "Farrux Play - Energy Coins: Hold and Win (Видео)": {
+            "videos": [
+                "BAACAgUAAxkBAAKelmXXP-t2P_VH2Y0c4SFf5-EjdZOPAAK7DgACHj-4VjLeGAiC-k8WNAQ",
+                "BAACAgUAAxkBAAKemWXXQNuSOgK5Hcuisyyam2-QWqxeAALMDgACHj-4VrnsoknofTofNAQ",
+                "BAACAgUAAxkBAAKenGXXQY5T-3XpxyQjkwuCbF7UP-OXAALTDgACHj-4Vuc9EAAB0X4S2jQE"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Play - Coin Volcano": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKev2XXRkBMFf1TyInIRYRDQjeXbSTrAAJCuDEbHj-4VshupdlMoSixAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKewmXXRkYjHaVALFatHfcxNtQyKsbUAAJDuDEbHj-4VmWf7k_qy67wAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKexWXXRk1Sj1MtPJy8-nEjO4tb2WVXAAJEuDEbHj-4VpXp_066CceAAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKeyGXXRlTjR92OMMeAkSgQCB5E1HZmAAJFuDEbHj-4Vs68N9pbtu6IAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKey2XXRlrNWuqOBtUU9MlRcdX5vwGqAAJGuDEbHj-4Vs9RY4iPzHcCAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKezmXXRmBwME5Smo6cspjd_E18pREBAAJHuDEbHj-4VsPkbMzXKTVNAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKe0WXXRmgnSDFsPmINWxu8auoXKGisAAJIuDEbHj-4VooTSwlpiMpYAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKe1GXXRm9QA88CFoedCgy2PaienLIRAAJJuDEbHj-4VunOjQ7eP_b3AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKe12XXRnWpYMMRbD4T97htHjtyhkJ2AAJKuDEbHj-4VgUFxRXYMuBNAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKe2mXXRoGOIL2Y5ZBJyrGS3P98sZKIAAJLuDEbHj-4VhrnGlvQiaQkAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKe3WXXRomLZUEdvVnVYbvBmURXIB-pAAJMuDEbHj-4Vh_O5bNOTN6CAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🌋🪙Coin Volcano🪙🌋\n\nYong'in sehrini his eting, slot o'yinlari dunyosidan yangi 🪙 Coin Volcano!!\n\n😎Farruxdan fishkalar😎\n\n✅5X-9x multiplikatori Sticky Coin deb ataladi.\n✅Sirli belgilar har qanday o'yin belgilariga aylanadi.\n✅Coin Collecting deb nomlangan barabandan barcha qiymatlarni to'playdigan maxsus belgi.\n\nHar qanday 3 ta belgini to'plang va Hold & Win bonus o'yiniga o'ting.\n\n👇Men shu yerda o'ynayman👇",
+                "🌋🪙Coin Volcano🪙🌋\n\nIssiq🥵 vulqon cho'qqisining atmosferasi va hayratlanarli yutuqlar!\n\nKeling, slot bizga nimani taklif qilishini ko'rib chiqaylik:\n\n1️⃣asosiy o'yin bonus belgilaridan iborat.\n2️⃣har qanday 3 ta belgi chiqsa  u   Bonus o'yinini yoki Ultra bonusni ishga tushiradi!\n\n😎Farruxdan fishkalar😎\n\n✅5X-9x multiplikatori Sticky Coin deb ataladi.\n✅Mystery belgilar har qanday o'yin belgilariga aylanadi.\n✅Coin Collecting deb nomlangan barabandan barcha qiymatlarni to'playdigan maxsus belgi.\n\n👇Men shu yerda o'ynayman"
+            ]
+        },
+        "Farrux Play - Coin Volcano (Видео)": {
+            "videos": [
+                "BAACAgUAAxkBAAKfCGXXUtmHrajrgYvp-f9-LdiytGBIAAIsDwACHj-4VrDXf0b_g94JNAQ",
+                "BAACAgUAAxkBAAKfC2XXUwyDVKzNRJqTGukIURFcvO5iAAItDwACHj-4VtRjQFkq1h8SNAQ",
+                "BAACAgUAAxkBAAKfDmXXUz9xzXnN1coacOpIWoAyI-WKAAIuDwACHj-4Vgei7DDcyteLNAQ",
+                "BAACAgUAAxkBAAKfEWXXU4kkCH8gO8L7QJXpsMaRCn8uAAIwDwACHj-4VjRkXNy9g71sNAQ",
+                "BAACAgUAAxkBAAKfFGXXU-eQEdJAb7y6HgQbx31Yk6OZAAIxDwACHj-4Vj-wqO9HuhfBNAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Victoria Play - Gates of Olympus": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKfR2XYcykYgZ8Pqn12iebJUWURIKYEAAJxuDEbHj_AVmjaoB5FGDtHAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKfSmXYczWt8s2dQaorCLGeS234EaigAAJzuDEbHj_AVp_DLAhhh2wEAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKfTWXYcz83wOkrdnYZttpB1fa-pGDLAAJ0uDEbHj_AVsRFLYx45_w4AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKfUGXYc2HSxjhFwgk0_6HMcCZIXxKsAAJ1uDEbHj_AVkHXocjdneLkAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKfU2XYc3J-AiYi1IJObYqMWnqdiiTnAAJ3uDEbHj_AVs-kYh9Z9IeiAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKfVmXYc49Skdk1D0S0J1o7GkW909kPAAJ4uDEbHj_AVrQ8zzCIrleDAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKfWWXYc6dGhiEIeUkmjtkjUHXqo7xrAAJ5uDEbHj_AVoB6eSVVpMiCAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKfXGXYc7veMqRyRUjkiqgYdl-We6mEAAJ6uDEbHj_AVhLVPC7iYw0kAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKfX2XYc9fH6Gw8UB6mEClSXmx0sYrhAAJ7uDEbHj_AVjWigUAc9LTwAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKfYmXYdAcRC5aZFtsGBzvXUbb63FiKAAJ9uDEbHj_AVp3-eUjZf9SfAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKfZWXYdBeRe3jhIeaJDEz6D71v5-oCAAKAuDEbHj_AVpoWL1rcyXpqAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "⚡️Gates of Olympus⚡️\n\n🎰Os portões do reino de Zeus e as vitórias divinas estão abertos para você em Gates of Olympus\n\nEntão por que é um dos mais populares do Brasil? É simples.💫\n\n✅Jackpot de 5000x a aposta!\n✅Símbolos multiplicadores - podem trazer de 2x a 500x\n✅Rodadas grátis\n\n💋Truques da Victoria💋\n\nA principal característica são 15 rodadas grátis, durante as quais todos os símbolos com ✖️ que caírem numa combinação vencedora serão adicionados a todos os seus ganhos.\n\n👇Estou jogando aqui👇",
+                "⚡️Gates of Olympus⚡️\n\n🏔Alcance as alturas do Olimpo comigo!\n\nNo caminho para o topo, colete Scatters - três desses símbolos trazem 15 rodadas grátis, eles ajudarão você a obter 500x!💫\n\nUse Buy Bonus ou Ante Bet para coletar Scatter e ganhar um bônus!\n\n💋Truques de Victoria💋\n\n✅ Jackpot de 5000x\n✅Ante Bet aumenta a chance de obter uma rodada de bônus!\n✅Compre rodadas grátis usando o recurso Comprar Bônus\n\n👇Estou jogando aqui👇",
+                "⚡️Gates of Olympus⚡️\n\nDeus da sorte🍀 Hermes favorece você! Viaje até o topo do Olimpo com Gates of Olympus\n\n\n💋Truques da Victoria💋\n\n✅Jackpot de 5000x a aposta!\n✅Símbolos multiplicadores - podem trazer de 2x a 500x\n✅Compre rodadas grátis usando a função Comprar Bônus\n\nLembre-se de que 3 Scatters acionam o recurso de rodadas grátis e você ganha 15 rodadas grátis. 💫\n\nUse a função Ante Bet para dobrar suas chances de ganhar um bônus!\n\n👇Estou jogando aqui👇",
+                "⚡️Gates of Olympus⚡️\n\nUma das slots mais populares🎰 do Brasil - Gates of Olympus lhe proporcionará uma experiência única!\n\n💫Vejamos as principais características deste jogo:\n\n💋Truques da Victoria💋\n \n✅5000x - jackpot!\n✅O jogo de bônus lhe dará de 2x a 500x dos seus ganhos\n✅E também o recurso de rodadas grátis, que é lançado após receber 3 Scatters!💫\n\nAlém disso, a função Ante Bet pode duplicar as suas hipóteses de receber um bónus!\n\n👇Estou jogando aqui👇",
+                "⚡️Gates of Olympus⚡️\n\nOs Portões do Olimpo se abrem novamente com a lendária slot Gates of Olympus!\n\n💫Já jogo Gates of Olympus há muito tempo, vamos dar uma olhada nas principais características do jogo:\n\n💋Truques da Victoria💋\n\n✅Jackpot de 5000x a aposta!\n✅Símbolos multiplicadores - podem trazer de 2x a 500x\n✅Rodadas grátis\n\n🔥Use a função Comprar Bônus ou Ante Bet para coletar Scatter e ganhar um bônus!\n\n👇Estou jogando aqui👇",
+                "O que o topo do Olimpo esconde? Descubra comigo!\n\n💫A slot que já se tornou um clássico dos jogos, surpreende mais uma vez jogadores antigos e novos!\n\n✅Jackpot de 5000x a aposta!\n✅Símbolos multiplicadores - podem trazer de 2x a 500x\n✅Compre rodadas grátis usando o recurso Comprar Bônus\n\n💋Truques da Victoria💋\n\n🎰Jogo de bônus que pode render de 2x a 500x dos seus ganhos!\n\n🔥Use a função Comprar Bônus ou Ante Bet para coletar Scatter e ganhar um bônus!\n\n👇Estou jogando aqui👇"
+            ]
+        },
+        "Victoria Play - Gates of Olympus (Видео)": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [
+                "CgACAgUAAxkBAAKfcGXYdij9Ezuz3YwzfG9cKIyaCMiqAALXDQACHj_AVuJYxonDJ9VzNAQ",
+                "CgACAgUAAxkBAAKfc2XYd4ckKQo0nzmDTsXj3Aak2TLJAALYDQACHj_AVh3PqDGKoZvpNAQ"
+            ],
+            "video_notes": [],
+            "texts": []
+        },
+        "Victoria Play - Приветствия": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "Bom dia, desejo a todos um grande X! Como sempre, para iniciantes, recomendo a leitura do post. Tenham um bom dia, pessoal!",
+                "Bom dia, espero que você tenha recebido bons X ontem! Como sempre, os recém-chegados vão ler as postagens. Um grande X para todos e tenham um bom dia!",
+                "Oi pessoal! Hoje estou de bom humor, o que significa que haverá muitos slots e bônus legais! Os iniciantes devem ler a postagem para entender o que estamos fazendo aqui, mas desejo a todos os demais um grande X!"
+            ]
+        },
+        "Victoria Play - Sweet Bonanza": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKf6WXYkNNgPkd8pCx0LnBdk44tpOzpAAK8uDEbHj_AVm3Nx33tDuQgAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKf7GXYkOC7gZZR0e3jFmKpcbw-Vt8PAAK9uDEbHj_AVg_Wv22DCbnhAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKf72XYkRFkyA-JqIV233bqiBEnZJY0AAK-uDEbHj_AVuULSnIO6QK1AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKf8mXYkR153CMyjeME1ZLfKlPx6KToAAK_uDEbHj_AViglSox9laMXAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKf9WXYkUJ8UKx7eqAWY5-bi6ozlJ1sAALAuDEbHj_AVkD2mMiijw0mAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKf-GXYkXPKcSsnBLu52SK7Hr10iwNUAALBuDEbHj_AVnaR-2WXZRFmAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKf-2XYkZGZELICNrDJjYH0r17HrLwYAALDuDEbHj_AVorvmvS55-auAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKf_mXYka0KLEo-3gW0W3_oUY_LbQWVAALEuDEbHj_AVoakzXO7oppcAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKgAWXYkcFKUCCz6Reid__xhSfDxSc_AALFuDEbHj_AViQ2tS3bt2ZvAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🍫Sweet Bonanza🍫\n\nUm clássico dos jogos que nunca para de surpreender os jogadores! O doce momento da vitória não o deixará neste jogo!\n\nVejamos as fichas de uma das slots mais populares do Brasil:\n\n  ✅Símbolo Scatter - quando quatro desses símbolos aparecem, uma rodada de rodadas grátis é lançada!\n\n✅Ante Bet – aumenta a aposta por rodada, aumentando a chance de coletar símbolos Scatter.\n\n✅Candy bomb —  pode aumentar os ganhos de 2x a 100x da aposta na rodada de free spins..\n\n[👉Estou jogando aqui👈](https://bit.ly/3Te68GH)\n[👉Estou jogando aqui👈](https://bit.ly/3Te68GH)\n[👉Estou jogando aqui👈](https://bit.ly/3Te68GH)",
+                "🍫Sweet Bonanza🍫\n\nA lenda do mundo dos jogos de slots Sweet Bonanza não o deixará indiferente!\n\nVejamos as principais vantagens do 🍫 Sweet Bonanza:\n\n✅Ganho máximo de até 21.100x!\n\n✅Símbolo Scatter - quando mais de 4 desses símbolos caem, uma rodada de giros grátis é acionada!\n\n✅Ante Bet – aumenta a aposta por rodada, aumentando o multiplicador de vitória e a oportunidade de coletar símbolos Scatter!\n\n✅Multiplicador Candy Bomb - pode aumentar os ganhos de 2x a 100x da aposta na rodada de Free Spins!\n\n[👉Estou jogando aqui👈](https://bit.ly/3Te68GH)\n[👉Estou jogando aqui👈](https://bit.ly/3Te68GH)\n[👉Estou jogando aqui👈](https://bit.ly/3Te68GH)"
+            ]
+        },
+        "Victoria Play - Sweet Bonanza (Видео)": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [
+                "CgACAgUAAxkBAAKgIWXYmqc5hi4fpC5MIjI_9wfuq3CSAAIoDgACHj_AVpEZ-1hdnon_NAQ",
+                "CgACAgUAAxkBAAKgJGXYnU8OldXgjmZ1uTosSi010fnNAAI_DgACHj_AVi6LT43030LfNAQ"
+            ],
+            "video_notes": [],
+            "texts": []
+        },
+        "Victoria Play - Sun of Egypt 3": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKhcWXZvI0W_WtGWIHXbKSzuJ8iaWx3AAK8uTEbSN_RVpH5WVHc6l7HAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhdGXZvK3xv79McPk-VJ5a1VEI0EncAAK9uTEbSN_RVoJRWPTOZ8y8AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhd2XZvLU1iiVAvXDQhphI8vfmLLBpAAK_uTEbSN_RVvdGYl8VGhFlAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhemXZvMYP--ZcgiwJXmNweEbhzCYmAALAuTEbSN_RVtiHtoLeZT7bAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhfWXZvNhiW7D-mTTVOzQ_rWkXwIfIAALBuTEbSN_RVhw3kzpbf9Z0AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhgGXZvOL_HINU0eHqcvd8VREqRHYvAALCuTEbSN_RVjd-cHm5jR6lAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhg2XZvOy-00mhXXJm1MQAAYiAg52cGgACw7kxG0jf0Va1wahvlw0OEwEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAKhhmXZvPx4IodWr-eTbhsUPcJuspSvAALFuTEbSN_RVq37NFCrkEhaAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhiWXZvRMOEv1y8sTrnArLrL75M58sAALGuTEbSN_RVp2jHwud-vqFAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhjGXZvRw5vWaqzq_w9UNRywbAOBKAAALHuTEbSN_RVvRy0Jy1TRV4AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhj2XZvSg_H9Xiarc_F7a1Jr5uAAHy-AACyLkxG0jf0VbmXU9cFUpy0gEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAKhkmXZvTRGBr1_rwb1fP3UtLSNiKSIAALJuTEbSN_RVjWrAAFohsN-XgEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAKhlWXZvUe7n3GducrhYP5nCgyHMqbRAALKuTEbSN_RVnzWUwWfJSSSAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhmGXZvVQszlmlXddKxqsU-MEaAAF9BgACy7kxG0jf0VZa0f6rRXZQKwEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAKhm2XZvV27w4of5nPqaURfPYLH2EhBAALMuTEbSN_RVsOQiKI8NG2AAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhnmXZvW8YVHiFGhzRLxD1n29AJVUEAALNuTEbSN_RVgd5Q88INzxXAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhoWXZvYE4TXcdiK3Rh-9oMqRWYGqIAALOuTEbSN_RVpZ2YGNcz3sjAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhpGXZvYpZ7FWiz6BEnsnRdBkcMO4wAALPuTEbSN_RVjDD65-OpuK9AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhp2XZvZNM7D9NwIztPy_j1jNVrfHpAALQuTEbSN_RVrM617oJZ7BpAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKhqmXZvaUq0PdbgU-Xk0VdHzCf0GjiAALSuTEbSN_RVrOpbYFDKAfoAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🐫Sun of Egypt 3🐫\n\nEmbarque comigo em uma jornada para encontrar os tesouros dos faraós do Egito em Sun of Egypt 3!\n\n💋Truques da Victoria💋\n\n✅Hold and Win - colete símbolos com valores de até 15x e aumente seus ganhos!\n\n✅Scatters — três vasos com ouro ativam 8 rodadas grátis;\n\n✅Bonus Symbol  — 6+ elementos com um sol ardente acionam o jogo de bônus;\n\nJackpot Real - aposta de 10.000x\n\n👇Estou jogando aqui👇",
+                "🐫Sun of Egypt 3🐫\n\nAs areias douradas do Egito guardam muitos segredos, mas o Sol do Egito os revela!\n\nVamos dar uma olhada em um dos slots mais populares\n\n💋Truques de Victoria💋\n\n✅Hold & Win\n✅Free Spins\n✅Super Bonus\n\n3 símbolos Scatter trazem 8 rodadas grátis, e repeti-los durante o jogo de bônus lhe trará mais 3 rodadas grátis.\n\n👇Estou jogando aqui👇",
+                "🐫Sun of Egypt  3🐫\n\nLords of the Golden Dunes realizam sonhos no jogo de caça-níqueis\nSol do Egito 3\n\n✅Hold & Win\n✅Free Spins\n✅Jackpot 10 000х\n\n💋Truques da Victoria💋\n\nRecurso Hold & Win, símbolos de bônus aparecem com valores aleatórios de 1x a 15x a sua aposta!\n\n3 símbolos Scatter trazem 8 rodadas grátis, e repeti-los durante o jogo de bônus lhe trará mais 3 rodadas grátis.\n\n👇Estou jogando aqui👇"
+            ]
+        },
+        "Victoria Play - Sun of Egypt 3 (Видео)": {
+            "videos": [
+                "BAACAgUAAxkBAAKhtWXZv6pyODjs0jr3BPYzAcdN3G2EAAKrCwACSN_RVvC-r1Og2IxxNAQ",
+                "BAACAgUAAxkBAAKhuGXZv_uHPl8aIBK3RTN94Z4d-yANAAKtCwACSN_RVvHlcptjv2bYNAQ",
+                "BAACAgUAAxkBAAKhu2XZwDlQbBijafB_-tqK4rIaAZWrAAKuCwACSN_RVtjW1bqZeQurNAQ",
+                "BAACAgUAAxkBAAKhvmXZwNBY4QtglRC_RD5ZMIxCkLyzAAKvCwACSN_RVhrjfQOX75WENAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Victoria Play - Alchemy Gold": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKiPGXZ9iDVxOyBtgpnwNfpTuSxtzTHAAJvujEbSN_RVmMeKUuI4mUbAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKiP2XZ9jj93OENvSD5l38nqn4GWI3vAAJwujEbSN_RVlqsgkl3rM3GAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKiQmXZ9lDBzfJi-bcLRRm_kBoym1wbAAJxujEbSN_RVkwF03B1o4uNAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKiRWXZ9mhtFAzgWpZKKFj2J2---s0-AAJ1ujEbSN_RVun_wFZlsZBWAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🔮Alchemy Gold🔮\n\nManuscritos do Alquimista🧙‍♀️, poção mágica e outros atributos atmosféricos já estão esperando por você no jogo Alchemy Gold\n\n💋Truques da Victoria💋\n\n✅Símbolos Gold que se transformam em Wild e multiplicam os pagamentos\n✅Colete Scatters de 3+ e ganhe uma rodada de bônus de rodadas grátis.\n✅Jackpot - 5.000x\n\n👇Estou jogando aqui👇",
+                "🔮Alchemy Gold🔮\n\nSegundo a lenda, quem domina a alquimia não só poderá viver para sempre, mas também transformar metal em ouro!\n\nAlchemy Gold é o lugar onde você mesmo pode se tornar esse alquimista!\n\n💋Truques da Victoria💋\n\n✅Símbolos Gold que se transformam em Wild e multiplicam os pagamentos\n✅Colete Scatters de 3+ e ganhe uma rodada de bônus de rodadas grátis.\n✅Jackpot - 5.000x\n\n👇Estou jogando aqui👇",
+                "🔮Alchemy Gold🔮\n\nOs alquimistas da Idade Média sonhavam em transformar chumbo em ouro.\n\nE com a slot Alchemy Gold, você provará que isso é possível!\n\n💋Truques da Victoria💋\n\n✅Jackpot - 5.000x!\n✅Wild\n✅Scatter\n\nE para aprender a alquimia das grandes vitórias, pegue 3+ Scatters e a rodada de bônus de Free Spins começará!\n\n👇Estou jogando aqui👇"
+            ]
+        },
+        "Victoria Play - Alchemy Gold (Видео)": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [
+                "CgACAgUAAxkBAAKiV2XbDvVeWKt2P5uJi9iZgccrBAwNAAKfDgACNbfYVn8lXGGjHenINAQ",
+                "CgACAgUAAxkBAAKiWmXbDwZfpP-0Yg5Nec6DdNAJP55EAAKgDgACNbfYVrkEAekkpWlYNAQ"
+            ],
+            "video_notes": [],
+            "texts": []
+        },
+        "Victoria Play - Coin Volcano": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKiwGXbRij-O4ahHZZSei0JpSBvOXE4AAL5vTEbNbfgViyb9lFeP49SAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKiw2XbRwOJb1yofz_SE2ppjUA-o7w0AAL-vTEbNbfgVo0NBvQtfWF-AQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🌋🪙Coin Volcano🪙🌋\n\nSinta a magia do fogo, novidade no mundo dos jogos de caça-níqueis 🪙Coin Volcano🌋!\n\n💋Truques da Victoria💋\n\n✅Multiplicador 5x-9x chamado Sticky Coin.\n✅Símbolos Mystery que se transformam em qualquer símbolo do jogo.\n✅Um símbolo especial que coleta todos os valores de uma bobina chamada Coin Collect.\n\nColete quaisquer 3 símbolos e vá para o jogo de bônus Hold & Win 🤩.\n\n👇Estou jogando aqui👇",
+                "🌋🪙Coin Volcano🪙🌋\n\nAtmosfera quente🥵 de pico vulcânico e ganhos alucinantes!\n\nVamos ver o que a slot nos oferece:\n\n1️⃣ O jogo principal consiste em símbolos de bônus.\n2️⃣ O aparecimento de quaisquer 3 símbolos inicia o Jogo de Bônus ou Ultra Bônus!\n\n💋Truques da Victoria💋\n\n✅Multiplicador 5x-9x chamado Sticky Coin.\n✅Símbolos Mystery que se transformam em qualquer símbolo do jogo.\n✅Um símbolo especial que coleta todos os valores de uma bobina chamada Coin Collect.\n\n👇Estou jogando aqui"
+            ]
+        },
+        "Victoria Play - Sugar Rush": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKjOGXcWTlYTBlY8YQ1aI_KhtNXglVLAAJhvzEbNbfoVpZLEyErmnQnAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKjO2XcWUUM_hoXjwABDIJTgDBZVnLpxQACYr8xGzW36FarhjYG_5KVIgEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAKjPmXcWVNevCUUmCArcYF8fs8OFOpWAAJjvzEbNbfoVrAub-2KhAi_AQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🍬Sugar Rush🍬\n\nAmigos, vocês gostam de doces? Afinal, jackpots de 5.000x\nIsso é delicioso!\n\n💋Truques da Victoria💋\n\n(Vamos ver o que tem no nosso “menu”, porque é que esta slot é tão atractiva:)\n\n✅O símbolo vencedor marca seu lugar e desaparece. Após o segundo desaparecimento, um multiplicador de 2x a 128x aparece a cada nova vitória na mesma posição.\n\n✅Rodadas grátis - para começar você precisa coletar 3+ ou mais Scatters. No jogo bônus, os pontos marcados são salvos, permitindo que os multiplicadores aumentem até o final da rodada!✨\n\n👇Brinque comigo aqui 👇",
+                "🍬Sugar Rush🍬\n\nUma das slots de topo que tanto gosto!\n\n💋Truques da Victoria💋\n\n✅Tumble abrirá uma avalanche de ganhos, porque as combinações bem-sucedidas desaparecerão e novas aparecerão em seu lugar!🍰\n\n  ✅Se um símbolo vencedor se espalhar, sua localização será marcada na bobina. então o Multiplicador é adicionado a este local, aumentando o valor a cada novo desaparecimento! 🍭\n\n✅Colete 3 pontos Scatter e ganhe rodadas grátis.\n\n👇Estou jogando aqui👇",
+                "🍬Sugar Rush🍬\n\nNão só os doces são doces, mas também os ganhos no topo\nSugar Rush!\n\n   💋Truques da Victoria💋\n\n✅Rodadas grátis - a partir de 3 scatters!\n✅Jackpot - 5.000x!!!\n✅Sistema de compra de bônus!\n\nOs Scatters podem lançar até 30 rodadas grátis, onde os multiplicadores não desaparecem, mas continuam a crescer cada vez mais!\n\n👇Brinque comigo aqui 👇"
+            ]
+        },
+        "Victoria Play - Treasures of Fire: Scatter Pays": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKjd2XcY-fYwnvY5SUNYj7gtOWscsvDAAJzvzEbNbfoVs0V0kuJszQVAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKjemXcZA4E-ZcQ-jUa4TAt_wGTlQUnAAJ0vzEbNbfoVqnmOkyWqTW3AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKjfWXcZBm_p8o1xHZtb-wqxYoqV4yZAAJ1vzEbNbfoVmlv1EWGnXrXAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKjgGXcZCVgTzi3qRKKq3SC2Zjlc5UaAAJ2vzEbNbfoVvbmx9dOyxJPAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🐲Treasures of Fire🐲\n\nVocê sabia que os dragões dormem em cima de tesouros?\n\nEntão eu convido você a pegar esses tesouros ao usar slot do topo Treasures of Fire🐲\n\n💋Truques da Victoria💋\n\n✅ Multiplicadores 2x-100x,\n✅ Scatters - 3+ trazem 10 rodadas grátis,\n✅ Compra de bônus - compre 10 rodadas grátis.\n\nSistema de símbolos desaparecidos! Colete mais de 8 símbolos idênticos e ativeuma cascata de vitórias!\n\n👇Brinque comigo aqui👇",
+                "🐲Treasures of Fire🐲\n\nDragões antigos não se tornarão um obstáculo no caminho para os tesouros desejados!🐉\n\n💋Truques da Victoria💋\n\n✅Sistema de pagamento Pay Anywhere, você precisa encontrar 8 ou mais símbolos em qualquer lugar para ganhar 💰\n\n✅ Enorme jackpot de 20.000x 🤑\n\n✅3+ Scatter - traga 10 rodadas grátis\n\n👇Estou jogando aqui👇"
+            ]
+        },
+        "Victoria Play - 100 Joker Staxx: 100 lines": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKj0GXcdWsjrSnIq2_sGMBZNVTn05-5AAKUvzEbNbfoVtr2bInhRY4eAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKj02XcdXoyxWXftCGRQKTIc1IbWcolAAKVvzEbNbfoVty_jz-6UltOAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKj1mXcdYZBWH1wfa0Vl627irkXLx_AAAKWvzEbNbfoVpMlJQcVWtvKAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKj2WXcdZVfaxrKE0CUl8D-Pi_D__6xAAKXvzEbNbfoVqkwYXfh79JjAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKj3GXcdaJlDhPjI2ydDPEDpuP3tvHHAAKYvzEbNbfoVp0GhUa88UUmAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKj32Xcda4iKBE2uFiC1ibehIXFncqIAAKavzEbNbfoVh0n2XJBQgsAAQEAAwIAA3MAAzQE"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "♣️100 Joker Staxx: 100 Lines ♠️\n\nNão está familiarizado com 100 Joker Staxx?\nRecomendo experimentar, porque é um clássico dos jogos!🙌\n\n💋Truques da Victoria💋\n\n✅ 100 linhas de pagamento;\n✅ Wild joker: substitui outros símbolos e aumenta a oportunidade de obter uma combinação vencedora;\n✅ Símbolo Scatter: paga os ganhos independentemente da combinação.\n\n👇Estou jogando aqui👇"
+            ]
+        },
+        "Victoria Play - Big Bass Amazon Xtreme": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKkHWXckOho07UYXl-7D-ALV3XGW4pnAALCvzEbNbfoVkALn90lzg7PAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKkIGXckPocGT3UUNEnphPh0xliheHxAALDvzEbNbfoVne0XGAY8KoZAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKkI2XckQpw2L-q4Xon0bYqyqIatVG6AALEvzEbNbfoVivY015qfgEsAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🐟Big Bass Amazon🐟\n\nAproveite o momento com o novo jogo Big Bass da Amazon!\nEsta é a sua chance 🎣de pegar um “peixinho dourado”!\n\n\n✅Jackpot - 10.000x 😱\n✅Wilds\n✅Rodadas Grátis\n✅Ante Bet\n\n💋Truques da Victoria💋\n\n💫Wilds Maximum Big Bass que ajudam você a coletar uma combinação vencedora;\n\n💫3 Scatters que acionam a rodada de bônus Amazon Xtreme Rodadas Grátis;\n\nE ainda - Money Symbols, que pagam até 50x da aposta.\n\n👇Entre, estou jogando aqui👇"
+            ]
+        },
+        "Victoria Play - Big Bass Amazon Xtreme (Видео)": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [
+                "CgACAgUAAxkBAAKkRGXcnwJjpC4pRM9YTqerwbSZ-W2xAAJdDAACNbfoVgYMBjsVf6X6NAQ",
+                "CgACAgUAAxkBAAKkR2XcoBryJgABFys6E2sJsicogSGoygACXgwAAjW36FZG4WRo7mn0wTQE"
+            ],
+            "video_notes": [],
+            "texts": []
+        },
+        "Victoria Play - Bigger Bass Bonanza": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKkcGXcoarWncLcLRVlXqx2_Ay4FroxAALZvzEbNbfoVgb6LeSeHPMiAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKkc2XcorV8ndWSry7N_sFBfVIbGSPUAALdvzEbNbfoVoqProbS7VswAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKkdmXcotdX81xWFGf7mi8kZmI1zARcAALevzEbNbfoVvysCZc71BeuAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKkeWXco6NnERt_kdabvAeYB7L2JZooAALfvzEbNbfoVrhwWfDZhGerAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKkfGXco7xt6l0r-GJPbVJJin7yVvfPAALgvzEbNbfoVsA_fbccxTmLAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🎣Bigger Bass Bonanza🎣\n\nAlguns dias são feitos apenas para pescar. E hoje é um deles, não é? 😏\n\nEntão tente a sorte no top Bigger Bass Bonanza!✨\n\n✅Wilds \n✅Jogo bônus\n✅Rodadas grátis\n\n💋Truques da Victoria💋\n\nCada quarto símbolo Wild poderá reiniciar a rodada de bônus e fornecerá 10 rodadas grátis adicionais!💫\n\n👇Brinque comigo aqui👇"
+            ]
+        },
+        "Мега скидка УЗ (Тексты)": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "Pulni behuda sarflayotganingizni, vaqtni belgilab, o'yindan zavqlanib, pul ishlashning iloji yo'q, deb o'ylash bu menimcha noto'g'ri dep o'ylayman 🤔\n\n🔥💰 Mendan MEGA chegirmaga ega bo'ling 💰🔥\n\nEndi BOT 150 000 so'm emas, atiga 1️⃣0️⃣0️⃣ 0️⃣0️⃣0️⃣ so'm!\n\n👉 Menga lichka orqali yozing 💬\n\nVa efirlarga keling - biz birga pul ishlaymiz 💸",
+                "❗️❗️MEGA SKIDKA e'lon qilaman! ❗️❗️\n\nKo‘pgina obunachilarim BOT sotib olishga qurbi yetmasligi bu qiyin xolat. 😕\nOdatda, siz hisobingizga 3-4 dollar kiritasiz va bu depozitni tezda yo'qotasiz. Va keyin salbiy va tushkun kayfiyat bilan kazinoni tark etasiz 🤯\n\nMEGA SKIDKA  e'lon qilaman 😎\nEndi mening BOTim 150 000 so'm emas, atiga 1️⃣0️⃣0️⃣ 0️⃣0️⃣0️⃣ so'mga olishingiz mumkun! 🤩\n\nKeling, birga o'ynaymiz va pul ishlaymiz! 🔥💰"
+            ]
+        },
+        "Мега скидка БР (Тексты)": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "Quando o destino apresenta oportunidades, sua tarefa é aproveitar o momento! 😏\nEu quero que você tenha mais oportunidades desse tipo. ☺️\n\n❗️Portanto, estou lhe dando um deles agora mesmo ❗️\n\n⚡️⚡️⚡️\nO BOT está disponível para todos!!!\nMEGA DESCONTO para Grupo VIP com sinalizações para o jogo Aviator apenas  1̶0̶0̶  50 Reais.\n⚡️⚡️⚡️",
+                "❗️ MEGA DESCONTO para grupo VIP ❗️\n\n✈️ O aviador se abrirá para você de uma nova maneira!\n\nTe dou uma oferta exclusiva! 🤑\n\nApenas 50 reais! 👇👇",
+                "🚨 50% de desconto no acesso ao GRUPO VIP! 🚨\n\n😌 Cada um de nós conhece esse doce sentimento de vitória! \n\nEstou pronto para dar a você de novo! 🔥\n\nAgora o acesso ao GRUPO VIP ficou mais acessível do que nunca! 💸\n\nApenas 50 reais 👇👇👇"
+            ]
+        },
+        "Farrux Play - Egypt Fire": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAKpfGXuxWkzFixBGn4E0kVL8va3U9LEAAJ2ujEbGetxV15BbX_rnldiAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKpf2XuxXMG1fRQds1-G3J7rh9KbOe3AAJ4ujEbGetxV5N_Nu8PayP3AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKpgmXuxX7zZGt2Q_ZDb6u9xF-zqYJXAAJ5ujEbGetxVyj2YaF46Sb-AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKphWXuxZu_6NZTz-9zc6bre_kauXvWAAJ6ujEbGetxV7kCbAbMQhlQAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKpiGXuxaUynKPH_hIJk1TGNH2P--VjAAJ7ujEbGetxV-GVsSN2R4oXAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAKpi2XuxbCNRlvZbqxsUJIOlhkp48MzAAJ8ujEbGetxV-wkP-UraUjwAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🔥Egypt Fire 🔥\n\nIssiq mamlakatlarda dam olishga vaqtingiz yo'qmi? Bu muhim emas, Egypt Fire-ning eng yaxshi slotini O'ynang 🔥issiq bo'ladi!\n\n😎 Farruxdan fishkalar\n\n✅Free spins\n✅Jackpot 10 000x\n✅Hold and win\n\n6+ Mystery Token belgilarini ushlang va 3 FS oling. Har bir Bonus yoki Mystery Token yana 3 ta jrespin beradi.\n\n👇Men shu yerda o'ynayman👇"
+            ]
+        },
+        "Farrux Play - Egypt Fire (Видео)": {
+            "videos": [
+                "BAACAgUAAxkBAAKplGXuyAWQks0hdRlYg5UJrVH8vgnyAAKZDAACGetxV9s6coarLaOMNAQ",
+                "BAACAgUAAxkBAAKpl2XuyFqtB901z56beRxibDxmatXXAAKaDAACGetxV5rU8tjP-fOpNAQ",
+                "BAACAgUAAxkBAAKpmmXuzxger-VpjVZZZ2UpZGwEbDM4AAK6DAACGetxV4o3KdnIcqOHNAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Play - Book of Sun": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAK17GYBMg8qKPQWRZrfKSpEhfrUPp-DAALxvDEbPc8JVIFm3AdIrN6jAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK172YBMhetaIfib4LGlCFa0rRR4VzKAALyvDEbPc8JVHkPvomb2ysEAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK18mYBMh86nGojypadtDMFdwwta_kPAALzvDEbPc8JVJaYe4JsZNprAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK19WYBMij09t_1qt-_DH6pxiUl6Ze0AAL0vDEbPc8JVAZn9h9SwOD7AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK1-GYBMjAUUJ7DM7-5zFSLJg0lq68MAAL1vDEbPc8JVDWCePwJ7pLYAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK1-2YBMjgDb0OZyefD2BggqDo9R_WzAAL2vDEbPc8JVNFDu54VORPiAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK1_mYBMj-C8CuOiz8KSjCjL3htr568AAL4vDEbPc8JVOBK-BsTNLJXAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2AWYBMkaWrYG5jKfokqVdhyhaBZyhAAL5vDEbPc8JVIUHCn76dPwwAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2BGYBMlHWwj86NX_FAl8qXqHxUfNSAAL6vDEbPc8JVD5IE8mQGDWlAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "📖Book of Sun☀️\n\nShaxsiy kutubxonangizni yana bir bestseller bilan to'ldiring - Book of Sun!\n\n😎Farruxdan fishkalar😎\n\n✅Barabanlarni aylantiring, 12 ta freespin oling. Ularni ishga tushirish uchun uchtadan boshlab Scatter-Wild  ushlang.\n\n✅Murojaatlarni boshlashdan oldin, kitob sahifalarida expanding belgisi paydo bo'ladi va butun barabanni egallaydi.\n\n👇Men shu yerda o'ynayman👇",
+                "📖Book of Sun☀️\n\nMisr bo'ylab sayohat davom etmoqda va bugun men sizga mashhur  Book of Suni 💥 haqida gapirib beraman\n\n😎Farruxdan fishkalar😎\n\n✅Barabanlarni aylantiring, 12 ta freespin oling .Ularni ishga tushirish uchun, uchtadan boshlab -Scatter-Wild  ushlang.\n\n✅Bonus raundi boshlanishidan oldin esa expanding symbols появятся paydo bo'ladi, ular Free Spins davomida butun barabanni egallaydi va yutuqlaringizni ko'paytiradi 💰\n\n👇Men shu yerda o'ynayman👇"
+            ]
+        },
+        "Farrux Play - Book of Sun (Видео)": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [
+                "BQACAgUAAxkBAAK2H2YBNERDq-l60mcHNOe_XkRrFs4rAALODgACPc8JVGV1SGfBTDJPNAQ"
+            ],
+            "gifs": [
+                "CgACAgUAAxkBAAK2DGYBMvf55HntFRap0NfLUl6eFYhfAALLDgACPc8JVG2JssDf__fVNAQ"
+            ],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Play - 3 Coins Egypt": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAK2KmYBNMtDo20AAWoQkcPo3GY9Z8ULkgAC_rwxGz3PCVTXR3XnzPJAFgEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAK2LWYBNNI7DuZ1TCpqsUkB48HXNwpiAAL_vDEbPc8JVOyK8uiShrNYAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2MGYBNNqhzBv9GNGUqBuwkwznimEMAAO9MRs9zwlU-MW0RsXCyRMBAAMCAANzAAM0BA",
+                "AgACAgUAAxkBAAK2M2YBNOY7xfDX32z-OlavVBlHQSpJAAIBvTEbPc8JVC7Iq0pvuyjTAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2NmYBNO5BkQsErKnBoGzevTYO_a_4AAICvTEbPc8JVN7B1DLIUT2tAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2OWYBNPXVVYX3tIRtzI9zAbeGnFXmAAIDvTEbPc8JVErSiM4rQJwoAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2PGYBNPyR1AtdQx4Jvf1aXuzZw5mzAAIEvTEbPc8JVB9CHyDocmzCAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2P2YBNQQz7clYcMZYg-ne2j1pnzazAAIFvTEbPc8JVN-Mj08HG-UaAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2QmYBNQ4kNhDlev62JibHt4BP-CLEAAIGvTEbPc8JVGpqILY3ZtQIAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2RWYBNRW6zKmirk7QxIaI8dfXrFKOAAIHvTEbPc8JVCx0xTq0T5OfAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "🔥3 Coins: Egypt 🔥\n\nSlot o'yin janrining klassikasi issiq Misr va uning xazinalari haqida🤩\n\n😎Farruxdan fishkalarr😎\n\n✅Bonus round\n✅Respins\n✅Wild\n\n Bonus Symbol nafaqat saxiy to'lovlarni  beradi va yana ularning hisobini  4 ga yangilaydi. O'yin barcharespinlar tugamaguncha davom etadi.\n\n🤩 Bundan tashqari, saxiy Wild har doim o'yin maydonidagi boshqa belgilarni almashtirishga va yutuqlaringizni oshirishga tayyor.\n\n👇Men shu yerda o'ynayman👇"
+            ]
+        },
+        "Farrux Play - 3 Coins Egypt (Видео)": {
+            "videos": [
+                "BAACAgUAAxkBAAK2TWYBWFQTjQRE7HuLGgpCGEEgAs1EAAIGDwACPc8JVLVVzYFNDsEZNAQ",
+                "BAACAgUAAxkBAAK2UGYBWGfxI8FZtSf7kXi0tc1HG90vAAIHDwACPc8JVCb5SJA1R7PnNAQ",
+                "BAACAgUAAxkBAAK2XGYBWIkeaE7immgDIfv6w6L0A3YLAAIJDwACPc8JVEZmhi6VdsryNAQ"
+            ],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Play - Scarab Riches": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAK2ZGYBWOIDe4_kzkPHmGAP4bQT9y9LAAJkvTEbPc8JVNTcHzcL3tDCAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2Z2YBWOlxR0jIoBpFx3SzBlZVGtjPAAJlvTEbPc8JVJ-Y2I9Zoz2uAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2amYBWPHHItvy3Zbl_hA-lTwimcZGAAJmvTEbPc8JVHl7MgjJ5IsqAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2bWYBWPm0qyZ3-wABz-M_M9ZvyuSnBQACZ70xGz3PCVT8S6_1wIDxiwEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAK2cGYBWQIqb0s-62i7qIH5A6P83k7vAAJovTEbPc8JVPK-zE42Qf9hAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2c2YBWQoZVD4Mk3FZW3W2YY5yRMvlAAJpvTEbPc8JVOcLrBLXDTj9AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2dmYBWROBnEE-PLPFCj9QlBLvzwsOAAJqvTEbPc8JVPhNkUYlv2APAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2eWYBWRteYAxslFQnrmm5VRCkNI6fAAJrvTEbPc8JVDP5Ot71-H5OAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2fGYBWSMnzcjUoeSB4pMjoXdjB5GmAAJsvTEbPc8JVOlS66pitlfNAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2f2YBWSpZoHczdwQLDlwoTMsAAV9v-gACbr0xGz3PCVTQTsE1zaX2xAEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAK2gmYBWTLTESdEz5-QD9PqOul_NuufAAJvvTEbPc8JVIQPgxpQIMu0AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2hWYBWTlK3iLTHHYTIpgAAfOW_TbFFAACcL0xGz3PCVQdCkos3s2pnwEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAAK2iGYBWUVwIB3KH0115X19Qyv7MQRCAAJxvTEbPc8JVGL3DirbdN6TAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2i2YBWU5JawK9Cm8fcj7qCmz7L3pyAAJyvTEbPc8JVONGW9XH9TrbAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "💰🪲Scarab Riches🪲💰\n\n🐫Misr xudolari siz bilan eng yaxshi uyada uchrashishga tayyor-Scarab Riches, tezda  issiq sayohatga boring👇\n\n😎Farruxdan fishkalar😎\n\n✅ Wild Scarab-bu asosiy va bonusli o'yinda tasodifiy faollashtirilishi mumkin bo'lgan xususiyat bo'lib, g'alaba qozongan kombinatsiyalar uchun 4 dan 12 gacha Wild belgilarini olib keladi.\n\n✅ Scatter-piramidalar - 3 ta shunday belgi 10 ta freespinni faollashtiradi, qachonki  bir aylanishda 1, 3 va 5 barabanlarga tushganda\n\n✅ 25 ta to'lov liniyasi\n\n👇Men shu yerda o'ynayman👇",
+                "💰🪲Scarab Riches🪲💰\n\nEng issiq slot  allaqachon g'oliblarini kutmoqda! Misrning issiq qumlari bo'ylab sayohat qiling!👇\n\n😎Farruxdan fishkalar😎\n\n✅ 25 ta to'lov liniyasi\n✅ Wild Scarab-boshqa belgilar o'rnini bosadigan va yutuqlarni oshiradigan 4 dan 12 gacha yovvoyi hayvonlarning tasodifiy ko'rinishi.\n✅ Scatter-piramidalar-3 ta piramida uchun, siz 10 ta freespin olasiz\n\n👇Men bu erda o'ynayman👇",
+                "💰🪲Scarab Riches🪲💰\n\n️ ️ Scarab Riches-bu sizni bir necha soniya ichida qadimgi Misrga olib boradigan qiziqarli o'yin.\n\n✅Wild\n✅Free spins\n✅25 ta to'lov liniyasi\n\n😎Farruxdan fishkalar😎\n\nWild Scarabs-u tasodifiy pozitsiyalarga 4 dan 12 gacha skarablarni qo'shib, g'olib kombinatsiyalarni yaratadi. 💸\n\n\nScatter-ni piramidalar shaklida to'plang: 10 ta bepul aylanishni boshlash uchun faqat 3 ta shunday belgi kerak bo'ladi\n\n👇Men shu yerda o'ynayman👇"
+            ]
+        },
+        "Farrux Play - Scarab Riches (Видео)": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [
+                "CgACAgUAAxkBAAK2nGYBafNN81qUDGg96EtAk9lEgQpvAAJWDwACPc8JVLlfFUDuk8PgNAQ",
+                "CgACAgUAAxkBAAK2n2YBah6XNtoqppo5M5R6i8NDUwJsAAJXDwACPc8JVAuLq3WZLvKlNAQ",
+                "CgACAgUAAxkBAAK2omYBaiyBcLLsqS67FVG04dT3zuK1AAJYDwACPc8JVM3CsmgUE1DfNAQ",
+                "CgACAgUAAxkBAAK2pWYBakAXure3BnLGcVtMb82uZCSuAAJZDwACPc8JVMvHpj-hCH8dNAQ",
+                "CgACAgUAAxkBAAK2qGYBatmQeKVxAvbOF0lM_aGSwelTAAJaDwACPc8JVHP0z1j3uue9NAQ",
+                "CgACAgUAAxkBAAK2q2YBauYmUeY8My2iwcoxWvRQGYIKAAJbDwACPc8JVMfN6jabPkAqNAQ",
+                "CgACAgUAAxkBAAK2rmYBavbpo5SHj6eNz4WiLWcQfEMVAAJcDwACPc8JVLRo1tb5MUo3NAQ",
+                "CgACAgUAAxkBAAK2sWYBawHiB2CnrCxbTOoEvRiqhvFGAAJdDwACPc8JVI2SCPU_EXrHNAQ"
+            ],
+            "video_notes": [],
+            "texts": []
+        },
+        "Farrux Play - 100 Joker Staxx: 100 Lines": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAAK2vGYBd0m62pss9ragepXHzxeQOsFDAAJsvjEbPc8JVMzIuC-aQ2KoAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2v2YBd1EHwlN9z6RsoCGxYptpwk4hAAJtvjEbPc8JVOLTuSwvWyGHAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2wmYBd1jDtkZ7oezeSwO_8hb77ppHAAJuvjEbPc8JVAUYvFdseqO5AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2xWYBd157M0TW-BJRFigCqRhgi3JXAAJvvjEbPc8JVNHUZuF5qMsSAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAAK2yGYBd4u0tXNWkvpr580FSbfedrELAAJwvjEbPc8JVMYDU-iP9iVxAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": [
+                "♣️100 Joker Staxx: 100 Lines ♠️\n\n100 Joker Staxx bilan tanish emasmisiz?\nMen buni sinab ko'rishni maslahat beraman, chunki bu o'yin klassikasi!🙌\n\n😎Farruxdan fishkalar😎\n\n✅ 100 ta to'lov liniyasi;\n✅ Wild-Joker: boshqa belgilarni almashtiradi va g'olib kombinatsiyani yig'ish imkoniyatini oshiradi;\n✅ Scatter-belgi: kombinatsiyadan qat'i nazar, yutuqlarni to'laydi.\n\n👇Men shu yerda o'ynayman👇"
+            ]
+        },
+        "Farrux Play - 100 Joker Staxx: 100 Lines (Видео)": {
+            "videos": [],
+            "photos": [],
+            "voices": [],
+            "documents": [],
+            "gifs": [
+                "CgACAgUAAxkBAAK20GYBeJ4Z4sjutQX0-mKAYhFmtodCAAJ3DwACPc8JVNpQEYL4JwleNAQ"
+            ],
+            "video_notes": [],
+            "texts": []
+        },
+        "Успешный успех БР (ФОТО 2)": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAALDQ2YP0-w_N7Kfmyo6R_CBkdP9-7F6AAJ7uzEbtjp4VOtc8EkjXv-YAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDRmYP0_JDD8sTHTvv0R5u8RaEpb2vAAJ8uzEbtjp4VB4lnH77J171AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDSWYP0_e2C0kKmApdiMOrYagLHjafAAJ9uzEbtjp4VLaePg5TtOozAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDTGYP0_3uKxKofQxVT6eX7QeSPaqiAAJ-uzEbtjp4VFZWwZVRnIPHAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDT2YP1AS1yP45FfFCZuc-LLC1gi6xAAJ_uzEbtjp4VMHFSCLZR_-2AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDUmYP1AuYUbhBL_5JJtmm1gTn9N6EAAKAuzEbtjp4VN2ypw355uWMAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDVWYP1BGZVURu_36LKhetw3o_71KBAAKBuzEbtjp4VOiHQhnEsK5SAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDWGYP1BgDfhx_MrO-A6dML0V-8k0-AAKCuzEbtjp4VGRm3zY-DCUzAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDW2YP1B0jUPkAAZHLMMl6S0X4eGvpPgACg7sxG7Y6eFTOvuEb2RxgHQEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAALDXmYP1COIZPjbiX3CxqYSc4_MMtX8AAKEuzEbtjp4VDlQ7-JkY27-AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDYWYP1Cm3YBH7TC51T90h6j13z4HoAAKFuzEbtjp4VBdQ5wNtIxxCAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDZGYP1C_t5TT48iwTiUSd0YvPwGHbAAKGuzEbtjp4VOVyyazCp1UXAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDZ2YP1DX2xsMUzPkZMjv-iAJWGZf6AAKHuzEbtjp4VKzFjzAVsM1dAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDamYP1DpAYquMhzQ3iNgaTA7HsrPlAAKIuzEbtjp4VEgIbgMmHHzuAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDbWYP1ELjCRFZFbTT63hadOJBCxE3AAKJuzEbtjp4VAifhSed_iLsAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDcGYP1EgAAakqxdqQ8ZxmQZdOaaMtkgACirsxG7Y6eFQ3kbW47v4F3wEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAALDc2YP1E9aE6DETEgrU-CqSlW1MWKCAAKLuzEbtjp4VCzOihqXVDNdAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDdmYP1FZkx6-5fNLPy8RHC4oJPwWlAAKMuzEbtjp4VAEBuxW2VOsaAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDeWYP1Fu-HPOZ_0Y-O_gSAAHI5g_48gACjbsxG7Y6eFQVEp0D1V2RRAEAAwIAA3MAAzQE",
+                "AgACAgUAAxkBAALDfGYP1GGrc4y2j0De9AYKrQJfOXNRAAKOuzEbtjp4VGfFxA5LSiJxAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDf2YP1Geven031cQPKBEG6xN2Ss6XAAKPuzEbtjp4VFBm_29fI1P3AQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDgmYP1Jxc3zy6JiTeTDLmXl5_atNqAAKRuzEbtjp4VKfW9C-O4cvfAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDhWYP1KQZ8A6T8wxKdQnWLKcIzlgjAAKSuzEbtjp4VGHxz3_c1jPMAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDiGYP1KxRLaEX5lqrrFg1cFaW82gPAAKTuzEbtjp4VFHoj5aPJb8TAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDi2YP1LY0_lEHEj1sTwOJEiNwH5n2AAKUuzEbtjp4VCD3OPUyYYCtAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDjmYP1L_pv_SJblG9MlacH_TstWE5AAKVuzEbtjp4VIvI5dsRyXtTAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDkWYP1MhKIp87nuehNsngBvv12mqLAAKWuzEbtjp4VKDD-lqLmMfAAQADAgADcwADNAQ",
+                "AgACAgUAAxkBAALDlGYP1M_ZU3DipyFpShQqSC6TJyjzAAKXuzEbtjp4VKodcSGfth7EAQADAgADcwADNAQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Trouble Jet UZ - Отзывы": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAALYpWZF2Jvezp4tVZGKbfjKmAlQZXTtAAKuuTEbtqExVnP0164gA68GAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALYqGZF2KhNJrBpxjx1fbnziswjzioWAAKvuTEbtqExVnpq6KZwXBaDAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALYq2ZF2LuZZGsSlAWPh5IJQRHdYnfOAALEuTEbtqExVsw3_LvMeneTAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALYrmZF2OEaSiMO6vU1_p1Jm_hnWi0fAALGuTEbtqExVs1ADwkbMdPkAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALYsWZF2PCeRFdL6_0RSFI0bWaVQQOQAALHuTEbtqExVvCx3cR7Mg13AQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALYtGZF2QIVlxsrooXJutCFcpZAf6mvAALJuTEbtqExVoJ9DFJv5NRhAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALYuGZF2WoP96i_nBfdJ5MF4rwgc23DAALMuTEbtqExVnrwYlG9rg6_AQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALYu2ZF2X2EGTy6OGzuSa0qE72zgwbEAALNuTEbtqExVvpRAerwZ467AQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALYvmZF2k51m3wCe8Spdl_Yi47NFWWhAALQuTEbtqExVrq4CFVYZF6SAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALYwWZF2ntgqiYN4Ta_qwLQuyxtUO3JAALRuTEbtqExVlRb6ib69MCyAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALYxGZF2r2XKvbEcKx4nl8ar_JEHmEFAALSuTEbtqExVtqQ3_t7s3P8AQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALYx2ZF2t5q6s2ROueKFSb08yaXtAVvAALTuTEbtqExVpQJeP9NPsPgAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALYymZF2ybSYXpgqsbiwT1OGbAdq2CwAALUuTEbtqExVh46XYdTfcxVAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALYzWZF2z9hBOrEXb9iO1aFRBlRp467AALVuTEbtqExVuilIGWwUGhSAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALY0GZF23yzemGTLEDMRIobQvT4A2f8AALWuTEbtqExVukXPBh_S1ytAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALY02ZF2864C2zoSDuIi1nAD5jLLdBlAALXuTEbtqExVqOszYE80gdbAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALY1mZF2-r8IkSHRnGBxPibaDV97NCzAALYuTEbtqExVvqcBYm5jbDaAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALY2WZF3A7275nHPITrA0_bSpTdfHIIAALZuTEbtqExVvNheveh9nTTAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALY3GZF3El9Me5ApXB2ua2f9aBbJPcTAALauTEbtqExVpmdGwYU3OoAAQEAAwIAA3MAAzUE",
+                "AgACAgUAAxkBAALY32ZF3GSJlycVZj7iVEHMVCJZ_xlUAALbuTEbtqExVinRj0CtQ4CqAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALY4mZF3H0pA-3_G0f_j8r4rZ-Wj3DYAALcuTEbtqExVhy1KvJMm6TMAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALY5WZF3JXjLUfTmLpvVn6pquuNUouSAALduTEbtqExVhvw3RhApGswAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALY6GZF3K7PdELiQAZ50mN786MAAY9b6AAC3rkxG7ahMVa34cfFEK6kfQEAAwIAA3MAAzUE",
+                "AgACAgUAAxkBAALc6WZQkhJiQt9SMZE6dxKXKAxWIb4MAAJ9vDEbDGGIVkCGPgKwNaq0AQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALc7GZQknpT32ZNiMR2zBzybpALFP8eAAJ_vDEbDGGIVnuJm-nIw83DAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALc72ZQkpdy2MVsY_A94MXxXg0xa6qOAAKCvDEbDGGIVvbS_7pgZrwRAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALc8mZQkrSGxJD3uKr1vsg_Euv0O6M2AAKEvDEbDGGIViaJVkf5nrjDAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALc9WZQkslAix_xokVrppmCfPoQdL5OAAKFvDEbDGGIVrfz9XfY4qoeAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALc-GZQkuDl2edZ6itkqainTD639YBLAAKGvDEbDGGIVixMMR6B7ppDAQADAgADcwADNQQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Trouble Jet BR - Отзывы": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAALaoGZNs8aADUaztBGOe08nKZF2pnk_AAIgujEb0hFxVhKd0_lJF2gNAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALao2ZNs9KkRTOe_P-xOBOgOZ8ZQ14PAAIhujEb0hFxVmEmHshTkbeEAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALapmZNs-y9578dPSCpREntksR8oVC2AAIiujEb0hFxVgi3g5iW2KNJAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALaqWZNs_zoLrXNndxjhzNltXYm0gQSAAIjujEb0hFxVmMNZv5FNU-KAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALarGZNtA6qtVHb6kUVXi2-oQu1pylAAAIlujEb0hFxVgXMxBDWkiymAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALar2ZNtBuesbAUFeGu6HBbSX0JlFWyAAImujEb0hFxVtGb81JsFg5HAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALasmZNtCTJuzpBtiF_wGRAFN5eqzGHAAInujEb0hFxVpWxII0MdVBiAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALatWZNtDM6x-0o-7Qs1ghDRRrx0fRbAAIoujEb0hFxVsKZZauhJ2d1AQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALauGZNtEWH27-zjwABU6ufUI9OxroyYAACKboxG9IRcVbPGbJyFmo5gAEAAwIAA3MAAzUE",
+                "AgACAgUAAxkBAALau2ZNtFA4QVaP34NjrJIeEU33ZxkiAAIqujEb0hFxVnLW_y_us5s2AQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALcqGZQhBGIHWkiP80wZzQqjYrgRYRNAAIxvDEbDGGIVkqSelHPsZjzAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALcq2ZQhB37T3WZEFN3gGAbY7-IIJsNAAIyvDEbDGGIVpGcvnTg1DGrAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALcrmZQhFbN2Y6L0yWQFrf4v6xliiNjAAIzvDEbDGGIVqtpvzQGTjfbAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALcsWZQhGd-bWm0qvG-Cl84HdLxoOGbAAI0vDEbDGGIVnMChXEFnF6ZAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALctGZQhHbY9PW9d0j5RBeMjl8Z2u9RAAI1vDEbDGGIVs4kk28X7XxNAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALct2ZQhIceSjdssPugWsamm7s02_bdAAI3vDEbDGGIVgbUaZf68hVGAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALcumZQhK27_wzp-g_iM00s5tvTaUtrAAI4vDEbDGGIVjZA9Q70A81TAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALcvWZQhLjVKIrf26IrKNN0S_QyamxtAAI5vDEbDGGIVpNV62cpG97HAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALcwGZQhM23r0T3vpf-QxWFzA_OM3l0AAI6vDEbDGGIVoovShdZtk8xAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALcw2ZQhS4SFIpRpEXNnFkXYnsXrte-AAI7vDEbDGGIVrJ4Kj9hfjwdAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALcxmZQhUckr__QXm0dtxFdeJ6aij7sAAI8vDEbDGGIVnVvKrTc1-EyAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALcyWZQhW_tfufOep7Efbq3U4tPNtAGAAI9vDEbDGGIVuA86ICFgZYDAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALczGZQhYnN_-4ES86Yrnho1io3r3lpAAI-vDEbDGGIVu0_k5g9-xLFAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALcz2ZQhZ7xbDgWQXuDd0_NecFlB-zIAAI_vDEbDGGIVg-0CEOLq8ikAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALc0mZQiRxG2DP9xlCwUEZ62FzBr6z0AAJFvDEbDGGIVlhHwbydsAIHAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALc1WZQiW63GmR-1Sl0ubZVgwsad4-wAAJGvDEbDGGIVnHivcL0hSLrAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALc2GZQiZNviNalNR4TXveP_PIDCh5dAAJHvDEbDGGIVhm37hTsu6qWAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALc22ZQia3MuloD2bdKbkj_W8aj1tmcAAJJvDEbDGGIVtzBuK-DL7SKAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALc3mZQie6WKkzikW3UNbMG04aJPERfAAJMvDEbDGGIVqUeDMiVBOlPAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALc4WZQiuAOSwnALQ88XUjXgY83YrTYAAJPvDEbDGGIVlBe35GwdVdJAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALc5GZQi6VFEhDR7g17pTCqdlp9GsPiAAJXvDEbDGGIVjkel9NRp0suAQADAgADcwADNQQ"
+            ],
+            "voices": [],
+            "documents": [
+                "BQACAgUAAxkBAALanWZNs7ZeBF9V6fP-QWN601g2VaM1AALNDQAC0hFxVhn59oNxrTt_NQQ"
+            ],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
+        },
+        "Aviator UZ - Отзывы": {
+            "videos": [],
+            "photos": [
+                "AgACAgUAAxkBAALbQ2ZN4mIow690bCKiEtTeOYHXS5elAAJ3ujEb0hFxVk9Ko6AOs24ZAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbRmZN4m1OwJEF3ewqWsllcMKxoh1xAAJ4ujEb0hFxVp9bggXngUPFAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbSWZN4nmQJZ59FC1Rk1H8-mt1bi5CAAJ5ujEb0hFxVu5om-Nw5laEAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbTGZN458Pk1qvODHvRw_rl4eMcAW3AAJ8ujEb0hFxVtdHj94ZQyOwAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbT2ZN46w7ls9ZIP9hildpENTdWitFAAJ9ujEb0hFxVq31U0kJj5ryAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbUmZN47wk4Om2kO7SV7zCaSDrautgAAJ-ujEb0hFxVof7WJf4jyzKAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbVWZN493tyKjfcZxomKmZAAFU1AkbygACf7oxG9IRcVatFlDerjfaPAEAAwIAA3MAAzUE",
+                "AgACAgUAAxkBAALbWGZN5GzuivuXywjXjI2sfbfI2n95AAKAujEb0hFxVmpHiTVNbobKAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbW2ZN5bd7UgkRBfSsA8HJF2_X8iqQAAKGujEb0hFxVnk4s2ojVpDZAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbXmZN5cT7B6Evu1umlH90YlrceOAmAAKHujEb0hFxVoOHKM4v-yXeAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbYWZN5kOe8hrIPc3qq0KSsYpoLiBqAAKIujEb0hFxVtND59wYWE1xAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbZGZN5r8a-WZbChP8Zr3pm9MNX3ELAAKKujEb0hFxVuLzgKtn1TnyAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbZ2ZN5tDiRLtWsnGbsr62DkhbohdUAAKLujEb0hFxVmJh6Elqby1hAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbamZN59qdbEIuHnH8jQnqHJwQpmdKAAKNujEb0hFxVmfqGGKYinh0AQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbbWZN6Dp5aGxKo4UvXddD3JW-Qal3AAKQujEb0hFxVjsWMdAJIV4RAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbcGZN6I1FRhNvVQ1nYd2I2WmPh2vTAAKRujEb0hFxVsE_VWeF5GlnAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbc2ZN6JkD5bzM-CgRfeZ7d6tpZrZoAAKSujEb0hFxViQyuXnaR4GJAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbdmZN6aIzCAmJZAYfEyKHEApM1qQXAAKUujEb0hFxVkCB5nyqzpk8AQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbeWZN6hgeonpgEr-Aguv3JkC4r7eFAAKWujEb0hFxVpf-Ej59cjdAAQADAgADcwADNQQ",
+                "AgACAgUAAxkBAALbfGZN8S1A4G09JN_oNpB07VQ2gDlkAAKwujEb0hFxVt5X7Y7jK4jOAQADAgADcwADNQQ"
+            ],
+            "voices": [],
+            "documents": [],
+            "gifs": [],
+            "video_notes": [],
+            "texts": []
         }
     }
 }
